@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ButtonProps {
+export interface ButtonProps {
   style?: string;
   label: string;
   size: string;
