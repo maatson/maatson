@@ -9,7 +9,7 @@ interface ButtonProps {
   // Icon?: string;   will exceute later...
 }
 
-const PrimaryButton: React.FC<ButtonProps> = ({
+const NeutralBlueButton: React.FC<ButtonProps> = ({
   style,
   label,
   size,
@@ -32,17 +32,17 @@ const PrimaryButton: React.FC<ButtonProps> = ({
               : size.toLocaleLowerCase() === "xl"
               ? "text-base px-4 py-3"
               : "text-sm px-4 py-2"
-          }
+          } 
           ${
             variant?.toLocaleLowerCase() === "link"
-              ? " text-primary hover:text-primary-600 active:text-primary-700  disabled:text-primary-300"
+              ? " text-blue hover:text-blue-700 active:text-blue-800  disabled:text-blue-300"
               : variant?.toLocaleLowerCase() === "outline"
-              ? "border border-primary text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700  disabled:bg-primary-50 disabled:text-primary-300"
+              ? "border border-blue text-blue hover:bg-blue-50 active:bg-blue-100 active:text-blue-700  disabled:bg-blue-50 disabled:text-blue-300"
               : variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-primary-200 text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700 disabled:bg-primary-300 "
-              : "bg-primary hover:bg-primary-600 active:bg-primary-700   disabled:bg-primary-200 text-grey-50"
+              ? "bg-blue-200 text-blue-900 hover:bg-blue-300 active:bg-blue-400 disabled:bg-blue-50 disabled:text-blue-200"
+              : "bg-blue text-grey-50 hover:bg-blue-700 active:bg-blue-800  disabled:bg-blue-50 disabled:text-blue-200"
           }
-         ${style} `}
+          ${style} `}
       >
         {label}
       </button>
@@ -50,4 +50,4 @@ const PrimaryButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default NeutralBlueButton;

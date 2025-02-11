@@ -9,7 +9,7 @@ interface ButtonProps {
   // Icon?: string;   will exceute later...
 }
 
-const PrimaryButton: React.FC<ButtonProps> = ({
+const BlackButton: React.FC<ButtonProps> = ({
   style,
   label,
   size,
@@ -32,17 +32,17 @@ const PrimaryButton: React.FC<ButtonProps> = ({
               : size.toLocaleLowerCase() === "xl"
               ? "text-base px-4 py-3"
               : "text-sm px-4 py-2"
-          }
+          } 
           ${
             variant?.toLocaleLowerCase() === "link"
-              ? " text-primary hover:text-primary-600 active:text-primary-700  disabled:text-primary-300"
+              ? " text-grey-ab hover:text-grey-ab-700 active:text-grey-ab-800  disabled:text-grey-ab-300"
               : variant?.toLocaleLowerCase() === "outline"
-              ? "border border-primary text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700  disabled:bg-primary-50 disabled:text-primary-300"
+              ? "border border-grey-ab text-grey-ab hover:bg-grey-200 active:bg-grey-ab-100 active:text-grey-ab-700  disabled:bg-grey-200 disabled:text-grey-ab-300"
               : variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-primary-200 text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700 disabled:bg-primary-300 "
-              : "bg-primary hover:bg-primary-600 active:bg-primary-700   disabled:bg-primary-200 text-grey-50"
+              ? "bg-grey-ab-200 text-grey-ab-900 hover:bg-grey-ab-300 active:bg-grey-ab-400 active:text-grey-200 disabled:bg-grey-200 disabled:text-grey-ab-200"
+              : "bg-grey-ab text-grey-200 hover:bg-grey-ab-700 active:bg-grey-ab-800  disabled:bg-grey-200 disabled:text-grey-ab-200"
           }
-         ${style} `}
+          ${style} `}
       >
         {label}
       </button>
@@ -50,4 +50,4 @@ const PrimaryButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default BlackButton;

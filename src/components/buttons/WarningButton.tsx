@@ -9,7 +9,7 @@ interface ButtonProps {
   // Icon?: string;   will exceute later...
 }
 
-const PrimaryButton: React.FC<ButtonProps> = ({
+const WarningButton: React.FC<ButtonProps> = ({
   style,
   label,
   size,
@@ -32,17 +32,17 @@ const PrimaryButton: React.FC<ButtonProps> = ({
               : size.toLocaleLowerCase() === "xl"
               ? "text-base px-4 py-3"
               : "text-sm px-4 py-2"
-          }
+          } 
           ${
             variant?.toLocaleLowerCase() === "link"
-              ? " text-primary hover:text-primary-600 active:text-primary-700  disabled:text-primary-300"
+              ? " text-warning-600 hover:text-warning-700 active:text-warning-800  disabled:text-warning-300"
               : variant?.toLocaleLowerCase() === "outline"
-              ? "border border-primary text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700  disabled:bg-primary-50 disabled:text-primary-300"
+              ? "border border-warning text-warning-600 hover:bg-warning-50 active:bg-warning-100 active:text-warning-700  disabled:bg-warning-50 disabled:text-warning-300"
               : variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-primary-200 text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700 disabled:bg-primary-300 "
-              : "bg-primary hover:bg-primary-600 active:bg-primary-700   disabled:bg-primary-200 text-grey-50"
+              ? "bg-warning-200 text-warning-900 hover:bg-warning-300 active:bg-warning-400 disabled:bg-warning-50 disabled:text-warning-200"
+              : "bg-warning text-grey-50 hover:bg-warning-700 active:bg-warning-800  disabled:bg-warning-50 disabled:text-warning-200"
           }
-         ${style} `}
+          ${style} `}
       >
         {label}
       </button>
@@ -50,4 +50,4 @@ const PrimaryButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default WarningButton;

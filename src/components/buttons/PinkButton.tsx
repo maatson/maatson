@@ -9,7 +9,7 @@ interface ButtonProps {
   // Icon?: string;   will exceute later...
 }
 
-const PrimaryButton: React.FC<ButtonProps> = ({
+const PinkButton: React.FC<ButtonProps> = ({
   style,
   label,
   size,
@@ -32,17 +32,17 @@ const PrimaryButton: React.FC<ButtonProps> = ({
               : size.toLocaleLowerCase() === "xl"
               ? "text-base px-4 py-3"
               : "text-sm px-4 py-2"
-          }
+          } 
           ${
             variant?.toLocaleLowerCase() === "link"
-              ? " text-primary hover:text-primary-600 active:text-primary-700  disabled:text-primary-300"
+              ? " text-pink hover:text-pink-700 active:text-pink-800  disabled:text-pink-300"
               : variant?.toLocaleLowerCase() === "outline"
-              ? "border border-primary text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700  disabled:bg-primary-50 disabled:text-primary-300"
+              ? "border border-pink text-pink hover:bg-pink-50 active:bg-pink-100 active:text-pink-700  disabled:bg-pink-50 disabled:text-pink-300"
               : variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-primary-200 text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700 disabled:bg-primary-300 "
-              : "bg-primary hover:bg-primary-600 active:bg-primary-700   disabled:bg-primary-200 text-grey-50"
+              ? "bg-pink-200 text-pink-900 hover:bg-pink-300 active:bg-pink-400 disabled:bg-pink-50 disabled:text-pink-200"
+              : "bg-pink text-grey-50 hover:bg-pink-700 active:bg-pink-800  disabled:bg-pink-50 disabled:text-pink-200"
           }
-         ${style} `}
+          ${style} `}
       >
         {label}
       </button>
@@ -50,4 +50,4 @@ const PrimaryButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default PinkButton;
