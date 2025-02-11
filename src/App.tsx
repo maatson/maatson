@@ -1,5 +1,5 @@
 import "./App.css";
-import PrimaryButton from "./components/buttons/PrimaryButton";
+import SecondaryButton from "./components/buttons/SecondaryButton";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <div className="flex gap-10 items-center justify-center">
           {/* primary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"s"} variant={""} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"s"} variant={""} />
+            <SecondaryButton
               label={"Send Email"}
               size={"s"}
               variant={""}
@@ -24,12 +24,12 @@ function App() {
           </div>
           {/* secondary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"s"}
               variant={"secondary"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"s"}
               variant={"secondary"}
@@ -38,12 +38,12 @@ function App() {
           </div>
           {/* ouline */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"s"}
               variant={"outline"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"s"}
               variant={"outline"}
@@ -52,8 +52,8 @@ function App() {
           </div>
           {/* link */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"s"} variant={"link"} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"s"} variant={"link"} />
+            <SecondaryButton
               label={"Send Email"}
               size={"s"}
               variant={"link"}
@@ -65,8 +65,8 @@ function App() {
         <div className="flex gap-10 items-center justify-center">
           {/* primary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"m"} variant={""} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"m"} variant={""} />
+            <SecondaryButton
               label={"Send Email"}
               size={"m"}
               variant={""}
@@ -75,12 +75,12 @@ function App() {
           </div>
           {/* secondary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"m"}
               variant={"secondary"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"m"}
               variant={"secondary"}
@@ -89,12 +89,12 @@ function App() {
           </div>
           {/* ouline */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"m"}
               variant={"outline"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"m"}
               variant={"outline"}
@@ -103,8 +103,8 @@ function App() {
           </div>
           {/* link */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"m"} variant={"link"} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"m"} variant={"link"} />
+            <SecondaryButton
               label={"Send Email"}
               size={"m"}
               variant={"link"}
@@ -116,8 +116,8 @@ function App() {
         <div className="flex gap-10 items-center justify-center">
           {/* primary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"l"} variant={""} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"l"} variant={""} />
+            <SecondaryButton
               label={"Send Email"}
               size={"l"}
               variant={""}
@@ -126,12 +126,12 @@ function App() {
           </div>
           {/* secondary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"l"}
               variant={"secondary"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"l"}
               variant={"secondary"}
@@ -140,12 +140,12 @@ function App() {
           </div>
           {/* ouline */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"l"}
               variant={"outline"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"l"}
               variant={"outline"}
@@ -154,8 +154,8 @@ function App() {
           </div>
           {/* link */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"l"} variant={"link"} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"l"} variant={"link"} />
+            <SecondaryButton
               label={"Send Email"}
               size={"l"}
               variant={"link"}
@@ -167,8 +167,8 @@ function App() {
         <div className="flex gap-10 items-center justify-center">
           {/* primary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"xl"} variant={""} />
-            <PrimaryButton
+            <SecondaryButton label={"Send Email"} size={"xl"} variant={""} />
+            <SecondaryButton
               label={"Send Email"}
               size={"xl"}
               variant={""}
@@ -177,12 +177,12 @@ function App() {
           </div>
           {/* secondary */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"xl"}
               variant={"secondary"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"xl"}
               variant={"secondary"}
@@ -191,12 +191,12 @@ function App() {
           </div>
           {/* ouline */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"xl"}
               variant={"outline"}
             />
-            <PrimaryButton
+            <SecondaryButton
               label={"Send Email"}
               size={"xl"}
               variant={"outline"}
@@ -205,8 +205,12 @@ function App() {
           </div>
           {/* link */}
           <div className="flex flex-col gap-5">
-            <PrimaryButton label={"Send Email"} size={"xl"} variant={"link"} />
-            <PrimaryButton
+            <SecondaryButton
+              label={"Send Email"}
+              size={"xl"}
+              variant={"link"}
+            />
+            <SecondaryButton
               label={"Send Email"}
               size={"xl"}
               variant={"link"}
