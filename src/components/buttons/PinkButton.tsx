@@ -1,13 +1,5 @@
 import React from "react";
-
-interface ButtonProps {
-  style?: string;
-  label: string;
-  size: string;
-  variant: string;
-  disabled?: boolean;
-  // Icon?: string;   will exceute later...
-}
+import { ButtonProps } from "./PrimaryButton";
 
 const PinkButton: React.FC<ButtonProps> = ({
   style,

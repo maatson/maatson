@@ -1,4 +1,5 @@
 import "./App.css";
+import SecondaryButton from "./components/buttons/SecondaryButton";
 // import PrimaryButton from "./components/buttons/PrimaryButton";
 import SuccessButton from "./components/buttons/SuccessButton";
 // import NeutralBlueButton from "./components/buttons/NeutralBlueButton";
@@ -221,7 +222,7 @@ function App() {
                 size={"xl"}
                 variant={"link"}
               />
-              <SuccessButton
+              <SecondaryButton
                 label={"Send Email"}
                 size={"xl"}
                 variant={"link"}
