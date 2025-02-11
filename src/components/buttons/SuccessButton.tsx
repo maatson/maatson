@@ -1,15 +1,7 @@
 import React from "react";
+import { ButtonProps } from "./PrimaryButton";
 
-export interface ButtonProps {
-  style?: string;
-  label: string;
-  size: string;
-  variant: string;
-  disabled?: boolean;
-  // Icon?: string;   will exceute later...
-}
-
-const PrimaryButton: React.FC<ButtonProps> = ({
+const SuccessButton: React.FC<ButtonProps> = ({
   style,
   label,
   size,
@@ -32,17 +24,17 @@ const PrimaryButton: React.FC<ButtonProps> = ({
               : size.toLocaleLowerCase() === "xl"
               ? "text-base px-4 py-3"
               : "text-sm px-4 py-2"
-          }
+          } 
           ${
             variant?.toLocaleLowerCase() === "link"
-              ? " text-primary hover:text-primary-600 active:text-primary-700  disabled:text-primary-300"
+              ? " text-success-600 hover:text-success-700 active:text-success-800  disabled:text-success-300"
               : variant?.toLocaleLowerCase() === "outline"
-              ? "border border-primary text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700  disabled:bg-primary-50 disabled:text-primary-300"
+              ? "border border-success text-success-600 hover:bg-success-50 active:bg-success-100 active:text-success-700  disabled:bg-success-50 disabled:text-success-300"
               : variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-primary-200 text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700 disabled:bg-primary-300 "
-              : "bg-primary hover:bg-primary-600 active:bg-primary-700   disabled:bg-primary-200 text-grey-50"
+              ? "bg-success-200 text-success-900 hover:bg-success-300 active:bg-success-400 disabled:bg-success-50 disabled:text-success-200"
+              : "bg-success-600 text-grey-50 hover:bg-success-700 active:bg-success-800  disabled:bg-success-50 disabled:text-success-200"
           }
-         ${style} `}
+          ${style} `}
       >
         {label}
       </button>
@@ -50,4 +42,4 @@ const PrimaryButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default SuccessButton;

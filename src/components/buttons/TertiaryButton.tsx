@@ -1,15 +1,7 @@
 import React from "react";
+import { ButtonProps } from "./PrimaryButton";
 
-export interface ButtonProps {
-  style?: string;
-  label: string;
-  size: string;
-  variant: string;
-  disabled?: boolean;
-  // Icon?: string;   will exceute later...
-}
-
-const PrimaryButton: React.FC<ButtonProps> = ({
+const TertiaryButton: React.FC<ButtonProps> = ({
   style,
   label,
   size,
@@ -32,17 +24,17 @@ const PrimaryButton: React.FC<ButtonProps> = ({
               : size.toLocaleLowerCase() === "xl"
               ? "text-base px-4 py-3"
               : "text-sm px-4 py-2"
-          }
+          } 
           ${
             variant?.toLocaleLowerCase() === "link"
-              ? " text-primary hover:text-primary-600 active:text-primary-700  disabled:text-primary-300"
+              ? " text-tertiary hover:text-tertiary-600 active:text-tertiary-700  disabled:text-tertiary-300"
               : variant?.toLocaleLowerCase() === "outline"
-              ? "border border-primary text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700  disabled:bg-primary-50 disabled:text-primary-300"
+              ? "border border-tertiary text-tertiary hover:bg-tertiary-50 active:bg-tertiary-100 active:text-tertiary-600  disabled:bg-tertiary-50 disabled:tertiary-pink-300"
               : variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-primary-200 text-primary hover:bg-primary-50 active:bg-primary-100 active:text-primary-700 disabled:bg-primary-300 "
-              : "bg-primary hover:bg-primary-600 active:bg-primary-700   disabled:bg-primary-200 text-grey-50"
+              ? "bg-tertiary-200 text-tertiary-800 hover:bg-tertiary-300 active:bg-tertiary-400 active:text-tertiary-900 disabled:bg-tertiary-50 disabled:text-tertiary-200"
+              : "bg-tertiary text-grey-50 hover:bg-tertiary-600 active:bg-tertiary-700  disabled:bg-tertiary-50 disabled:text-grey-ab-200"
           }
-         ${style} `}
+          ${style} `}
       >
         {label}
       </button>
@@ -50,4 +42,4 @@ const PrimaryButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default PrimaryButton;
+export default TertiaryButton;
