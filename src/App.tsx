@@ -232,6 +232,26 @@ function App() {
             </div>
           </div>
         </div>
+        <div className="text-center mb-2 flex gap-5 items-center">
+          <span className="border px-8 py-3 bg-primary-gradient-1 rounded-md ">
+            gradient
+          </span>
+          <span className="border px-8 py-3 bg-primary-gradient-2  rounded-md ">
+            gradient
+          </span>
+          <span className="border px-8 py-3 bg-primary-gradient-3 rounded-md ">
+            gradient
+          </span>
+          <span className="border px-8 py-3 bg-primary-gradient-4 rounded-md ">
+            gradient
+          </span>
+          <span className="border px-8 py-3 bg-primary-gradient-5  rounded-md">
+            gradient
+          </span>
+          <span className="border px-8 py-3 bg-primary-gradient-6 rounded-md ">
+            gradient
+          </span>
+        </div>
 
         {/* Chip setup */}
         <div className="container mx-auto py-10 flex flex-col gap-5 justify-center items-center">
