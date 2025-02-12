@@ -1,23 +1,25 @@
 import React from "react";
 
 export interface ChipProps {
-  style?: string,
+  style?: string;
   label: string;
   size: string;
   variant: string;
 }
 
 const PrimaryChip: React.FC<ChipProps> = ({
-  style,  
+  style,
   label,
   size,
   variant = "primary",
 }) => {
   return (
     <>
-      <span className={`
+      <span
+        className={`
         rounded-xl font-bold
-        ${size.toLocaleLowerCase() === "s"
+        ${
+          size.toLocaleLowerCase() === "s"
             ? "text-3xs px-2 py-1"
             : size.toLocaleLowerCase() === "m"
             ? "text-xs px-2 py-1"
@@ -26,7 +28,7 @@ const PrimaryChip: React.FC<ChipProps> = ({
             : " text-xs py-[6px] px-3"
         }
         ${
-            variant?.toLocaleLowerCase() === "fill"
+          variant?.toLocaleLowerCase() === "fill"
             ? "bg-primary-100 text-primary"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-primary text-primary"
