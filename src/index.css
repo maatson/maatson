@@ -19,23 +19,12 @@
   } */
 }
 
-@layer utilities {
+/* @layer utilities {
   .primary-gradient-1 {
     background-image: linear-gradient(109deg, #EAECF9, #C4C8E4);
   }
   .primary-gradient-2 {
     background-image: linear-gradient(109deg, #D7DAEE, #9EA4CF);
   }
-  .primary-gradient-3 {
-    background-image: linear-gradient(109deg, #525DA4, #2C398F);
-  }
-  .primary-gradient-4 {
-    background-image: linear-gradient(109deg, #2C398F, #232E72);
-  }
-  .primary-gradient-5 {
-    background-image: linear-gradient(109deg, #525DA4, #232E72);
-  }
-  .primary-gradient-6 {
-    background-image: linear-gradient(109deg, #2C398F, #121739);
-  }
-}
+
+} */
