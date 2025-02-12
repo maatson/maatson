@@ -9,6 +9,7 @@ import SuccessButton from "./components/buttons/SuccessButton";
 // import SuccessButton from "./components/buttons/SuccessButton";
 // import GreyButton from "./components/buttons/GreyButton";
 // import TertiaryButton from "./components/buttons/TertiaryButton";
+import PrimaryChip from "./components/chips/PrimaryChip";
 
 function App() {
   return (
@@ -231,6 +232,72 @@ function App() {
             </div>
           </div>
         </div>
+
+        {/* Chip setup */}
+        <div className="container mx-auto py-10 flex flex-col gap-5 justify-center items-center">
+          {/* fill */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"fill"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"fill"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"fill"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"fill"} />
+            </div>
+          </div>
+          {/* outline */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"outline"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"outline"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"outline"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"outline"} />
+            </div>
+          </div>
+          {/* mix */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"mix"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"mix"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"mix"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"mix"} />
+            </div>
+          </div>
+          {/* primary */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"primary"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"primary"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"primary"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"primary"} />
+            </div>
+          </div>
+        </div>
+
+        <PrimaryChip label={"alpha"} size={"lg"} variant={"mix"} />
       </div>
     </>
   );
