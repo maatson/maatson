@@ -3,9 +3,46 @@ import SecondaryButton from "./components/buttons/SecondaryButton";
 // import PrimaryButton from "./components/buttons/PrimaryButton";
 import SuccessButton from "./components/buttons/SuccessButton";
 import {
+  AddIconIcon,
+  AeroplaneIcon,
+  AnalyticsIcon,
+  BusinessIcon,
+  CalenderIcon,
+  CategoryIcon,
+  ClockIcon,
+  CloseIcon,
+  ContainerIcon,
+  ContainerSettingsIcon,
+  DocumentIcon,
+  DownArrowIcon,
+  DownloadIcon,
+  DropDownIcon,
+  EditIcon,
   EmployeeGroupIcon,
   ExporterIcon,
+  FilterIcon,
+  FreightIcon,
+  GlobalIcon,
   ImporterIcon,
+  InfoIcon,
+  LeftArrowIcon,
+  LogoutIcon,
+  MenuIcon,
+  MessageIcon,
+  NotesIcon,
+  OperationsIcon,
+  OptionsIcon,
+  PriceTagIcon,
+  PrintIcon,
+  RangeCalenderIcon,
+  RoadIcon,
+  ScalePencilIcon,
+  SearchIcon,
+  ShipIcon,
+  StarIcon,
+  SunRiseIcon,
+  TruckIcon,
+  UserIcon,
 } from "./components/icons/Icons";
 // import NeutralBlueButton from "./components/buttons/NeutralBlueButton";
 // import PinkButton from "./components/buttons/PinkButton";
@@ -14,6 +51,11 @@ import {
 // import SuccessButton from "./components/buttons/SuccessButton";
 // import GreyButton from "./components/buttons/GreyButton";
 // import TertiaryButton from "./components/buttons/TertiaryButton";
+import PrimaryChip from "./components/chips/PrimaryChip";
+import SecondaryChip from "./components/chips/SecondaryChip";
+import TertiaryChip from "./components/chips/TertiaryChip";
+import BlueChip from "./components/chips/BlueChip";
+import BlackChip from "./components/chips/BlackChip";
 
 function App() {
   return (
@@ -236,6 +278,7 @@ function App() {
             </div>
           </div>
         </div>
+        {/* Gradient setup */}
         <div className="text-center mb-2 flex gap-5 items-center">
           <span className="border px-8 py-3 bg-primary-gradient-1 rounded-md ">
             gradient
@@ -255,9 +298,119 @@ function App() {
           <span className="border px-8 py-3 bg-primary-gradient-6 rounded-md ">
             gradient
           </span>
+        </div>
+
+        <div className="container mx-auto  flex gap-5 justify-center my-10">
           <EmployeeGroupIcon />
           <ImporterIcon />
           <ExporterIcon />
+          <UserIcon />
+          <CalenderIcon />
+          <SunRiseIcon />
+          <TruckIcon />
+          <ContainerIcon />
+          <AeroplaneIcon />
+          <SearchIcon />
+          <RoadIcon />
+          <ShipIcon />
+          <AnalyticsIcon />
+          <MessageIcon />
+          <ContainerSettingsIcon />
+          <DocumentIcon />
+          <EditIcon />
+          <NotesIcon />
+          <CloseIcon />
+          <OptionsIcon />
+          <BusinessIcon />
+        </div>
+        <div className="container mx-auto  flex gap-5 justify-center my-10">
+          <PrintIcon />
+          <DownloadIcon />
+          <StarIcon />
+          <LeftArrowIcon />
+          <DownArrowIcon />
+          <LogoutIcon />
+          <DropDownIcon />
+          <FreightIcon />
+          <AddIconIcon />
+          <FilterIcon />
+          <MenuIcon />
+          <PriceTagIcon />
+          <RangeCalenderIcon />
+          <GlobalIcon />
+          <ScalePencilIcon />
+          <ClockIcon />
+          <InfoIcon />
+          <CategoryIcon />
+          <OperationsIcon />
+        </div>
+
+        {/* Chip setup */}
+        <div className="container mx-auto py-10 flex flex-col gap-5 justify-center items-center">
+          {/* fill */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"fill"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"fill"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"fill"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"fill"} />
+              <SecondaryChip label={"chip"} size={"xl"} variant={"fill"} />
+              <TertiaryChip label={"chip"} size={"xl"} variant={"fill"} />
+              <BlueChip label={"chip"} size={"xl"} variant={"fill"} />
+              <BlackChip label={"chip"} size={"xl"} variant={"fill"} />
+            </div>
+          </div>
+          {/* outline */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"outline"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"outline"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"outline"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"outline"} />
+            </div>
+          </div>
+          {/* mix */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"mix"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"mix"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"mix"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"mix"} />
+            </div>
+          </div>
+          {/* primary */}
+          <div className="flex flex-row gap-5">
+            <div>
+              <PrimaryChip label={"chip"} size={"s"} variant={"primary"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"m"} variant={"primary"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={""} variant={"primary"} />
+            </div>
+            <div>
+              <PrimaryChip label={"chip"} size={"xl"} variant={"primary"} />
+            </div>
+          </div>
         </div>
       </div>
     </>
