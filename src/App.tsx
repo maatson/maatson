@@ -3,9 +3,46 @@ import SecondaryButton from "./components/buttons/SecondaryButton";
 // import PrimaryButton from "./components/buttons/PrimaryButton";
 import SuccessButton from "./components/buttons/SuccessButton";
 import {
+  AddIconIcon,
+  AeroplaneIcon,
+  AnalyticsIcon,
+  BusinessIcon,
+  CalenderIcon,
+  CategoryIcon,
+  ClockIcon,
+  CloseIcon,
+  ContainerIcon,
+  ContainerSettingsIcon,
+  DocumentIcon,
+  DownArrowIcon,
+  DownloadIcon,
+  DropDownIcon,
+  EditIcon,
   EmployeeGroupIcon,
   ExporterIcon,
+  FilterIcon,
+  FreightIcon,
+  GlobalIcon,
   ImporterIcon,
+  InfoIcon,
+  LeftArrowIcon,
+  LogoutIcon,
+  MenuIcon,
+  MessageIcon,
+  NotesIcon,
+  OperationsIcon,
+  OptionsIcon,
+  PriceTagIcon,
+  PrintIcon,
+  RangeCalenderIcon,
+  RoadIcon,
+  ScalePencilIcon,
+  SearchIcon,
+  ShipIcon,
+  StarIcon,
+  SunRiseIcon,
+  TruckIcon,
+  UserIcon,
 } from "./components/icons/Icons";
 // import NeutralBlueButton from "./components/buttons/NeutralBlueButton";
 // import PinkButton from "./components/buttons/PinkButton";
@@ -257,9 +294,51 @@ function App() {
           <span className="border px-8 py-3 bg-primary-gradient-6 rounded-md ">
             gradient
           </span>
+        </div>
+
+        <div className="container mx-auto  flex gap-5 justify-center my-10">
           <EmployeeGroupIcon />
           <ImporterIcon />
           <ExporterIcon />
+          <UserIcon />
+          <CalenderIcon />
+          <SunRiseIcon />
+          <TruckIcon />
+          <ContainerIcon />
+          <AeroplaneIcon />
+          <SearchIcon />
+          <RoadIcon />
+          <ShipIcon />
+          <AnalyticsIcon />
+          <MessageIcon />
+          <ContainerSettingsIcon />
+          <DocumentIcon />
+          <EditIcon />
+          <NotesIcon />
+          <CloseIcon />
+          <OptionsIcon />
+          <BusinessIcon />
+        </div>
+        <div className="container mx-auto  flex gap-5 justify-center my-10">
+          <PrintIcon />
+          <DownloadIcon />
+          <StarIcon />
+          <LeftArrowIcon />
+          <DownArrowIcon />
+          <LogoutIcon />
+          <DropDownIcon />
+          <FreightIcon />
+          <AddIconIcon />
+          <FilterIcon />
+          <MenuIcon />
+          <PriceTagIcon />
+          <RangeCalenderIcon />
+          <GlobalIcon />
+          <ScalePencilIcon />
+          <ClockIcon />
+          <InfoIcon />
+          <CategoryIcon />
+          <OperationsIcon />
         </div>
 
         {/* Chip setup */}
@@ -325,8 +404,6 @@ function App() {
             </div>
           </div>
         </div>
-
-        <PrimaryChip label={"alpha"} size={"lg"} variant={"mix"} />
       </div>
     </>
   );
