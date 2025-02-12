@@ -8,7 +8,7 @@ const SuccessChip: React.FC<ChipProps> = ({
   variant = "primary",
 }) => {
   return (
-    <>
+    <div>
       <span className={`
         rounded-xl font-bold
         ${size.toLocaleLowerCase() === "s"
@@ -32,7 +32,7 @@ const SuccessChip: React.FC<ChipProps> = ({
       >
         {label}
       </span>
-    </>
+    </div>
   );
 };
 

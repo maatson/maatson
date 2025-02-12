@@ -14,7 +14,7 @@ const PrimaryChip: React.FC<ChipProps> = ({
   variant = "primary",
 }) => {
   return (
-    <>
+    <div>
       <span
         className={`
         rounded-xl font-bold
@@ -40,7 +40,7 @@ const PrimaryChip: React.FC<ChipProps> = ({
       >
         {label}
       </span>
-    </>
+    </div>
   );
 };
 
