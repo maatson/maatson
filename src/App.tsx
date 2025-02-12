@@ -2,6 +2,11 @@ import "./App.css";
 import SecondaryButton from "./components/buttons/SecondaryButton";
 // import PrimaryButton from "./components/buttons/PrimaryButton";
 import SuccessButton from "./components/buttons/SuccessButton";
+import {
+  EmployeeGroupIcon,
+  ExporterIcon,
+  ImporterIcon,
+} from "./components/icons/Icons";
 // import NeutralBlueButton from "./components/buttons/NeutralBlueButton";
 // import PinkButton from "./components/buttons/PinkButton";
 // import BlackButton from "./components/buttons/BlackButton";
@@ -252,6 +257,9 @@ function App() {
           <span className="border px-8 py-3 bg-primary-gradient-6 rounded-md ">
             gradient
           </span>
+          <EmployeeGroupIcon />
+          <ImporterIcon />
+          <ExporterIcon />
         </div>
 
         {/* Chip setup */}
