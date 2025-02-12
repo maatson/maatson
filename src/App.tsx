@@ -3,9 +3,41 @@ import SecondaryButton from "./components/buttons/SecondaryButton";
 // import PrimaryButton from "./components/buttons/PrimaryButton";
 import SuccessButton from "./components/buttons/SuccessButton";
 import {
+  AccountDetailIcon,
+  BellIcon,
+  CloseSolidIcon,
+  CodeIcon,
+  CompanyIcon,
+  CrossIcon,
+  DeleteIcon,
+  DepartmentIcon,
+  EmailIcon,
   EmployeeGroupIcon,
+  ExcelIcon,
   ExporterIcon,
+  EyeClose,
+  EyeOpen,
+  FileIcon,
+  FollowUpIcon,
   ImporterIcon,
+  InvoiceIcon,
+  LocationIcon,
+  NvoccIcon,
+  PasswordIcon,
+  PhoneIcon,
+  PhoneOutlineIcon,
+  ProductIcon,
+  ReplyIcon,
+  RoutingIcon,
+  SendIcon,
+  SettingsIcon,
+  SuccessIcon,
+  TaxIcon,
+  TelephoneIcon,
+  UploadIcon,
+  UrlIcon,
+  WarningIcon,
+  WeightIcon,
 } from "./components/icons/Icons";
 // import NeutralBlueButton from "./components/buttons/NeutralBlueButton";
 // import PinkButton from "./components/buttons/PinkButton";
@@ -255,9 +287,43 @@ function App() {
           <span className="border px-8 py-3 bg-primary-gradient-6 rounded-md ">
             gradient
           </span>
-          <EmployeeGroupIcon />
-          <ImporterIcon />
-          <ExporterIcon />
+          <div className="flex flex-wrap gap-5">
+            <EmployeeGroupIcon />
+            <ImporterIcon />
+            <ExporterIcon />
+            <AccountDetailIcon />
+            <BellIcon />
+            <CloseSolidIcon />
+            <CodeIcon />
+            <CompanyIcon />
+            <CrossIcon />
+            <DeleteIcon />
+            <DepartmentIcon />
+            <EmailIcon />
+            <ExcelIcon />
+            <EyeClose />
+            <EyeOpen />
+            <FileIcon />
+            <FollowUpIcon />
+            <InvoiceIcon />
+            <LocationIcon />
+            <NvoccIcon />
+            <PasswordIcon />
+            <PhoneIcon />
+            <PhoneOutlineIcon />
+            <ProductIcon />
+            <ReplyIcon />
+            <RoutingIcon />
+            <SendIcon />
+            <SettingsIcon />
+            <SuccessIcon />
+            <TaxIcon />
+            <TelephoneIcon />
+            <UploadIcon />
+            <UrlIcon />
+            <WarningIcon />
+            <WeightIcon />
+          </div>
         </div>
       </div>
     </>
