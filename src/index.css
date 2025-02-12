@@ -19,7 +19,7 @@
   } */
 }
 
-@layer utilities {
+/* @layer utilities {
   .primary-gradient-1 {
     background-image: linear-gradient(109deg, #EAECF9, #C4C8E4);
   }
@@ -38,4 +38,4 @@
   .primary-gradient-6 {
     background-image: linear-gradient(109deg, #2C398F, #121739);
   }
-}
+} */
