@@ -232,6 +232,7 @@ function App() {
             </div>
           </div>
         </div>
+        {/* Gradient setup */}
         <div className="text-center mb-2 flex gap-5 items-center">
           <span className="border px-8 py-3 bg-primary-gradient-1 rounded-md ">
             gradient
