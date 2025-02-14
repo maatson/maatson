@@ -29,7 +29,7 @@ const PrimaryChip: React.FC<ChipProps> = ({
         }
         ${
           variant?.toLocaleLowerCase() === "fill"
-            ? "bg-primary-100 text-primary"
+            ? "bg-primary-50 text-primary"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-primary text-primary"
             : variant?.toLocaleLowerCase() === "mix"

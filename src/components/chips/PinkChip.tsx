@@ -21,7 +21,7 @@ const PinkChip: React.FC<ChipProps> = ({
         }
         ${
             variant?.toLocaleLowerCase() === "fill"
-            ? "bg-pink-100 text-pink"
+            ? "bg-pink-50 text-pink"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-pink text-pink"
             : variant?.toLocaleLowerCase() === "mix"
