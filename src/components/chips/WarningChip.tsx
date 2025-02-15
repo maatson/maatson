@@ -8,7 +8,7 @@ const WarningChip: React.FC<ChipProps> = ({
   variant = "primary",
 }) => {
   return (
-    <>
+    <div>
       <span className={`
         rounded-xl font-bold
         ${size.toLocaleLowerCase() === "s"
@@ -21,7 +21,7 @@ const WarningChip: React.FC<ChipProps> = ({
         }
         ${
             variant?.toLocaleLowerCase() === "fill"
-            ? "bg-warning-100 text-warning"
+            ? "bg-warning-50 text-warning"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-warning text-warning"
             : variant?.toLocaleLowerCase() === "mix"
@@ -32,7 +32,7 @@ const WarningChip: React.FC<ChipProps> = ({
       >
         {label}
       </span>
-    </>
+    </div>
   );
 };
 

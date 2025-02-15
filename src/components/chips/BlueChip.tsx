@@ -8,7 +8,7 @@ const BlueChip: React.FC<ChipProps> = ({
   variant = "primary",
 }) => {
   return (
-    <>
+    <div>
       <span className={`
         rounded-xl font-bold
         ${size.toLocaleLowerCase() === "s"
@@ -21,7 +21,7 @@ const BlueChip: React.FC<ChipProps> = ({
         }
         ${
             variant?.toLocaleLowerCase() === "fill"
-            ? "bg-blue-100 text-blue"
+            ? "bg-blue-50 text-blue"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-blue text-blue"
             : variant?.toLocaleLowerCase() === "mix"
@@ -32,7 +32,7 @@ const BlueChip: React.FC<ChipProps> = ({
       >
         {label}
       </span>
-    </>
+    </div>
   );
 };
 

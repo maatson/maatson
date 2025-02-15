@@ -2,16 +2,18 @@ import React from "react";
 import { ChipProps } from "./PrimaryChip";
 
 const PinkChip: React.FC<ChipProps> = ({
-  style,  
+  style,
   label,
   size,
   variant = "primary",
 }) => {
   return (
-    <>
-      <span className={`
+    <div>
+      <span
+        className={`
         rounded-xl font-bold
-        ${size.toLocaleLowerCase() === "s"
+        ${
+          size.toLocaleLowerCase() === "s"
             ? "text-3xs px-2 py-1"
             : size.toLocaleLowerCase() === "m"
             ? "text-xs px-2 py-1"
@@ -20,19 +22,19 @@ const PinkChip: React.FC<ChipProps> = ({
             : " text-xs py-[6px] px-3"
         }
         ${
-            variant?.toLocaleLowerCase() === "fill"
-            ? "bg-pink-100 text-pink"
+          variant?.toLocaleLowerCase() === "fill"
+            ? "bg-pink-50 text-pink"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-pink text-pink"
             : variant?.toLocaleLowerCase() === "mix"
             ? "border border-pink text-pink bg-pink-50"
-            : "bg-pink text-grey-aw-50"
+            : "bg-pink text-grey-aw-50 "
         }
         ${style}`}
       >
         {label}
       </span>
-    </>
+    </div>
   );
 };
 

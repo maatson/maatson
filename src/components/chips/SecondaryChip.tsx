@@ -8,7 +8,7 @@ const SecondaryChip: React.FC<ChipProps> = ({
   variant = "primary",
 }) => {
   return (
-    <>
+    <div>
       <span className={`
         rounded-xl font-bold
         ${size.toLocaleLowerCase() === "s"
@@ -21,7 +21,7 @@ const SecondaryChip: React.FC<ChipProps> = ({
         }
         ${
             variant?.toLocaleLowerCase() === "fill"
-            ? "bg-secondary-100 text-warning"
+            ? "bg-secondary-50 text-warning"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-secondary text-secondary"
             : variant?.toLocaleLowerCase() === "mix"
@@ -32,7 +32,7 @@ const SecondaryChip: React.FC<ChipProps> = ({
       >
         {label}
       </span>
-    </>
+    </div>
   );
 };
 
