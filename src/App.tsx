@@ -52,6 +52,10 @@ import {
 // import GreyButton from "./components/buttons/GreyButton";
 // import TertiaryButton from "./components/buttons/TertiaryButton";
 import PrimaryChip from "./components/chips/PrimaryChip";
+import SecondaryChip from "./components/chips/SecondaryChip";
+import TertiaryChip from "./components/chips/TertiaryChip";
+import BlueChip from "./components/chips/BlueChip";
+import BlackChip from "./components/chips/BlackChip";
 
 function App() {
   return (
@@ -356,6 +360,10 @@ function App() {
             </div>
             <div>
               <PrimaryChip label={"chip"} size={"xl"} variant={"fill"} />
+              <SecondaryChip label={"chip"} size={"xl"} variant={"fill"} />
+              <TertiaryChip label={"chip"} size={"xl"} variant={"fill"} />
+              <BlueChip label={"chip"} size={"xl"} variant={"fill"} />
+              <BlackChip label={"chip"} size={"xl"} variant={"fill"} />
             </div>
           </div>
           {/* outline */}
