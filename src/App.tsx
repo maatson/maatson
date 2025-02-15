@@ -357,6 +357,7 @@ function App() {
               <PrimaryChip label={"chip"} size={"m"} variant={"fill"} />
             </div>   
             <div>
+      
               <PrimaryChip label={"chip"} size={""} variant={"fill"} />
             </div>
             <div>
