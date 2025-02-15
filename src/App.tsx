@@ -61,8 +61,10 @@ function App() {
   return (
     <>
       <div className="">
-        <h1 className=" text-center text-grey-a-50">Maatson maritime</h1>
-        <h1 className="text-red-600 text-center text-h1">Maatson maritime</h1>
+        <h1 className=" text-center text-grey-a-50">Maatson maritime </h1>
+        <h1 className="text-red-600 text-center text-h1">
+          Vick Develped Maatson
+        </h1>
         <h1 className="text-red-600 text-center rounded-sm text-h-2xl">
           Maatson maritime
         </h1>
