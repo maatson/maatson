@@ -395,7 +395,7 @@ export const ExcelIcon: React.FC<IconProps> = ({
   );
 };
 
-export const EyeClose: React.FC<IconProps> = ({
+export const EyeCloseIcon: React.FC<IconProps> = ({
   size = 24,
   color = "#121212",
 }) => {
@@ -417,7 +417,7 @@ export const EyeClose: React.FC<IconProps> = ({
   );
 };
 
-export const EyeOpen: React.FC<IconProps> = ({
+export const EyeOpenIcon: React.FC<IconProps> = ({
   size = 24,
   color = "#121212",
 }) => {
