@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { WarningIcon } from "../icons/Icons";
+import { DropDownIcon, WarningIcon } from "../icons/Icons";
 import Select from "react-select";
 
 interface Groupfield {
@@ -18,6 +18,14 @@ interface Groupfield {
   error: boolean;
   errorMessage: string;
 }
+
+const CustomDropdownIndicator = () => {
+  return (
+    <div>
+      <DropDownIcon />
+    </div>
+  ); // Empty or custom content here to replace the default dropdown icon
+};
 
 const GroupField: React.FC<Groupfield> = ({
   label,
@@ -57,7 +65,7 @@ const GroupField: React.FC<Groupfield> = ({
               !error ? "border-grey-200 " : "border-error "
             } relative`}
           >
-            {leftIcon && leftIcon}
+            {leftIcon && <div>{leftIcon}</div>}
             {type === "select" ? (
               <>
                 <Select
@@ -69,6 +77,9 @@ const GroupField: React.FC<Groupfield> = ({
                   classNamePrefix="custom-select" // Optional class prefix for styling
                   placeholder={placeholder || "Select an option"} // Placeholder text
                   isSearchable // Enable searching options
+                  components={{
+                    DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                  }}
                   styles={{
                     control: (provided) => ({
                       ...provided,
@@ -113,11 +124,13 @@ const GroupField: React.FC<Groupfield> = ({
                 className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-300 w-full ${inputStyle}`}
               />
             )}
-            {rightIcon && rightIcon}
+            {rightIcon && <div>{rightIcon}</div>}
           </div>
           {error && errorMessage && (
-            <p className="text-error flex items-center gap-1 mt-1 text-2xs font-semibold capitalize">
-              <WarningIcon color="#ea0001" size={16} />
+            <p className="text-error flex items-start gap-1 mt-1 text-2xs font-semibold capitalize">
+              <div>
+                <WarningIcon color="#ea0001" size={14} />
+              </div>
               <span> {errorMessage}</span>
             </p>
           )}
