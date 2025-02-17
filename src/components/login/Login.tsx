@@ -13,7 +13,7 @@ const Login: React.FC = () => {
           <div className="mx-auto">
             <img src={Logo} alt="maatson maritime logo" />
           </div>
-          <h2 className="text-h3 font-semibold text-center text-secondary">
+          <h2 className="h3 font-semibold text-center text-secondary">
             Welcome Back
           </h2>
         </div>
