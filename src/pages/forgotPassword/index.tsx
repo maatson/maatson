@@ -2,7 +2,7 @@ import React from "react";
 import Login from "../../components/login/Login";
 import CredentialsLayout from "../../components/layouts/CredentialsLayout";
 
-const SignIn: React.FC = () => {
+const ForgetPassword: React.FC = () => {
   return (
     <>
       <CredentialsLayout children={<Login />} />
@@ -10,4 +10,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default ForgetPassword;
