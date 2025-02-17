@@ -17,6 +17,8 @@ import {
 } from "./utils/toastutil";
 import WarningChip from "./components/chips/WarningChip";
 import BlueChip from "./components/chips/BlueChip";
+import Login from "./components/login/Login";
+import SignIn from "./pages/signIn";
 
 function App() {
   const [data, setData] = useState({ name: "", email: "", department: "" });
@@ -62,7 +64,7 @@ function App() {
         icon={false}
         closeButton={false}
       />
-      <div className="w-1/2 mx-auto flex flex-col gap-4 mt-5 ">
+      {/* <div className="w-1/2 mx-auto flex flex-col gap-4 mt-5 ">
         <GroupField
           type={"text"}
           name={"name"}
@@ -117,7 +119,8 @@ function App() {
         <div onClick={infoToast}>
           <BlueChip label={"Info Toast"} size={""} variant={"fill"} />
         </div>
-      </div>
+      </div> */}
+      <SignIn />
     </>
   );
 }

@@ -3,9 +3,9 @@ import { DropDownIcon, WarningIcon } from "../icons/Icons";
 import Select from "react-select";
 
 interface Groupfield {
-  label?: string;
+  label: string;
   type: string;
-  placeholder?: string;
+  placeholder: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   inputStyle?: string;
