@@ -106,7 +106,8 @@ const Loginw: React.FC = () => {
                 size={"xl"}
                 variant={"primary"}
                 style="w-full"
-                
+                // style="w-full"
+
               />
             </div>
           </div>
