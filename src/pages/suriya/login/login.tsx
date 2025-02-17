@@ -101,11 +101,12 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="flex w-full">
-              <PrimaryButton
+              <PrimaryButton  
                 label={"Login"}
                 size={"xl"}
                 variant={"primary"}
                 style="w-full"
+                
               />
             </div>
           </div>
