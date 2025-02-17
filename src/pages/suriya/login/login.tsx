@@ -10,7 +10,7 @@ import {
   UserIcon,
 } from "../../../components/icons/Icons";
 
-const Login: React.FC = () => {
+const Loginw: React.FC = () => {
   const [data, setData] = useState({ name: "", department: "", password: "" }); //Add checkbox
   const handlechange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -101,13 +101,11 @@ const Login: React.FC = () => {
               </div>
             </div>
             <div className="flex w-full">
-              <PrimaryButton  
+              <PrimaryButton
                 label={"Login"}
                 size={"xl"}
                 variant={"primary"}
                 style="w-full"
-                // style="w-full"
-
               />
             </div>
           </div>
@@ -116,4 +114,4 @@ const Login: React.FC = () => {
     </>
   );
 };
-export default Login;
+export default Loginw;

@@ -10,7 +10,16 @@ import {
 import { ToastContainer } from "react-toastify";
 import SuccessChip from "./components/chips/SuccessChip";
 import ErrorChip from "./components/chips/ErrorChip";
-import { useErrorNotify, useSuccessNotify } from "./utils/toastutil";
+import {
+  useErrorNotify,
+  useInfoNotify,
+  useSuccessNotify,
+  useWarningNotify,
+} from "./utils/toastutil";
+import WarningChip from "./components/chips/WarningChip";
+import BlueChip from "./components/chips/BlueChip";
+// import Login from "./components/login/Login";
+import SignIn from "./pages/signIn";
 
 function App() {
   const [data, setData] = useState({ name: "", email: "", department: "" });
@@ -35,6 +44,18 @@ function App() {
       message: "This email is not registered. Please try again.",
     });
   };
+  const warningToast = () => {
+    useWarningNotify({
+      heading: "Warning Email ",
+      message: "This email is not registered. Please try again.",
+    });
+  };
+  const infoToast = () => {
+    useInfoNotify({
+      heading: "Info Email ",
+      message: "This email is not registered. Please try again.",
+    });
+  };
 
   return (
     <>
@@ -44,12 +65,13 @@ function App() {
         icon={false}
         closeButton={false}
       />
-      <div className="w-1/2 mx-auto flex flex-col gap-4 mt-5 ">
+      {/* <div className="w-1/2 mx-auto flex flex-col gap-4 mt-5 ">
         <GroupField
           type={"text"}
           name={"name"}
           value={data.name}
           label={"username"}
+          placeholder="username"
           onChange={handlechange}
           leftIcon={<DepartmentIcon color="#2C398F" />}
           error={false}
@@ -92,9 +114,14 @@ function App() {
         <div onClick={errorToast}>
           <ErrorChip label={"Error Toast"} size={""} variant={"fill"} />
         </div>
+        <div onClick={warningToast}>
+          <WarningChip label={"Error Toast"} size={""} variant={"fill"} />
+        </div>
+        <div onClick={infoToast}>
+          <BlueChip label={"Info Toast"} size={""} variant={"fill"} />
+        </div>
       </div> */}
-
-        <Login />
+      <SignIn />
     </>
   );
 }
