@@ -2,17 +2,13 @@ import React from "react";
 import { toast } from "react-toastify";
 import { SuccessIcon } from "../icons/Icons";
 
-interface SuccessToastProps {
+export interface ToastProps {
   toastId: string; // Accept toastId as a prop
   heading: string; // Accept toastId as a prop
   message: string; // Accept toastId as a prop
 }
 
-const SuccessToast: React.FC<SuccessToastProps> = ({
-  toastId,
-  heading,
-  message,
-}) => {
+const SuccessToast: React.FC<ToastProps> = ({ toastId, heading, message }) => {
   return (
     <div className="bg-success-50 border border-success p-2 rounded flex items-start w-full gap-3">
       <div className="p-1 bg-success rounded ">

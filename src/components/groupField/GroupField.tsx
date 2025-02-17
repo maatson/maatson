@@ -79,6 +79,7 @@ const GroupField: React.FC<Groupfield> = ({
                   isSearchable // Enable searching options
                   components={{
                     DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                    IndicatorSeparator: null,
                   }}
                   styles={{
                     control: (provided) => ({
@@ -121,7 +122,7 @@ const GroupField: React.FC<Groupfield> = ({
                 id={name}
                 onChange={onChange}
                 placeholder={placeholder}
-                className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-300 w-full ${inputStyle}`}
+                className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full ${inputStyle}`}
               />
             )}
             {rightIcon && <div>{rightIcon}</div>}
