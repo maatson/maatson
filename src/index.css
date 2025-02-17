@@ -1,17 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-body{
-  font-family: 'Roboto',sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  font-family: "Roboto", sans-serif;
 }
-
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-
-@layer components{
+@layer components {
   /* .primary-btn-s {
     @apply bg-primary px-2 py-1 rounded-xs text-grey-50 text-xs font-semibold hover:bg-primary-600 active:bg-primary-700 disabled:bg-primary-200 shadow-xs outline-none
   }
@@ -24,7 +20,39 @@ body{
   .primary-btn-xl {
     @apply bg-primary px-4 py-3 rounded-xs text-grey-50 font-semibold hover:bg-primary-600 active:bg-primary-700 disabled:bg-primary-200 shadow-sm outline-none
   } */
-   
+  .h-3xl {
+    @apply text-h-3xl leading-[120%];
+  }
+  .h-2xl {
+    @apply text-2xl leading-[120%];
+  }
+  .h-xl {
+    @apply text-h-xl leading-[120%];
+  }
+  .h1 {
+    @apply text-h1 leading-[120%];
+  }
+  .h2 {
+    @apply text-h2 leading-[120%];
+  }
+  .h3 {
+    @apply text-h3 leading-[120%];
+  }
+  .h4 {
+    @apply text-h4 leading-[120%];
+  }
+  .h5 {
+    @apply text-h5 leading-[120%];
+  }
+  .h6 {
+    @apply text-h6 leading-[120%];
+  }
+  .xs-2 {
+    @apply text-2xs leading-[120%];
+  }
+  .xs-3 {
+    @apply text-3xs leading-[120%];
+  }
 }
 
 /* @layer utilities {
