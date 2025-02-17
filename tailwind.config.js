@@ -31,6 +31,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
       fontSize: {
         "h-3xl": "118px",
         "h-2xl": "92px",
