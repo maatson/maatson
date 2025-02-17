@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         hideProgressBar
         icon={false}
@@ -92,7 +92,9 @@ function App() {
         <div onClick={errorToast}>
           <ErrorChip label={"Error Toast"} size={""} variant={"fill"} />
         </div>
-      </div>
+      </div> */}
+
+        <Login />
     </>
   );
 }
