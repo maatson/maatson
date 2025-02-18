@@ -20,6 +20,7 @@ body {
   .primary-btn-xl {
     @apply bg-primary px-4 py-3 rounded-xs text-grey-50 font-semibold hover:bg-primary-600 active:bg-primary-700 disabled:bg-primary-200 shadow-sm outline-none
   } */
+   
   .h-3xl {
     @apply text-h-3xl leading-[120%];
   }
