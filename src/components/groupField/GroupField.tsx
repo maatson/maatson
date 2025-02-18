@@ -15,6 +15,7 @@ interface Groupfield {
   value: string | number;
   options?: { label: string; value: string }[]; // Better type for options
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onClickRightIcon?: () => void;
   error: boolean;
   errorMessage: string;
 }
@@ -40,6 +41,7 @@ const GroupField: React.FC<Groupfield> = ({
   options,
   name,
   onChange,
+  onClickRightIcon,
   error,
   errorMessage,
 }) => {
@@ -125,7 +127,7 @@ const GroupField: React.FC<Groupfield> = ({
                 className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full ${inputStyle}`}
               />
             )}
-            {rightIcon && <div>{rightIcon}</div>}
+            {rightIcon && <div onClick={onClickRightIcon}>{rightIcon}</div>}
           </div>
           {error && errorMessage && (
             <p className="text-error flex items-start gap-1 mt-1 text-2xs font-semibold capitalize">
