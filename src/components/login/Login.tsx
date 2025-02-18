@@ -6,18 +6,18 @@ import PrimaryButton from "../buttons/PrimaryButton";
 const Login: React.FC = () => {
   const handleChange = () => {};
   return (
-    <div className="max-w-[480px]  mx-auto px-10 py-14 shadow-sm w-full rounded-sm flex flex-col gap-6 ">
+    <div className="max-w-[400px]  mx-auto px-8 py-8 shadow-sm w-full rounded-sm flex flex-col gap-2 ">
       {" "}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-4 justify-center">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1 justify-center">
           <div className="mx-auto">
             <img src={Logo} alt="maatson maritime logo" />
           </div>
-          <h2 className="h3 font-semibold text-center text-secondary">
+          <h2 className="h5 font-semibold text-center text-secondary">
             Welcome Back
           </h2>
         </div>
-        <div className="flex gap-4 flex-col">
+        <div className="flex gap-2 flex-col">
           <GroupField
             type={"text"}
             name={"username"}
@@ -55,7 +55,7 @@ const Login: React.FC = () => {
           Forgot Password ?
         </button>
       </p>
-      <PrimaryButton label={"Login"} size={"xl"} variant={"primary"} />
+      <PrimaryButton label={"Login"} size={"l"} variant={"primary"} />
     </div>
   );
 };
