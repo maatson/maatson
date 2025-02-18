@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import "./App.css";
 import GroupField from "./components/groupField/GroupField";
-import Login from "./pages/suriya/login/login";
+// import Login from "./components/login/login";
 import {
   DepartmentIcon,
   EyeOpenIcon,
@@ -18,7 +18,6 @@ import {
 } from "./utils/toastutil";
 import WarningChip from "./components/chips/WarningChip";
 import BlueChip from "./components/chips/BlueChip";
-// import Login from "./components/login/Login";
 import SignIn from "./pages/signIn";
 
 function App() {
