@@ -23,6 +23,7 @@ import SignIn from "./pages/signIn";
 import ForgotPasswordPage from "./pages/forgotPasswordPage";
 import OtpVerificationPage from "./pages/otpVerificationPage";
 import ResetPasswordPage from "./pages/resetPasswordPage";
+import EmployeeListPage from "./pages/hrm/employees";
 
 
 function App() {
@@ -126,10 +127,13 @@ function App() {
         </div>
       </div> */}
 
-      <SignIn />
+      {/* <SignIn /> */}
       {/* <ForgotPasswordPage /> */}
       {/* <OtpVerificationPage /> */}
       {/* <ResetPasswordPage /> */}
+
+        <EmployeeListPage />
+      
 
     </>
   );
