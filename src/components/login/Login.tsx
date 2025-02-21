@@ -1,58 +1,90 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import Logo from "/images/logo.svg";
 import GroupField from "../groupField/GroupField";
 import PrimaryButton from "../buttons/PrimaryButton";
+import {
+  UserIcon,
+  DepartmentIcon,
+  PasswordIcon,
+  EyeOpenIcon,
+  EyeCloseIcon,
+} from "../icons/Icons";
 
 const Login: React.FC = () => {
-  const handleChange = () => {};
+  const [data, setData] = useState({ name: "", department: "", password: "" });
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+  const [eyeIcon, setEyeIcon] = useState("close");
+  const handleEyeIconClick = () => {
+    if (eyeIcon === "open") {
+      setEyeIcon("close");
+    }
+    if (eyeIcon === "close") {
+      setEyeIcon("open");
+    }
+  };
   return (
-    <div className="max-w-[400px]  mx-auto px-8 py-8 shadow-sm w-full rounded-sm flex flex-col gap-2 ">
-      {" "}
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-1 justify-center">
-          <div className="mx-auto">
-            <img src={Logo} alt="maatson maritime logo" />
-          </div>
-          <h2 className="h5 font-semibold text-center text-secondary">
-            Welcome Back
-          </h2>
+    <div className="max-w-[424px] mx-auto p-8 border border-grey-300 shadow-lg w-full rounded-sm flex flex-col gap-2">
+      <div className="flex flex-col gap-6 justify-center">
+        <div className="mx-auto">
+          <img src={Logo} alt="maatson maritime logo" />
         </div>
-        <div className="flex gap-2 flex-col">
-          <GroupField
-            type={"text"}
-            name={"username"}
-            value={""}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            label={"Username/Email"}
-            placeholder={"Enter User Name or Email"}
-          />
-          <GroupField
-            type={"select"}
-            name={"department"}
-            value={""}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            label={"Department"}
-            placeholder={"Choose Department"}
-          />
-          <GroupField
-            type={"password"}
-            name={"password"}
-            value={""}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            label={"Password"}
-            placeholder={"Enter Password"}
-          />
-        </div>
+        <h5 className="h5 font-bold text-center text-secondary">
+          Welcome Back
+        </h5>
       </div>
+      <div className="flex flex-col gap-3">
+        <GroupField
+          type={"text"}
+          name={"name"}
+          value={data.name}
+          onChange={handleChange}
+          leftIcon={<UserIcon color="#2C398F" />}
+          error={false}
+          errorMessage={""}
+          label={"Username/Email"}
+          placeholder={"Enter User Name or Email"}
+        />
+        <GroupField
+          type={"select"}
+          name={"department"}
+          value={data.department}
+          onChange={handleChange}
+          leftIcon={<DepartmentIcon color="#2C398F" />}
+          error={false}
+          errorMessage={""}
+          label={"Department"}
+          placeholder={"Choose Department"}
+        />
+        <GroupField
+          type={eyeIcon === "open" ? "text" : "password"}
+          name={"password"}
+          value={data.password}
+          onChange={handleChange}
+          leftIcon={<PasswordIcon color="#2C398F" />}
+          rightIcon={
+            eyeIcon === "open" ? (
+              <EyeOpenIcon color="#2C398F" />
+            ) : (
+              <EyeCloseIcon color="#2C398F" />
+            )
+          }
+          onClickRightIcon={handleEyeIconClick}
+          error={false}
+          errorMessage={""}
+          label={"Password"}
+          placeholder={"Enter Password"}
+        />
+      </div>
+
       <p className="text-end">
         <button className="text-secondary font-semibold">
-          Forgot Password ?
+          Forgot Password
         </button>
       </p>
       <PrimaryButton label={"Login"} size={"l"} variant={"primary"} />

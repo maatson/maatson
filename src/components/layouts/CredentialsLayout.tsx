@@ -7,27 +7,27 @@ interface CredentialsLayoutProps {
 const CredentialsLayout: React.FC<CredentialsLayoutProps> = ({ children }) => {
   return (
     <div className="flex justify-center min-h-screen">
-      <div className=" w-full p-10 bg-primary-gradient-6  ">
-        <div className="px-8 gap-6 flex flex-col text-grey-aw-50">
-          <div className="w-[320px] mx-auto">
+      <div className=" w-full px-10 flex items-center bg-primary-gradient-6 ">
+        <div className="px-8 gap-4 flex flex-col text-grey-aw-50">
+          <div className="w-[280px] mx-auto">
             <img src={shipping} alt="Banner" />
           </div>
-          <div className="flex flex-col gap-3">
-            <h5 className="h5 font-semibold">
+          <div className="flex flex-col gap-2">
+            <h6 className="h6 font-bold">
               Maatson Maritime Intl (OPC) Pvt Ltd
-            </h5>
-            <h2 className="text-secondary font-semibold h2">
+            </h6>
+            <h3 className="text-secondary font-bold h3">
               Seamless Operations, Stronger Teamwork
-            </h2>
+            </h3>
           </div>
-          <h6 className="h6">
+          <h6 className="text-sm">
             Welcome to the Maatson Maritime Employee Portal. This platform is
             designed to help our team efficiently manage logistics, track
             container operations, and streamline internal workflows.
           </h6>
         </div>
       </div>
-      <div className="p-10 border w-full ">{children}</div>
+      <div className="px-20 py-10 w-full flex items-center ">{children}</div>
     </div>
   );
 };

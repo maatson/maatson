@@ -15,6 +15,7 @@ interface Groupfield {
   value: string | number;
   options?: { label: string; value: string }[]; // Better type for options
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onClickRightIcon?: () => void;
   error: boolean;
   errorMessage: string;
 }
@@ -40,6 +41,7 @@ const GroupField: React.FC<Groupfield> = ({
   options,
   name,
   onChange,
+  onClickRightIcon,
   error,
   errorMessage,
 }) => {
@@ -61,9 +63,9 @@ const GroupField: React.FC<Groupfield> = ({
           <div
             className={`${
               type === "select" ? "py-[2px]" : "py-2"
-            } px-4 flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
+            } px-3 flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
               !error ? "border-grey-200 " : "border-error "
-            } relative`}
+            } relative ${inputStyle}`}
           >
             {leftIcon && <div>{leftIcon}</div>}
             {type === "select" ? (
@@ -73,7 +75,7 @@ const GroupField: React.FC<Groupfield> = ({
                   value={options?.find((option) => option.value === value)} // Set the selected value
                   onChange={handleReactSelectChange} // React-Select onChange handler
                   options={options}
-                  className="w-full p-0" // Tailwind class for full width
+                  className="w-full p-0 " // Tailwind class for full width
                   classNamePrefix="custom-select" // Optional class prefix for styling
                   placeholder={placeholder || "Select an option"} // Placeholder text
                   isSearchable // Enable searching options
@@ -90,6 +92,7 @@ const GroupField: React.FC<Groupfield> = ({
                       boxShadow: "none", // Remove default React-Select shadow
                       background: "#fcfcfc",
                       border: 0,
+                      minHeight:"none"
                     }),
                     menu: (provided) => ({
                       ...provided,
@@ -122,10 +125,10 @@ const GroupField: React.FC<Groupfield> = ({
                 id={name}
                 onChange={onChange}
                 placeholder={placeholder}
-                className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full ${inputStyle}`}
+                className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
               />
             )}
-            {rightIcon && <div>{rightIcon}</div>}
+            {rightIcon && <div onClick={onClickRightIcon}>{rightIcon}</div>}
           </div>
           {error && errorMessage && (
             <p className="text-error flex items-start gap-1 mt-1 text-2xs font-semibold capitalize">

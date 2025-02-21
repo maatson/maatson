@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import "./App.css";
 import GroupField from "./components/groupField/GroupField";
-import Login from "./pages/suriya/login/login";
 import {
   DepartmentIcon,
   EyeOpenIcon,
+  EyeCloseIcon,
   PasswordIcon,
 } from "./components/icons/Icons";
 import { ToastContainer } from "react-toastify";
@@ -16,10 +16,15 @@ import {
   useSuccessNotify,
   useWarningNotify,
 } from "./utils/toastutil";
+
 import WarningChip from "./components/chips/WarningChip";
 import BlueChip from "./components/chips/BlueChip";
-// import Login from "./components/login/Login";
 import SignIn from "./pages/signIn";
+import ForgotPasswordPage from "./pages/forgotPasswordPage";
+import OtpVerificationPage from "./pages/otpVerificationPage";
+import ResetPasswordPage from "./pages/resetPasswordPage";
+import EmployeeListPage from "./pages/hrm/employees";
+
 
 function App() {
   const [data, setData] = useState({ name: "", email: "", department: "" });
@@ -30,9 +35,9 @@ function App() {
 
     setData((prev) => ({ ...prev, [name]: value }));
   };
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   const successToast = () => {
     // toast.success("success");
@@ -121,7 +126,15 @@ function App() {
           <BlueChip label={"Info Toast"} size={""} variant={"fill"} />
         </div>
       </div> */}
-      <SignIn />
+
+      {/* <SignIn /> */}
+      {/* <ForgotPasswordPage /> */}
+      {/* <OtpVerificationPage /> */}
+      {/* <ResetPasswordPage /> */}
+
+        <EmployeeListPage />
+      
+
     </>
   );
 }
