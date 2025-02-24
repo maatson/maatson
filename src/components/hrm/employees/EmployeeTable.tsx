@@ -3,17 +3,19 @@ import PrimaryChip from "../../chips/PrimaryChip";
 import NeutralBlueButton from "../../buttons/NeutralBlueButton";
 import { UserIcon } from "../../icons/Icons";
 import EmployeeImage from "/images/sample/employee.png";
-
 import {
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TablePagination,
   TableRow,
   Paper,
   TableHead,
   Checkbox,
+  Select,
+  MenuItem,
+  Pagination,
+  SelectChangeEvent,
 } from "@mui/material";
 
 interface Column {
@@ -27,7 +29,7 @@ interface Column {
     | "action";
   label: string;
   minWidth?: number;
-  align?: "center";
+  align?: "left";
 }
 
 const columns: Column[] = [
@@ -206,28 +208,85 @@ const sampleData: Data[] = [
       </div>
     ),
   },
+  {
+    employeeID: "EMP2022006",
+    employeeName: (
+      <div className="min-w-[180px] flex gap-[10px] items-center">
+        <div className="w-10 h-10">
+          <img
+            src={EmployeeImage}
+            alt="employeeImage"
+            className="w-full h-full rounded-full"
+          />
+        </div>
+        <div className="text-sm">Henry, Arthur</div>
+      </div>
+    ),
+    employeeEmail: "bill.sanders@example.com",
+    designation: "Sales Executive",
+    department: "Marketing",
+    branchLocation: (
+      <PrimaryChip label={"Chennai, India"} size={"m"} variant={"mix"} />
+    ),
+    action: (
+      <div className="flex justify-center">
+        <NeutralBlueButton
+          label={"Profile"}
+          size={"s"}
+          variant={"primary"}
+          rightIcon={<UserIcon size="16px" color="#FDFDFD" />}
+        />
+      </div>
+    ),
+  },
+  {
+    employeeID: "EMP2022007",
+    employeeName: (
+      <div className="min-w-[180px] flex gap-[10px] items-center">
+        <div className="w-10 h-10">
+          <img
+            src={EmployeeImage}
+            alt="employeeImage"
+            className="w-full h-full rounded-full"
+          />
+        </div>
+        <div className="text-sm">Henry, Arthur</div>
+      </div>
+    ),
+    employeeEmail: "bill.sanders@example.com",
+    designation: "Sales Executive",
+    department: "Marketing",
+    branchLocation: (
+      <PrimaryChip label={"Chennai, India"} size={"m"} variant={"mix"} />
+    ),
+    action: (
+      <div className="flex justify-center">
+        <NeutralBlueButton
+          label={"Profile"}
+          size={"s"}
+          variant={"primary"}
+          rightIcon={<UserIcon size="16px" color="#FDFDFD" />}
+        />
+      </div>
+    ),
+  },
 ];
 
 const EmployeeTable: React.FC = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(1);
+  const [itemsPerPage, setItemsPerPage] = React.useState(5);
   const [selected, setSelected] = React.useState<string[]>([]);
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - sampleData.length) : 0;
-
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    event: React.ChangeEvent<unknown>,
+    value: number
   ) => {
-    setPage(newPage);
+    setPage(value);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  const handleItemsPerPageChange = (event: SelectChangeEvent<number>) => {
+    setItemsPerPage(Number(event.target.value));
+    setPage(1); // Reset to first page when items per page changes
   };
 
   const handleSelectRow = (name: string) => {
@@ -240,119 +299,20 @@ const EmployeeTable: React.FC = () => {
 
   const isSelected = (name: string) => selected.includes(name);
 
+  const startIndex = (page - 1) * itemsPerPage;
+  const paginatedData = sampleData.slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <div className="w-full py-1 px-3 bg-grey-aw-50">
-      {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 800 }} aria-label="custom pagination table">
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  indeterminate={
-                    selected.length > 0 && selected.length < rows.length
-                  }
-                  checked={selected.length === rows.length}
-                  onChange={(e) =>
-                    setSelected(
-                      e.target.checked ? rows.map((row) => row.employeeID) : []
-                    )
-                  }
-                />
-              </TableCell>
-              <TableCell width="130px" padding="none">
-                Employee ID
-              </TableCell>
-              <TableCell width="180px" padding="none">
-                Employee Name
-              </TableCell>
-              <TableCell width="180px" padding="none">
-                Employee Email
-              </TableCell>
-              <TableCell width="140px" padding="none">
-                Designation
-              </TableCell>
-              <TableCell width="120px" padding="none">
-                Department
-              </TableCell>
-              <TableCell width="140px" padding="none" align="center">
-                Branch Location
-              </TableCell>
-              <TableCell width="120px" padding="none" align="center">
-                Action
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : rows
-            ).map((row) => (
-              <TableRow
-                key={row.employeeID}
-                selected={isSelected(row.employeeID)}
-              >
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={isSelected(row.employeeID)}
-                    onChange={() => handleSelectRow(row.employeeID)}
-                  />
-                </TableCell>
-                <TableCell
-                  component="th"
-                  scope="row"
-                  width="130px"
-                  padding="none"
-                >
-                  {row.employeeID}
-                </TableCell>
-                <TableCell width="180px" padding="none">
-                  {row.employeeName}
-                </TableCell>
-                <TableCell width="180px" padding="none">
-                  {row.employeeEmail}
-                </TableCell>
-                <TableCell width="140px" padding="none">
-                  {row.designation}
-                </TableCell>
-                <TableCell width="120px" padding="none">
-                  {row.department}
-                </TableCell>
-                <TableCell width="140px" padding="none" align="center">
-                  {row.branchLocation}
-                </TableCell>
-                <TableCell width="120px" padding="none" align="center">
-                  {row.action}
-                </TableCell>
-              </TableRow>
-            ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={4} />
-              </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions} // 👈 Custom pagination actions
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer> */}
-
-      <Paper sx={{ width: "100%", overflowX: "auto" }}>
-        <TableContainer>
+      <Paper sx={{ width: "100%", overflowX: "auto", boxShadow: "none" }}>
+        <TableContainer sx={{ overflowX: "auto" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
+                <TableCell
+                  padding="checkbox"
+                  style={{ backgroundColor: "#F6F6F6", borderBottom: "none" }}
+                >
                   <Checkbox
                     indeterminate={
                       selected.length > 0 && selected.length < sampleData.length
@@ -370,8 +330,19 @@ const EmployeeTable: React.FC = () => {
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    align={column.id === "action" ? "center" : column.align}
+                    style={{
+                      minWidth: column.minWidth,
+                      width: column.minWidth,
+                      maxWidth: column.minWidth,
+                      backgroundColor: "#F6F6F6",
+                      borderBottom: "none",
+                      padding: "4px 16px",
+                      fontSize: "14px",
+                      color: "#0E0E0E",
+                      whiteSpace: "normal",
+                      wordBreak: "break-word",
+                    }}
                   >
                     <span className="font-semibold">{column.label}</span>
                   </TableCell>
@@ -379,13 +350,7 @@ const EmployeeTable: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {(rowsPerPage > 0
-                ? sampleData.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : sampleData
-              ).map((row) => (
+              {paginatedData.map((row) => (
                 <TableRow
                   key={row.employeeID}
                   selected={isSelected(row.employeeID)}
@@ -397,29 +362,116 @@ const EmployeeTable: React.FC = () => {
                     />
                   </TableCell>
                   {columns.map((column) => (
-                    <TableCell key={column.id} align={column.align}>
+                    <TableCell
+                      key={column.id}
+                      align={
+                        column.id === "action" || column.id === "branchLocation"
+                          ? "center"
+                          : column.align
+                      }
+                      style={{
+                        minWidth: column.minWidth,
+                        width: column.minWidth,
+                        maxWidth: column.minWidth,
+                        padding: "10px 16px",
+                        fontSize: "14px",
+                        color: "#0E0E0E",
+                        whiteSpace: "normal",
+                        wordBreak: "break-word",
+                      }}
+                    >
                       {row[column.id]}
                     </TableCell>
                   ))}
                 </TableRow>
               ))}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={4} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 100]}
-          component="div"
-          count={sampleData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+
+        {/* Pagination */}
+        <div className="flex justify-between py-4 px-0 items-center">
+          <div className="text-xs text-grey-ab-200">
+            Showing {startIndex + 1} to{" "}
+            {Math.min(startIndex + itemsPerPage, sampleData.length)} of{" "}
+            {sampleData.length} Entries
+          </div>
+          <Pagination
+            count={Math.ceil(sampleData.length / itemsPerPage)}
+            page={page}
+            onChange={handleChangePage}
+            variant="outlined"
+            shape="rounded"
+            size="small"
+            siblingCount={0}
+            boundaryCount={1}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                fontSize: "10px",
+                color: "#212121",
+                backgroundColor: "#FDFDFD",
+                border: "1px solid rgba(206, 206, 206, 1)",
+                fontWeight: 800,
+                lineHeight: 0,
+                "&:hover": {
+                  backgroundColor: "#C4C8E4",
+                },
+              },
+              "& .Mui-selected": {
+                backgroundColor: "#FDFDFD",
+                color: "#2C398F",
+                border: "1px solid #2C398F",
+                "&:hover": {
+                  backgroundColor: "#FDFDFD",
+                },
+              },
+              "& .MuiPaginationItem-ellipsis": {
+                color: "#212121",
+                fontSize: "10px",
+                padding: "10px 5px 14px 5px",
+                fontWeight: 800,
+                borderRadius: "4px",
+                border: "1px solid rgba(206, 206, 206, 1)",
+              },
+              "& .MuiPaginationItem-previousNext": {
+                backgroundColor: "#FDFDFD",
+                color: "#171717",
+                border: "1px solid #171717",
+                "&:hover": {
+                  border: "1px solid rgba(206, 206, 206, 1)",
+                },
+              },
+              "& .MuiPaginationItem-previousNext.Mui-disabled": {
+                backgroundColor: "#FDFDFD",
+                color: "#171717",
+                border: "1px solid #171717",
+                opacity: 1,
+              },
+            }}
+          />
+          <div className="flex gap-4 items-center">
+            <p className="text-xs text-grey-ab-300">Items Per Page</p>
+            {/* <div className="w-[64px] h-[32px] bg-black"></div>{" "} */}
+            <Select
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+              size="small"
+              sx={{
+                fontSize: "12px",
+                fontWeight: "700",
+                color: "#121212",
+                padding: "0px 4px",
+                borderRadius: "4px",
+              }}
+            >
+              {[5, 10, 15, 20, 25].map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+        </div>
       </Paper>
     </div>
   );
