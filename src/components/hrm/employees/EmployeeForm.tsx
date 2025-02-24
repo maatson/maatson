@@ -11,7 +11,7 @@ const EmployeeForm: React.FC = () => {
         {/* heading section */}
         <p className="py-4 px-3 text-lg font-bold text-grey-ab-900 border">
           Employee Form
-        </p>
+        </p>  
 
         {/* form section */}
         <div className="flex flex-col gap-8">
