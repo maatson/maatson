@@ -18,12 +18,15 @@ const OtpVerification = lazy(
 const PageNotFound = lazy(() => import("./pages/pageNotFound"));
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
 
+const Employees = lazy(() => import("./pages/hrm/employees"));
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<DashBoard />}>
         <Route path="hrm" element={<PageNotFound />} />
         <Route path="hrm/attendance" element={<Attendance />} />
+        <Route path="hrm/employees" element={<Employees />} />
       </Route>
       <Route
         index
