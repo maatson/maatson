@@ -1,6 +1,11 @@
 import React from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { AddIcon, ExcelIcon } from "../../../components/icons/Icons";
+import {
+  AddIcon,
+  CalenderIcon,
+  ExcelIcon,
+  SearchIcon,
+} from "../../../components/icons/Icons";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import GroupField from "../../../components/groupField/GroupField";
 
@@ -21,54 +26,43 @@ const AttendanceList: React.FC = () => {
           <GroupField
             label={""}
             type={""}
-            placeholder={""}
+            placeholder={"Search"}
+            name={""}
+            value={""}
+            onChange={function (
+              e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+            parentStyle=" max-w-[320px] w-full min-w-[180px] "
+            error={false}
+            rightIcon={<SearchIcon />}
+            errorMessage={""}
+          />
+          <GroupField
+            label={""}
+            type={"select"}
+            placeholder={"Branch Office"}
+            name={""}
+            value={""}
+            size="s"
+            parentStyle=" max-w-[180px] w-full min-w-[180px]"
+            onChange={function (
+              e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+            error={false}
+            errorMessage={""}
+          />
+          <GroupField
+            label={""}
+            type={"date"}
+            placeholder={"today"}
             name={""}
             size="s"
             value={""}
-            onChange={function (
-              e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-            ): void {
-              throw new Error("Function not implemented.");
-            }}
-            error={false}
-            errorMessage={""}
-          />
-          <GroupField
-            label={""}
-            type={""}
-            placeholder={""}
-            name={""}
-            value={""}
-            size="m"
-            onChange={function (
-              e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-            ): void {
-              throw new Error("Function not implemented.");
-            }}
-            error={false}
-            errorMessage={""}
-          />
-          <GroupField
-            label={""}
-            type={"select"}
-            placeholder={""}
-            name={""}
-            size="l"
-            value={""}
-            onChange={function (
-              e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-            ): void {
-              throw new Error("Function not implemented.");
-            }}
-            error={false}
-            errorMessage={""}
-          />
-          <GroupField
-            label={""}
-            type={"select"}
-            placeholder={""}
-            name={""}
-            value={""}
+            parentStyle=" max-w-[180px] w-full min-w-[180px]"
             onChange={function (
               e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
             ): void {

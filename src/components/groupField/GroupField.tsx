@@ -64,17 +64,10 @@ const GroupField: React.FC<Groupfield> = ({
         )}
         <div>
           <div
-            className={`px-3 ${
-              size === "s"
-                ? "py-1 text-3xs"
-                : size === "m"
-                ? "py-[6px] text-xs"
-                : size === "m"
-                ? "px-4 py-2 text-sm"
-                : "py-2 text-sm"
-            } flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
-              !error ? "border-grey-200 " : "border-error "
-            }   ${inputStyle}`}
+            className={`${size === "s" ? "px-3 py-[6px]" : "px-4 py-3 "}
+             flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
+               !error ? "border-grey-200 " : "border-error "
+             }   ${inputStyle}`}
           >
             {leftIcon && <div className="flex-shrink-0">{leftIcon}</div>}
             {type === "select" ? (
@@ -84,7 +77,7 @@ const GroupField: React.FC<Groupfield> = ({
                   value={options?.find((option) => option.value === value)} // Set the selected value
                   onChange={handleReactSelectChange} // React-Select onChange handler
                   options={options}
-                  className="p-0 w-full min-w-0" // Tailwind class for full width
+                  className="p-0 w-full min-w-0 " // Tailwind class for full width
                   classNamePrefix="custom-select" // Optional class prefix for styling
                   placeholder={placeholder || "Select an option"} // Placeholder text
                   isSearchable // Enable searching options
@@ -102,6 +95,10 @@ const GroupField: React.FC<Groupfield> = ({
                       background: "#fcfcfc",
                       border: 0,
                       minHeight: "none",
+                    }),
+                    placeholder: (provided) => ({
+                      ...provided,
+                      fontSize: "14px",
                     }),
                     menu: (provided) => ({
                       ...provided,
@@ -128,7 +125,7 @@ const GroupField: React.FC<Groupfield> = ({
               <input
                 type={type}
                 name={name}
-                // value={value}
+                value={value}
                 id={name}
                 onChange={onChange}
                 placeholder={placeholder}
