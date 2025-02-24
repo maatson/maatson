@@ -1,0 +1,6 @@
+.overflow-scroll::-webkit-scrollbar{
+    display: none;
+}
+/* Add these styles to your CSS file (style.css) */
+
+

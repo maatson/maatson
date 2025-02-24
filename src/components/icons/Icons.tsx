@@ -2312,25 +2312,48 @@ export const RegistrationIcon: React.FC<IconProps> = ({
   );
 };
 
-// export const EmployeeGroupIcon: React.FC<IconProps> = ({
-//     size = 24,
-//     color = "#121212",
-//   }) => {
-//     return(<>
-//     </>
+export const CustomerServiceIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = "#121212",
+}) => {
+  return (
+    <>
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11 2C12.933 2 14.5 3.56698 14.5 5.49997C14.5 7.36855 13.0358 8.89513 11.1921 8.99478L11 8.99998C9.06705 8.99998 7.50002 7.433 7.50002 5.49997C7.50002 3.63144 8.9643 2.10481 10.808 2.00516L11 2ZM4 20H12.8027C12.4449 19.3818 12.2012 18.7044 12.083 18H6.00002V16.4L6.00522 16.2058C6.10164 14.4075 7.52936 13 9.25 13H12.75L12.9332 13.0053C13.1117 13.0158 13.2866 13.0414 13.4567 13.0809C13.9623 12.495 14.5761 12.0121 15.2645 11.6585C14.5178 11.2386 13.661 11 12.75 11H9.25L9.03362 11.0045C6.23448 11.1212 4 13.4922 4 16.4V20ZM9.50003 5.49997C9.50003 4.67155 10.1716 3.99997 11 3.99997C11.8285 3.99997 12.5 4.67155 12.5 5.49997C12.5 6.32839 11.8285 6.99997 11 6.99997C10.1716 6.99997 9.50003 6.32839 9.50003 5.49997ZM15.0611 21.0451L18 19.25L20.9389 21.0451L20.1399 17.6952L22.7553 15.4549L19.3225 15.1797L18 12L16.6775 15.1797L13.2447 15.4549L15.8601 17.6952L15.0611 21.0451Z"
+          fill={color}
+        />
+      </svg>
+    </>
+  );
+};
 
-//   );
-// };
-
-// export const EmployeeGroupIcon: React.FC<IconProps> = ({
-//     size = 24,
-//     color = "#121212",
-//   }) => {
-//     return(<>
-//     </>
-
-//   );
-// };
+export const SlashIcon: React.FC<IconProps> = ({ color = "#121212" }) => {
+  return (
+    <>
+      <svg
+        width="8"
+        height="19"
+        viewBox="0 0 8 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0.666504 18.5L5.93317 0.5H7.33317L2.0665 18.5H0.666504Z"
+          fill={color}
+        />
+      </svg>
+    </>
+  );
+};
 
 // export const EmployeeGroupIcon: React.FC<IconProps> = ({
 //     size = 24,

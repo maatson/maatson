@@ -5,6 +5,7 @@ import PrimaryButton from "../buttons/PrimaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import WarningChip from "../chips/WarningChip";
 import { EmailIcon } from "../icons/Icons";
+import { Link } from "react-router-dom";
 
 const OtpVerification: React.FC = () => {
   const [data, setData] = useState({ email: "" });
@@ -66,28 +67,26 @@ const OtpVerification: React.FC = () => {
         </p>
       </div>
       {/* otp */}
-      <div className="flex flex-col items-center w-full">
-        <div className="flex flex-col gap-3 w-fit">
-          <div className="flex gap-4">
-            {otp.map((digit, index) => (
-              <input
-                key={index}
-                type="text"
-                placeholder="_"
-                className="text-center w-12 h-12 placeholder:text-ab-300 shadow-xs rounded-xs bg-grey-50 border border-grey-ab-50 hover:border-grey-ab-100 focus:border-primary text-grey-ab-800 outline-none"
-                value={digit}
-                maxLength={1}
-                ref={(el) => (inputRefs.current[index] = el)}
-                onChange={(e) => handleChangeOTP(index, e)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                onFocus={(e) => (e.target.placeholder = "")}
-                onBlur={(e) => (e.target.placeholder = "_")}
-              />
-            ))}
-          </div>
-          <div className="flex justify-end">
-            <WarningChip label={"02:29"} size={"s"} variant={"fill"} />
-          </div>
+      <div className="flex flex-col gap-3 mx-auto ">
+        <div className="flex gap-4">
+          {otp.map((digit, index) => (
+            <input
+              key={index}
+              type="text"
+              placeholder="_"
+              className="text-center w-12 h-12 placeholder:text-ab-300 shadow-xs rounded-xs bg-grey-50 border border-grey-ab-50 hover:border-grey-ab-100 focus:border-primary text-grey-ab-800 outline-none"
+              value={digit}
+              maxLength={1}
+              ref={(el) => (inputRefs.current[index] = el)}
+              onChange={(e) => handleChangeOTP(index, e)}
+              onKeyDown={(e) => handleKeyDown(index, e)}
+              onFocus={(e) => (e.target.placeholder = "")}
+              onBlur={(e) => (e.target.placeholder = "_")}
+            />
+          ))}
+        </div>
+        <div className="flex justify-end w-full">
+          <WarningChip label={"02:29"} size={"s"} variant={"fill"} />
         </div>
       </div>
       {/* otp end */}
@@ -117,9 +116,11 @@ const OtpVerification: React.FC = () => {
           style="w-full"
         />
       </div>
-      <div className="flex gap-[14px] items-center justify-center">
+      <div className="flex gap-1 items-center justify-center">
         <span>Return to</span>
-        <SecondaryButton label={"Login"} size={"l"} variant={"link"} />
+        <Link to={"/login"}>
+          <SecondaryButton label={"Login"} size={"l"} variant={"link"} />
+        </Link>
       </div>
     </div>
   );
