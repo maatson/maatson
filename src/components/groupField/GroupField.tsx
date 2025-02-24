@@ -19,7 +19,7 @@ interface Groupfield {
   onClickRightIcon?: () => void;
   error: boolean;
   errorMessage: string;
-  size? : string; //added by suriya
+  size?: string; //added by suriya
 }
 
 const CustomDropdownIndicator = () => {
@@ -64,7 +64,15 @@ const GroupField: React.FC<Groupfield> = ({
         )}
         <div>
           <div
-            className={`px-3 ${size === "s" ? "py-1 text-xs" : "py-2 text-base"} flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
+            className={`px-3 ${
+              size === "s"
+                ? "py-1 text-3xs"
+                : size === "m"
+                ? "py-[6px] text-xs"
+                : size === "m"
+                ? "px-4 py-2 text-sm"
+                : "py-2 text-sm"
+            } flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
               !error ? "border-grey-200 " : "border-error "
             }   ${inputStyle}`}
           >

@@ -23,6 +23,7 @@ const AttendanceList: React.FC = () => {
             type={""}
             placeholder={""}
             name={""}
+            size="s"
             value={""}
             onChange={function (
               e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -37,6 +38,22 @@ const AttendanceList: React.FC = () => {
             type={""}
             placeholder={""}
             name={""}
+            value={""}
+            size="m"
+            onChange={function (
+              e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+            error={false}
+            errorMessage={""}
+          />
+          <GroupField
+            label={""}
+            type={"select"}
+            placeholder={""}
+            name={""}
+            size="l"
             value={""}
             onChange={function (
               e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
