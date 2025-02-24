@@ -4,9 +4,11 @@ import { ButtonProps } from "./PrimaryButton";
 const TertiaryButton: React.FC<ButtonProps> = ({
   style,
   label,
-  size,
+  size = "l",
   variant = "primary",
   disabled,
+  leftIcon,
+  rightIcon,
   // Icon,
 }) => {
   return (
@@ -14,17 +16,17 @@ const TertiaryButton: React.FC<ButtonProps> = ({
       <button
         disabled={disabled}
         className={`
-          outline-none  rounded-xs font-semibold disabled:cursor-not-allowed
+          outline-none  rounded-xs font-semibold disabled:cursor-not-allowed flex items-center justify-center
           ${variant?.toLocaleLowerCase() === "link" ? "" : "shadow-xs"} 
           ${
             size.toLocaleLowerCase() === "s"
-              ? "text-xs px-2 py-1"
+              ? "text-xs px-2 py-1 gap-2"
               : size.toLocaleLowerCase() === "m"
-              ? "text-xs px-3 py-2"
+              ? "text-xs px-3 py-2 gap-2"
               : size.toLocaleLowerCase() === "xl"
-              ? "text-base px-4 py-3"
-              : "text-sm px-4 py-2"
-          } 
+              ? "text-base px-4 py-3 gap-4"
+              : "text-sm px-4 py-2 gap-3"
+          }
           ${
             variant?.toLocaleLowerCase() === "link"
               ? " text-tertiary hover:text-tertiary-600 active:text-tertiary-700  disabled:text-tertiary-300"
@@ -36,7 +38,9 @@ const TertiaryButton: React.FC<ButtonProps> = ({
           }
           ${style} `}
       >
+        {leftIcon && <div>{leftIcon}</div>}
         {label}
+        {rightIcon && <div>{rightIcon}</div>}
       </button>
     </>
   );
