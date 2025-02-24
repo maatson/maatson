@@ -1,5 +1,6 @@
 import React from "react";
 import EmployeeList from "../../../components/hrm/employees/EmployeeList";
+import EmployeeForm from "../../../components/hrm/employees/EmployeeForm";
 
 const EmployeeListPage: React.FC = () => {
   return (
@@ -8,20 +9,21 @@ const EmployeeListPage: React.FC = () => {
       <div className="h-[68px] w-full bg-grey-aw-50"></div>
 
       {/* Main layout */}
-      <div className="w-full flex">
+      <div className="flex">
         {/* SideBar */}
-        <div className="max-w-[260px] w-full bg-primary-gradient-4 ">
+        <div className="max-w-[260px] w-full bg-primary-gradient-4">
         </div>
 
         <div className="w-full bg-primary-50 flex flex-col justify-between gap-10">
-          <div className="flex flex-col gap-4 pt-4 pl-4 pr-5">
+          <div className="flex flex-col gap-4 py-4 px-5">
             <div className="flex justify-between py-2 px-3">
               <h5 className="h5 font-bold text-grey-ab-900">Employees</h5>
               <div className="flex gap-1">{/* Breadcrumbs here */}</div> 
             </div>
 
             {/* EmployeeList Component */}
-            <EmployeeList />
+            {/* <EmployeeList /> */}
+            <EmployeeForm />
           </div>
 
           {/* Footer */}

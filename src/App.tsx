@@ -24,6 +24,7 @@ import ForgotPasswordPage from "./pages/forgotPasswordPage";
 import OtpVerificationPage from "./pages/otpVerificationPage";
 import ResetPasswordPage from "./pages/resetPasswordPage";
 import EmployeeListPage from "./pages/hrm/employees";
+import EmployeeTable from "./components/hrm/employees/EmployeeTable";
 
 
 function App() {
@@ -132,7 +133,7 @@ function App() {
       {/* <OtpVerificationPage /> */}
       {/* <ResetPasswordPage /> */}
 
-        <EmployeeListPage />
+         <EmployeeListPage />
       
 
     </>
