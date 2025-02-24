@@ -40,7 +40,7 @@ const SideBar: React.FC = () => {
     // Set the active item based on the current route
     sideBarItems.forEach((item, index) => {
       item.children.forEach((child) => {
-        if (child.link === location.pathname) {
+        if (location.pathname.startsWith(child.link)) {
           setActiveItem(index); // Set the active item based on the current route
           setOpenItems((prevState) => ({
             ...prevState,
@@ -226,7 +226,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
               to={child.link}
               key={index}
               className={`py-2 px-6 rounded flex items-center gap-2 ${
-                location.pathname === child.link
+                location.pathname.startsWith(child.link)
                   ? "bg-[#ffffff] bg-opacity-40 "
                   : ""
               }`}

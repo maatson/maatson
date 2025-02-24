@@ -118,7 +118,7 @@ const GroupField: React.FC<Groupfield> = ({
               <input
                 type={type}
                 name={name}
-                value={value}
+                // value={value}
                 id={name}
                 onChange={onChange}
                 placeholder={placeholder}

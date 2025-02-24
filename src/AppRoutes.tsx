@@ -1,6 +1,7 @@
-import React, { lazy } from "react";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
+// Lazy loading components
 const DashBoard = lazy(() => import("./pages/dashboard/DashBoard"));
 const CredentialsLayout = lazy(
   () => import("./pages/layouts/CredentialsLayout")
@@ -16,35 +17,108 @@ const OtpVerification = lazy(
   () => import("./components/otpVerification/OtpVerification")
 );
 const PageNotFound = lazy(() => import("./pages/pageNotFound"));
-const Attendance = lazy(() => import("./pages/hrm/attendance"));
 
+// HRM Routes
+const Attendance = lazy(() => import("./pages/hrm/attendance"));
+const AttendanceList = lazy(
+  () => import("./pages/hrm/attendance/AttendanceList")
+);
+const Holidays = lazy(() => import("./pages/hrm/attendance/Holidays"));
 const Employees = lazy(() => import("./pages/hrm/employees"));
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<DashBoard />}>
+      {/* Suspense for the Dashboard route */}
+      <Route
+        path="/"
+        element={
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="w-10 h-10 border-4 border-primary border-t-transparent border-solid rounded-full animate-spin"></div>
+              </div>
+            }
+          >
+            <DashBoard />
+          </Suspense>
+        }
+      >
         <Route path="hrm" element={<PageNotFound />} />
-        <Route path="hrm/attendance" element={<Attendance />} />
+        <Route path="hrm/attendance" element={<Attendance />}>
+          <Route index element={<AttendanceList />} />
+          <Route path="holidays" element={<Holidays />} />
+        </Route>
         <Route path="hrm/employees" element={<Employees />} />
       </Route>
+
+      {/* Suspense for Login and other credential-related routes */}
       <Route
-        index
         path="/login"
-        element={<CredentialsLayout children={<Login />} />}
+        element={
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="w-10 h-10 border-4 border-primary border-t-transparent border-solid rounded-full animate-spin"></div>
+              </div>
+            }
+          >
+            <CredentialsLayout>
+              <Login />
+            </CredentialsLayout>
+          </Suspense>
+        }
       />
       <Route
         path="/forgot-password"
-        element={<CredentialsLayout children={<ForgotPassword />} />}
+        element={
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="w-10 h-10 border-4 border-primary border-t-transparent border-solid rounded-full animate-spin"></div>
+              </div>
+            }
+          >
+            <CredentialsLayout>
+              <ForgotPassword />
+            </CredentialsLayout>
+          </Suspense>
+        }
       />
       <Route
         path="/reset-password"
-        element={<CredentialsLayout children={<ResetPassword />} />}
+        element={
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="w-10 h-10 border-4 border-primary border-t-transparent border-solid rounded-full animate-spin"></div>
+              </div>
+            }
+          >
+            <CredentialsLayout>
+              <ResetPassword />
+            </CredentialsLayout>
+          </Suspense>
+        }
       />
       <Route
         path="/otp-verification"
-        element={<CredentialsLayout children={<OtpVerification />} />}
+        element={
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center min-h-screen">
+                <div className="w-10 h-10 border-4 border-primary border-t-transparent border-solid rounded-full animate-spin"></div>
+              </div>
+            }
+          >
+            <CredentialsLayout>
+              <OtpVerification />
+            </CredentialsLayout>
+          </Suspense>
+        }
       />
+
+      {/* Page not found for undefined routes */}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import EmployeeList from "../../../components/hrm/employees/EmployeeList";
-import EmployeeForm from "../../../components/hrm/employees/EmployeeForm";
 import PageHeader from "../../../components/header/PageHeader";
 
 const Employees: React.FC = () => {
@@ -15,9 +14,6 @@ const Employees: React.FC = () => {
 
           <EmployeeList />
         </div>
-
-        {/* Footer */}
-        <div>footer</div>
       </div>
     </>
   );

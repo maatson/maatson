@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/header/Header";
 import SideBar from "../../components/sideBar/SideBar";
 import { Outlet } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 const DashBoard: React.FC = () => {
   return (
@@ -18,7 +19,10 @@ const DashBoard: React.FC = () => {
           <SideBar />
         </div>
         <div className="w-full max-w-[80%]  h-full bg-primary-50 break-after-all flex mx-auto ">
-          <Outlet />
+          <div className="flex flex-col justifiy-between min-h-screen h-full w-full ps-4 pe-5 pt-4 gap-4 ">
+            <Outlet />
+            <Footer />
+          </div>
         </div>
       </div>
     </>
