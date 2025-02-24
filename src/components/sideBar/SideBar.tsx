@@ -148,7 +148,7 @@ const SideBar: React.FC = () => {
         label: "HRM",
         isOpen: openItems[9] || false,
         children: [
-          { label: "Employees", link: "/reset-password" },
+          { label: "Employees", link: "/hrm/employees" },
           { label: "Attendance", link: "/hrm/attendance" },
           { label: "Leave Form", link: "/reset-password" },
           { label: "Requirement", link: "/reset-password" },
