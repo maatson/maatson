@@ -306,7 +306,7 @@ const EmployeeTable: React.FC = () => {
     <div className="w-full py-1 px-3 bg-grey-aw-50">
       <Paper sx={{ width: "100%", overflowX: "auto", boxShadow: "none" }}>
         <TableContainer sx={{ overflowX: "auto" }}>
-          <Table stickyHeader aria-label="sticky table">
+          <Table aria-label="sticky table">
             <TableHead>
               <TableRow>
                 <TableCell

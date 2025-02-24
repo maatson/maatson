@@ -17,6 +17,7 @@ const EmployeeList: React.FC = () => {
     search: "",
     department: "",
     branchLocation: "",
+    designation: "",
   });
   const [hambergerMenuIcon, setHambergerMenuIcon] = useState<Boolean>(true);
   const [cubeIcon, setCubeIcon] = useState<Boolean>(false);
@@ -70,7 +71,8 @@ const EmployeeList: React.FC = () => {
               onChange={handleChange}
               error={false}
               errorMessage={""}
-              inputStyle="text-xs"
+              parentStyle="min-w-[140px] "
+              size="s"
             />
             <GroupField
               type={"select"}
@@ -81,8 +83,23 @@ const EmployeeList: React.FC = () => {
               onChange={handleChange}
               error={false}
               errorMessage={""}
-              inputStyle="text-xs"
+              size="s"
+              parentStyle="min-w-[140px] "
             />
+            {cubeIcon && (
+              <GroupField
+                type={"select"}
+                name={"designation"}
+                value={data.designation}
+                label={""}
+                placeholder="Designation"
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                size="s"
+                parentStyle="min-w-[140px] "
+              />
+            )}
           </div>
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 rounded-sm border p-2 border-grey-200">

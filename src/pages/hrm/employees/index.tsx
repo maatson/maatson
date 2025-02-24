@@ -12,7 +12,8 @@ const Employees: React.FC = () => {
             heading={"Employees"}
           />
 
-          <EmployeeList />
+          {/* <EmployeeList /> */}
+          <EmployeeForm />
         </div>
       </div>
     </>
