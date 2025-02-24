@@ -16,7 +16,7 @@ const PinkButton: React.FC<ButtonProps> = ({
       <button
         disabled={disabled}
         className={`
-          outline-none  rounded-xs font-semibold disabled:cursor-not-allowed flex items-center
+          outline-none  rounded-xs font-semibold disabled:cursor-not-allowed flex items-center justify-center
           ${variant?.toLocaleLowerCase() === "link" ? "" : "shadow-xs"} 
           ${
             size.toLocaleLowerCase() === "s"

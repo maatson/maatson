@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { DropDownIcon, WarningIcon } from "../icons/Icons";
 import Select from "react-select";
+import "./style.css";
 
 interface Groupfield {
   label: string;
@@ -61,13 +62,11 @@ const GroupField: React.FC<Groupfield> = ({
         )}
         <div>
           <div
-            className={`${
-              type === "select" ? "py-[2px]" : "py-2"
-            } px-3 flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
+            className={`py-2 px-3 flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
               !error ? "border-grey-200 " : "border-error "
-            } relative ${inputStyle}`}
+            }   ${inputStyle}`}
           >
-            {leftIcon && <div>{leftIcon}</div>}
+            {leftIcon && <div className="flex-shrink-0">{leftIcon}</div>}
             {type === "select" ? (
               <>
                 <Select
@@ -75,7 +74,7 @@ const GroupField: React.FC<Groupfield> = ({
                   value={options?.find((option) => option.value === value)} // Set the selected value
                   onChange={handleReactSelectChange} // React-Select onChange handler
                   options={options}
-                  className="w-full p-0 " // Tailwind class for full width
+                  className="p-0 w-full min-w-0" // Tailwind class for full width
                   classNamePrefix="custom-select" // Optional class prefix for styling
                   placeholder={placeholder || "Select an option"} // Placeholder text
                   isSearchable // Enable searching options
@@ -86,18 +85,16 @@ const GroupField: React.FC<Groupfield> = ({
                   styles={{
                     control: (provided) => ({
                       ...provided,
-                      padding: "0",
+                      padding: 0,
                       borderColor: "none", // Tailwind border-gray-200
                       borderRadius: "0", // Tailwind rounded-md
                       boxShadow: "none", // Remove default React-Select shadow
                       background: "#fcfcfc",
                       border: 0,
-                      minHeight:"none"
+                      minHeight: "none",
                     }),
                     menu: (provided) => ({
                       ...provided,
-                      //   maxHeight: "150px", // Tailwind equivalent max-height
-                      //   overflowY: "auto", // Scroll if more options
                       top: "120%",
                       background: "#fcfcfc",
                     }),

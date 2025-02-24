@@ -9,6 +9,8 @@ import {
   EyeOpenIcon,
   EyeCloseIcon,
 } from "../icons/Icons";
+import SecondaryButton from "../buttons/SecondaryButton";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [data, setData] = useState({ name: "", department: "", password: "" });
@@ -38,7 +40,7 @@ const Login: React.FC = () => {
           Welcome Back
         </h5>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4">
         <GroupField
           type={"text"}
           name={"name"}
@@ -82,11 +84,14 @@ const Login: React.FC = () => {
         />
       </div>
 
-      <p className="text-end">
-        <button className="text-secondary font-semibold">
-          Forgot Password
-        </button>
-      </p>
+      <Link to={"/forgot-password"} className="flex  justify-end py-2">
+        <SecondaryButton
+          label={"Forgot Password ?"}
+          size={""}
+          variant={"link"}
+          style="px-0 py-0"
+        ></SecondaryButton>
+      </Link>
       <PrimaryButton label={"Login"} size={"l"} variant={"primary"} />
     </div>
   );

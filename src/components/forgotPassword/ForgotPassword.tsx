@@ -4,6 +4,7 @@ import GroupField from "../groupField/GroupField";
 import PrimaryButton from "../buttons/PrimaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { EmailIcon } from "../icons/Icons";
+import { Link } from "react-router-dom";
 
 const ForgotPassword: React.FC = () => {
   const [data, setData] = useState({ email: "" });
@@ -46,9 +47,11 @@ const ForgotPassword: React.FC = () => {
         />
       </div>
       <PrimaryButton label={"Submit"} size={"l"} variant={"primary"} />
-      <div className="flex gap-[14px] items-center justify-center">
+      <div className="flex gap-1 items-center justify-center">
         <span>Return to</span>
-        <SecondaryButton label={"Login"} size={"l"} variant={"link"} />
+        <Link to={"/login"}>
+          <SecondaryButton label={"Login"} size={"l"} variant={"link"} />
+        </Link>
       </div>
     </div>
   );
