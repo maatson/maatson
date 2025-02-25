@@ -705,6 +705,7 @@ const EmployeeCard: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
+    console.log("Value ", value)
   };
   const startIndex = (page - 1) * itemsPerPage; //(1-1)* 12 = 0, (2-1)* 12 = 12, (3-1)* 12 = 24 ...
   const paginatedEmployees = employees.slice(

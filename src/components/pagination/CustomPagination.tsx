@@ -17,9 +17,9 @@ const CustomPagination: React.FC<PaginationProps> = ({
       count={Math.ceil(totalPages)}
       page={currentPage}
       onChange={handlePageChange}
-      color="primary" // Change the color to primary
       shape="rounded" // Rounded pagination buttons
       size="small"
+      className="text-primary-300"
       siblingCount={1}
       boundaryCount={1}
       sx={{
@@ -36,11 +36,11 @@ const CustomPagination: React.FC<PaginationProps> = ({
           },
         },
         "& .Mui-selected": {
-          backgroundColor: "#FDFDFD",
-          color: "#2C398F",
+          backgroundColor: "#9ea4cf",
+          color: "#fdfdfd",
           border: "1px solid #2C398F",
           "&:hover": {
-            backgroundColor: "#FDFDFD",
+            backgroundColor: "#9ea4cf",
           },
         },
         "& .MuiPaginationItem-ellipsis": {

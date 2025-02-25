@@ -1,21 +1,41 @@
 import React from "react";
-import EmployeeList from "../../../components/hrm/employees/EmployeeList";
 import PageHeader from "../../../components/header/PageHeader";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Employees: React.FC = () => {
+  const location = useLocation();
+
   return (
     <>
-      <div className="w-full bg-primary-50 flex flex-col justify-between gap-10">
-        <div className="flex flex-col gap-4 py-4 px-5">
-          <PageHeader
-            breadCrums={["Home", "HRM", "Employee"]}
-            heading={"Employees"}
-          />
-
-          {/* <EmployeeList /> */}
-          <EmployeeForm />
-        </div>
-      </div>
+      <PageHeader
+        breadCrums={[
+          "Home",
+          "HRM",
+          "Employee",
+          location.pathname !== "/hrm/employees" &&
+          location.pathname === "/hrm/employees/employee-profile"
+            ? "Profile"
+            : "Add Employee",
+        ]}
+        // breadCrums={[
+        //   "Home",
+        //   "HRM",
+        //   "Employee",
+        //   location.pathname === "/hrm/employees"
+        //     ? null
+        //     : location.pathname === "/hrm/employees/employee-form"
+        //     ? "Add Employee"
+        //     : "Profile",
+        // ].filter(Boolean)}
+        heading={
+          location.pathname === "/hrm/employees/employee-profile"
+            ? "Profile"
+            : location.pathname === "/hrm/employees/employee-form"
+            ? "Add Employee"
+            : "Employees"
+        }
+      />
+      <Outlet />
     </>
   );
 };
