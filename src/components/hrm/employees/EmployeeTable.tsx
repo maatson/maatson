@@ -17,6 +17,7 @@ import {
   Pagination,
   SelectChangeEvent,
 } from "@mui/material";
+import CustomPagination from "../../pagination/CustomPagination";
 
 interface Column {
   id:
@@ -279,9 +280,9 @@ const EmployeeTable: React.FC = () => {
 
   const handleChangePage = (
     event: React.ChangeEvent<unknown>,
-    value: number
+    page: number
   ) => {
-    setPage(value);
+    setPage(page);
   };
 
   const handleItemsPerPageChange = (event: SelectChangeEvent<number>) => {
@@ -396,59 +397,13 @@ const EmployeeTable: React.FC = () => {
             {Math.min(startIndex + itemsPerPage, sampleData.length)} of{" "}
             {sampleData.length} Entries
           </div>
-          <Pagination
-            count={Math.ceil(sampleData.length / itemsPerPage)}
-            page={page}
-            onChange={handleChangePage}
-            variant="outlined"
-            shape="rounded"
-            size="small"
-            siblingCount={0}
-            boundaryCount={1}
-            sx={{
-              "& .MuiPaginationItem-root": {
-                fontSize: "10px",
-                color: "#212121",
-                backgroundColor: "#FDFDFD",
-                border: "1px solid rgba(206, 206, 206, 1)",
-                fontWeight: 800,
-                lineHeight: 0,
-                "&:hover": {
-                  backgroundColor: "#C4C8E4",
-                },
-              },
-              "& .Mui-selected": {
-                backgroundColor: "#FDFDFD",
-                color: "#2C398F",
-                border: "1px solid #2C398F",
-                "&:hover": {
-                  backgroundColor: "#FDFDFD",
-                },
-              },
-              "& .MuiPaginationItem-ellipsis": {
-                color: "#212121",
-                fontSize: "10px",
-                padding: "10px 5px 14px 5px",
-                fontWeight: 800,
-                borderRadius: "4px",
-                border: "1px solid rgba(206, 206, 206, 1)",
-              },
-              "& .MuiPaginationItem-previousNext": {
-                backgroundColor: "#FDFDFD",
-                color: "#171717",
-                border: "1px solid #171717",
-                "&:hover": {
-                  border: "1px solid rgba(206, 206, 206, 1)",
-                },
-              },
-              "& .MuiPaginationItem-previousNext.Mui-disabled": {
-                backgroundColor: "#FDFDFD",
-                color: "#171717",
-                border: "1px solid #171717",
-                opacity: 1,
-              },
-            }}
+
+          <CustomPagination
+            totalPages={sampleData.length / itemsPerPage}
+            currentPage={page}
+            handlePageChange={handleChangePage}
           />
+
           <div className="flex gap-4 items-center">
             <p className="text-xs text-grey-ab-300">Items Per Page</p>
             {/* <div className="w-[64px] h-[32px] bg-black"></div>{" "} */}
