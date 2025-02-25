@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import PrimaryButton from "../../buttons/PrimaryButton";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import {
   EmailIcon,
   EyeCloseIcon,
@@ -8,8 +8,8 @@ import {
   PhoneIcon,
   RegistrationIcon,
   UserIcon,
-} from "../../icons/Icons";
-import GroupField from "../../groupField/GroupField";
+} from "../../../components/icons/Icons";
+import GroupField from "../../../components/groupField/GroupField";
 
 const EmployeeForm: React.FC = () => {
   const [data, setData] = useState({

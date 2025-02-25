@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import PrimaryButton from "../../buttons/PrimaryButton";
-import GroupField from "../../groupField/GroupField";
-import SuccessButton from "../../buttons/SuccessButton";
+import { NavLink } from "react-router-dom";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GroupField from "../../../components/groupField/GroupField";
+import SuccessButton from "../../../components/buttons/SuccessButton";
 import {
   HambergerMenuIcon,
   CubeIcon,
   AddIcon,
   ExcelIcon,
   SearchIcon,
-} from "../../icons/Icons";
-import EmployeeTable from "./EmployeeTable";
-import EmployeeCard from "./EmployeeCard";
+} from "../../../components/icons/Icons";
+import EmployeeTable from "../../../components/hrm/employees/EmployeeTable";
+import EmployeeCard from "../../../components/hrm/employees/EmployeeCard";
 
 const EmployeeList: React.FC = () => {
   const [data, setData] = useState({
@@ -39,12 +40,14 @@ const EmployeeList: React.FC = () => {
         {/* Table heading 1 */}
         <div className="w-full bg-grey-aw-50 flex justify-between rounded-tl-xs rounded-tr-xs p-3 items-center">
           <p className="text-lg font-semibold">Employee List</p>
-          <PrimaryButton
-            label={"Add Employee"}
-            size={"l"}
-            variant={"primary"}
-            leftIcon={<AddIcon color="#FCFCFC" />}
-          />
+          <NavLink to={"/hrm/employees/employee-form"}>
+            <PrimaryButton
+              label={"Add Employee"}
+              size={"l"}
+              variant={"primary"}
+              leftIcon={<AddIcon color="#FCFCFC" />}
+            />
+          </NavLink>
         </div>
 
         {/* Table heading 2 */}
@@ -72,7 +75,7 @@ const EmployeeList: React.FC = () => {
               error={false}
               errorMessage={""}
               parentStyle="min-w-[140px] "
-              size="s"
+              // size="s"
             />
             <GroupField
               type={"select"}
@@ -83,23 +86,21 @@ const EmployeeList: React.FC = () => {
               onChange={handleChange}
               error={false}
               errorMessage={""}
-              size="s"
+              // size="s"
               parentStyle="min-w-[140px] "
             />
-            {cubeIcon && (
-              <GroupField
-                type={"select"}
-                name={"designation"}
-                value={data.designation}
-                label={""}
-                placeholder="Designation"
-                onChange={handleChange}
-                error={false}
-                errorMessage={""}
-                size="s"
-                parentStyle="min-w-[140px] "
-              />
-            )}
+            <GroupField
+              type={"select"}
+              name={"designation"}
+              value={data.designation}
+              label={""}
+              placeholder="Designation"
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              // size="s"
+              parentStyle="min-w-[140px] "
+            />
           </div>
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 rounded-sm border p-2 border-grey-200">
@@ -129,7 +130,6 @@ const EmployeeList: React.FC = () => {
           </div>
         </div>
 
-        {/* Employee Attendence Main*/}
         {hambergerMenuIcon && <EmployeeTable />}
         {cubeIcon && <EmployeeCard />}
       </div>

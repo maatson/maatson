@@ -24,7 +24,11 @@ const AttendanceList = lazy(
   () => import("./pages/hrm/attendance/AttendanceList")
 );
 const Holidays = lazy(() => import("./pages/hrm/attendance/Holidays"));
+
 const Employees = lazy(() => import("./pages/hrm/employees"));
+const EmployeeList = lazy(() => import("./pages/hrm/employees/EmployeeList"));
+const EmployeeForm = lazy(() => import("./pages/hrm/employees/EmployeeForm"));
+const EmployeeProfile = lazy(() => import("./pages/hrm/employees/EmployeeProfile"));
 
 const AppRoutes: React.FC = () => {
   return (
@@ -49,7 +53,12 @@ const AppRoutes: React.FC = () => {
           <Route index element={<AttendanceList />} />
           <Route path="holidays" element={<Holidays />} />
         </Route>
-        <Route path="hrm/employees" element={<Employees />} />
+        <Route path="hrm/employees" element={<Employees />}>
+          <Route index element={<EmployeeList />} />
+          <Route path="employee-form" element={<EmployeeForm />} />
+          <Route path="employee-profile" element={<EmployeeProfile />} />
+        </Route>
+
       </Route>
 
       {/* Suspense for Login and other credential-related routes */}
