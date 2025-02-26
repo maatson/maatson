@@ -35,6 +35,12 @@ const EmployeeProfile = lazy(
 
 //requirements
 const Requirement = lazy(() => import("./pages/hrm/requirement"));
+const RequirementList = lazy(
+  () => import("./pages/hrm/requirement/RequirementList")
+);
+const RequirementDetails = lazy(
+  () => import("./pages/hrm/requirement/RequirementDetails")
+);
 
 const AppRoutes: React.FC = () => {
   return (
@@ -65,9 +71,9 @@ const AppRoutes: React.FC = () => {
           <Route path="employee-profile" element={<EmployeeProfile />} />
         </Route>
         <Route path="hrm/requirement" element={<Requirement />}>
-          {/* <Route index element={<EmployeeList />} /> */}
-          {/* <Route path="employee-form" element={<EmployeeForm />} />
-          <Route path="employee-profile" element={<EmployeeProfile />} /> */}
+          <Route index element={<RequirementList />} />
+          <Route path="details" element={<RequirementDetails />} />
+          {/* <Route path="employee-profile" element={<EmployeeProfile />} /> */}
         </Route>
       </Route>
 

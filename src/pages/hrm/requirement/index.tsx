@@ -12,19 +12,17 @@ const Requirement: React.FC = () => {
         breadCrums={[
           "Home",
           "HRM",
-          location.pathname === "/hrm/requirement/detail"
+          location.pathname === "/hrm/requirement/details"
             ? ["Requirement", "Job Detail"]
-            : "",
-        ]}
+            : "Requirement",
+        ].flat()}
         heading={
-          location.pathname !== "/hrm/attendance"
-            ? "Holidays"
+          location.pathname !== "/hrm/requirement"
+            ? "Job Details"
             : "Job Requirement"
         }
       />
-      <div className="bg-white  min-h-screen rounded">
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   );
 };
