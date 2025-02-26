@@ -51,8 +51,8 @@ const EmployeeList: React.FC = () => {
         </div>
 
         {/* Table heading 2 */}
-        <div className="w-full border-y flex justify-between p-3 border-y-grey-ab-200 bg-grey-aw-50 shadow-lg">
-          <div className="flex gap-4 items-center w-full">
+        <div className="w-full border-y flex justify-between p-3 border-y-grey-ab-200 bg-grey-aw-50 shadow-lg items-start">
+          <div className="flex gap-4 items-center w-full flex-wrap">
             <GroupField
               type={"type"}
               name={"search"}
@@ -65,43 +65,8 @@ const EmployeeList: React.FC = () => {
               parentStyle="max-w-[280px] w-full"
               rightIcon={<SearchIcon color="#6A6A6A" />}
             />
-            <GroupField
-              type={"select"}
-              name={"department"}
-              value={data.department}
-              label={""}
-              placeholder="Department"
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              parentStyle="min-w-[140px] "
-              // size="s"
-            />
-            <GroupField
-              type={"select"}
-              name={"branchLocation"}
-              value={data.branchLocation}
-              label={""}
-              placeholder="Branch Location"
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              // size="s"
-              parentStyle="min-w-[140px] "
-            />
-            <GroupField
-              type={"select"}
-              name={"designation"}
-              value={data.designation}
-              label={""}
-              placeholder="Designation"
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              // size="s"
-              parentStyle="min-w-[140px] "
-            />
           </div>
+
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 rounded-sm border p-2 border-grey-200">
               <div
@@ -128,6 +93,44 @@ const EmployeeList: React.FC = () => {
               rightIcon={<ExcelIcon color="#FCFCFC" />}
             />
           </div>
+        </div>
+        <div className="w-full  flex justify-start gap-4 p-3 border-y-grey-ab-200 bg-grey-aw-50 shadow-lg items-start">
+          <GroupField
+            type={"select"}
+            name={"department"}
+            value={data.department}
+            label={""}
+            placeholder="Department"
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            parentStyle="max-w-[280px] w-full"
+            // size="s"
+          />
+          <GroupField
+            type={"select"}
+            name={"branchLocation"}
+            value={data.branchLocation}
+            label={""}
+            placeholder="Branch Location"
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            // size="s"
+            parentStyle="max-w-[280px] w-full"
+          />
+          <GroupField
+            type={"select"}
+            name={"designation"}
+            value={data.designation}
+            label={""}
+            placeholder="Designation"
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            // size="s"
+            parentStyle="max-w-[280px] w-full"
+          />
         </div>
 
         {hambergerMenuIcon && <EmployeeTable />}

@@ -14,7 +14,6 @@ import {
   Checkbox,
   Select,
   MenuItem,
-  Pagination,
   SelectChangeEvent,
 } from "@mui/material";
 import CustomPagination from "../../pagination/CustomPagination";
@@ -279,7 +278,7 @@ const EmployeeTable: React.FC = () => {
   const [selected, setSelected] = React.useState<string[]>([]);
 
   const handleChangePage = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setPage(page);
@@ -306,7 +305,7 @@ const EmployeeTable: React.FC = () => {
   return (
     <div className="w-full py-1 px-3 bg-grey-aw-50">
       <Paper sx={{ width: "100%", overflowX: "auto", boxShadow: "none" }}>
-        <TableContainer sx={{ overflowX: "auto" }}>
+        <TableContainer sx={{ overflowX: "auto" }} className="custom-scrollbar">
           <Table aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -399,14 +398,14 @@ const EmployeeTable: React.FC = () => {
           </div>
 
           <CustomPagination
-            totalPages={sampleData.length / itemsPerPage}
+            totalItems={sampleData.length}
+            itemsPerPage={itemsPerPage}
             currentPage={page}
             handlePageChange={handleChangePage}
           />
 
           <div className="flex gap-4 items-center">
             <p className="text-xs text-grey-ab-300">Items Per Page</p>
-            {/* <div className="w-[64px] h-[32px] bg-black"></div>{" "} */}
             <Select
               value={itemsPerPage}
               onChange={handleItemsPerPageChange}

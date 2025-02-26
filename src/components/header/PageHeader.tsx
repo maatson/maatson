@@ -13,7 +13,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ breadCrums, heading }) => {
         <h5 className="h5 font-semibold">{heading}</h5>
         <div className="flex gap-1 items-center">
           {breadCrums.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="flex items-center gap-1">
               <span
                 className={`shadow-xs px-2 py-1 rounded-xl text-2xs  ${
                   index === breadCrums.length - 1
