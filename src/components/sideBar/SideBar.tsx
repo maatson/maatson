@@ -167,7 +167,7 @@ const SideBar: React.FC = () => {
   );
 
   return (
-    <div className="text-grey-50 text-sm font-semibold px-5 py-2 flex flex-col gap-2 overflow-scroll h-full pb-32">
+    <div className="text-grey-50 text-sm font-semibold px-5 py-2 flex flex-col gap-2 overflow-scroll h-full pb-32 ">
       {sideBarItems.map((item, index) => (
         <SideBarItem
           key={index}
