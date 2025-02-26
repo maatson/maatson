@@ -554,7 +554,9 @@ const EmployeeForm: React.FC = () => {
             </div>
 
             {/* verification doc */}
-            <div className="flex flex-col gap-1"></div>
+            <div className="flex flex-col ">
+              <div></div>
+            </div>
           </div>
         </div>
 
