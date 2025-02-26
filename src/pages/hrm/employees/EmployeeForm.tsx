@@ -1,17 +1,33 @@
 import React, { ChangeEvent, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import {
+  AccountDetailIcon,
+  CompanyIcon,
+  DocumentIcon,
   EmailIcon,
   EyeCloseIcon,
   EyeOpenIcon,
+  LocationIcon,
   PasswordIcon,
   PhoneIcon,
   RegistrationIcon,
   UserIcon,
 } from "../../../components/icons/Icons";
 import GroupField from "../../../components/groupField/GroupField";
+import FileUpload from "../../../components/fileUpload/FileUpload";
+import ImageUpload from "../../../components/imageUpload/ImageUpload";
 
 const EmployeeForm: React.FC = () => {
+  const [eyeIcon, setEyeIcon] = useState("close");
+  const handleEyeIconClick = () => {
+    if (eyeIcon === "open") {
+      setEyeIcon("close");
+    }
+    if (eyeIcon === "close") {
+      setEyeIcon("open");
+    }
+  };
+
   const [data, setData] = useState({
     userName: "",
     email: "",
@@ -19,7 +35,7 @@ const EmployeeForm: React.FC = () => {
     password: "",
     confirmPassword: "",
     employee: {
-      imagepath: "",
+      image: "",
       fullName: "",
       dateofBirth: "",
       gender: "",
@@ -27,14 +43,14 @@ const EmployeeForm: React.FC = () => {
       personalMobileNo: "",
       street: "",
       city: "",
-      door: "",
+      doorNo: "",
       postalCode: "",
       country: "",
     },
     contactPerson: {
-      name: "",
-      email: "",
-      mobileNo: "",
+      contactPersonName: "",
+      contactPersonEmail: "",
+      contactPersonMobileNo: "",
     },
     companyDetails: {
       officeLocation: "",
@@ -48,25 +64,33 @@ const EmployeeForm: React.FC = () => {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-
     setData((prev) => ({ ...prev, [name]: value }));
   };
+  const handleFileChange = (file: File | null) => {
+    // const updatedFormData = new FormData();
+    // if (file) {
+    //   updatedFormData.append("file", file);
+    // }
+    // setData(updatedFormData);
+  };
+  const handleImageChange = (file: File | null) => {
+    // const updatedFormData = new FormData();
+    // if (file) {
+    //   updatedFormData.append("image", file);
+    // }
+    // setData(updatedFormData);
+  };
 
-  const [eyeIcon, setEyeIcon] = useState("close");
-  const handleEyeIconClick = () => {
-    if (eyeIcon === "open") {
-      setEyeIcon("close");
-    }
-    if (eyeIcon === "close") {
-      setEyeIcon("open");
-    }
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("data :", data);
   };
 
   return (
     <>
       <div className="w-full rounded-xs py-4 px-8 flex flex-col gap-8 bg-grey-aw-50 shadow-lg">
         {/* heading section */}
-        <p className="py-4 px-3 text-lg font-bold text-grey-ab-900 border">
+        <p className="py-4 px-3 text-lg font-bold text-grey-ab-900">
           Employee Form
         </p>
 
@@ -115,7 +139,7 @@ const EmployeeForm: React.FC = () => {
                 label={"Mobile Number"}
                 type={"text"}
                 placeholder={"Enter Mobile Number"}
-                name={"mobilenNo"}
+                name={"mobileNo"}
                 value={data.mobileNo}
                 onChange={handleChange}
                 error={false}
@@ -171,7 +195,7 @@ const EmployeeForm: React.FC = () => {
           </div>
 
           {/* employee information */}
-          <div className="flex flex-col gap-24">
+          <div className="flex flex-col gap-6">
             {/* employee information */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
@@ -184,7 +208,7 @@ const EmployeeForm: React.FC = () => {
                 <div className="border-t border-t-grey-ab-100 flex flex-col gap-3"></div>
               </div>
 
-              <div className="w-[220px] h-[128px] border rounded-xs border-ab-100 py-6 px-4"></div>
+              <ImageUpload onImageChange={handleImageChange} label={"Upload Your Profile Picture"} />
 
               <div className="flex gap-4">
                 <GroupField
@@ -217,35 +241,338 @@ const EmployeeForm: React.FC = () => {
             <div className="flex flex-col gap-2">
               <p className="text-grey-ab-600">Gender*</p>
               <div className="flex gap-8">
-                <div className="flex gap-3">radio</div>
+                <div className="flex gap-3 font-semibold text-grey-ab-800">
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    className="w-5 h-5"
+                  />
+                  <label htmlFor="male">Male</label>
+                </div>
+                <div className="flex gap-3 font-semibold text-grey-ab-800">
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    className="w-5 h-5"
+                  />
+                  <label htmlFor="female">Female</label>
+                </div>
+                <div className="flex gap-3 font-semibold text-grey-ab-800">
+                  <input
+                    type="radio"
+                    id="others"
+                    name="gender"
+                    className="w-5 h-5"
+                  />
+                  <label htmlFor="others">Others</label>
+                </div>
               </div>
             </div>
 
             {/* email & mobile number  */}
-            <div></div>
+            <div className="flex gap-4">
+              <GroupField
+                label={"Personal Email*"}
+                type={"email"}
+                placeholder={"Enter Email"}
+                name={"personalEmail"}
+                value={data.employee.personalEmail}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                leftIcon={<EmailIcon color="#2C398F" />}
+                parentStyle="max-w-[400px] w-full"
+              />
+              <GroupField
+                label={"Personal Mobile Number*"}
+                type={"text"}
+                placeholder={"Enter Mobile Number"}
+                name={"personalMobileNo"}
+                value={data.employee.personalMobileNo}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                leftIcon={<PhoneIcon color="#2C398F" />}
+                parentStyle="max-w-[400px] w-full"
+              />
+            </div>
 
             {/* address */}
-            <div></div>
+            <div className="flex flex-col gap-4">
+              <p className="text-grey-ab-500">Employee Address*</p>
+              <div className="flex flex-col gap-3">
+                <div className="flex gap-4">
+                  <GroupField
+                    label={"Street*"}
+                    type={"text"}
+                    placeholder={"Enter Street"}
+                    name={"street"}
+                    value={data.employee.street}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[400px] w-full"
+                  />
+                  <GroupField
+                    label={"City*"}
+                    type={"text"}
+                    placeholder={"Enter City"}
+                    name={"city"}
+                    value={data.employee.city}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[400px] w-full"
+                  />
+                </div>
+
+                {/* 3 input section */}
+                <div className="flex gap-4">
+                  <GroupField
+                    label={"Building/Door Number"}
+                    type={"text"}
+                    placeholder={"Enter Building/Door Number"}
+                    name={"doorNo"}
+                    value={data.employee.doorNo}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[400px] w-full"
+                  />
+                  <GroupField
+                    label={"Postal Code*"}
+                    type={"text"}
+                    placeholder={"Enter Postal Code"}
+                    name={"postalCode"}
+                    value={data.employee.postalCode}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[400px] w-full"
+                  />
+                </div>
+                <GroupField
+                  label={"Country "}
+                  type={"text"}
+                  placeholder={"Enter Country"}
+                  name={"country"}
+                  value={data.employee.country}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  leftIcon={<LocationIcon color="#2C398F" />}
+                  parentStyle="max-w-[400px] w-full"
+                />
+              </div>
+            </div>
           </div>
 
           {/* emergency contact details */}
-          <div></div>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4">
+                <PhoneIcon />
+                <p className="font-semibold text-grey-ab-800">
+                  Emergency Contact Details
+                </p>
+              </div>
+              <div className="border-t border-t-grey-ab-100 flex flex-col gap-3"></div>
+            </div>
+
+            {/* 2nd */}
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-4">
+                <GroupField
+                  label={"Contact Person Name"}
+                  type={"text"}
+                  placeholder={"Enter Full Name"}
+                  name={"contactPersonName"}
+                  value={data.contactPerson.contactPersonName}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  leftIcon={<UserIcon color="#2C398F" />}
+                  parentStyle="max-w-[400px] w-full"
+                />
+                <GroupField
+                  label={"Contact Person Email"}
+                  type={"email"}
+                  placeholder={"Enter Email"}
+                  name={"contactPersonEmail"}
+                  value={data.contactPerson.contactPersonEmail}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  leftIcon={<EmailIcon color="#2C398F" />}
+                  parentStyle="max-w-[400px] w-full"
+                />
+              </div>
+              <GroupField
+                label={"Contact Person Mobile Number"}
+                type={"text"}
+                placeholder={"Enter Mobile Number"}
+                name={"contactPersonMobileNo"}
+                value={data.contactPerson.contactPersonMobileNo}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                leftIcon={<PhoneIcon color="#2C398F" />}
+                parentStyle="max-w-[400px] w-full"
+              />
+            </div>
+          </div>
 
           {/* company details  */}
-          <div></div>
+          <div className="flex flex-col gap-6">
+            {/* head */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4">
+                <CompanyIcon />
+                <p className="font-semibold text-grey-ab-800">
+                  Company Details
+                </p>
+              </div>
+              <div className="border-t border-t-grey-ab-100 flex flex-col gap-3"></div>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {/* office loaction, joining */}
+              <div className="flex gap-4">
+                <GroupField
+                  label={"Office Location*"}
+                  type={"text"}
+                  placeholder={"Enter Office Location"}
+                  name={"officeLocation"}
+                  value={data.companyDetails.officeLocation}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  leftIcon={<LocationIcon color="#2C398F" />}
+                  parentStyle="max-w-[400px] w-full"
+                />
+                <GroupField
+                  label={"Joining Date*"}
+                  type={"date"}
+                  placeholder={"DD/MM/YYYY"}
+                  name={"joiningDate"}
+                  value={data.companyDetails.joiningDate}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  parentStyle="max-w-[400px] w-full"
+                />
+              </div>
+
+              {/* designation  */}
+              <div className="flex gap-4">
+                <GroupField
+                  label={"Designation"}
+                  type={"select"}
+                  placeholder={"Choose Designation"}
+                  name={"designation"}
+                  value={data.companyDetails.designation}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  leftIcon={<AccountDetailIcon color="#2C398F" />}
+                  parentStyle="max-w-[400px] w-full"
+                />
+                <GroupField
+                  label={"Joining Date*"}
+                  type={"date"}
+                  placeholder={"DD/MM/YYYY"}
+                  name={"joiningDate"}
+                  value={data.companyDetails.joiningDate}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                  parentStyle="max-w-[400px] w-full"
+                />
+              </div>
+
+              {/* employee type */}
+              <div className="flex flex-col gap-2">
+                <p className="text-grey-ab-600">Employee Type*</p>
+                <div className="flex gap-8">
+                  <div className="flex gap-3 font-semibold text-grey-ab-800">
+                    <input
+                      type="radio"
+                      id="fullTime"
+                      name="employeeType"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="male">Full- Time</label>
+                  </div>
+                  <div className="flex gap-3 font-semibold text-grey-ab-800">
+                    <input
+                      type="radio"
+                      id="partTime"
+                      name="employeeType"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="female">Part- Time</label>
+                  </div>
+                  <div className="flex gap-3 font-semibold text-grey-ab-800">
+                    <input
+                      type="radio"
+                      id="internship"
+                      name="employeeType"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="others">Internship</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* employee documents */}
-          <div></div>
+          <div className="flex flex-col gap-6">
+            {/* head */}
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-4">
+                <DocumentIcon />
+                <p className="font-semibold text-grey-ab-800">
+                  Employee Documents
+                </p>
+              </div>
+              <div className="border-t border-t-grey-ab-100 flex flex-col gap-3"></div>
+            </div>
+
+            {/* resume doc */}
+            <div className="flex flex-col gap-2">
+              <p className="text-grey-ab">Resume</p>
+              <div className="max-w-[816px]">
+                <FileUpload onFileChange={handleFileChange} />
+              </div>
+            </div>
+
+            {/* verification doc */}
+            <div className="flex flex-col ">
+              <div></div>
+            </div>
+          </div>
         </div>
 
         {/* button section */}
-        <div className="flex gap-6 justify-end border">
-          <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
-          <PrimaryButton
-            label={"Save Details"}
-            size={"xl"}
-            variant={"primary"}
-          />
+        <div className="flex gap-6 items-center  justify-end">
+          <div>
+            <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
+          </div>
+
+          <div onClick={handleSubmit}>
+            <PrimaryButton
+              label={"Save Details"}
+              size={"xl"}
+              variant={"primary"}
+            />
+          </div>
         </div>
       </div>
     </>
