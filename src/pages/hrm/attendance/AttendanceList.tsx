@@ -4,47 +4,61 @@ import {
   AddIcon,
   SearchIcon,
   ExcelIcon,
+  EditIcon,
+  AttendenceIcon,
 } from "../../../components/icons/Icons";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import GroupField from "../../../components/groupField/GroupField";
 import CustomPagination from "../../../components/pagination/CustomPagination";
 import CustomTable from "../../../components/table/CustomTable";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import DefaultDp from "/images/defaultProfilePic.png";
+import PrimaryChip from "../../../components/chips/PrimaryChip";
+import SuccessChip from "../../../components/chips/SuccessChip";
+import ErrorChip from "../../../components/chips/ErrorChip";
+import TertiaryChip from "../../../components/chips/TertiaryChip";
+import WarningChip from "../../../components/chips/WarningChip";
+import BlueChip from "../../../components/chips/BlueChip";
+import GreyButton from "../../../components/buttons/GreyButton";
 
 // Define pagination model if needed
 
 interface RowData {
   id: string | number;
-  employeeId: string;
-  employeeName: string;
-  attendanceStatus: string;
-  designation: string;
-  branchOffice: string;
-  department: string;
-  date: string;
-  checkIn: string;
+  employeeId: string | React.ReactNode;
+  employeeName: string | React.ReactNode;
+  attendanceStatus: string | React.ReactNode;
+  designation: string | React.ReactNode;
+  branchOffice: string | React.ReactNode;
+  department: string | React.ReactNode;
+  date: string | React.ReactNode;
+  checkIn: string | React.ReactNode;
   checkOut: string;
-  workingHours: string;
+  workingHours: string | React.ReactNode;
   action: React.ReactNode; // If you have any actions like buttons or components
 }
 
 const columns: any[] = [
-  { id: "employeeId", label: "Booking Id" },
-  { id: "employeeName", label: "Company Name" },
-  { id: "attendanceStatus", label: "Booking Date" },
+  { id: "employeeId", label: "Employee ID" },
+  {
+    id: "employeeName",
+    label: "Employee Name",
+    minWidth: "180px",
+  },
+  { id: "attendanceStatus", label: "Attendance Status" },
+  { id: "department", label: "Department" },
   {
     id: "designation",
-    label: "Container Quantity",
+    label: "Designations",
   },
-  { id: "branchOffice", label: "payment Method" },
-  { id: "department", label: "Payment Status" },
-  { id: "date", label: "Order Status" },
-  { id: "checkIn", label: "Order Status" },
-  { id: "checkOut", label: "Order Status" },
+  { id: "branchOffice", label: "Branch office", align: "center" },
+  { id: "date", label: "Date" },
+  { id: "checkIn", label: "Check In" },
+  { id: "checkOut", label: "Check Out" },
 
   {
     id: "workingHours",
-    label: "Amount",
+    label: "Working Hours",
     align: "center",
   },
   {
@@ -81,24 +95,127 @@ const AttendanceList: React.FC = () => {
   };
 
   const createData = (items: any) => {
+    const {
+      id,
+      attendanceStatus,
+      employeeName,
+      employeeImage,
+      designation,
+      department,
+      branchOffice,
+      date,
+      checkIn,
+      checkOut,
+      workingHours,
+    } = items;
     // Define your actions or any other custom logic you need for each row
     const actions = (
-      <span className="h-20 flex justify-center items-center">icon</span>
+      <div className="px-2 py-1 gap-2 flex justify-center items-center font-semibold">
+        <GreyButton
+          label={"CheckOut"}
+          size={"s"}
+          variant={""}
+          rightIcon={<EditIcon size={16} />}
+        />
+        <div className="p-1 rounded bg-grey-ab ">
+          <AttendenceIcon color="#fdfdfd" size={16} />
+        </div>
+      </div>
+    );
+
+    const employeeNameValue = (
+      <div className="px-2 py-1 flex items-center gap-2 text-sm">
+        <div className="min-h-10 min-w-10">
+          <img
+            src={employeeImage || DefaultDp}
+            alt="employeeImage"
+            className="object-fill  h-10 w-10"
+          />
+        </div>
+
+        <p className="w-full"> {employeeName || "Nil"}</p>
+      </div>
+    );
+
+    let attendanceStatusText: string | React.ReactNode = "Unknown"; // Default status
+    if (attendanceStatus) {
+      switch (attendanceStatus) {
+        case "present":
+          attendanceStatusText = (
+            <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
+              <SuccessChip label={"Present"} size={"l"} variant={"fill"} />
+            </div>
+          );
+          break;
+        case "absent":
+          attendanceStatusText = (
+            <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
+              <ErrorChip label={"Absent"} size={"l"} variant={"fill"} />
+            </div>
+          );
+          break;
+        case "vacation":
+          attendanceStatusText = (
+            <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
+              <TertiaryChip label={"Vacation"} size={"l"} variant={"fill"} />
+            </div>
+          );
+          break;
+        case "leave":
+          attendanceStatusText = (
+            <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
+              <WarningChip label={"Leave"} size={"l"} variant={"fill"} />
+            </div>
+          );
+          break;
+        // Add more cases as needed
+        default:
+          attendanceStatusText = "Unknown";
+          break;
+      }
+    }
+
+    const branchOfficeValue = branchOffice ? (
+      <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
+        <PrimaryChip label={branchOffice || ""} size={"m"} variant={"mix"} />
+      </div>
+    ) : (
+      "-"
+    );
+
+    const workingHoursValue = workingHours ? (
+      <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
+        {Number(workingHours) >= 8.3 ? (
+          <BlueChip
+            label={workingHours + " " + "hours" || ""}
+            size={"m"}
+            variant={"fill"}
+          />
+        ) : (
+          <WarningChip
+            label={workingHours + " " + "hours" || ""}
+            size={"m"}
+            variant={"fill"}
+          />
+        )}
+      </div>
+    ) : (
+      "nil"
     );
 
     // Ensure all columns have a value (or a default) for each row.
     const updatedData = {
-      id: items.id,
+      id: id,
       employeeId: items?.employeeId || "N/A", // Default value if not available
-      employeeName: items?.employeeName || "No Name", // Default value if not available
-      attendanceStatus: items?.attendanceStatus || "Unknown", // Default value if not available
-      designation: items?.designation || "Not Assigned", // Default value if not available
-      branchOffice: items?.branchOffice || "Not Specified", // Default value if not available
-      department: items?.department || "Unknown", // Default value if not available
-      date: items?.date || "Unknown", // Default value if not available
-      checkIn: items?.checkIn || "Not Checked In", // Default value if not available
-      checkOut: items?.checkOut || "Not Checked Out", // Default value if not available
-      workingHours: items?.workingHours || "0", // Default value if not available
+      employeeName: employeeNameValue, // Default value if not available
+      attendanceStatus: attendanceStatusText, // Default value if not available
+      designation: designation || "Not Assigned", // Default value if not available
+      department: department || "Unknown", // Default value if not available
+      branchOffice: branchOfficeValue, // Default value if not available
+      date: date || "-", // Default value if not available
+      checkIn: checkIn || "-", // Default value if not available
+      checkOut: checkOut || "-", // Default value if not available
+      workingHours: workingHoursValue, // Default value if not available
       action: actions, // Actions will remain the same as you defined
     };
 
@@ -107,28 +224,52 @@ const AttendanceList: React.FC = () => {
 
   const data = [
     {
-      employeeId: "ugdu",
+      employeeId: "Emp001",
       employeeName: "John Doe",
-      attendanceStatus: "Present",
+      attendanceStatus: "present",
       designation: "Manager",
       department: "Sales",
       branchOffice: "New York",
       date: "2025-02-01",
       checkIn: "9:00 AM",
       checkOut: "6:00 PM",
-      workingHours: "8",
+      workingHours: "09.00",
     },
     {
-      employeeId: "sih",
-      employeeName: "Jane Smith",
-      attendanceStatus: "Absent",
+      employeeId: "Emp002",
+      employeeName: "",
+      attendanceStatus: "absent",
       designation: "Developer",
       department: "Tech",
       branchOffice: "San Francisco",
       date: "2025-02-01",
       checkIn: "9:15 AM",
       checkOut: "6:15 PM",
-      workingHours: "8",
+      workingHours: "07.50",
+    },
+    {
+      employeeId: "Emp003",
+      employeeName: "Pavi ",
+      attendanceStatus: "leave",
+      designation: "senior Developer",
+      department: "Tech",
+      branchOffice: "San Francisco",
+      date: "2025-02-01",
+      checkIn: "",
+      checkOut: "",
+      workingHours: "07.50",
+    },
+    {
+      employeeId: "Emp004",
+      employeeName: "Janani ",
+      attendanceStatus: "vacation",
+      designation: "junior Developer",
+      department: "Tech",
+      branchOffice: "San Francisco",
+      date: "",
+      checkIn: "9:15 AM",
+      checkOut: "6:15 PM",
+      workingHours: "08.50",
     },
   ];
   // Memoize fetchData function with useCallback
