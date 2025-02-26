@@ -16,7 +16,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import CustomPagination from "../../pagination/CustomPagination";
+import CustomPagination from "../../customPagination/CustomPagination";
 
 interface Column {
   id:

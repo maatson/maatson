@@ -5,14 +5,14 @@ interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
   currentPage: number;
-  onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+  handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 const CustomPagination: React.FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
   currentPage,
-  onPageChange,
+  handlePageChange,
 }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -21,7 +21,7 @@ const CustomPagination: React.FC<PaginationProps> = ({
       <Pagination
         count={totalPages}
         page={currentPage}
-        onChange={onPageChange}
+        onChange={handlePageChange}
         variant="outlined"
         shape="rounded"
         size="small"

@@ -98,7 +98,8 @@ const GroupField: React.FC<Groupfield> = ({
                     }),
                     placeholder: (provided) => ({
                       ...provided,
-                      fontSize: "14px",
+                      fontSize: "16px",
+                      color: "#999999  ",
                     }),
                     menu: (provided) => ({
                       ...provided,
@@ -129,7 +130,7 @@ const GroupField: React.FC<Groupfield> = ({
                 id={name}
                 onChange={onChange}
                 placeholder={placeholder}
-                className={`outline-none  focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
+                className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
               />
             )}
             {rightIcon && <div onClick={onClickRightIcon}>{rightIcon}</div>}
