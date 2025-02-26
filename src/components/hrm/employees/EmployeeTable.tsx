@@ -17,6 +17,7 @@ import {
   Pagination,
   SelectChangeEvent,
 } from "@mui/material";
+import CustomPagination from "../../customPagination/CustomPagination";
 
 interface Column {
   id:
@@ -277,10 +278,7 @@ const EmployeeTable: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
   const [selected, setSelected] = React.useState<string[]>([]);
 
-  const handleChangePage = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 
@@ -396,7 +394,14 @@ const EmployeeTable: React.FC = () => {
             {Math.min(startIndex + itemsPerPage, sampleData.length)} of{" "}
             {sampleData.length} Entries
           </div>
-          <Pagination
+          <CustomPagination
+            totalItems={sampleData.length}
+            itemsPerPage={itemsPerPage}
+            currentPage={page}
+            onPageChange={handleChange}
+          />
+          
+          {/* <Pagination
             count={Math.ceil(sampleData.length / itemsPerPage)}
             page={page}
             onChange={handleChangePage}
@@ -448,7 +453,7 @@ const EmployeeTable: React.FC = () => {
                 opacity: 1,
               },
             }}
-          />
+          /> */}
           <div className="flex gap-4 items-center">
             <p className="text-xs text-grey-ab-300">Items Per Page</p>
             {/* <div className="w-[64px] h-[32px] bg-black"></div>{" "} */}

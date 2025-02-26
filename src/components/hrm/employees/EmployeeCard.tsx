@@ -5,6 +5,7 @@ import GradientChip from "../../chips/GradientChip";
 import PrimaryChip from "../../chips/PrimaryChip";
 import { EmailIcon, PhoneIcon } from "../../icons/Icons";
 import { Pagination } from "@mui/material";
+import CustomPagination from "../../customPagination/CustomPagination";
 
 interface Employee {
   id: number;
@@ -705,7 +706,7 @@ const EmployeeCard: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    console.log("Value ", value)
+    console.log("Value ", value);
   };
   const startIndex = (page - 1) * itemsPerPage; //(1-1)* 12 = 0, (2-1)* 12 = 12, (3-1)* 12 = 24 ...
   const paginatedEmployees = employees.slice(
@@ -788,13 +789,21 @@ const EmployeeCard: React.FC = () => {
           {Math.min(startIndex + itemsPerPage, employees.length)} of{" "}
           {employees.length} Entries
         </div>
-        <Pagination
+        <CustomPagination
+          totalItems={employees.length}
+          itemsPerPage={itemsPerPage}
+          currentPage={page}
+          onPageChange={handleChange}
+        />
+        
+        {/* <Pagination
           count={Math.ceil(employees.length / itemsPerPage)}
           page={page}
           onChange={handleChange}
           variant="outlined"
           shape="rounded"
           size="small"
+          className="text-primary-300"
           siblingCount={0}
           boundaryCount={1}
           sx={{
@@ -844,7 +853,7 @@ const EmployeeCard: React.FC = () => {
               opacity: 1,
             },
           }}
-        />
+        /> */}
       </div>
     </>
   );

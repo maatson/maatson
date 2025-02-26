@@ -11,22 +11,12 @@ const Employees: React.FC = () => {
         breadCrums={[
           "Home",
           "HRM",
-          "Employee",
-          location.pathname !== "/hrm/employees" &&
-          location.pathname === "/hrm/employees/employee-profile"
-            ? "Profile"
-            : "Add Employee",
-        ]}
-        // breadCrums={[
-        //   "Home",
-        //   "HRM",
-        //   "Employee",
-        //   location.pathname === "/hrm/employees"
-        //     ? null
-        //     : location.pathname === "/hrm/employees/employee-form"
-        //     ? "Add Employee"
-        //     : "Profile",
-        // ].filter(Boolean)}
+          location.pathname === "/hrm/employees"
+            ? "Employee"
+            : location.pathname === "/hrm/employees/employee-profile"
+            ? ["Employees", "Profile"]
+            : ["Employees", "Add Employee"]
+        ].flat()}
         heading={
           location.pathname === "/hrm/employees/employee-profile"
             ? "Profile"
