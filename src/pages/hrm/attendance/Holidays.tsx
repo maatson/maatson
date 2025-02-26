@@ -5,7 +5,6 @@ import {
   SearchIcon,
   ExcelIcon,
   EditIcon,
-  AttendenceIcon,
 } from "../../../components/icons/Icons";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import GroupField from "../../../components/groupField/GroupField";
