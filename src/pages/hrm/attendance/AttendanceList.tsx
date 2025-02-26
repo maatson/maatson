@@ -8,7 +8,6 @@ import {
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import GroupField from "../../../components/groupField/GroupField";
 import CustomPagination from "../../../components/pagination/CustomPagination";
-
 import CustomTable from "../../../components/table/CustomTable";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
@@ -59,17 +58,26 @@ const AttendanceList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
+  const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
 
-  const handleItemsPerPageChange = (event: SelectChangeEvent<number>) => {
-    setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1);
+  // Handle the change in checked rows
+  const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
+    setSelectedRows(newCheckedRows);
   };
+  console.log(selectedRows, "selected Rows");
+  const handleItemsPerPageChange = useCallback(
+    (event: SelectChangeEvent<number>) => {
+      setItemsPerPage(Number(event.target.value));
+      setCurrentPage(1);
+    },
+    []
+  );
+
   const handlechangePage = (
     _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page);
-    console.log(currentPage);
   };
 
   const createData = (items: any) => {
@@ -80,7 +88,7 @@ const AttendanceList: React.FC = () => {
 
     // Ensure all columns have a value (or a default) for each row.
     const updatedData = {
-      id: items.id || "",
+      id: items.id,
       employeeId: items?.employeeId || "N/A", // Default value if not available
       employeeName: items?.employeeName || "No Name", // Default value if not available
       attendanceStatus: items?.attendanceStatus || "Unknown", // Default value if not available
@@ -99,7 +107,7 @@ const AttendanceList: React.FC = () => {
 
   const data = [
     {
-      employeeId: 1,
+      employeeId: "ugdu",
       employeeName: "John Doe",
       attendanceStatus: "Present",
       designation: "Manager",
@@ -111,7 +119,7 @@ const AttendanceList: React.FC = () => {
       workingHours: "8",
     },
     {
-      employeeId: 2,
+      employeeId: "sih",
       employeeName: "Jane Smith",
       attendanceStatus: "Absent",
       designation: "Developer",
@@ -128,34 +136,8 @@ const AttendanceList: React.FC = () => {
     const arr = data.map((items, index) => {
       return createData({ ...items, id: index }); // Ensure createData returns the transformed data
     });
-    console.log(arr, "array");
     setRows(arr); // Set the rows with the updated data
   }, []); // Empty dependency array ensures this function is only created once
-
-  const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
-
-  const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      // Select all rows
-      setSelectedRows(rows.map((row) => row?.id));
-    } else {
-      // Deselect all rows
-      setSelectedRows([]);
-    }
-  };
-
-  const handleRowSelect = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    rowId: any
-  ) => {
-    if (event.target.checked) {
-      // Add rowId to selectedRows
-      setSelectedRows((prev) => [...prev, rowId]);
-    } else {
-      // Remove rowId from selectedRows
-      setSelectedRows((prev) => prev.filter((id) => id !== rowId));
-    }
-  };
 
   useEffect(() => {
     fetchData(); // Call fetchData when the component mounts
@@ -222,9 +204,8 @@ const AttendanceList: React.FC = () => {
         <CustomTable
           columns={columns}
           rows={rows}
-          selectedRows={selectedRows} // Pass selected rows to the table
-          onSelectAll={handleSelectAll}
-          onRowSelect={handleRowSelect}
+          isCheckbox={true}
+          onCheckedRowsChange={handleCheckedRowsChange} // Pass the handler here
         />
       </div>
 
