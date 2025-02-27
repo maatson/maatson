@@ -14,6 +14,8 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 import GreyButton from "../../../components/buttons/GreyButton";
 import PrimaryChip from "../../../components/chips/PrimaryChip";
+import AddHoliday from "./AddHoliday";
+import UpdateHoliday from "./UpdateHoliday";
 
 interface RowData {
   id: string | number;
@@ -45,6 +47,8 @@ const Holidays: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
+  const [isAddHoliday, setAddHoliday] = useState<boolean>();
+  const [isUpdateHoliday, setUpdateHoliday] = useState<boolean>();
 
   // Handle the change in checked rows
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -70,7 +74,10 @@ const Holidays: React.FC = () => {
     const { id, title, description, branchOffice, date } = items;
     // Define your actions or any other custom logic you need for each row
     const actions = (
-      <div className="px-2 py-1 gap-2 flex justify-center items-center font-semibold">
+      <div
+        className="px-2 py-1 gap-2 flex justify-center items-center font-semibold"
+        onClick={() => setUpdateHoliday(true)}
+      >
         <GreyButton
           label={"Edit"}
           size={"s"}
@@ -141,14 +148,20 @@ const Holidays: React.FC = () => {
 
   return (
     <>
+      {isAddHoliday && <AddHoliday cancel={() => setAddHoliday(false)} />}
+      {isUpdateHoliday && (
+        <UpdateHoliday cancel={() => setUpdateHoliday(false)} />
+      )}
       <div className="p-3 flex justify-between items-center text-grey-ab-900 ">
         <p className="text-lg font-semibold">Holiday’s List</p>
-        <PrimaryButton
-          label={"Add Holidays"}
-          size={""}
-          variant={""}
-          leftIcon={<AddIcon color="#fdfdfd" />}
-        />
+        <div onClick={() => setAddHoliday(true)}>
+          <PrimaryButton
+            label={"Add Holidays"}
+            size={""}
+            variant={""}
+            leftIcon={<AddIcon color="#fdfdfd" />}
+          />
+        </div>
       </div>
       <div className="p-3 flex justify-between items-center text-grey-ab-900 border-y border-grey-ab-200">
         <div className="flex gap-4 items-center">

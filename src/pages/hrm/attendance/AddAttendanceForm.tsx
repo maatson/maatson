@@ -2,22 +2,22 @@ import React from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 
-interface AddLeaveFormProps {
+interface AddAttendanceFormProps {
   cancel: () => void;
 }
-const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
+
+const AddAttendanceForm: React.FC<AddAttendanceFormProps> = ({ cancel }) => {
   return (
     <>
       {" "}
-      <div className="fixed inset-0 z-20 bg-grey-ab-400 opacity-15 "></div>
-      <div className="fixed flex items-center inset-0 z-30 h-screen  ">
-        {" "}
-        <div className=" w-1/2 mx-auto top-10 rounded-md flex bg-[white] h-[90vh]   p-8 gap-8 flex-col overflow-auto custom-scrollbar">
-          <h6 className="h6 font-semibold text-center">Leave Form</h6>
+      <div className="fixed inset-0 z-20 bg-grey-ab-400 opacity-15   "></div>
+      <div className="fixed inset-0 z-30 h-screen flex items-center">
+        <div className=" w-1/2 mx-auto rounded-md flex bg-[white]  p-8 gap-8 flex-col overflow-auto custom-scrollbar">
+          <h6 className="h6 font-semibold text-center">Attendance Form</h6>
           <div className="flex flex-col gap-4">
             <GroupField
               label={"Employee Name*"}
-              type={"text"}
+              type={"select"}
               placeholder={"Choose Employee"}
               name={"employeeName"}
               value={""}
@@ -30,11 +30,12 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
               }}
               error={false}
               errorMessage={""}
+              options={[]}
             />
             <GroupField
               label={"Branch Location*"}
               type={"select"}
-              placeholder={"Choose Location"}
+              placeholder={"Enter Location"}
               name={"branchLocation"}
               value={""}
               onChange={function (
@@ -47,29 +48,12 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
               error={false}
               errorMessage={""}
             />
-            <GroupField
-              label={"Leave Type*"}
-              type={"select"}
-              placeholder={"Choose Leave"}
-              name={"leaveType"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-              error={false}
-              errorMessage={""}
-              options={[]}
-            />
             <div className="flex items-center gap-4 ">
               <GroupField
-                label={"From Date*"}
+                label={"Date*"}
                 type={"date"}
                 placeholder={"date"}
-                name={"fromDate"}
+                name={"jobtitle"}
                 value={""}
                 onChange={function (
                   e: React.ChangeEvent<
@@ -83,10 +67,10 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
                 parentStyle="w-1/2"
               />
               <GroupField
-                label={"Till Date**"}
-                type={"date"}
-                placeholder={"date"}
-                name={"tillDtae"}
+                label={"Status*"}
+                type={"select"}
+                placeholder={"Choose Job Type"}
+                name={"status"}
                 value={""}
                 onChange={function (
                   e: React.ChangeEvent<
@@ -101,52 +85,57 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
                 parentStyle="w-1/2 "
               />
             </div>
-            <GroupField
-              label={"How Many Days*"}
-              type={"number"}
-              placeholder={"Enter Days"}
-              name={"days"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-              error={false}
-              errorMessage={""}
-            />
-            <GroupField
-              label={"Reason*"}
-              type={"textarea"}
-              placeholder={"Write"}
-              name={"reason"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-              error={false}
-              errorMessage={""}
-            />
+            <div className="flex items-center gap-4 ">
+              <GroupField
+                label={"Check In Time*"}
+                type={"time"}
+                placeholder={"time"}
+                name={"checkInTime*"}
+                value={""}
+                onChange={function (
+                  e: React.ChangeEvent<
+                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+                  >
+                ): void {
+                  throw new Error("Function not implemented.");
+                }}
+                error={false}
+                errorMessage={""}
+                parentStyle="w-1/2"
+              />
+              <GroupField
+                label={"Check Out Time*"}
+                type={"time"}
+                placeholder={"Time"}
+                name={"checkOutTime"}
+                value={""}
+                onChange={function (
+                  e: React.ChangeEvent<
+                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+                  >
+                ): void {
+                  throw new Error("Function not implemented.");
+                }}
+                error={false}
+                errorMessage={""}
+                options={[]}
+                parentStyle="w-1/2 "
+              />
+            </div>
           </div>
-          <div className="flex items-center gap-6 justify-center w-full">
+          <div className="flex items-center gap-6 justify-end">
             <div onClick={cancel} className="w-full">
+              {" "}
               <PrimaryButton
-                label={"Cancel"}
+                label={"Cancel Entry"}
                 size={"xl"}
                 variant={"outline"}
                 style="w-full"
               />
             </div>
             <div className="w-full">
-              {" "}
               <PrimaryButton
-                label={"Post Leave"}
+                label={"Save Entry"}
                 size={"xl"}
                 variant={""}
                 style="w-full"
@@ -159,4 +148,4 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
   );
 };
 
-export default AddLeaveForm;
+export default AddAttendanceForm;
