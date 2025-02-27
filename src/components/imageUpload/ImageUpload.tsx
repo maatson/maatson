@@ -25,7 +25,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label }) => {
     <div>
       <input
         type="file"
-        id="imageInput"
+        id={label}
         accept="image/jpeg, image/jpg, image/png"
         className="hidden"
         onChange={handleImageChange}

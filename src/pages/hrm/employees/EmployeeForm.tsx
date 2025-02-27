@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GreyButton from "../../../components/buttons/GreyButton";
 import {
   AccountDetailIcon,
   CompanyIcon,
+  DeleteIcon,
   DocumentIcon,
   EmailIcon,
   EyeCloseIcon,
@@ -11,14 +13,35 @@ import {
   PasswordIcon,
   PhoneIcon,
   RegistrationIcon,
+  UploadIcon,
   UserIcon,
 } from "../../../components/icons/Icons";
 import GroupField from "../../../components/groupField/GroupField";
 import FileUpload from "../../../components/fileUpload/FileUpload";
 import ImageUpload from "../../../components/imageUpload/ImageUpload";
+import CustomTable from "../../../components/table/CustomTable";
+import DocumentForm from "./DocumentForm";
+
+// Define table model
+interface RowData {
+  id: string | number;
+  documentName: string;
+  documentFile: React.ReactNode;
+  action: React.ReactNode;
+}
+
+const columns: any[] = [
+  { id: "documentName", label: "Document Name" },
+  { id: "documentFile", label: "Document File" },
+  { id: "action", label: "Action", align: "center", minWidth: 130 },
+];
 
 const EmployeeForm: React.FC = () => {
   const [eyeIcon, setEyeIcon] = useState("close");
+  const [isOpen, setIsOpen] = useState(false);
+  const openPopup = () => setIsOpen(true);
+  const closePopup = () => setIsOpen(false);
+
   const handleEyeIconClick = () => {
     if (eyeIcon === "open") {
       setEyeIcon("close");
@@ -35,7 +58,7 @@ const EmployeeForm: React.FC = () => {
     password: "",
     confirmPassword: "",
     employee: {
-      image: "",
+      image: null as File | null,
       fullName: "",
       dateofBirth: "",
       gender: "",
@@ -59,6 +82,7 @@ const EmployeeForm: React.FC = () => {
       department: "",
       employeeType: "",
     },
+    employeeResume: null as File | null,
   });
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -66,12 +90,11 @@ const EmployeeForm: React.FC = () => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleFileChange = (file: File | null) => {
-    // const updatedFormData = new FormData();
-    // if (file) {
-    //   updatedFormData.append("file", file);
-    // }
-    // setData(updatedFormData);
+  const handleFileChange = (name:"employeeResume", file: File | null) => {
+    setData((prevData) => ({
+      ...prevData,
+      [name]: file,
+    }));
   };
   const handleImageChange = (file: File | null) => {
     // const updatedFormData = new FormData();
@@ -85,6 +108,58 @@ const EmployeeForm: React.FC = () => {
     event.preventDefault();
     console.log("data :", data);
   };
+
+  // My table format
+  const [rows, setRows] = useState<RowData[]>([]);
+  const createData = (items: any) => {
+    const { id, fileName } = items;
+    const documentFile = (
+      <div className="flex gap-3 py-1 px-2 items-center justify-start">
+        <DocumentIcon color="#2C398F" />
+        <div className="text-grey-ab-800">{fileName}.pdf</div>
+      </div>
+    );
+    const actions = (
+      <div className="flex gap-[10px] py-1 px-2 justify-center items-center">
+        <div className="bg-error-50 p-1 rounded-xs cursor-pointer">
+          <DeleteIcon size={16} color="#810001" />
+        </div>
+        <div className="bg-blue-50 p-1 rounded-xs cursor-pointer">
+          <DocumentIcon size={16} color="#00508C" />
+        </div>
+      </div>
+    );
+    const updatedData = {
+      id: id,
+      documentName: items?.documentName || "sfhjfs",
+      documentFile: documentFile,
+      action: actions,
+    };
+
+    return updatedData;
+  };
+  const tableData = [
+    {
+      documentName: "Pan Card",
+      fileName: "User Pan Card",
+    },
+    {
+      documentName: "Aadhaar Card",
+      fileName: "User Aadhaar Card",
+    },
+  ];
+
+  // Memoize fetchData function with useCallback
+  const fetchData = useCallback(() => {
+    const arr = tableData.map((items, index) => {
+      return createData({ ...items, id: index }); // Ensure createData returns the transformed data
+    });
+    setRows(arr); // Set the rows with the updated data
+  }, []); // Empty dependency array ensures this function is only created once
+
+  useEffect(() => {
+    fetchData(); // Call fetchData when the component mounts
+  }, [fetchData]); // Only re-run fetchData if fetchData changes
 
   return (
     <>
@@ -208,7 +283,10 @@ const EmployeeForm: React.FC = () => {
                 <div className="border-t border-t-grey-ab-100 flex flex-col gap-3"></div>
               </div>
 
-              <ImageUpload onImageChange={handleImageChange} label={"Upload Your Profile Picture"} />
+              <ImageUpload
+                onImageChange={handleImageChange}
+                label={"Upload Your Profile Picture"}
+              />
 
               <div className="flex gap-4">
                 <GroupField
@@ -546,16 +624,30 @@ const EmployeeForm: React.FC = () => {
             </div>
 
             {/* resume doc */}
-            <div className="flex flex-col gap-2">
-              <p className="text-grey-ab">Resume</p>
-              <div className="max-w-[816px]">
-                <FileUpload onFileChange={handleFileChange} />
-              </div>
+            <div className="max-w-[816px]">
+              <FileUpload
+                onFileChange={(file) => handleFileChange("employeeResume", file)}
+                label={"Resume"}
+                fileName={data.employeeResume?.name}
+              />
             </div>
 
             {/* verification doc */}
             <div className="flex flex-col ">
-              <div></div>
+              <div className="flex justify-between py-3 px-4 bg-grey-50">
+                <p className="text-lg font-bold text-grey-ab-800">
+                  Verification Document
+                </p>
+                <div onClick={openPopup}>
+                  <GreyButton
+                    label={"Add Document"}
+                    size={"s"}
+                    variant={""}
+                    rightIcon={<UploadIcon size={16} />}
+                  />
+                </div>
+              </div>
+              <CustomTable columns={columns} rows={rows} isCheckbox={false} />
             </div>
           </div>
         </div>
@@ -575,6 +667,13 @@ const EmployeeForm: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Popup  */}
+      {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <DocumentForm onClose={closePopup} />
+        </div>
+      )}
     </>
   );
 };

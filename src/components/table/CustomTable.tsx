@@ -26,7 +26,7 @@ interface TableProps {
   columns: Column[];
   rows: Row[]; // Rows can contain normal data or React components
   isCheckbox: boolean;
-  onCheckedRowsChange: (checkedRows: (string | number)[]) => void; // New prop for parent to handle checked rows
+  onCheckedRowsChange?: (checkedRows: (string | number)[]) => void; // New prop for parent to handle checked rows
 }
 
 const CustomTable: React.FC<TableProps> = React.memo(
@@ -36,7 +36,9 @@ const CustomTable: React.FC<TableProps> = React.memo(
     // Use effect to trigger state change after render
     useEffect(() => {
       // Send data to parent when checkedRows changes
-      onCheckedRowsChange(checkedRows);
+      if(onCheckedRowsChange){
+        onCheckedRowsChange(checkedRows);
+      }
     }, [checkedRows, onCheckedRowsChange]); // This ensures the parent is updated after checkedRows is modified
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,9 +140,6 @@ const CustomTable: React.FC<TableProps> = React.memo(
                           key={column.id}
                           align={column.align || "left"}
                           sx={{ padding: "8px" }}
-                          className={`${
-                            column.id === "department" ? "" : "capitalize"
-                          }`}
                         >
                           {/* If value is undefined, display a default message */}
                           {value !== undefined ? value : "N/A"}
