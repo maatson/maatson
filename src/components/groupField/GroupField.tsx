@@ -142,7 +142,7 @@ const GroupField: React.FC<Groupfield> = ({
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
             />
           )}
-          {rightIcon && <div onClick={onClickRightIcon}>{rightIcon}</div>}
+          {rightIcon && <div onClick={onClickRightIcon} className="cursor-pointer">{rightIcon}</div>}
         </div>
         {error && errorMessage && (
           <p className="text-error flex items-start gap-1 mt-1 text-2xs font-semibold capitalize">

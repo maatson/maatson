@@ -85,7 +85,7 @@ const EmployeeForm: React.FC = () => {
     employeeResume: null as File | null,
   });
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
