@@ -150,7 +150,7 @@ const SideBar: React.FC = () => {
         children: [
           { label: "Employees", link: "/hrm/employees" },
           { label: "Attendance", link: "/hrm/attendance" },
-          { label: "Leave Form", link: "/hrm/leaveForm" },
+          { label: "Leave Form", link: "/hrm/leave-form" },
           { label: "Requirement", link: "/hrm/requirement" },
         ],
         onClick: () => handleItemClick(9),

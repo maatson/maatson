@@ -17,7 +17,7 @@ const Attendance: React.FC = () => {
         }
       />
       <div className="flex items-center text-sm">
-        <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold">
+        <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold ">
           <button>
             <NavLink
               to={"/hrm/attendance"}
@@ -25,7 +25,7 @@ const Attendance: React.FC = () => {
               className={({ isActive }) =>
                 `${
                   isActive ? "bg-primary-900 text-grey-aw-50" : ""
-                } px-4 py-2 rounded`
+                } px-4 py-2 rounded transition-all duration-500`
               }
             >
               Attendance
@@ -37,7 +37,7 @@ const Attendance: React.FC = () => {
               className={({ isActive }) =>
                 `${
                   isActive ? "bg-primary-900 text-grey-aw-50" : ""
-                } px-4 py-2 rounded`
+                } px-4 py-2 rounded transition-all duration-500`
               }
             >
               Holidays

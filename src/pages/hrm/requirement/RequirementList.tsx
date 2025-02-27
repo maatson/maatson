@@ -3,7 +3,6 @@ import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import {
   AddIcon,
   DocumentIcon,
-  EditIcon,
   ExcelIcon,
   SearchIcon,
 } from "../../../components/icons/Icons";
@@ -12,10 +11,10 @@ import GroupField from "../../../components/groupField/GroupField";
 import CustomTable from "../../../components/table/CustomTable";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../components/pagination/CustomPagination";
-import GreyButton from "../../../components/buttons/GreyButton";
 import PrimaryChip from "../../../components/chips/PrimaryChip";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import { Link } from "react-router-dom";
+import AddRequirement from "./AddRequirement";
 
 interface RowData {
   id: string | number;
@@ -49,6 +48,7 @@ const RequirementList: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
+  const [isAddRequirement, setAddRequirement] = useState<boolean>();
 
   // Handle the change in checked rows
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -160,15 +160,22 @@ const RequirementList: React.FC = () => {
 
   return (
     <>
+      {isAddRequirement && (
+        <AddRequirement cancel={() => setAddRequirement(false)} />
+      )}
+
       <div className="bg-white min-h-screen rounded">
         <div className="p-3 flex justify-between items-center text-grey-ab-900 ">
           <p className="text-lg font-semibold">Job Requirement List</p>
-          <PrimaryButton
-            label={"Add Requirement"}
-            size={""}
-            variant={""}
-            leftIcon={<AddIcon color="#fdfdfd" />}
-          />
+          <div onClick={() => setAddRequirement(true)}>
+            {" "}
+            <PrimaryButton
+              label={"Add Requirement"}
+              size={""}
+              variant={""}
+              leftIcon={<AddIcon color="#fdfdfd" />}
+            />
+          </div>
         </div>
         <div className="p-3 flex justify-between items-center text-grey-ab-900 border-y border-grey-ab-200">
           <div className="flex gap-4 items-center">
