@@ -18,7 +18,7 @@ const CustomPagination: React.FC<PaginationProps> = React.memo(
         shape="rounded" // Rounded pagination buttons
         size="small"
         className="text-primary-300"
-        siblingCount={1}
+        siblingCount={0}
         boundaryCount={1}
         sx={{
           "& .MuiPaginationItem-root": {

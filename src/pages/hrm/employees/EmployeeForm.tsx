@@ -5,6 +5,7 @@ import {
   AccountDetailIcon,
   CompanyIcon,
   DeleteIcon,
+  DepartmentIcon,
   DocumentIcon,
   EmailIcon,
   EyeCloseIcon,
@@ -57,31 +58,25 @@ const EmployeeForm: React.FC = () => {
     mobileNo: "",
     password: "",
     confirmPassword: "",
-    employee: {
-      image: null as File | null,
-      fullName: "",
-      dateofBirth: "",
-      gender: "",
-      personalEmail: "",
-      personalMobileNo: "",
-      street: "",
-      city: "",
-      doorNo: "",
-      postalCode: "",
-      country: "",
-    },
-    contactPerson: {
-      contactPersonName: "",
-      contactPersonEmail: "",
-      contactPersonMobileNo: "",
-    },
-    companyDetails: {
-      officeLocation: "",
-      joiningDate: "",
-      designation: "",
-      department: "",
-      employeeType: "",
-    },
+    image: null as File | null,
+    fullName: "",
+    dateofBirth: "",
+    gender: "",
+    personalEmail: "",
+    personalMobileNo: "",
+    street: "",
+    city: "",
+    doorNo: "",
+    postalCode: "",
+    country: "",
+    contactPersonName: "",
+    contactPersonEmail: "",
+    contactPersonMobileNo: "",
+    officeLocation: "",
+    joiningDate: "",
+    designation: "",
+    department: "",
+    employeeType: "",
     employeeResume: null as File | null,
   });
   const handleChange = (
@@ -90,7 +85,7 @@ const EmployeeForm: React.FC = () => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleFileChange = (name:"employeeResume", file: File | null) => {
+  const handleFileChange = (name: "employeeResume", file: File | null) => {
     setData((prevData) => ({
       ...prevData,
       [name]: file,
@@ -294,7 +289,7 @@ const EmployeeForm: React.FC = () => {
                   type={"text"}
                   placeholder={"Enter Full Name"}
                   name={"fullName"}
-                  value={data.employee.fullName}
+                  value={data.fullName}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -306,7 +301,7 @@ const EmployeeForm: React.FC = () => {
                   type={"date"}
                   placeholder={"DD/MM/YYYY"}
                   name={"dateofBirth"}
-                  value={data.employee.dateofBirth}
+                  value={data.dateofBirth}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -324,6 +319,7 @@ const EmployeeForm: React.FC = () => {
                     type="radio"
                     id="male"
                     name="gender"
+                    value={data.gender}
                     className="w-5 h-5"
                   />
                   <label htmlFor="male">Male</label>
@@ -333,6 +329,7 @@ const EmployeeForm: React.FC = () => {
                     type="radio"
                     id="female"
                     name="gender"
+                    value={data.gender}
                     className="w-5 h-5"
                   />
                   <label htmlFor="female">Female</label>
@@ -342,6 +339,7 @@ const EmployeeForm: React.FC = () => {
                     type="radio"
                     id="others"
                     name="gender"
+                    value={data.gender}
                     className="w-5 h-5"
                   />
                   <label htmlFor="others">Others</label>
@@ -356,7 +354,7 @@ const EmployeeForm: React.FC = () => {
                 type={"email"}
                 placeholder={"Enter Email"}
                 name={"personalEmail"}
-                value={data.employee.personalEmail}
+                value={data.personalEmail}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -368,7 +366,7 @@ const EmployeeForm: React.FC = () => {
                 type={"text"}
                 placeholder={"Enter Mobile Number"}
                 name={"personalMobileNo"}
-                value={data.employee.personalMobileNo}
+                value={data.personalMobileNo}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -387,7 +385,7 @@ const EmployeeForm: React.FC = () => {
                     type={"text"}
                     placeholder={"Enter Street"}
                     name={"street"}
-                    value={data.employee.street}
+                    value={data.street}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -399,7 +397,7 @@ const EmployeeForm: React.FC = () => {
                     type={"text"}
                     placeholder={"Enter City"}
                     name={"city"}
-                    value={data.employee.city}
+                    value={data.city}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -415,7 +413,7 @@ const EmployeeForm: React.FC = () => {
                     type={"text"}
                     placeholder={"Enter Building/Door Number"}
                     name={"doorNo"}
-                    value={data.employee.doorNo}
+                    value={data.doorNo}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -427,7 +425,7 @@ const EmployeeForm: React.FC = () => {
                     type={"text"}
                     placeholder={"Enter Postal Code"}
                     name={"postalCode"}
-                    value={data.employee.postalCode}
+                    value={data.postalCode}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -440,7 +438,7 @@ const EmployeeForm: React.FC = () => {
                   type={"text"}
                   placeholder={"Enter Country"}
                   name={"country"}
-                  value={data.employee.country}
+                  value={data.country}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -471,7 +469,7 @@ const EmployeeForm: React.FC = () => {
                   type={"text"}
                   placeholder={"Enter Full Name"}
                   name={"contactPersonName"}
-                  value={data.contactPerson.contactPersonName}
+                  value={data.contactPersonName}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -483,7 +481,7 @@ const EmployeeForm: React.FC = () => {
                   type={"email"}
                   placeholder={"Enter Email"}
                   name={"contactPersonEmail"}
-                  value={data.contactPerson.contactPersonEmail}
+                  value={data.contactPersonEmail}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -496,7 +494,7 @@ const EmployeeForm: React.FC = () => {
                 type={"text"}
                 placeholder={"Enter Mobile Number"}
                 name={"contactPersonMobileNo"}
-                value={data.contactPerson.contactPersonMobileNo}
+                value={data.contactPersonMobileNo}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -506,7 +504,7 @@ const EmployeeForm: React.FC = () => {
             </div>
           </div>
 
-          {/* company details  */}
+          {/* company details */}
           <div className="flex flex-col gap-6">
             {/* head */}
             <div className="flex flex-col gap-2">
@@ -527,7 +525,7 @@ const EmployeeForm: React.FC = () => {
                   type={"text"}
                   placeholder={"Enter Office Location"}
                   name={"officeLocation"}
-                  value={data.companyDetails.officeLocation}
+                  value={data.officeLocation}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -539,7 +537,7 @@ const EmployeeForm: React.FC = () => {
                   type={"date"}
                   placeholder={"DD/MM/YYYY"}
                   name={"joiningDate"}
-                  value={data.companyDetails.joiningDate}
+                  value={data.joiningDate}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -554,7 +552,7 @@ const EmployeeForm: React.FC = () => {
                   type={"select"}
                   placeholder={"Choose Designation"}
                   name={"designation"}
-                  value={data.companyDetails.designation}
+                  value={data.designation}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
@@ -562,14 +560,15 @@ const EmployeeForm: React.FC = () => {
                   parentStyle="max-w-[400px] w-full"
                 />
                 <GroupField
-                  label={"Joining Date*"}
-                  type={"date"}
-                  placeholder={"DD/MM/YYYY"}
-                  name={"joiningDate"}
-                  value={data.companyDetails.joiningDate}
+                  label={"Department"}
+                  type={"text"}
+                  placeholder={"Choose Department"}
+                  name={"department"}
+                  value={data.department}
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
+                  leftIcon={<DepartmentIcon color="#2C398F"/>}
                   parentStyle="max-w-[400px] w-full"
                 />
               </div>
@@ -626,7 +625,9 @@ const EmployeeForm: React.FC = () => {
             {/* resume doc */}
             <div className="max-w-[816px]">
               <FileUpload
-                onFileChange={(file) => handleFileChange("employeeResume", file)}
+                onFileChange={(file) =>
+                  handleFileChange("employeeResume", file)
+                }
                 label={"Resume"}
                 fileName={data.employeeResume?.name}
               />
@@ -670,7 +671,7 @@ const EmployeeForm: React.FC = () => {
 
       {/* Popup  */}
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
           <DocumentForm onClose={closePopup} />
         </div>
       )}

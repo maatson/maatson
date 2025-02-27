@@ -716,13 +716,15 @@ const EmployeeCard: React.FC = () => {
   return (
     <>
       <div className="py-4 px-2 grid grid-cols-3 xl:grid-cols-4 gap-3 items-center">
-        {paginatedEmployees.map((employee, index) => (
+        {paginatedEmployees.map((employee) => (
           <div
             key={employee.id}
             className="bg-grey-aw-50 rounded-sm flex flex-col gap-3 shadow-lg p-3 max-w-[245px] w-full mx-auto"
           >
-            <div className="flex justify-between items-center">
-              <input type="checkbox" />
+            <div className="flex justify-between">
+              <div>
+                <input type="checkbox" className="w-4 h-4" />
+              </div>
               <div className="flex flex-col gap-1">
                 <span className="xs-3">Experience</span>
                 <div className="flex justify-end">
@@ -794,7 +796,6 @@ const EmployeeCard: React.FC = () => {
           currentPage={page}
           handlePageChange={handleChange}
         />
-
         {/* <Pagination
           count={Math.ceil(employees.length / itemsPerPage)}
           page={page}
