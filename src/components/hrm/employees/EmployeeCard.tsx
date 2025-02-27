@@ -4,8 +4,7 @@ import EmployeeImage from "/images/sample/employee.png";
 import GradientChip from "../../chips/GradientChip";
 import PrimaryChip from "../../chips/PrimaryChip";
 import { EmailIcon, PhoneIcon } from "../../icons/Icons";
-import { Pagination } from "@mui/material";
-import CustomPagination from "../../customPagination/CustomPagination";
+import CustomPagination from "../../pagination/CustomPagination";
 
 interface Employee {
   id: number;
@@ -793,9 +792,9 @@ const EmployeeCard: React.FC = () => {
           totalItems={employees.length}
           itemsPerPage={itemsPerPage}
           currentPage={page}
-          onPageChange={handleChange}
+          handlePageChange={handleChange}
         />
-        
+
         {/* <Pagination
           count={Math.ceil(employees.length / itemsPerPage)}
           page={page}

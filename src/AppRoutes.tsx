@@ -25,10 +25,26 @@ const AttendanceList = lazy(
 );
 const Holidays = lazy(() => import("./pages/hrm/attendance/Holidays"));
 
+//Employees
 const Employees = lazy(() => import("./pages/hrm/employees"));
 const EmployeeList = lazy(() => import("./pages/hrm/employees/EmployeeList"));
 const EmployeeForm = lazy(() => import("./pages/hrm/employees/EmployeeForm"));
-const EmployeeProfile = lazy(() => import("./pages/hrm/employees/EmployeeProfile"));
+const EmployeeProfile = lazy(
+  () => import("./pages/hrm/employees/EmployeeProfile")
+);
+
+// Leave-Form
+const LeaveForm = lazy(() => import("./pages/hrm/leaveForm"));
+const LeaveFormList = lazy(() => import("./pages/hrm/leaveForm/LeaveFormList"));
+
+//requirements
+const Requirement = lazy(() => import("./pages/hrm/requirement"));
+const RequirementList = lazy(
+  () => import("./pages/hrm/requirement/RequirementList")
+);
+const RequirementDetails = lazy(
+  () => import("./pages/hrm/requirement/RequirementDetails")
+);
 
 const AppRoutes: React.FC = () => {
   return (
@@ -49,16 +65,23 @@ const AppRoutes: React.FC = () => {
         }
       >
         <Route path="hrm" element={<PageNotFound />} />
-        <Route path="hrm/attendance" element={<Attendance />}>
-          <Route index element={<AttendanceList />} />
-          <Route path="holidays" element={<Holidays />} />
-        </Route>
         <Route path="hrm/employees" element={<Employees />}>
           <Route index element={<EmployeeList />} />
           <Route path="employee-form" element={<EmployeeForm />} />
           <Route path="employee-profile" element={<EmployeeProfile />} />
         </Route>
-
+        <Route path="hrm/attendance" element={<Attendance />}>
+          <Route index element={<AttendanceList />} />
+          <Route path="holidays" element={<Holidays />} />
+        </Route>
+        <Route path="hrm/leave-form" element={<LeaveForm />}>
+          <Route index element={<LeaveFormList />} />
+        </Route>
+        <Route path="hrm/requirement" element={<Requirement />}>
+          <Route index element={<RequirementList />} />
+          <Route path="details" element={<RequirementDetails />} />
+          {/* <Route path="employee-profile" element={<EmployeeProfile />} /> */}
+        </Route>
       </Route>
 
       {/* Suspense for Login and other credential-related routes */}
