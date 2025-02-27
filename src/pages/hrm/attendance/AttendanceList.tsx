@@ -20,6 +20,7 @@ import TertiaryChip from "../../../components/chips/TertiaryChip";
 import WarningChip from "../../../components/chips/WarningChip";
 import BlueChip from "../../../components/chips/BlueChip";
 import GreyButton from "../../../components/buttons/GreyButton";
+import AddAttendanceForm from "./AddAttendanceForm";
 
 // Define pagination model if needed
 
@@ -73,6 +74,7 @@ const AttendanceList: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
+  const [isAddAttendance, setAddAttendance] = useState<boolean>();
 
   // Handle the change in checked rows
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -286,14 +288,20 @@ const AttendanceList: React.FC = () => {
 
   return (
     <>
+      {isAddAttendance && (
+        <AddAttendanceForm cancel={() => setAddAttendance(false)} />
+      )}
+
       <div className="p-3 flex justify-between items-center text-grey-ab-900 ">
         <p className="text-lg font-semibold">Employee Attendance List</p>
-        <PrimaryButton
-          label={"Add Attendance"}
-          size={""}
-          variant={""}
-          leftIcon={<AddIcon color="#fdfdfd" />}
-        />
+        <div onClick={() => setAddAttendance(true)}>
+          <PrimaryButton
+            label={"Add Attendance"}
+            size={""}
+            variant={""}
+            leftIcon={<AddIcon color="#fdfdfd" />}
+          />
+        </div>
       </div>
       <div className="p-3 flex justify-between items-center text-grey-ab-900 border-y border-grey-ab-200">
         <div className="flex gap-4 items-center">
