@@ -61,7 +61,7 @@ const EmployeeProfile: React.FC = () => {
                   label={"Send Mail"}
                   size={"m"}
                   variant={"primary"}
-                  leftIcon={<EmailIcon size={16} color="#121212" />}
+                  leftIcon={<EmailIcon size={16} color="#121212" />}    
                   style="w-full"
                 />
               </div>
