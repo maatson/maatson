@@ -10,42 +10,57 @@ const Attendance: React.FC = () => {
         breadCrums={[
           "Home",
           "HRM",
-          location.pathname !== "/hrm/attendance" ? "Holidays" : "Attendance",
-        ]}
+          location.pathname === "/hrm/attendance/detail"
+            ? ["Attendance", "Attendance Detail"]
+            : location.pathname === "/hrm/attendance/holidays"
+            ? "Holidays"
+            : "Attendance",
+        ].flat()}
         heading={
-          location.pathname !== "/hrm/attendance" ? "Holidays" : "Attendance"
+          location.pathname === "/hrm/attendance/detail"
+            ? "Attendance Detail"
+            : location.pathname === "/hrm/attendance/holidays"
+            ? "Holidays"
+            : "Attendance"
         }
       />
-      <div className="flex items-center text-sm">
-        <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold ">
-          <button>
-            <NavLink
-              to={"/hrm/attendance"}
-              end
-              className={({ isActive }) =>
-                `${
-                  isActive ? "bg-primary-900 text-grey-aw-50" : ""
-                } px-4 py-2 rounded transition-all duration-500`
-              }
-            >
-              Attendance
-            </NavLink>
-          </button>
-          <button>
-            <NavLink
-              to={"/hrm/attendance/holidays"}
-              className={({ isActive }) =>
-                `${
-                  isActive ? "bg-primary-900 text-grey-aw-50" : ""
-                } px-4 py-2 rounded transition-all duration-500`
-              }
-            >
-              Holidays
-            </NavLink>
-          </button>
+      {(location.pathname === "/hrm/attendance" ||
+        location.pathname === "/hrm/attendance/holidays") && (
+        <div className="flex items-center text-sm">
+          <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold ">
+            <button>
+              <NavLink
+                to={"/hrm/attendance"}
+                end
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "bg-primary-900 text-grey-aw-50" : ""
+                  } px-4 py-2 rounded transition-all duration-500`
+                }
+              >
+                Attendance
+              </NavLink>
+            </button>
+            <button>
+              <NavLink
+                to={"/hrm/attendance/holidays"}
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "bg-primary-900 text-grey-aw-50" : ""
+                  } px-4 py-2 rounded transition-all duration-500`
+                }
+              >
+                Holidays
+              </NavLink>
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="bg-white  min-h-screen rounded">
+      )}
+      <div
+        className={`${
+          location.pathname === "/hrm/attendance/detail" ? "" : "bg-white"
+        }  min-h-screen rounded`}
+      >
         <Outlet />
       </div>
     </>
