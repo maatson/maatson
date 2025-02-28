@@ -23,6 +23,9 @@ const Attendance = lazy(() => import("./pages/hrm/attendance"));
 const AttendanceList = lazy(
   () => import("./pages/hrm/attendance/AttendanceList")
 );
+const AttendanceDetail = lazy(
+  () => import("./pages/hrm/attendance/AttendanceDetail")
+);
 const Holidays = lazy(() => import("./pages/hrm/attendance/Holidays"));
 
 //Employees
@@ -73,6 +76,7 @@ const AppRoutes: React.FC = () => {
         <Route path="hrm/attendance" element={<Attendance />}>
           <Route index element={<AttendanceList />} />
           <Route path="holidays" element={<Holidays />} />
+          <Route path="detail" element={<AttendanceDetail />} />
         </Route>
         <Route path="hrm/leave-form" element={<LeaveForm />}>
           <Route index element={<LeaveFormList />} />

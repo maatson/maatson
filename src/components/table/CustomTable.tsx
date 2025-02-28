@@ -36,7 +36,7 @@ const CustomTable: React.FC<TableProps> = React.memo(
     // Use effect to trigger state change after render
     useEffect(() => {
       // Send data to parent when checkedRows changes
-      if(onCheckedRowsChange){
+      if (onCheckedRowsChange) {
         onCheckedRowsChange(checkedRows);
       }
     }, [checkedRows, onCheckedRowsChange]); // This ensures the parent is updated after checkedRows is modified

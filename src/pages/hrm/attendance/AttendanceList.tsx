@@ -21,6 +21,7 @@ import WarningChip from "../../../components/chips/WarningChip";
 import BlueChip from "../../../components/chips/BlueChip";
 import GreyButton from "../../../components/buttons/GreyButton";
 import AddAttendanceForm from "./AddAttendanceForm";
+import { Link } from "react-router-dom";
 
 // Define pagination model if needed
 
@@ -119,9 +120,9 @@ const AttendanceList: React.FC = () => {
           variant={""}
           rightIcon={<EditIcon size={16} />}
         />
-        <div className="p-1 rounded bg-grey-ab ">
+        <Link className="p-1 rounded bg-grey-ab " to={"/hrm/attendance/detail"}>
           <AttendenceIcon color="#fdfdfd" size={16} />
-        </div>
+        </Link>
       </div>
     );
 
