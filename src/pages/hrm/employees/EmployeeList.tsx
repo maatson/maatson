@@ -134,6 +134,7 @@ const EmployeeList: React.FC = () => {
         </div>
 
         {hambergerMenuIcon && <EmployeeTable />}
+        {/* {hambergerMenuIcon && <CustomTable columns={[]} rows={[]} isCheckbox={true} />} */}
         {cubeIcon && <EmployeeCard />}
       </div>
     </>

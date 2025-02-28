@@ -5,6 +5,7 @@ import GradientChip from "../../chips/GradientChip";
 import PrimaryChip from "../../chips/PrimaryChip";
 import { EmailIcon, PhoneIcon } from "../../icons/Icons";
 import CustomPagination from "../../pagination/CustomPagination";
+import { useNavigate } from "react-router-dom";
 
 interface Employee {
   id: number;
@@ -713,6 +714,10 @@ const EmployeeCard: React.FC = () => {
     startIndex + itemsPerPage
   ); //slice(0,11), slice(12,23), slice(24,35) ...
 
+  const navigate = useNavigate();
+  const handleImageClick = () => {
+    navigate("/hrm/employees/employee-profile") ;  
+  }
   return (
     <>
       <div className="py-4 px-2 grid grid-cols-3 xl:grid-cols-4 gap-3 items-center">
@@ -738,7 +743,7 @@ const EmployeeCard: React.FC = () => {
             </div>
             <div className="flex flex-col gap-1 justify-center items-center">
               <div className="flex flex-col gap-2 items-center">
-                <div className="w-16 h-16">
+                <div className="w-16 h-16 cursor-pointer" onClick={handleImageClick}>
                   <img
                     src={EmployeeImage}
                     alt={employee.name}
@@ -750,6 +755,7 @@ const EmployeeCard: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-1">
+                {/* make it dynamically */}
                 <GradientChip
                   label={employee.department}
                   size={"s"}
@@ -796,64 +802,6 @@ const EmployeeCard: React.FC = () => {
           currentPage={page}
           handlePageChange={handleChange}
         />
-        {/* <Pagination
-          count={Math.ceil(employees.length / itemsPerPage)}
-          page={page}
-          onChange={handleChange}
-          variant="outlined"
-          shape="rounded"
-          size="small"
-          className="text-primary-300"
-          siblingCount={0}
-          boundaryCount={1}
-          sx={{
-            "& .MuiPaginationItem-root": {
-              fontSize: "10px",
-              color: "#212121",
-              backgroundColor: "#FDFDFD",
-              border: "1px solid rgba(206, 206, 206, 1)",
-              fontWeight: 800,
-              lineHeight: 0,
-              "&:hover": {
-                backgroundColor: "#C4C8E4",
-              },
-            },
-            // selected page
-            "& .Mui-selected": {
-              backgroundColor: "#FDFDFD",
-              color: "#2C398F",
-              border: "1px solid #2C398F",
-              "&:hover": {
-                backgroundColor: "#FDFDFD",
-              },
-            },
-            // 3 dots section
-            "& .MuiPaginationItem-ellipsis": {
-              color: "#212121",
-              fontSize: "10px",
-              padding: "10px 5px 14px 5px",
-              fontWeight: 800,
-              borderRadius: "4px",
-              border: "1px solid rgba(206, 206, 206, 1)",
-            },
-            // left , right arrow buttons
-            "& .MuiPaginationItem-previousNext": {
-              backgroundColor: "#FDFDFD",
-              color: "#171717",
-              border: "1px solid #171717",
-              "&:hover": {
-                border: "1px solid rgba(206, 206, 206, 1)",
-              },
-            },
-            // disabled left, rigth buttons
-            "& .MuiPaginationItem-previousNext.Mui-disabled": {
-              backgroundColor: "#FDFDFD",
-              color: "#171717",
-              border: "1px solid #171717",
-              opacity: 1,
-            },
-          }}
-        /> */}
       </div>
     </>
   );

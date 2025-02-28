@@ -78,7 +78,7 @@ const DocumentForm: React.FC<DocumentFormProps> = ({ onClose }) => {
             <PrimaryButton
               label={"Cancel"}
               size={"l"}
-              variant={"link"}
+              variant={"outline"}
               style="w-full"
             />
           </div>

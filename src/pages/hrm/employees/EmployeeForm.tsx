@@ -29,7 +29,7 @@ interface RowData {
   documentName: string;
   documentFile: React.ReactNode;
   action: React.ReactNode;
-}
+} 
 
 const columns: any[] = [
   { id: "documentName", label: "Document Name" },
@@ -92,11 +92,10 @@ const EmployeeForm: React.FC = () => {
     }));
   };
   const handleImageChange = (file: File | null) => {
-    // const updatedFormData = new FormData();
-    // if (file) {
-    //   updatedFormData.append("image", file);
-    // }
-    // setData(updatedFormData);
+    setData((prevData) => ({
+      ...prevData,
+      image: file,
+    }));
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -126,7 +125,7 @@ const EmployeeForm: React.FC = () => {
     );
     const updatedData = {
       id: id,
-      documentName: items?.documentName || "sfhjfs",
+      documentName: items?.documentName,
       documentFile: documentFile,
       action: actions,
     };

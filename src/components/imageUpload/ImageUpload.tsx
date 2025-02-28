@@ -32,7 +32,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label }) => {
       />
       {!selectedImage ? (
         <label
-          htmlFor="imageInput"
+          htmlFor={label}
           className="w-[220px] min-h-[128px] flex items-center justify-center rounded-xs border px-4 bg-white flex-col gap-3 border-grey-ab-100 relative cursor-pointer"
         >
           <UploadIcon size={32} color="#6A6A6A" />
@@ -55,7 +55,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label }) => {
             />
           </div>
           <label
-            htmlFor="imageInput"
+            htmlFor={label}
             className="rounded-xs bg-blue-50 p-1 absolute bottom-2 right-2 cursor-pointer"
           >
             <EditIcon size={16} color="#0067B5" />
