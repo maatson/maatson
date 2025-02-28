@@ -20,7 +20,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageChange, label }) => {
       onImageChange?.(file);
     }
   };
-
+    
   return (
     <div>
       <input
