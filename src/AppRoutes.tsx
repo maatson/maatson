@@ -18,6 +18,26 @@ const OtpVerification = lazy(
 );
 const PageNotFound = lazy(() => import("./pages/pageNotFound"));
 
+// Registration Routes
+
+// user
+const UserRegister = lazy(() => import("./pages/register/user"));
+const UserRegisterList = lazy(
+  () => import("./pages/register/user/UserRegisterList")
+);
+
+// carrier
+const CarrierRegister = lazy(() => import("./pages/register/carrier"));
+const CarrierRegisterList = lazy(
+  () => import("./pages/register/carrier/CarrierRegisterList")
+);
+
+// vendor
+const VendorRegister = lazy(() => import("./pages/register/vendor"));
+const VendorRegisterList = lazy(
+  () => import("./pages/register/vendor/VendorRegisterList")
+);
+
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
 const AttendanceList = lazy(
@@ -51,8 +71,9 @@ const RequirementDetails = lazy(
 
 // testimonials
 const Testimonials = lazy(() => import("./pages/testimonials"));
-const TestimonialList = lazy(() => import("./pages/testimonials/TestimonialList"));
-
+const TestimonialList = lazy(
+  () => import("./pages/testimonials/TestimonialList")
+);
 
 const AppRoutes: React.FC = () => {
   return (
@@ -72,7 +93,17 @@ const AppRoutes: React.FC = () => {
           </Suspense>
         }
       >
-        <Route path="hrm" element={<PageNotFound />} />
+        {/* register */}
+        <Route path="registration-user" element={<UserRegister />}>
+          <Route index element={<UserRegisterList />} />
+        </Route>
+        <Route path="registration-carrier" element={<CarrierRegister />}>
+          <Route index element={<CarrierRegisterList />} />
+        </Route>
+        <Route path="registration-vendor" element={<VendorRegister />}>
+          <Route index element={<VendorRegisterList />} />
+        </Route>
+        {/* hrm */}
         <Route path="hrm/employees" element={<Employees />}>
           <Route index element={<EmployeeList />} />
           <Route path="employee-form" element={<EmployeeForm />} />
@@ -96,7 +127,6 @@ const AppRoutes: React.FC = () => {
         <Route path="testimonials" element={<Testimonials />}>
           <Route index element={<TestimonialList />} />
         </Route>
-        
       </Route>
 
       {/* Suspense for Login and other credential-related routes */}

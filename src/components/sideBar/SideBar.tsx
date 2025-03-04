@@ -91,7 +91,11 @@ const SideBar: React.FC = () => {
         leftIcon: <UserIcon />,
         label: "Registration",
         isOpen: openItems[1] || false,
-        children: [],
+        children: [
+          { link: "/registration-user", label: "User Registration" },
+          { link: "/registration-carrier", label: "Carrier Registration" },
+          { link: "/registration-vendor", label: "Vendor Registration" },
+        ],
         onClick: () => handleItemClick(1),
       },
       {
