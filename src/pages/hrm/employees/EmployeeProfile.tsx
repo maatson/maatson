@@ -297,7 +297,7 @@ const EmployeeProfile: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
- 
+  
   return (
     <>
       <div className="flex justify-end py-4 items-center">

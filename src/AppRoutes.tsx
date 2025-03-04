@@ -49,6 +49,11 @@ const RequirementDetails = lazy(
   () => import("./pages/hrm/requirement/RequirementDetails")
 );
 
+// testimonials
+const Testimonials = lazy(() => import("./pages/testimonials"));
+const TestimonialList = lazy(() => import("./pages/testimonials/TestimonialList"));
+
+
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
@@ -86,6 +91,12 @@ const AppRoutes: React.FC = () => {
           <Route path="details" element={<RequirementDetails />} />
           {/* <Route path="employee-profile" element={<EmployeeProfile />} /> */}
         </Route>
+
+        {/* testimonials */}
+        <Route path="testimonials" element={<Testimonials />}>
+          <Route index element={<TestimonialList />} />
+        </Route>
+        
       </Route>
 
       {/* Suspense for Login and other credential-related routes */}

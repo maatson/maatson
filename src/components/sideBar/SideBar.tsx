@@ -160,7 +160,7 @@ const SideBar: React.FC = () => {
         label: "Testimonials",
         isOpen: openItems[10] || false,
         children: [],
-        onClick: () => handleItemClick(10),
+        onClick: () => handleItemClick(10, "/testimonials"),
       },
     ],
     [openItems, handleItemClick]
