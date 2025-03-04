@@ -111,7 +111,7 @@ const TestimonialList: React.FC = () => {
 
   // Pagination
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [itemsPerPage, setItemsPerPage] = useState(9);  
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
