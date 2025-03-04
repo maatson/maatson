@@ -723,7 +723,7 @@ const EmployeeCard: React.FC = () => {
       <div className="py-4 px-2 grid grid-cols-3 xl:grid-cols-4 gap-3 items-center">
         {paginatedEmployees.map((employee) => (
           <div
-            key={employee.id}
+            key={employee.id} 
             className="bg-grey-aw-50 rounded-sm flex flex-col gap-3 shadow-lg p-3 max-w-[245px] w-full mx-auto"
           >
             <div className="flex justify-between">

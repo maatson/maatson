@@ -22,6 +22,7 @@ import FileUpload from "../../../components/fileUpload/FileUpload";
 import ImageUpload from "../../../components/imageUpload/ImageUpload";
 import CustomTable from "../../../components/table/CustomTable";
 import DocumentForm from "./DocumentForm";
+import { Link } from "react-router-dom";
 
 // Define table model
 interface RowData {
@@ -29,7 +30,7 @@ interface RowData {
   documentName: string;
   documentFile: React.ReactNode;
   action: React.ReactNode;
-} 
+}
 
 const columns: any[] = [
   { id: "documentName", label: "Document Name" },
@@ -38,19 +39,10 @@ const columns: any[] = [
 ];
 
 const EmployeeForm: React.FC = () => {
-  const [eyeIcon, setEyeIcon] = useState("close");
+  const [eyeIcon, setEyeIcon] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
-
-  const handleEyeIconClick = () => {
-    if (eyeIcon === "open") {
-      setEyeIcon("close");
-    }
-    if (eyeIcon === "close") {
-      setEyeIcon("open");
-    }
-  };
 
   const [data, setData] = useState({
     userName: "",
@@ -221,19 +213,19 @@ const EmployeeForm: React.FC = () => {
             {/* password, confirm password */}
             <div className="flex gap-4">
               <GroupField
-                type={eyeIcon === "open" ? "text" : "password"}
+                type={eyeIcon ? "text" : "password"}
                 name={"password"}
                 value={data.password}
                 onChange={handleChange}
                 leftIcon={<PasswordIcon color="#2C398F" />}
                 rightIcon={
-                  eyeIcon === "open" ? (
+                  eyeIcon ? (
                     <EyeOpenIcon color="#2C398F" />
                   ) : (
                     <EyeCloseIcon color="#2C398F" />
                   )
                 }
-                onClickRightIcon={handleEyeIconClick}
+                onClickRightIcon={() => setEyeIcon(!eyeIcon)}
                 error={false}
                 errorMessage={""}
                 label={"Password*"}
@@ -242,19 +234,19 @@ const EmployeeForm: React.FC = () => {
               />
               <GroupField
                 label={"Confirm Password"}
-                type={eyeIcon === "open" ? "text" : "password"}
+                type={eyeIcon ? "text" : "password"}
                 placeholder={"Enter Confirm Password"}
                 name={"confirmPassword"}
                 value={data.confirmPassword}
                 onChange={handleChange}
                 rightIcon={
-                  eyeIcon === "open" ? (
+                  eyeIcon ? (
                     <EyeOpenIcon color="#2C398F" />
                   ) : (
                     <EyeCloseIcon color="#2C398F" />
                   )
                 }
-                onClickRightIcon={handleEyeIconClick}
+                onClickRightIcon={() => setEyeIcon(!eyeIcon)}
                 error={false}
                 errorMessage={""}
                 leftIcon={<PasswordIcon color="#2C398F" />}
@@ -318,7 +310,9 @@ const EmployeeForm: React.FC = () => {
                     type="radio"
                     id="male"
                     name="gender"
-                    value={data.gender}
+                    value={"male"}
+                    checked={data.gender === "male"}
+                    onChange={handleChange}
                     className="w-5 h-5"
                   />
                   <label htmlFor="male">Male</label>
@@ -328,7 +322,9 @@ const EmployeeForm: React.FC = () => {
                     type="radio"
                     id="female"
                     name="gender"
-                    value={data.gender}
+                    value={"female"}
+                    checked={data.gender === "female"}
+                    onChange={handleChange}
                     className="w-5 h-5"
                   />
                   <label htmlFor="female">Female</label>
@@ -338,7 +334,9 @@ const EmployeeForm: React.FC = () => {
                     type="radio"
                     id="others"
                     name="gender"
-                    value={data.gender}
+                    value={"others"}
+                    checked={data.gender === "others"}
+                    onChange={handleChange}
                     className="w-5 h-5"
                   />
                   <label htmlFor="others">Others</label>
@@ -567,7 +565,7 @@ const EmployeeForm: React.FC = () => {
                   onChange={handleChange}
                   error={false}
                   errorMessage={""}
-                  leftIcon={<DepartmentIcon color="#2C398F"/>}
+                  leftIcon={<DepartmentIcon color="#2C398F" />}
                   parentStyle="max-w-[400px] w-full"
                 />
               </div>
@@ -655,7 +653,9 @@ const EmployeeForm: React.FC = () => {
         {/* button section */}
         <div className="flex gap-6 items-center  justify-end">
           <div>
-            <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
+            <Link to={"/hrm/employees"}>
+              <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
+            </Link>
           </div>
 
           <div onClick={handleSubmit}>
