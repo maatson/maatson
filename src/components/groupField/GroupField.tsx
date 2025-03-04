@@ -2,6 +2,7 @@ import React, { ChangeEvent } from "react";
 import { DropDownIcon, WarningIcon } from "../icons/Icons";
 import Select from "react-select";
 import "./style.css";
+import CreatableSelect from "react-select/creatable";
 
 interface Groupfield {
   label: string;
@@ -13,7 +14,7 @@ interface Groupfield {
   labelStyle?: string;
   parentStyle?: string;
   name: string;
-  value: string | number;
+  value: string | number | string[];
   options?: { label: string; value: string }[]; // Better type for options
   onChange: (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -22,6 +23,7 @@ interface Groupfield {
   error: boolean;
   errorMessage: string;
   size?: string; //added by suriya
+  isMulti?: boolean;
 }
 
 const CustomDropdownIndicator = () => {
@@ -48,12 +50,18 @@ const GroupField: React.FC<Groupfield> = ({
   onClickRightIcon,
   error,
   errorMessage,
+  isMulti,
   size, //added by suriya
 }) => {
   // Handle React-Select change event
   const handleReactSelectChange = (selectedOption: any) => {
     onChange({
       target: { name, value: selectedOption ? selectedOption.value : "" },
+    } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
+  };
+  const handleReactMultiSelectChange = (selectedOption: any) => {
+    onChange({
+      target: { name, value: selectedOption },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
   return (
@@ -77,7 +85,12 @@ const GroupField: React.FC<Groupfield> = ({
               <Select
                 name={name}
                 value={options?.find((option) => option.value === value)} // Set the selected value
-                onChange={handleReactSelectChange} // React-Select onChange handler
+                onChange={
+                  isMulti
+                    ? handleReactMultiSelectChange
+                    : handleReactSelectChange
+                } // React-Select onChange handler
+                isMulti={isMulti ? true : false}
                 options={options}
                 className="p-0 w-full min-w-0 " // Tailwind class for full width
                 classNamePrefix="custom-select" // Optional class prefix for styling
@@ -122,6 +135,88 @@ const GroupField: React.FC<Groupfield> = ({
                 }}
               />
             </>
+          ) : type === "creatable" ? (
+            <>
+              <CreatableSelect
+                name={name}
+                value={options?.find((option) => option.value === value)} // Set the selected value
+                onChange={
+                  isMulti
+                    ? handleReactMultiSelectChange
+                    : handleReactSelectChange
+                } // React-Select onChange handler
+                isMulti={isMulti ? true : false}
+                options={options}
+                className="p-0 w-full min-w-0 " // Tailwind class for full width
+                classNamePrefix="custom-select" // Optional class prefix for styling
+                placeholder={placeholder || "Select an option"} // Placeholder text
+                isSearchable // Enable searching options
+                components={{
+                  DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                  IndicatorSeparator: null,
+                }}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    padding: 0,
+                    borderColor: "none", // Tailwind border-gray-200
+                    borderRadius: "0", // Tailwind rounded-md
+                    boxShadow: "none", // Remove default React-Select shadow
+                    background: "#fcfcfc",
+                    border: 0,
+                    minHeight: "none",
+                  }),
+                  placeholder: (provided) => ({
+                    ...provided,
+                    fontSize: "16px",
+                    color: "#999999  ",
+                  }),
+                  menu: (provided) => ({
+                    ...provided,
+                    top: "120%",
+                    background: "#fcfcfc",
+                  }),
+                  option: (provided, state) => ({
+                    ...provided,
+                    backgroundColor: state.isSelected
+                      ? "#2c398f "
+                      : state.isFocused
+                      ? "#9ea4cf "
+                      : "#fff", // Tailwind background colors
+                    color:
+                      state.isSelected || state.isFocused ? "#fff" : "#111827", // Tailwind text colors
+                    padding: "0.5rem", // Tailwind padding
+                  }),
+                  multiValue: (provided) => ({
+                    ...provided,
+                    backgroundColor: "#2c398f", // Background color of the chip
+                    borderRadius: "16px", // Round shape
+                    padding: "0px 10px", // Padding inside the chip
+                    margin: "0px 5px", // Space between chips
+                  }),
+                  multiValueLabel: (provided) => ({
+                    ...provided,
+                    color: "white", // Text color inside the chip
+                    fontSize: "14px", // Text size inside the chip
+                    fontWeight: "500",
+                    marginBlock: "0",
+                    paddingInline: "10px",
+                  }),
+                  multiValueRemove: (provided) => ({
+                    ...provided,
+                    color: "white", // Close icon color
+                    cursor: "pointer",
+                    padding: "0px",
+                    marginBlock: "5px",
+                    ":hover": {
+                      backgroundColor: "#9ea4cf", // Hover effect for remove button
+                      color: "#fff", // Text color on hover
+                      padding: "0px ",
+                    },
+                  }),
+                }}
+              />
+            </>
           ) : type === "textarea" ? (
             <textarea
               name={name}
@@ -142,7 +237,11 @@ const GroupField: React.FC<Groupfield> = ({
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
             />
           )}
-          {rightIcon && <div onClick={onClickRightIcon} className="cursor-pointer">{rightIcon}</div>}
+          {rightIcon && (
+            <div onClick={onClickRightIcon} className="cursor-pointer">
+              {rightIcon}
+            </div>
+          )}
         </div>
         {error && errorMessage && (
           <p className="text-error flex items-start gap-1 mt-1 text-2xs font-semibold capitalize">

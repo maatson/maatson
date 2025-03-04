@@ -25,6 +25,7 @@ const UserRegister = lazy(() => import("./pages/register/user"));
 const UserRegisterList = lazy(
   () => import("./pages/register/user/UserRegisterList")
 );
+const AddRegister = lazy(() => import("./pages/register/user/AddRegister"));
 
 // carrier
 const CarrierRegister = lazy(() => import("./pages/register/carrier"));
@@ -96,6 +97,7 @@ const AppRoutes: React.FC = () => {
         {/* register */}
         <Route path="registration-user" element={<UserRegister />}>
           <Route index element={<UserRegisterList />} />
+          <Route path="add" element={<AddRegister />} />
         </Route>
         <Route path="registration-carrier" element={<CarrierRegister />}>
           <Route index element={<CarrierRegisterList />} />

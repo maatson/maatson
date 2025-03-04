@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 const Login: React.FC = () => {
   const [data, setData] = useState({ name: "", department: "", password: "" });
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
