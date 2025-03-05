@@ -404,7 +404,7 @@ const EmployeeForm: React.FC = () => {
                 </div>
 
                 {/* 3 input section */}
-                <div className="flex gap-4">
+                <div className="flex gap-[18px]">
                   <GroupField
                     label={"Building/Door Number"}
                     type={"text"}
@@ -415,7 +415,7 @@ const EmployeeForm: React.FC = () => {
                     error={false}
                     errorMessage={""}
                     leftIcon={<LocationIcon color="#2C398F" />}
-                    parentStyle="max-w-[400px] w-full"
+                    parentStyle="max-w-[260px] w-full"
                   />
                   <GroupField
                     label={"Postal Code*"}
@@ -427,21 +427,21 @@ const EmployeeForm: React.FC = () => {
                     error={false}
                     errorMessage={""}
                     leftIcon={<LocationIcon color="#2C398F" />}
-                    parentStyle="max-w-[400px] w-full"
+                    parentStyle="max-w-[260px] w-full"
+                  />
+                  <GroupField
+                    label={"Country "}
+                    type={"text"}
+                    placeholder={"Enter Country"}
+                    name={"country"}
+                    value={data.country}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[260px] w-full"
                   />
                 </div>
-                <GroupField
-                  label={"Country "}
-                  type={"text"}
-                  placeholder={"Enter Country"}
-                  name={"country"}
-                  value={data.country}
-                  onChange={handleChange}
-                  error={false}
-                  errorMessage={""}
-                  leftIcon={<LocationIcon color="#2C398F" />}
-                  parentStyle="max-w-[400px] w-full"
-                />
               </div>
             </div>
           </div>
