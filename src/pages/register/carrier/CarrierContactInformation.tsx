@@ -6,7 +6,6 @@ import {
   DeleteIcon,
   DocumentIcon,
   DownloadIcon,
-  DropDownIcon,
   ExcelIcon,
   SearchIcon,
   SendIcon,
@@ -45,46 +44,48 @@ const contactColumns: any[] = [
 ];
 
 // business table
-interface RowData {
+interface BusinessRowData {
   id: string | number;
   branch: string;
   document: React.ReactNode;
   action: React.ReactNode;
 }
 
-const columns: any[] = [
+const businessColumns: any[] = [
   { id: "branch", label: "Branch" },
   { id: "document", label: "Document", align: "center" },
   { id: "action", label: "Action", align: "center" },
 ];
 
-// // business table
-// interface RowData {
-//   id: string | number;
-//   branch: string;
-//   document: React.ReactNode;
-//   action: React.ReactNode;
-// }
+// tax table
+interface TaxRowData {
+  id: string | number;
+  branch: string;
+  document: React.ReactNode;
+  action: React.ReactNode;
+}
 
-// const columns: any[] = [
-//   { id: "branch", label: "Branch" },
-//   { id: "document", label: "Document", align: "center" },
-//   { id: "action", label: "Action", align: "center" },
-// ];
+const taxColumns: any[] = [
+  { id: "branch", label: "Branch" },
+  { id: "document", label: "Document", align: "center" },
+  { id: "action", label: "Action", align: "center" },
+];
 
-// // business table
-// interface RowData {
-//   id: string | number;
-//   branch: string;
-//   document: React.ReactNode;
-//   action: React.ReactNode;
-// }
+// other certificate table
+interface RowData {
+  id: string | number;
+  certificateName: string;
+  branch: string;
+  document: React.ReactNode;
+  action: React.ReactNode;
+}
 
-// const columns: any[] = [
-//   { id: "branch", label: "Branch" },
-//   { id: "document", label: "Document", align: "center" },
-//   { id: "action", label: "Action", align: "center" },
-// ];
+const columns: any[] = [
+  { id: "certificateName", label: "Certificate Name" },
+  { id: "branch", label: "Branch" },
+  { id: "document", label: "Document", align: "center" },
+  { id: "action", label: "Action", align: "center" },
+];
 
 const CarrierContactInformation: React.FC = () => {
   const [contactCurrentPage, setContactCurrentPage] = useState<number>(1);
@@ -115,7 +116,7 @@ const CarrierContactInformation: React.FC = () => {
   };
 
   // table
-  const contactCreateData = (items: any) => {
+  const createContactData = (items: any) => {
     const { id, email, countryOfOperation } = items;
     const countryOfOperations = (
       <SecondaryChip
@@ -181,7 +182,7 @@ const CarrierContactInformation: React.FC = () => {
   // Memoize fetchData function with useCallback
   const fetchContactData = useCallback(() => {
     const arr = contactData.map((items, index) => {
-      return contactCreateData({ ...items, id: index }); // Ensure createData returns the transformed data
+      return createContactData({ ...items, id: index }); // Ensure createData returns the transformed data
     });
     setContactRows(arr); // Set the rows with the updated data
   }, []); // Empty dependency array ensures this function is only created once
@@ -191,31 +192,33 @@ const CarrierContactInformation: React.FC = () => {
   }, [fetchContactData]);
 
   // Table -2 business registration
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rows, setRows] = useState<RowData[]>([]);
-  const [itemsPerPage, setItemsPerPage] = React.useState(5);
+  const [businessCurrentPage, setBusinessCurrentPage] = useState<number>(1);
+  const [businessRows, setBusinessRows] = useState<BusinessRowData[]>([]);
+  const [businessItemsPerPage, setBusinessItemsPerPage] = React.useState(5);
 
-  const handleItemsPerPageChange = useCallback(
+  const handleBusinessItemsPerPageChange = useCallback(
     (event: SelectChangeEvent<number>) => {
-      setItemsPerPage(Number(event.target.value));
-      setCurrentPage(1);
+      setBusinessItemsPerPage(Number(event.target.value));
+      setBusinessCurrentPage(1);
     },
     []
   );
-  const handlechangePage = (
+  const handleBusinessChangePage = (
     _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    setCurrentPage(page);
+    setBusinessCurrentPage(page);
   };
 
-  const createData = (items: any) => {
+  const createBusinessData = (items: any) => {
     const { id, fileName } = items;
     const documents = (
-      <div className="rounded-xs border w-[200px] p-2 flex gap-3 items-center bg-primary-50 border-grey-ab-100">
-        <DocumentIcon color="#2C398F" />
-        <div className="text-grey-ab-800 truncate w-[140px] overflow-hidden whitespace-nowrap text-ellipsis">
-          {fileName}.pdf
+      <div className="flex justify-center">
+        <div className="rounded-xs border p-2 flex gap-3 items-center bg-primary-50 border-grey-ab-100">
+          <DocumentIcon color="#2C398F" />
+          <div className="text-grey-ab-800 truncate w-[140px]">
+            {fileName}.pdf
+          </div>
         </div>
       </div>
     );
@@ -238,12 +241,187 @@ const CarrierContactInformation: React.FC = () => {
 
     return updatedData;
   };
-  const data = [
+  const businessData = [
     {
       branch: "Mooney Valley",
       fileName: "Business Registration",
     },
     {
+      branch: "Taupo",
+      fileName: "Business Registration",
+    },
+    {
+      branch: "Mooney Valley",
+      fileName: "Business Registration",
+    },
+    {
+      branch: "Taupo",
+      fileName: "Business Registration",
+    },
+  ];
+
+  // Memoize fetchData function with useCallback
+  const fetchBusinessData = useCallback(() => {
+    const arr = businessData.map((items, index) => {
+      return createBusinessData({ ...items, id: index }); // Ensure createData returns the transformed data
+    });
+    setBusinessRows(arr); // Set the rows with the updated data
+  }, []); // Empty dependency array ensures this function is only created once
+
+  useEffect(() => {
+    fetchBusinessData(); // Call fetchData when the component mounts
+  }, [fetchBusinessData]); // Only re-run fetchData if fetchData changes
+
+  // Table -3 tax registration
+  const [taxCurrentPage, setTaxCurrentPage] = useState<number>(1);
+  const [taxRows, setTaxRows] = useState<TaxRowData[]>([]);
+  const [taxItemsPerPage, setTaxItemsPerPage] = React.useState(5);
+
+  const handleTaxItemsPerPageChange = useCallback(
+    (event: SelectChangeEvent<number>) => {
+      setTaxItemsPerPage(Number(event.target.value));
+      setTaxCurrentPage(1);
+    },
+    []
+  );
+  const handleTaxChangePage = (
+    _event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setTaxCurrentPage(page);
+  };
+
+  const createTaxData = (items: any) => {
+    const { id, fileName } = items;
+    const documents = (
+      <div className="flex justify-center">
+        <div className="rounded-xs border p-2 flex gap-3 items-center bg-primary-50 border-grey-ab-100">
+          <DocumentIcon color="#2C398F" />
+          <div className="text-grey-ab-800 truncate w-[140px] ">
+            {fileName}.pdf
+          </div>
+        </div>
+      </div>
+    );
+    const actions = (
+      <div className="flex gap-[10px] py-1 px-2 justify-center items-center">
+        <div className="bg-grey-ab p-1 rounded-xs cursor-pointer">
+          <DownloadIcon size={16} color="#FDFDFD" />
+        </div>
+        <div className="bg-error-50 p-1 rounded-xs cursor-pointer">
+          <DeleteIcon size={16} color="#810001" />
+        </div>
+      </div>
+    );
+    const updatedData = {
+      id: id,
+      branch: items?.branch,
+      document: documents,
+      action: actions,
+    };
+
+    return updatedData;
+  };
+  const taxData = [
+    {
+      branch: "Mooney Valley",
+      fileName: "Business Registration",
+    },
+    {
+      branch: "Taupo",
+      fileName: "Business Registration",
+    },
+    {
+      branch: "Mooney Valley",
+      fileName: "Business Registration",
+    },
+    {
+      branch: "Taupo",
+      fileName: "Business Registration",
+    },
+  ];
+
+  // Memoize fetchData function with useCallback
+  const fetchTaxData = useCallback(() => {
+    const arr = taxData.map((items, index) => {
+      return createTaxData({ ...items, id: index }); // Ensure createData returns the transformed data
+    });
+    setTaxRows(arr); // Set the rows with the updated data
+  }, []); // Empty dependency array ensures this function is only created once
+
+  useEffect(() => {
+    fetchTaxData(); // Call fetchData when the component mounts
+  }, [fetchTaxData]); // Only re-run fetchData if fetchData changes
+
+  // Table -4 others registration
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [rows, setRows] = useState<RowData[]>([]);
+  const [itemsPerPage, setItemsPerPage] = React.useState(5);
+
+  const handleItemsPerPageChange = useCallback(
+    (event: SelectChangeEvent<number>) => {
+      setItemsPerPage(Number(event.target.value));
+      setCurrentPage(1);
+    },
+    []
+  );
+  const handlechangePage = (
+    _event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+  };
+
+  const createData = (items: any) => {
+    const { id, fileName } = items;
+    const documents = (
+      <div className="flex justify-center">
+        <div className="rounded-xs border  p-2 flex gap-3 items-center bg-primary-50 border-grey-ab-100">
+          <DocumentIcon color="#2C398F" />
+          <div className="text-grey-ab-800 truncate w-[140px] ">
+            {fileName}.pdf
+          </div>
+        </div>
+      </div>
+    );
+    const actions = (
+      <div className="flex gap-[10px] py-1 px-2 justify-center items-center">
+        <div className="bg-grey-ab p-1 rounded-xs cursor-pointer">
+          <DownloadIcon size={16} color="#FDFDFD" />
+        </div>
+        <div className="bg-error-50 p-1 rounded-xs cursor-pointer">
+          <DeleteIcon size={16} color="#810001" />
+        </div>
+      </div>
+    );
+    const updatedData = {
+      id: id,
+      certificateName: items?.certificateName,
+      branch: items?.branch,
+      document: documents,
+      action: actions,
+    };
+
+    return updatedData;
+  };
+  const data = [
+    {
+      certificateName: "Mooney Valley",
+      branch: "Mooney Valley",
+      fileName: "Business Registration",
+    },
+    {
+      certificateName: "Mooney Valley",
+      branch: "Taupo",
+      fileName: "Business Registration",
+    },
+    {
+      certificateName: "Mooney Valley",
+      branch: "Mooney Valley",
+      fileName: "Business Registration",
+    },
+    {
+      certificateName: "Mooney Valley",
       branch: "Taupo",
       fileName: "Business Registration",
     },
@@ -260,150 +438,6 @@ const CarrierContactInformation: React.FC = () => {
   useEffect(() => {
     fetchData(); // Call fetchData when the component mounts
   }, [fetchData]); // Only re-run fetchData if fetchData changes
-
-  // table 3
-  // // Table -2 business registration
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [rows, setRows] = useState<RowData[]>([]);
-  // const [itemsPerPage, setItemsPerPage] = React.useState(5);
-
-  // const handleItemsPerPageChange = useCallback(
-  //   (event: SelectChangeEvent<number>) => {
-  //     setItemsPerPage(Number(event.target.value));
-  //     setCurrentPage(1);
-  //   },
-  //   []
-  // );
-  // const handlechangePage = (
-  //   _event: React.ChangeEvent<unknown>,
-  //   page: number
-  // ) => {
-  //   setCurrentPage(page);
-  // };
-
-  // const createData = (items: any) => {
-  //   const { id, fileName } = items;
-  //   const documents = (
-  //     <div className="rounded-xs border w-[200px] p-2 flex gap-3 items-center bg-primary-50 border-grey-ab-100">
-  //       <DocumentIcon color="#2C398F" />
-  //       <div className="text-grey-ab-800 truncate w-[140px] overflow-hidden whitespace-nowrap text-ellipsis">
-  //         {fileName}.pdf
-  //       </div>
-  //     </div>
-  //   );
-  //   const actions = (
-  //     <div className="flex gap-[10px] py-1 px-2 justify-center items-center">
-  //       <div className="bg-grey-ab p-1 rounded-xs cursor-pointer">
-  //         <DownloadIcon size={16} color="#FDFDFD" />
-  //       </div>
-  //       <div className="bg-error-50 p-1 rounded-xs cursor-pointer">
-  //         <DeleteIcon size={16} color="#810001" />
-  //       </div>
-  //     </div>
-  //   );
-  //   const updatedData = {
-  //     id: id,
-  //     branch: items?.branch,
-  //     document: documents,
-  //     action: actions,
-  //   };
-
-  //   return updatedData;
-  // };
-  // const data = [
-  //   {
-  //     branch: "Mooney Valley",
-  //     fileName: "Business Registration",
-  //   },
-  //   {
-  //     branch: "Taupo",
-  //     fileName: "Business Registration",
-  //   },
-  // ];
-
-  // // Memoize fetchData function with useCallback
-  // const fetchData = useCallback(() => {
-  //   const arr = data.map((items, index) => {
-  //     return createData({ ...items, id: index }); // Ensure createData returns the transformed data
-  //   });
-  //   setRows(arr); // Set the rows with the updated data
-  // }, []); // Empty dependency array ensures this function is only created once
-
-  // useEffect(() => {
-  //   fetchData(); // Call fetchData when the component mounts
-  // }, [fetchData]); // Only re-run fetchData if fetchData changes
-
-  // table 4
-  // // Table -2 business registration
-  // const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [rows, setRows] = useState<RowData[]>([]);
-  // const [itemsPerPage, setItemsPerPage] = React.useState(5);
-
-  // const handleItemsPerPageChange = useCallback(
-  //   (event: SelectChangeEvent<number>) => {
-  //     setItemsPerPage(Number(event.target.value));
-  //     setCurrentPage(1);
-  //   },
-  //   []
-  // );
-  // const handlechangePage = (
-  //   _event: React.ChangeEvent<unknown>,
-  //   page: number
-  // ) => {
-  //   setCurrentPage(page);
-  // };
-
-  // const createData = (items: any) => {
-  //   const { id, fileName } = items;
-  //   const documents = (
-  //     <div className="rounded-xs border w-[200px] p-2 flex gap-3 items-center bg-primary-50 border-grey-ab-100">
-  //       <DocumentIcon color="#2C398F" />
-  //       <div className="text-grey-ab-800 truncate w-[140px] overflow-hidden whitespace-nowrap text-ellipsis">
-  //         {fileName}.pdf
-  //       </div>
-  //     </div>
-  //   );
-  //   const actions = (
-  //     <div className="flex gap-[10px] py-1 px-2 justify-center items-center">
-  //       <div className="bg-grey-ab p-1 rounded-xs cursor-pointer">
-  //         <DownloadIcon size={16} color="#FDFDFD" />
-  //       </div>
-  //       <div className="bg-error-50 p-1 rounded-xs cursor-pointer">
-  //         <DeleteIcon size={16} color="#810001" />
-  //       </div>
-  //     </div>
-  //   );
-  //   const updatedData = {
-  //     id: id,
-  //     branch: items?.branch,
-  //     document: documents,
-  //     action: actions,
-  //   };
-
-  //   return updatedData;
-  // };
-  // const data = [
-  //   {
-  //     branch: "Mooney Valley",
-  //     fileName: "Business Registration",
-  //   },
-  //   {
-  //     branch: "Taupo",
-  //     fileName: "Business Registration",
-  //   },
-  // ];
-
-  // // Memoize fetchData function with useCallback
-  // const fetchData = useCallback(() => {
-  //   const arr = data.map((items, index) => {
-  //     return createData({ ...items, id: index }); // Ensure createData returns the transformed data
-  //   });
-  //   setRows(arr); // Set the rows with the updated data
-  // }, []); // Empty dependency array ensures this function is only created once
-
-  // useEffect(() => {
-  //   fetchData(); // Call fetchData when the component mounts
-  // }, [fetchData]); // Only re-run fetchData if fetchData changes
 
   return (
     <>
@@ -568,22 +602,26 @@ const CarrierContactInformation: React.FC = () => {
             </div>
 
             {/* table */}
-            <CustomTable columns={columns} rows={rows} isCheckbox={false} />
+            <CustomTable
+              columns={businessColumns}
+              rows={businessRows}
+              isCheckbox={false}
+            />
 
             {/* pagination */}
             <div className="px-3 py-4 flex justify-between items-center rounded-b-xs">
               <CustomPagination
-                totalItems={rows.length}
-                itemsPerPage={itemsPerPage}
-                currentPage={currentPage}
-                handlePageChange={handlechangePage}
+                totalItems={businessRows.length}
+                itemsPerPage={businessItemsPerPage}
+                currentPage={businessCurrentPage}
+                handlePageChange={handleBusinessChangePage}
               />
 
               <div className="flex gap-4 items-center">
                 <p className="text-xs text-grey-ab-300">Items Per Page</p>
                 <Select
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
+                  value={businessItemsPerPage}
+                  onChange={handleBusinessItemsPerPageChange}
                   size="small"
                   sx={{
                     fontSize: "12px",
@@ -640,22 +678,26 @@ const CarrierContactInformation: React.FC = () => {
             </div>
 
             {/* table */}
-            <CustomTable columns={columns} rows={rows} isCheckbox={false} />
+            <CustomTable
+              columns={taxColumns}
+              rows={taxRows}
+              isCheckbox={false}
+            />
 
             {/* pagination */}
-            {/* <div className="px-3 py-4 flex justify-between items-center rounded-b-xs">
+            <div className="px-3 py-4 flex justify-between items-center rounded-b-xs">
               <CustomPagination
-                totalItems={rows.length}
-                itemsPerPage={itemsPerPage}
-                currentPage={currentPage}
-                handlePageChange={handlechangePage}
+                totalItems={taxRows.length}
+                itemsPerPage={taxItemsPerPage}
+                currentPage={taxCurrentPage}
+                handlePageChange={handleTaxChangePage}
               />
 
               <div className="flex gap-4 items-center">
                 <p className="text-xs text-grey-ab-300">Items Per Page</p>
                 <Select
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
+                  value={taxItemsPerPage}
+                  onChange={handleTaxItemsPerPageChange}
                   size="small"
                   sx={{
                     fontSize: "12px",
@@ -672,7 +714,7 @@ const CarrierContactInformation: React.FC = () => {
                   ))}
                 </Select>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
 
@@ -716,26 +758,7 @@ const CarrierContactInformation: React.FC = () => {
                 error={false}
                 errorMessage={""}
                 size="s"
-                parentStyle="w-[98px]"
-              />
-                            <GroupField
-                label={""}
-                type={"text"}
-                placeholder={"Branch"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
-                error={false}
-                errorMessage={""}
-                rightIcon={<DropDownIcon size={20} />}
-                size="s"
-                parentStyle="w-[98px]"
+                parentStyle="w-[15%]"
               />
             </div>
             <div>
@@ -745,6 +768,41 @@ const CarrierContactInformation: React.FC = () => {
                 variant={"primary"}
                 leftIcon={<AddIcon size={16} color="#121212" />}
               />
+            </div>
+          </div>
+
+          {/* table */}
+          <CustomTable columns={columns} rows={rows} isCheckbox={false} />
+
+          {/* pagination */}
+          <div className="px-3 py-4 flex justify-between items-center rounded-b-xs">
+            <CustomPagination
+              totalItems={rows.length}
+              itemsPerPage={itemsPerPage}
+              currentPage={currentPage}
+              handlePageChange={handlechangePage}
+            />
+
+            <div className="flex gap-4 items-center">
+              <p className="text-xs text-grey-ab-300">Items Per Page</p>
+              <Select
+                value={itemsPerPage}
+                onChange={handleItemsPerPageChange}
+                size="small"
+                sx={{
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  color: "#121212",
+                  padding: "0px 4px",
+                  borderRadius: "4px",
+                }}
+              >
+                {[5, 10, 15, 20, 25].map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
             </div>
           </div>
         </div>

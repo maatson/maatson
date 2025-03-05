@@ -15,7 +15,7 @@ import CustomTable from "../../../components/table/CustomTable";
 import BlueChip from "../../../components/chips/BlueChip";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import SuccessChip from "../../../components/chips/SuccessChip";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -97,10 +97,10 @@ const CarrierRegisterList: React.FC = () => {
 
     const actions = (
       <div className="flex justify-center gap-[10px] py-1 px-2">
-        <div className="rounded-xs p-1 bg-blue">
+        <div className="rounded-xs p-1 bg-blue cursor-pointer" onClick={handleEyeIcon}>
           <EyeOpenIcon size={16} color="#FDFDFD" />
         </div>
-        <div className="rounded-xs p-1 bg-success-600">
+        <div className="rounded-xs p-1 bg-success-600 cursor-pointer">
           <SendIcon size={16} color="#FCFCFC" />
         </div>
       </div>
@@ -181,6 +181,11 @@ const CarrierRegisterList: React.FC = () => {
   useEffect(() => {
     fetchData(); // Call fetchData when the component mounts
   }, [fetchData]); // Only re-run fetchData if fetchData changes
+
+  const navigate = useNavigate();
+  const handleEyeIcon = () => {
+    navigate("/registration-carrier/carrier-details/profile")
+  }
 
   return (
     <>
