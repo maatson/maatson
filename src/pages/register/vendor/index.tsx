@@ -7,7 +7,6 @@ const VendorRegister: React.FC = () => {
 
   return (
     <>
-      {" "}
       <PageHeader
         breadCrums={[
           "Home",

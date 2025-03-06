@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
 import { DocumentIcon } from "../../../../components/icons/Icons";
 import FileUpload from "../../../../components/fileUpload/FileUpload";
 import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import GroupField from "../../../../components/groupField/GroupField";
 
 interface AddOthersCertificateProps {
   onClose: () => void; // Function to close the popup
@@ -59,7 +59,7 @@ const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
         </div>
         {/* documents */}
         <div className="px-6 flex flex-col gap-4">
-        <GroupField
+          <GroupField
             label={"Certificate Name"}
             type={""}
             placeholder={"Enter Certificate Name"}

@@ -109,7 +109,9 @@ const GroupField: React.FC<Groupfield> = ({
                 //   IndicatorSeparator: null,
                 // }}
                 components={{
-                  DropdownIndicator: () => <CustomDropdownIndicator size={size} />,
+                  DropdownIndicator: () => (
+                    <CustomDropdownIndicator size={size} />
+                  ),
                   IndicatorSeparator: null,
                 }}
                 styles={{
@@ -168,7 +170,9 @@ const GroupField: React.FC<Groupfield> = ({
                 //   IndicatorSeparator: null,
                 // }}
                 components={{
-                  DropdownIndicator: () => <CustomDropdownIndicator size={size} />,
+                  DropdownIndicator: () => (
+                    <CustomDropdownIndicator size={size} />
+                  ),
                   IndicatorSeparator: null,
                 }}
                 styles={{
@@ -207,7 +211,7 @@ const GroupField: React.FC<Groupfield> = ({
                     ...provided,
                     backgroundColor: "#ffffff", // Background color of the chip
                     borderRadius: "16px", // Round shape
-                    border:"solid 1px #2c398f",
+                    border: "solid 1px #2c398f",
                     padding: "0px 8px", // Padding inside the chip
                     margin: "4px", // Space between chips
                   }),
