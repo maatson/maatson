@@ -33,6 +33,9 @@ const CarrierRegister = lazy(() => import("./pages/register/carrier"));
 const CarrierRegisterList = lazy(
   () => import("./pages/register/carrier/CarrierRegisterList")
 );
+const CarrierRegisterForm = lazy(() => import("./pages/register/carrier/CarrierRegisterForm"))
+const CarrierProfile = lazy(() => import("./pages/register/carrier/CarrierProfile"))
+const CarrierContactInformation = lazy(() => import("./pages/register/carrier/CarrierContactInformation"))
 
 // vendor
 const VendorRegister = lazy(() => import("./pages/register/vendor"));
@@ -115,6 +118,9 @@ const AppRoutes: React.FC = () => {
         </Route>
         <Route path="registration-carrier" element={<CarrierRegister />}>
           <Route index element={<CarrierRegisterList />} />
+          <Route path="register-form" element={<CarrierRegisterForm />} />
+          <Route path="carrier-details/profile" element={<CarrierProfile />} />
+          <Route path="carrier-details/contact-information" element={<CarrierContactInformation />} />
         </Route>
         <Route path="registration-vendor" element={<VendorRegister />}>
           <Route index element={<VendorRegisterList />} />

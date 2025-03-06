@@ -53,10 +53,10 @@ const employeeDocumentColumns: any[] = [
   { id: "action", label: "Action", align: "center", minWidth: "100px" },
 ];
 const columns: any[] = [
-  { id: "date", label: "Date" },
-  { id: "attendanceStatus", label: "Attendance Status" },
-  { id: "checkIn", label: "Check In" },
-  { id: "checkOut", label: "Check Out" },
+  { id: "date", label: "Date", align:"center"},
+  { id: "attendanceStatus", label: "Attendance Status", align:"center" },
+  { id: "checkIn", label: "Check In", align:"center" },
+  { id: "checkOut", label: "Check Out", align:"center" },
   {
     id: "workingHours",
     label: "Working Hours",

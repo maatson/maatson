@@ -26,12 +26,20 @@ interface Groupfield {
   isMulti?: boolean;
 }
 
-const CustomDropdownIndicator = () => {
+// const CustomDropdownIndicator = () => {
+//   return (
+//     <div>
+//       <DropDownIcon />
+//     </div>
+//   ); // Empty or custom content here to replace the default dropdown icon
+// };
+
+const CustomDropdownIndicator: React.FC<{ size?: string }> = ({ size }) => {
   return (
     <div>
-      <DropDownIcon />
+      <DropDownIcon size={size === "s" ? "20px" : "24px"} />
     </div>
-  ); // Empty or custom content here to replace the default dropdown icon
+  );
 };
 
 const GroupField: React.FC<Groupfield> = ({
@@ -74,7 +82,7 @@ const GroupField: React.FC<Groupfield> = ({
         )}
         {/* <div> */}
         <div
-          className={`${size === "s" ? "px-3 py-[6px]" : "px-4 py-3 "}
+          className={`${size === "s" ? "px-3 py-[6px] text-xs" : "px-4 py-3 "}
              flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
                !error ? "border-grey-200 " : "border-error "
              }   ${inputStyle}`}
@@ -96,8 +104,12 @@ const GroupField: React.FC<Groupfield> = ({
                 classNamePrefix="custom-select" // Optional class prefix for styling
                 placeholder={placeholder || "Select an option"} // Placeholder text
                 isSearchable // Enable searching options
+                // components={{
+                //   DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                //   IndicatorSeparator: null,
+                // }}
                 components={{
-                  DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                  DropdownIndicator: () => <CustomDropdownIndicator size={size} />,
                   IndicatorSeparator: null,
                 }}
                 styles={{
@@ -113,7 +125,7 @@ const GroupField: React.FC<Groupfield> = ({
                   }),
                   placeholder: (provided) => ({
                     ...provided,
-                    fontSize: "16px",
+                    // fontSize: "16px",
                     color: "#999999  ",
                   }),
                   menu: (provided) => ({
@@ -151,8 +163,12 @@ const GroupField: React.FC<Groupfield> = ({
                 classNamePrefix="custom-select" // Optional class prefix for styling
                 placeholder={placeholder || "Select an option"} // Placeholder text
                 isSearchable // Enable searching options
+                // components={{
+                //   DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                //   IndicatorSeparator: null,
+                // }}
                 components={{
-                  DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                  DropdownIndicator: () => <CustomDropdownIndicator size={size} />,
                   IndicatorSeparator: null,
                 }}
                 styles={{
@@ -168,7 +184,7 @@ const GroupField: React.FC<Groupfield> = ({
                   }),
                   placeholder: (provided) => ({
                     ...provided,
-                    fontSize: "16px",
+                    // fontSize: "16px",
                     color: "#999999  ",
                   }),
                   menu: (provided) => ({
@@ -189,28 +205,29 @@ const GroupField: React.FC<Groupfield> = ({
                   }),
                   multiValue: (provided) => ({
                     ...provided,
-                    backgroundColor: "#2c398f", // Background color of the chip
+                    backgroundColor: "#ffffff", // Background color of the chip
                     borderRadius: "16px", // Round shape
-                    padding: "0px 10px", // Padding inside the chip
-                    margin: "0px 5px", // Space between chips
+                    border:"solid 1px #2c398f",
+                    padding: "0px 8px", // Padding inside the chip
+                    margin: "4px", // Space between chips
                   }),
                   multiValueLabel: (provided) => ({
                     ...provided,
-                    color: "white", // Text color inside the chip
-                    fontSize: "14px", // Text size inside the chip
-                    fontWeight: "500",
+                    color: "#2c398f", // Text color inside the chip
+                    fontSize: "12px", // Text size inside the chip
+                    fontWeight: "400",
                     marginBlock: "0",
-                    paddingInline: "10px",
+                    paddingInline: "4px",
                   }),
                   multiValueRemove: (provided) => ({
                     ...provided,
-                    color: "white", // Close icon color
+                    color: "#2c398f", // Close icon color
                     cursor: "pointer",
                     padding: "0px",
                     marginBlock: "5px",
                     ":hover": {
                       backgroundColor: "#9ea4cf", // Hover effect for remove button
-                      color: "#fff", // Text color on hover
+                      color: "#2c398f", // Text color on hover
                       padding: "0px ",
                     },
                   }),
