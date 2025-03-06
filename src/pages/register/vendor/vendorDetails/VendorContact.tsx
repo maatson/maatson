@@ -332,7 +332,7 @@ const VendorContact: React.FC = () => {
         <div className="bg-grey-ab p-1 rounded-xs cursor-pointer">
           <DownloadIcon size={16} color="#FDFDFD" />
         </div>
-        <div className="bg-error-50 p-1 rounded-xs cursor-pointer">
+        <div className="bg-error-50 p-1 rounded-xs cursor-pointer ">
           <DeleteIcon size={16} color="#810001" />
         </div>
       </div>
