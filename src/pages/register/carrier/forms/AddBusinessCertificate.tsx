@@ -1,8 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../components/groupField/GroupField";
-import { DocumentIcon } from "../../../components/icons/Icons";
-import FileUpload from "../../../components/fileUpload/FileUpload";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GroupField from "../../../../components/groupField/GroupField";
+import FileUpload from "../../../../components/fileUpload/FileUpload";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 
 interface AddBusinessCertificateProps {
   onClose: () => void; // Function to close the popup
