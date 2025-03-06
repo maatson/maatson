@@ -5,6 +5,7 @@ import {
   AccountDetailIcon,
   BusinessIcon,
   CalenderIcon,
+  CategoryIcon,
   CodeIcon,
   CompanyIcon,
   DepartmentIcon,
@@ -241,12 +242,29 @@ const CarrierRegisterForm: React.FC = () => {
                   />
                 </div>
               </div>
-              <div className="flex flex-col gap-3">
-                <p className="text-lg text-grey-ab-400">Services*</p>
-                <div className="max-w-[816px] w-full flex items-center justify-center border rounded-sm shadow-lg h-[208px]">
-                  Will Execute Soon..
-                </div>
-              </div>
+              <GroupField
+                label={"Services*"}
+                type={"creatable"}
+                placeholder={""}
+                name={""}
+                value={""}
+                onChange={function (
+                  e: React.ChangeEvent<
+                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+                  >
+                ): void {
+                  console.log(e.target.value);
+                }}
+                error={false}
+                isMulti
+                errorMessage={""}
+                leftIcon={<CategoryIcon color="#2C398F"/>}
+                options={[
+                  { label: "hello", value: "hello" },
+                  { label: "bye", value: "bye" },
+                ]}
+                parentStyle="max-w-[816px] w-full"
+              />
             </div>
           </div>
 
@@ -395,20 +413,25 @@ const CarrierRegisterForm: React.FC = () => {
             <div className="flex gap-4">
               <GroupField
                 label={"Regions Served*"}
-                type={"text"}
+                type={"creatable"}
                 placeholder={""}
                 name={""}
                 value={""}
                 onChange={function (
-                  e: ChangeEvent<
+                  e: React.ChangeEvent<
                     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
                   >
                 ): void {
-                  throw new Error("Function not implemented.");
+                  console.log(e.target.value);
                 }}
                 error={false}
+                isMulti
                 errorMessage={""}
                 leftIcon={<GlobalIcon color="#2C398F" />}
+                options={[
+                  { label: "hello", value: "hello" },
+                  { label: "bye", value: "bye" },
+                ]}
                 parentStyle="max-w-[400px] w-full"
               />
               <GroupField

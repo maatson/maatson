@@ -16,6 +16,10 @@ import CustomPagination from "../../../components/pagination/CustomPagination";
 import CustomTable from "../../../components/table/CustomTable";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import GreyButton from "../../../components/buttons/GreyButton";
+import AddBusinessCertificate from "./forms/AddBusinessCertificate";
+import AddTaxCertificate from "./forms/AddTaxCertificate";
+import AddOthersCertificate from "./forms/AddOtherCertificate";
+import AddContactPerson from "./forms/AddContactPerson";
 
 interface ContactRowData {
   id: string | number;
@@ -88,6 +92,31 @@ const columns: any[] = [
 ];
 
 const CarrierContactInformation: React.FC = () => {
+  const [isAddContactPersonOpen, setIsAddContactPersonOpen] = useState(false);
+  const openAddContactPerson = () => setIsAddContactPersonOpen(true);
+  const closeAddContactPerson = () => setIsAddContactPersonOpen(false);
+
+  // business certification
+  const [isAddBusinessCertificateOpen, setIsAddBusinessCertificateOpen] =
+    useState(false);
+  const openAddBusinessCertificate = () =>
+    setIsAddBusinessCertificateOpen(true);
+  const closeAddBusinessCertificate = () =>
+    setIsAddBusinessCertificateOpen(false);
+
+  // tax certification
+  const [isAddTaxCertificateOpen, setIsAddTaxCertificateOpen] = useState(false);
+  const openAddTaxCertificate = () => setIsAddTaxCertificateOpen(true);
+  const closeAddTaxCertificate = () => setIsAddTaxCertificateOpen(false);
+
+  // other certification
+  const [isAddOtherCertificateOpen, setIsAddOtherCertificateOpen] =
+    useState(false);
+  const openAddOtherCertificate = () => setIsAddOtherCertificateOpen(true);
+  const closeAddOtherCertificate = () => setIsAddOtherCertificateOpen(false);
+
+  // tables
+  // table 1 - carrier information
   const [contactCurrentPage, setContactCurrentPage] = useState<number>(1);
   const [contactRows, setContactRows] = useState<ContactRowData[]>([]);
   const [contactItemsPerPage, setContactItemsPerPage] = React.useState(5);
@@ -449,7 +478,7 @@ const CarrierContactInformation: React.FC = () => {
             <p className="text-lg font-semibold text-grey-ab-900">
               Carrier Information
             </p>
-            <div>
+            <div onClick={openAddContactPerson}>
               <PrimaryButton
                 label={"Add Contact"}
                 size={"l"}
@@ -591,7 +620,7 @@ const CarrierContactInformation: React.FC = () => {
                   parentStyle="w-[30%]"
                 />
               </div>
-              <div>
+              <div onClick={openAddBusinessCertificate}>
                 <GreyButton
                   label={"Add Document"}
                   size={"m"}
@@ -667,7 +696,7 @@ const CarrierContactInformation: React.FC = () => {
                   parentStyle="w-[30%]"
                 />
               </div>
-              <div>
+              <div onClick={openAddTaxCertificate}>
                 <GreyButton
                   label={"Add Document"}
                   size={"m"}
@@ -761,7 +790,7 @@ const CarrierContactInformation: React.FC = () => {
                 parentStyle="w-[15%]"
               />
             </div>
-            <div>
+            <div onClick={openAddOtherCertificate}>
               <GreyButton
                 label={"Add Document"}
                 size={"m"}
@@ -807,6 +836,34 @@ const CarrierContactInformation: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* ContactPersonPopup  */}
+      {isAddContactPersonOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+          <AddContactPerson onClose={closeAddContactPerson} />
+        </div>
+      )}
+
+      {/* BusinessCertificatePopup  */}
+      {isAddBusinessCertificateOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+          <AddBusinessCertificate onClose={closeAddBusinessCertificate} />
+        </div>
+      )}
+
+      {/* TaxCertificatePopup  */}
+      {isAddTaxCertificateOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+          <AddTaxCertificate onClose={closeAddTaxCertificate} />
+        </div>
+      )}
+
+      {/* OtherCertificatePopup  */}
+      {isAddOtherCertificateOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+          <AddOthersCertificate onClose={closeAddOtherCertificate} />
+        </div>
+      )}
     </>
   );
 };
