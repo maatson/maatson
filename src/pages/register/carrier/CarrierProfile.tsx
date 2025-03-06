@@ -16,6 +16,7 @@ import SecondaryChip from "../../../components/chips/SecondaryChip";
 import PrimaryChip from "../../../components/chips/PrimaryChip";
 import BlackChip from "../../../components/chips/BlackChip";
 import BlueChip from "../../../components/chips/BlueChip";
+import ProfileBoxLayout from "../layouts/ProfileBoxLayout";
 
 const CarrierProfile: React.FC = () => {
   return (
@@ -24,8 +25,7 @@ const CarrierProfile: React.FC = () => {
         {/* top  */}
         <div className="flex gap-4">
           {/* left */}
-          <div className="rounded-xs p-4 flex flex-col gap-4 bg-grey-aw-50 max-w-[275px]">
-            {/* <div className="rounded-xs p-4 flex flex-col gap-4 bg-grey-aw-50 max-w-sm basis-[26%]"> */}
+          <div className="rounded-xs p-4 flex flex-col gap-4 bg-grey-aw-50 max-w-sm basis-1/3">
             <div className="flex flex-col gap-4">
               <div className="rounded-sm py-7 px-14 bg-grey-100 flex items-center justify-center">
                 <img src={CompanyLogo} alt="companylogo" className="" />
@@ -65,35 +65,19 @@ const CarrierProfile: React.FC = () => {
 
             <div className="border border-grey-200"></div>
 
-            <div className="flex flex-col gap-2 text-grey-ab-600">
-              <p className="text-grey-ab-300">Carrier Code</p>
-              <p>MSC-001</p>
-            </div>
+            <ProfileBoxLayout title={"Carrier Code"} value={"MSC-001"} />
+            <ProfileBoxLayout title={"Company Email"} value={"info@msc.com"} />
+            <ProfileBoxLayout
+              title={"Company Phone Number"}
+              value={"+41 22 703 8888"}
+            />
+            <ProfileBoxLayout
+              title={"Company Address"}
+              value={"Chemin Rieu 12, 1208 Geneva, Switzerland"}
+            />
 
-            <div className="flex flex-col gap-2 text-grey-ab-600">
-              <p className="text-grey-ab-300">Company Email</p>
-              <p>info@msc.com</p>
-            </div>
-
-            <div className="flex flex-col gap-2 text-grey-ab-600">
-              <p className="text-grey-ab-300">Company Phone Number</p>
-              <p>+41 22 703 8888</p>
-            </div>
-
-            <div className="flex flex-col gap-2 text-grey-ab-600">
-              <p className="text-grey-ab-300">Company Address</p>
-              <p>Chemin Rieu 12, 1208 Geneva, Switzerland</p>
-            </div>
-
-            <div className="flex flex-col gap-2 text-grey-ab-600">
-              <p className="text-grey-ab-300">Website</p>
-              <p>www.msc.com</p>
-            </div>
-
-            <div className="flex flex-col gap-2 text-grey-ab-600">
-              <p className="text-grey-ab-300">Operational Since</p>
-              <p>2000</p>
-            </div>
+            <ProfileBoxLayout title={"Website"} value={"www.msc.com"} />
+            <ProfileBoxLayout title={"Operational Since"} value={"2000"} />
 
             <div className="rounded-sm p-3 flex flex-col gap-3 bg-grey-200">
               <p className="text-sm text-grey-ab-400">Mode of Transport*</p>
@@ -119,7 +103,7 @@ const CarrierProfile: React.FC = () => {
           </div>
 
           {/* right */}
-          <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col gap-4  flex-grow w-2/3">
             {/* service */}
             <div className="bg-grey-aw-50 rounded-xs shadow-lg ">
               <div className="rounded-t-xs border-b border-b-grey-ab-100 py-3 px-4">
@@ -236,12 +220,14 @@ const CarrierProfile: React.FC = () => {
 
                 <div className="rounded-b-xs py-3 px-4 flex flex-col gap-3">
                   <div className="flex flex-col gap-3 ">
-                    <p className="text-grey-ab-300">Tax Identification Number (TIN) </p>
+                    <p className="text-grey-ab-300">
+                      Tax Identification Number (TIN){" "}
+                    </p>
                     <p className="text-grey-ab-600">12345678901</p>
                   </div>
 
                   <div className="flex flex-col gap-3 ">
-                    <p className="text-grey-ab-300">Payment Terms	 </p>
+                    <p className="text-grey-ab-300">Payment Terms </p>
                     <div className="flex gap-2 flex-wrap">
                       <BlueChip label={"IATA"} size={"m"} variant={"fill"} />
                     </div>
@@ -249,7 +235,7 @@ const CarrierProfile: React.FC = () => {
 
                   <div className="flex flex-col gap-3 ">
                     <p className="text-grey-ab-300">
-                    Tax Compliance Certificate
+                      Tax Compliance Certificate
                     </p>
                     <div className="rounded-xs border p-2 flex gap-3 items-center w-[250px] bg-primary-50 border-grey-ab-100">
                       <DocumentIcon color="#2C398F" />
@@ -273,7 +259,9 @@ const CarrierProfile: React.FC = () => {
         </div>
 
         {/* conversation */}
-        <div className=" bg-grey-aw-50 rounded-xs shadow-lg flex justify-center items-center h-[500px] w-full">Chat Conversation will execute after backend work</div>
+        <div className=" bg-grey-aw-50 rounded-xs shadow-lg flex justify-center items-center h-[500px] w-full">
+          Chat Conversation will execute after backend work
+        </div>
       </div>
     </>
   );

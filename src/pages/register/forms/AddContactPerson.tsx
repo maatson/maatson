@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
+import GroupField from "../../../components/groupField/GroupField";
 import {
   AccountDetailIcon,
   CategoryIcon,
   EmailIcon,
   PhoneIcon,
-} from "../../../../components/icons/Icons";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+} from "../../../components/icons/Icons";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
 interface AddContactPersonProps {
   onClose: () => void; // Function to close the popup

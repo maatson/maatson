@@ -1,13 +1,15 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
-import FileUpload from "../../../../components/fileUpload/FileUpload";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import GroupField from "../../../components/groupField/GroupField";
+import FileUpload from "../../../components/fileUpload/FileUpload";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
-interface AddTaxCertificateProps {
+interface AddBusinessCertificateProps {
   onClose: () => void; // Function to close the popup
 }
 
-const AddTaxCertificate: React.FC<AddTaxCertificateProps> = ({ onClose }) => {
+const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
+  onClose,
+}) => {
   const [data, setData] = useState({
     branch: "",
     fileName: "",
@@ -50,7 +52,7 @@ const AddTaxCertificate: React.FC<AddTaxCertificateProps> = ({ onClose }) => {
     <>
       <div className="flex flex-col gap-6 bg-grey-aw-50 shadow-lg rounded-sm max-w-[448px]">
         <div className="border-b border-b-grey-200 p-4 rounded-t-xs font-semibold text-lg text-gry-ab-800">
-          Add Tax compliance certificate
+          Add Business Registration Certificates
         </div>
         {/* documents */}
         <div className="px-6 flex flex-col gap-4">
@@ -66,7 +68,7 @@ const AddTaxCertificate: React.FC<AddTaxCertificateProps> = ({ onClose }) => {
           />
           <FileUpload
             onFileChange={handleFileChange}
-            label={"Tax compliance certificate"}
+            label={"Business Registration Certificates"}
             fileName={data.fileName}
           />
         </div>
@@ -94,4 +96,4 @@ const AddTaxCertificate: React.FC<AddTaxCertificateProps> = ({ onClose }) => {
   );
 };
 
-export default AddTaxCertificate;
+export default AddBusinessCertificate;

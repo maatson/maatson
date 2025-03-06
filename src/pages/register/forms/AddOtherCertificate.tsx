@@ -1,16 +1,18 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
-import FileUpload from "../../../../components/fileUpload/FileUpload";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import { DocumentIcon } from "../../../components/icons/Icons";
+import FileUpload from "../../../components/fileUpload/FileUpload";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GroupField from "../../../components/groupField/GroupField";
 
-interface AddBusinessCertificateProps {
+interface AddOthersCertificateProps {
   onClose: () => void; // Function to close the popup
 }
 
-const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
+const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
   onClose,
 }) => {
   const [data, setData] = useState({
+    certificateName: "",
     branch: "",
     fileName: "",
     file: null as File | null,
@@ -33,7 +35,7 @@ const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
   };
 
   const handleCancel = () => {
-    setData({ branch: "", fileName: "", file: null }); // Reset form
+    setData({ certificateName: "", branch: "", fileName: "", file: null }); // Reset form
     onClose(); // Close popup
   };
 
@@ -42,6 +44,7 @@ const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
 
     // Reset all fields
     setData({
+      certificateName: "",
       branch: "",
       fileName: "",
       file: null,
@@ -52,10 +55,21 @@ const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
     <>
       <div className="flex flex-col gap-6 bg-grey-aw-50 shadow-lg rounded-sm max-w-[448px]">
         <div className="border-b border-b-grey-200 p-4 rounded-t-xs font-semibold text-lg text-gry-ab-800">
-          Add Business Registration Certificates
+          Other Certificates
         </div>
         {/* documents */}
         <div className="px-6 flex flex-col gap-4">
+          <GroupField
+            label={"Certificate Name"}
+            type={""}
+            placeholder={"Enter Certificate Name"}
+            name={"certificateName"}
+            value={data.certificateName}
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            leftIcon={<DocumentIcon color="#2C398F" />}
+          />
           <GroupField
             label={"Branch"}
             type={"select"}
@@ -68,7 +82,7 @@ const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
           />
           <FileUpload
             onFileChange={handleFileChange}
-            label={"Business Registration Certificates"}
+            label={"Document*"}
             fileName={data.fileName}
           />
         </div>
@@ -96,4 +110,4 @@ const AddBusinessCertificate: React.FC<AddBusinessCertificateProps> = ({
   );
 };
 
-export default AddBusinessCertificate;
+export default AddOthersCertificate;
