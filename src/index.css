@@ -54,6 +54,15 @@ body {
   .xs-3 {
     @apply text-3xs leading-[120%];
   }
+  .custom-scrollbar {
+    @apply [&::-webkit-scrollbar]:w-2
+    [&::-webkit-scrollbar]:h-2
+    [&::-webkit-scrollbar-track]:rounded
+    [&::-webkit-scrollbar-track]:bg-grey-200
+    [&::-webkit-scrollbar-thumb]:rounded 
+    [&::-webkit-scrollbar-thumb]:bg-primary-400 ;
+  }
+ 
 }
 
 /* @layer utilities {

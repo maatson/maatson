@@ -40,7 +40,7 @@ const SideBar: React.FC = () => {
     // Set the active item based on the current route
     sideBarItems.forEach((item, index) => {
       item.children.forEach((child) => {
-        if (child.link === location.pathname) {
+        if (location.pathname.startsWith(child.link)) {
           setActiveItem(index); // Set the active item based on the current route
           setOpenItems((prevState) => ({
             ...prevState,
@@ -91,7 +91,11 @@ const SideBar: React.FC = () => {
         leftIcon: <UserIcon />,
         label: "Registration",
         isOpen: openItems[1] || false,
-        children: [],
+        children: [
+          { link: "/registration-user", label: "User Registration" },
+          { link: "/registration-carrier", label: "Carrier Registration" },
+          { link: "/registration-vendor", label: "Vendor Registration" },
+        ],
         onClick: () => handleItemClick(1),
       },
       {
@@ -148,10 +152,10 @@ const SideBar: React.FC = () => {
         label: "HRM",
         isOpen: openItems[9] || false,
         children: [
-          { label: "Employees", link: "/reset-password" },
+          { label: "Employees", link: "/hrm/employees" },
           { label: "Attendance", link: "/hrm/attendance" },
-          { label: "Leave Form", link: "/reset-password" },
-          { label: "Requirement", link: "/reset-password" },
+          { label: "Leave Form", link: "/hrm/leave-form" },
+          { label: "Requirement", link: "/hrm/requirement" },
         ],
         onClick: () => handleItemClick(9),
       },
@@ -160,14 +164,14 @@ const SideBar: React.FC = () => {
         label: "Testimonials",
         isOpen: openItems[10] || false,
         children: [],
-        onClick: () => handleItemClick(10),
+        onClick: () => handleItemClick(10, "/testimonials"),
       },
     ],
     [openItems, handleItemClick]
   );
 
   return (
-    <div className="text-grey-50 text-sm font-semibold px-5 py-2 flex flex-col gap-2 overflow-scroll h-full pb-32">
+    <div className="text-grey-50 text-sm font-semibold px-5 py-2 flex flex-col gap-2 overflow-scroll h-full pb-32 ">
       {sideBarItems.map((item, index) => (
         <SideBarItem
           key={index}
@@ -193,11 +197,13 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
   isActive,
 }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 cursor-pointer ">
       <div
-        className={`flex items-center rounded justify-between px-4 py-2 transition-all duration-700 ${
+        className={`flex items-center rounded justify-between px-4 py-2 transition-all duration-300    ${
           isOpen ? "bg-grey-50 text-primary" : ""
-        }  ${isActive ? "bg-blue-500 " : ""}`}
+        }  ${
+          isActive ? "bg-blue-500 " : "hover:bg-white hover:bg-opacity-30 "
+        }`}
         onClick={onClick}
       >
         <div className={`flex items-center justify-start gap-4 w-full`}>
@@ -224,7 +230,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
               to={child.link}
               key={index}
               className={`py-2 px-6 rounded flex items-center gap-2 ${
-                location.pathname === child.link
+                location.pathname.startsWith(child.link)
                   ? "bg-[#ffffff] bg-opacity-40 "
                   : ""
               }`}

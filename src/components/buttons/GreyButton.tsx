@@ -16,8 +16,7 @@ const GreyButton: React.FC<ButtonProps> = ({
       <button
         disabled={disabled}
         className={`
-          outline-none  rounded-xs font-semibold disabled:cursor-not-allowed flex items-center justify-center
-          ${variant?.toLocaleLowerCase() === "link" ? "" : "shadow-xs"} 
+          outline-none rounded-xs font-semibold disabled:cursor-not-allowed flex items-center justify-center shadow-xs
           ${
             size.toLocaleLowerCase() === "s"
               ? "text-xs px-2 py-1 gap-2"
@@ -29,8 +28,8 @@ const GreyButton: React.FC<ButtonProps> = ({
           }
           ${
             variant?.toLocaleLowerCase() === "secondary"
-              ? "bg-grey-100 text-grey-ab-500 hover:bg-grey-200 active:bg-grey-400 disabled:bg-grey-200 disabled:text-grey-ab-200"
-              : "bg-grey-aw-50 text-grey-ab-400 hover:bg-grey-aw-100 active:bg-grey-aw-300 active:text-grey-ab-500  disabled:bg-grey-100 disabled:text-grey-ab-100"
+              ? "bg-grey-100 text-grey-ab hover:bg-grey-200 hover:text-grey-ab-900 active:bg-grey-400 active:text-grey-ab disabled:bg-grey-200 disabled:text-grey-ab-200"
+              : "bg-grey-aw-50 text-grey-ab-400 border border-grey-ab-100 hover:bg-grey-aw-100 active:bg-grey-aw-300 active:text-grey-ab  disabled:bg-grey-100 disabled:text-grey-ab-100"
           }
           ${style} `}
       >

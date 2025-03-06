@@ -1,35 +1,33 @@
 import React from "react";
-import EmployeeList from "../../../components/hrm/employees/EmployeeList";
+import PageHeader from "../../../components/header/PageHeader";
+import { Outlet, useLocation } from "react-router-dom";
 
-const EmployeeListPage: React.FC = () => {
+const Employees: React.FC = () => {
+  const location = useLocation();
+
   return (
     <>
-      {/* Header */}
-      <div className="h-[68px] w-full bg-grey-aw-50"></div>
-
-      {/* Main layout */}
-      <div className="w-full flex">
-        {/* SideBar */}
-        <div className="max-w-[260px] w-full bg-primary-gradient-4 ">
-        </div>
-
-        <div className="w-full bg-primary-50 flex flex-col justify-between gap-10">
-          <div className="flex flex-col gap-4 pt-4 pl-4 pr-5">
-            <div className="flex justify-between py-2 px-3">
-              <h5 className="h5 font-bold text-grey-ab-900">Employees</h5>
-              <div className="flex gap-1">{/* Breadcrumbs here */}</div> 
-            </div>
-
-            {/* EmployeeList Component */}
-            <EmployeeList />
-          </div>
-
-          {/* Footer */}
-          <div className="py-1 bg-primary-100 text-center">Footer</div>
-        </div>
-      </div>
+      <PageHeader
+        breadCrums={[
+          "Home",
+          "HRM",
+          location.pathname === "/hrm/employees"
+            ? "Employee"
+            : location.pathname === "/hrm/employees/employee-profile"
+            ? ["Employees", "Profile"]
+            : ["Employees", "Add Employee"]
+        ].flat()}
+        heading={
+          location.pathname === "/hrm/employees/employee-profile"
+            ? "Profile"
+            : location.pathname === "/hrm/employees/employee-form"
+            ? "Add Employee"
+            : "Employees"
+        }
+      />
+      <Outlet />
     </>
   );
 };
 
-export default EmployeeListPage;
+export default Employees;
