@@ -16,10 +16,10 @@ import CustomPagination from "../../../components/pagination/CustomPagination";
 import CustomTable from "../../../components/table/CustomTable";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import GreyButton from "../../../components/buttons/GreyButton";
-import AddBusinessCertificate from "./forms/AddBusinessCertificate";
-import AddTaxCertificate from "./forms/AddTaxCertificate";
-import AddOthersCertificate from "./forms/AddOtherCertificate";
-import AddContactPerson from "./forms/AddContactPerson";
+import AddBusinessCertificate from "../forms/AddBusinessCertificate";
+import AddTaxCertificate from "../forms/AddTaxCertificate";
+import AddOthersCertificate from "../forms/AddOtherCertificate";
+import AddContactPerson from "../forms/AddContactPerson";
 
 interface ContactRowData {
   id: string | number;
@@ -29,6 +29,31 @@ interface ContactRowData {
   mobileNumber: string;
   alternativeContact: string;
   countryOfOperation: React.ReactNode;
+  action: React.ReactNode;
+}
+
+// business table
+interface BusinessRowData {
+  id: string | number;
+  branch: string;
+  document: React.ReactNode;
+  action: React.ReactNode;
+}
+
+// tax table
+interface TaxRowData {
+  id: string | number;
+  branch: string;
+  document: React.ReactNode;
+  action: React.ReactNode;
+}
+
+// other certificate table
+interface RowData {
+  id: string | number;
+  certificateName: string;
+  branch: string;
+  document: React.ReactNode;
   action: React.ReactNode;
 }
 
@@ -47,42 +72,17 @@ const contactColumns: any[] = [
   { id: "action", label: "Action", minWidth: 100, align: "center" },
 ];
 
-// business table
-interface BusinessRowData {
-  id: string | number;
-  branch: string;
-  document: React.ReactNode;
-  action: React.ReactNode;
-}
-
 const businessColumns: any[] = [
   { id: "branch", label: "Branch" },
   { id: "document", label: "Document", align: "center" },
   { id: "action", label: "Action", align: "center" },
 ];
 
-// tax table
-interface TaxRowData {
-  id: string | number;
-  branch: string;
-  document: React.ReactNode;
-  action: React.ReactNode;
-}
-
 const taxColumns: any[] = [
   { id: "branch", label: "Branch" },
   { id: "document", label: "Document", align: "center" },
   { id: "action", label: "Action", align: "center" },
 ];
-
-// other certificate table
-interface RowData {
-  id: string | number;
-  certificateName: string;
-  branch: string;
-  document: React.ReactNode;
-  action: React.ReactNode;
-}
 
 const columns: any[] = [
   { id: "certificateName", label: "Certificate Name" },
@@ -92,10 +92,25 @@ const columns: any[] = [
 ];
 
 const CarrierContactInformation: React.FC = () => {
+  const [contactCurrentPage, setContactCurrentPage] = useState<number>(1);
+  const [contactRows, setContactRows] = useState<ContactRowData[]>([]);
+  const [contactItemsPerPage, setContactItemsPerPage] = React.useState(5);
+  const [contactSelectedRows, setContactSelectedRows] = useState<
+    (string | number)[]
+  >([]); // Track selected row ids
+  const [businessCurrentPage, setBusinessCurrentPage] = useState<number>(1);
+  const [businessRows, setBusinessRows] = useState<BusinessRowData[]>([]);
+  const [businessItemsPerPage, setBusinessItemsPerPage] = React.useState(5);
+  const [taxCurrentPage, setTaxCurrentPage] = useState<number>(1);
+  const [taxRows, setTaxRows] = useState<TaxRowData[]>([]);
+  const [taxItemsPerPage, setTaxItemsPerPage] = React.useState(5);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [rows, setRows] = useState<RowData[]>([]);
+  const [itemsPerPage, setItemsPerPage] = React.useState(5);
+  // contact person
   const [isAddContactPersonOpen, setIsAddContactPersonOpen] = useState(false);
   const openAddContactPerson = () => setIsAddContactPersonOpen(true);
   const closeAddContactPerson = () => setIsAddContactPersonOpen(false);
-
   // business certification
   const [isAddBusinessCertificateOpen, setIsAddBusinessCertificateOpen] =
     useState(false);
@@ -103,12 +118,10 @@ const CarrierContactInformation: React.FC = () => {
     setIsAddBusinessCertificateOpen(true);
   const closeAddBusinessCertificate = () =>
     setIsAddBusinessCertificateOpen(false);
-
   // tax certification
   const [isAddTaxCertificateOpen, setIsAddTaxCertificateOpen] = useState(false);
   const openAddTaxCertificate = () => setIsAddTaxCertificateOpen(true);
   const closeAddTaxCertificate = () => setIsAddTaxCertificateOpen(false);
-
   // other certification
   const [isAddOtherCertificateOpen, setIsAddOtherCertificateOpen] =
     useState(false);
@@ -117,13 +130,6 @@ const CarrierContactInformation: React.FC = () => {
 
   // tables
   // table 1 - carrier information
-  const [contactCurrentPage, setContactCurrentPage] = useState<number>(1);
-  const [contactRows, setContactRows] = useState<ContactRowData[]>([]);
-  const [contactItemsPerPage, setContactItemsPerPage] = React.useState(5);
-  const [contactSelectedRows, setContactSelectedRows] = useState<
-    (string | number)[]
-  >([]); // Track selected row ids
-
   const handleContactCheckedRowsChange = (
     newCheckedRows: (string | number)[]
   ) => {
@@ -144,7 +150,6 @@ const CarrierContactInformation: React.FC = () => {
     setContactCurrentPage(page);
   };
 
-  // table
   const createContactData = (items: any) => {
     const { id, email, countryOfOperation } = items;
     const countryOfOperations = (
@@ -221,10 +226,6 @@ const CarrierContactInformation: React.FC = () => {
   }, [fetchContactData]);
 
   // Table -2 business registration
-  const [businessCurrentPage, setBusinessCurrentPage] = useState<number>(1);
-  const [businessRows, setBusinessRows] = useState<BusinessRowData[]>([]);
-  const [businessItemsPerPage, setBusinessItemsPerPage] = React.useState(5);
-
   const handleBusinessItemsPerPageChange = useCallback(
     (event: SelectChangeEvent<number>) => {
       setBusinessItemsPerPage(Number(event.target.value));
@@ -302,10 +303,6 @@ const CarrierContactInformation: React.FC = () => {
   }, [fetchBusinessData]); // Only re-run fetchData if fetchData changes
 
   // Table -3 tax registration
-  const [taxCurrentPage, setTaxCurrentPage] = useState<number>(1);
-  const [taxRows, setTaxRows] = useState<TaxRowData[]>([]);
-  const [taxItemsPerPage, setTaxItemsPerPage] = React.useState(5);
-
   const handleTaxItemsPerPageChange = useCallback(
     (event: SelectChangeEvent<number>) => {
       setTaxItemsPerPage(Number(event.target.value));
@@ -383,10 +380,6 @@ const CarrierContactInformation: React.FC = () => {
   }, [fetchTaxData]); // Only re-run fetchData if fetchData changes
 
   // Table -4 others registration
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rows, setRows] = useState<RowData[]>([]);
-  const [itemsPerPage, setItemsPerPage] = React.useState(5);
-
   const handleItemsPerPageChange = useCallback(
     (event: SelectChangeEvent<number>) => {
       setItemsPerPage(Number(event.target.value));

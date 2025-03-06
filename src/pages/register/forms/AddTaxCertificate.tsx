@@ -1,18 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
-import { DocumentIcon } from "../../../../components/icons/Icons";
-import FileUpload from "../../../../components/fileUpload/FileUpload";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import GroupField from "../../../../components/groupField/GroupField";
+import GroupField from "../../../components/groupField/GroupField";
+import FileUpload from "../../../components/fileUpload/FileUpload";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
-interface AddOthersCertificateProps {
+interface AddTaxCertificateProps {
   onClose: () => void; // Function to close the popup
 }
 
-const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
-  onClose,
-}) => {
+const AddTaxCertificate: React.FC<AddTaxCertificateProps> = ({ onClose }) => {
   const [data, setData] = useState({
-    certificateName: "",
     branch: "",
     fileName: "",
     file: null as File | null,
@@ -35,7 +31,7 @@ const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
   };
 
   const handleCancel = () => {
-    setData({ certificateName: "", branch: "", fileName: "", file: null }); // Reset form
+    setData({ branch: "", fileName: "", file: null }); // Reset form
     onClose(); // Close popup
   };
 
@@ -44,7 +40,6 @@ const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
 
     // Reset all fields
     setData({
-      certificateName: "",
       branch: "",
       fileName: "",
       file: null,
@@ -55,21 +50,10 @@ const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
     <>
       <div className="flex flex-col gap-6 bg-grey-aw-50 shadow-lg rounded-sm max-w-[448px]">
         <div className="border-b border-b-grey-200 p-4 rounded-t-xs font-semibold text-lg text-gry-ab-800">
-          Other Certificates
+          Add Tax compliance certificate
         </div>
         {/* documents */}
         <div className="px-6 flex flex-col gap-4">
-          <GroupField
-            label={"Certificate Name"}
-            type={""}
-            placeholder={"Enter Certificate Name"}
-            name={"certificateName"}
-            value={data.certificateName}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            leftIcon={<DocumentIcon color="#2C398F" />}
-          />
           <GroupField
             label={"Branch"}
             type={"select"}
@@ -82,7 +66,7 @@ const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
           />
           <FileUpload
             onFileChange={handleFileChange}
-            label={"Document*"}
+            label={"Tax compliance certificate"}
             fileName={data.fileName}
           />
         </div>
@@ -110,4 +94,4 @@ const AddOthersCertificate: React.FC<AddOthersCertificateProps> = ({
   );
 };
 
-export default AddOthersCertificate;
+export default AddTaxCertificate;

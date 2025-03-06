@@ -27,6 +27,7 @@ import { Link } from "react-router-dom";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import { MenuItem, Select } from "@mui/material";
 import CustomPagination from "../../../components/pagination/CustomPagination";
+import ProfileBoxLayout from "../layouts/ProfileBoxLayout";
 
 interface ContactPersonRowData {
   id: string | number;
@@ -534,20 +535,3 @@ const UserDetails: React.FC = () => {
 };
 
 export default UserDetails;
-
-const ProfileBoxLayout: React.FC<{
-  title: string;
-  value: string;
-  style?: string;
-  titleStyle?: string;
-  valueStyle?: string;
-}> = ({ title, value, style, titleStyle, valueStyle }) => {
-  return (
-    <>
-      <div className={`flex flex-col gap-2 break-before-all ${style}`}>
-        <p className={`text-grey-ab-300 ${titleStyle}`}>{title}</p>
-        <p className={`text-grey-ab-800 ${valueStyle}`}>{value}</p>
-      </div>
-    </>
-  );
-};

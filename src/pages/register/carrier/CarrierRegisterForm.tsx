@@ -75,8 +75,8 @@ const CarrierRegisterForm: React.FC = () => {
   const handleRegister = () => {};
   return (
     <>
-      <div className="py-4 px-3 rounded-xs flex flex-col gap-8 bg-grey-aw-50 shadow-lg">
-        <div className="py-4 px-3 text-lg font-semibold text-grey-ab-900">
+      <div className="py-4 px-3 rounded-xs flex flex-col gap-6 bg-grey-aw-50 shadow-lg">
+        <div className="py-2 px-3 h5 font-semibold text-grey-ab-900">
           Registration
         </div>
         {/* form section */}
@@ -192,7 +192,7 @@ const CarrierRegisterForm: React.FC = () => {
                   </div>
                   <div className="flex gap-[18px]">
                     <GroupField
-                      label={"Building/Door Number"}
+                      label={"Building/Door Number*"}
                       type={"text"}
                       placeholder={"Enter Building/Door Num.."}
                       name={"doorNo"}
@@ -283,7 +283,7 @@ const CarrierRegisterForm: React.FC = () => {
             <div className="flex flex-col gap-5">
               <div className="flex gap-4">
                 <GroupField
-                  label={"Primary Contact Name"}
+                  label={"Primary Contact Name*"}
                   type={"text"}
                   placeholder={"Enter Name"}
                   name={""}
@@ -518,7 +518,7 @@ const CarrierRegisterForm: React.FC = () => {
               {/* iso certification */}
               <div className="flex flex-col gap-2">
                 <p className="font-semibold text-grey-ab">
-                  Regulatory Approvals*
+                  ISO Certifications*
                 </p>
                 <div className="flex gap-8 px-4">
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
