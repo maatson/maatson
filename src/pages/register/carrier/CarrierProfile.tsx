@@ -192,12 +192,16 @@ const CarrierProfile: React.FC = () => {
                     <p className="text-grey-ab-300">Regulatory Approvals </p>
                     <div className="flex gap-2 flex-wrap">
                       <BlueChip label={"IATA"} size={"m"} variant={"fill"} />
+                      <BlueChip label={"IATA"} size={"m"} variant={"fill"} />
+                      <BlueChip label={"IATA"} size={"m"} variant={"fill"} />
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-3 ">
                     <p className="text-grey-ab-300">ISO Certifications </p>
                     <div className="flex gap-2 flex-wrap">
+                      <BlueChip label={"IATA"} size={"m"} variant={"mix"} />
+                      <BlueChip label={"IATA"} size={"m"} variant={"mix"} />
                       <BlueChip label={"IATA"} size={"m"} variant={"mix"} />
                     </div>
                   </div>
@@ -208,14 +212,14 @@ const CarrierProfile: React.FC = () => {
                     </p>
                     <div className="rounded-xs border p-2 flex gap-3 items-center w-[250px] bg-primary-50 border-grey-ab-100">
                       <DocumentIcon color="#2C398F" />
-                      <div className="text-grey-ab-800 truncate w-[140px] ">
+                      <div className="text-grey-ab-800 truncate w-[140px] cursor-pointer">
                         Carrier agreement.pdf
                       </div>
                       <div className="flex gap-1">
-                        <div className="rounded-xs p-1 bg-grey-ab">
+                        <div className="rounded-xs p-1 bg-grey-ab cursor-pointer">
                           <DownloadIcon size={16} color="#FDFDFD" />
                         </div>
-                        <div className="p-1">
+                        <div className="p-1 cursor-pointer" >
                           <CrossIcon size={16} color="#121212" />
                         </div>
                       </div>
@@ -273,7 +277,7 @@ const CarrierProfile: React.FC = () => {
         </div>
 
         {/* conversation */}
-        <div className=" bg-grey-aw-50 rounded-xs shadow-lg flex justify-center items-center h-[500px] w-full">Chat Conversation will execute after backend work</div>
+        <div className=" bg-grey-aw-50 rounded-xs shadow-lg flex justify-center items-center h-[500px] w-full">Chat Conversation will develop after backend work</div>
       </div>
     </>
   );
