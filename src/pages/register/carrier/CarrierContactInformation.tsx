@@ -16,10 +16,10 @@ import CustomPagination from "../../../components/pagination/CustomPagination";
 import CustomTable from "../../../components/table/CustomTable";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import GreyButton from "../../../components/buttons/GreyButton";
-import AddBusinessCertificate from "./forms/AddBusinessCertificate";
-import AddTaxCertificate from "./forms/AddTaxCertificate";
-import AddOthersCertificate from "./forms/AddOtherCertificate";
-import AddContactPerson from "./forms/AddContactPerson";
+import AddBusinessCertificate from "../forms/AddBusinessCertificate";
+import AddTaxCertificate from "../forms/AddTaxCertificate";
+import AddOthersCertificate from "../forms/AddOtherCertificate";
+import AddContactPerson from "../forms/AddContactPerson";
 
 interface ContactRowData {
   id: string | number;
