@@ -26,12 +26,20 @@ interface Groupfield {
   isMulti?: boolean;
 }
 
-const CustomDropdownIndicator = () => {
+// const CustomDropdownIndicator = () => {
+//   return (
+//     <div>
+//       <DropDownIcon />
+//     </div>
+//   ); // Empty or custom content here to replace the default dropdown icon
+// };
+
+const CustomDropdownIndicator: React.FC<{ size?: string }> = ({ size }) => {
   return (
     <div>
-      <DropDownIcon />
+      <DropDownIcon size={size === "s" ? "20px" : "24px"} />
     </div>
-  ); // Empty or custom content here to replace the default dropdown icon
+  );
 };
 
 const GroupField: React.FC<Groupfield> = ({
@@ -74,7 +82,7 @@ const GroupField: React.FC<Groupfield> = ({
         )}
         {/* <div> */}
         <div
-          className={`${size === "s" ? "px-3 py-[6px]" : "px-4 py-3 "}
+          className={`${size === "s" ? "px-3 py-[6px] text-xs" : "px-4 py-3 "}
              flex gap-4 items-center border bg-grey-50  rounded-xs shadow-xs justify-between  hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400 ${
                !error ? "border-grey-200 " : "border-error "
              }   ${inputStyle}`}
@@ -96,8 +104,12 @@ const GroupField: React.FC<Groupfield> = ({
                 classNamePrefix="custom-select" // Optional class prefix for styling
                 placeholder={placeholder || "Select an option"} // Placeholder text
                 isSearchable // Enable searching options
+                // components={{
+                //   DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                //   IndicatorSeparator: null,
+                // }}
                 components={{
-                  DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                  DropdownIndicator: () => <CustomDropdownIndicator size={size} />,
                   IndicatorSeparator: null,
                 }}
                 styles={{
@@ -113,7 +125,7 @@ const GroupField: React.FC<Groupfield> = ({
                   }),
                   placeholder: (provided) => ({
                     ...provided,
-                    fontSize: "16px",
+                    // fontSize: "16px",
                     color: "#999999  ",
                   }),
                   menu: (provided) => ({
@@ -151,8 +163,12 @@ const GroupField: React.FC<Groupfield> = ({
                 classNamePrefix="custom-select" // Optional class prefix for styling
                 placeholder={placeholder || "Select an option"} // Placeholder text
                 isSearchable // Enable searching options
+                // components={{
+                //   DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                //   IndicatorSeparator: null,
+                // }}
                 components={{
-                  DropdownIndicator: CustomDropdownIndicator, // Hide the dropdown icon
+                  DropdownIndicator: () => <CustomDropdownIndicator size={size} />,
                   IndicatorSeparator: null,
                 }}
                 styles={{
@@ -168,7 +184,7 @@ const GroupField: React.FC<Groupfield> = ({
                   }),
                   placeholder: (provided) => ({
                     ...provided,
-                    fontSize: "16px",
+                    // fontSize: "16px",
                     color: "#999999  ",
                   }),
                   menu: (provided) => ({
