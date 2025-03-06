@@ -49,10 +49,10 @@ const VendorDetails = lazy(
   () => import("./pages/register/vendor/vendorDetails")
 );
 const VendorProfile = lazy(
-  () => import("./pages/register/vendor/vendorDetails/vendorProfile")
+  () => import("./pages/register/vendor/vendorDetails/VendorProfile")
 );
 const VendorContact = lazy(
-  () => import("./pages/register/vendor/vendorDetails/vendorContact")
+  () => import("./pages/register/vendor/vendorDetails/VendorContact")
 );
 
 // HRM Routes
