@@ -26,6 +26,7 @@ const UserRegisterList = lazy(
   () => import("./pages/register/user/UserRegisterList")
 );
 const AddRegister = lazy(() => import("./pages/register/user/AddRegister"));
+const UserDetails = lazy(() => import("./pages/register/user/UserDetails"));
 
 // carrier
 const CarrierRegister = lazy(() => import("./pages/register/carrier"));
@@ -40,6 +41,18 @@ const CarrierContactInformation = lazy(() => import("./pages/register/carrier/Ca
 const VendorRegister = lazy(() => import("./pages/register/vendor"));
 const VendorRegisterList = lazy(
   () => import("./pages/register/vendor/VendorRegisterList")
+);
+const AddVendorRegister = lazy(
+  () => import("./pages/register/vendor/AddVendorRegister")
+);
+const VendorDetails = lazy(
+  () => import("./pages/register/vendor/vendorDetails")
+);
+const VendorProfile = lazy(
+  () => import("./pages/register/vendor/vendorDetails/vendorProfile")
+);
+const VendorContact = lazy(
+  () => import("./pages/register/vendor/vendorDetails/vendorContact")
 );
 
 // HRM Routes
@@ -101,6 +114,7 @@ const AppRoutes: React.FC = () => {
         <Route path="registration-user" element={<UserRegister />}>
           <Route index element={<UserRegisterList />} />
           <Route path="add" element={<AddRegister />} />
+          <Route path="details" element={<UserDetails />} />
         </Route>
         <Route path="registration-carrier" element={<CarrierRegister />}>
           <Route index element={<CarrierRegisterList />} />
@@ -110,6 +124,11 @@ const AppRoutes: React.FC = () => {
         </Route>
         <Route path="registration-vendor" element={<VendorRegister />}>
           <Route index element={<VendorRegisterList />} />
+          <Route path="add" element={<AddVendorRegister />} />
+          <Route path="details" element={<VendorDetails />}>
+            <Route index element={<VendorProfile />} />
+            <Route path="contact" element={<VendorContact />} />
+          </Route>
         </Route>
         {/* hrm */}
         <Route path="hrm/employees" element={<Employees />}>

@@ -14,11 +14,15 @@ const UserRegister: React.FC = () => {
           "Registration",
           location.pathname === "/registration-user/add"
             ? ["User Registration", "Register Form"]
+            : location.pathname === "/registration-user/details"
+            ? ["User Registration", "User Details"]
             : "User Registration",
         ].flat()}
         heading={
           location.pathname === "/registration-user/add"
             ? "Register"
+            : location.pathname === "/registration-user/details"
+            ? "User Details"
             : "User Registration"
         }
       />

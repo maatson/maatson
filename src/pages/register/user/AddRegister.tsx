@@ -83,7 +83,7 @@ const AddRegister: React.FC = () => {
               <CompanyIcon />
               <p>Company Details</p>
             </div>
-            <div className="border-b"></div>
+            <div className="border-b border-grey-ab-100"></div>
           </div>
           <div className="flex flex-col gap-2">
             <p>Company Logo*</p>
@@ -292,7 +292,7 @@ const AddRegister: React.FC = () => {
               <AccountDetailIcon />
               <p>Personal Details</p>
             </div>
-            <div className="border-b"></div>
+            <div className="border-b "></div>
           </div>
           <div className="flex gap-6 items-center flex-wrap">
             <GroupField
@@ -411,7 +411,7 @@ const AddRegister: React.FC = () => {
               <DocumentIcon />
               <p>Company Document</p>
             </div>
-            <div className="border-b"></div>
+            <div className="border-b border-grey-ab-100"></div>
           </div>
           <div className="max-w-[816px]">
             <FileUpload
@@ -427,7 +427,7 @@ const AddRegister: React.FC = () => {
               <PasswordIcon />
               <p>Password</p>
             </div>
-            <div className="border-b"></div>
+            <div className="border-b border-grey-ab-100"></div>
           </div>
           <div className="flex  gap-3">
             <GroupField

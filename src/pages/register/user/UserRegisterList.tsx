@@ -96,12 +96,15 @@ const UserRegisterList: React.FC = () => {
     // Define your actions or any other custom logic you need for each row
     const actions = (
       <div className="px-2 py-1 gap-2 flex justify-center items-center font-semibold">
-        <BlackButton
-          label={"Profile"}
-          size={"s"}
-          variant={""}
-          rightIcon={<UserIcon size={16} color="#fdfdfd" />}
-        />
+        <Link to={"/registration-user/details"}>
+          {" "}
+          <BlackButton
+            label={"Profile"}
+            size={"s"}
+            variant={""}
+            rightIcon={<UserIcon size={16} color="#fdfdfd" />}
+          />
+        </Link>
       </div>
     );
 
