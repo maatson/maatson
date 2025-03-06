@@ -392,7 +392,9 @@ const UserDetails: React.FC = () => {
                   label={isChangePassword ? "save" : "Change Password"}
                   size={"m"}
                   variant={""}
-                  rightIcon={!isChangePassword && <EditIcon color="#fdfdfd" />}
+                  rightIcon={
+                    !isChangePassword && <EditIcon color="#fdfdfd" size={16} />
+                  }
                 />
               </div>
             </div>
