@@ -54,8 +54,8 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
   return (
     <>
       <div className="flex flex-col gap-6 bg-grey-aw-50 shadow-lg rounded-sm max-w-[448px] w-full max-h-[550px] overflow-auto custom-scrollbar">
-        <div className="border-b border-b-grey-200 p-4 rounded-t-xs font-semibold text-lg text-gry-ab-800">
-          Verification Document
+        <div className="border-b border-b-grey-200 p-4 font-semibold text-lg text-grey-ab-800">
+          Add Contact Person
         </div>
         {/* documents */}
         <div className="px-6 flex flex-col gap-4 ">

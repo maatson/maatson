@@ -27,8 +27,11 @@ const CarrierProfile: React.FC = () => {
           {/* left */}
           <div className="rounded-xs p-4 flex flex-col gap-4 bg-grey-aw-50 max-w-sm basis-1/3">
             <div className="flex flex-col gap-4">
-              <div className="rounded-sm py-7 px-14 bg-grey-100 flex items-center justify-center">
+              <div className="rounded-sm py-7 px-14 bg-grey-100 flex items-center justify-center relative">
                 <img src={CompanyLogo} alt="companylogo" className="" />
+                <div className="absolute top-2 right-2 w-6 h-6 bg-blue-50 rounded flex items-center justify-center z-10 cursor-pointer">
+                  <EditIcon color="#0091FF" size={16} />
+                </div>
               </div>
               <div className="text-center font-semibold text-lg text-grey-ab-800">
                 Mediterranean Shipping Company S.A.
@@ -203,7 +206,7 @@ const CarrierProfile: React.FC = () => {
                         <div className="rounded-xs p-1 bg-grey-ab cursor-pointer">
                           <DownloadIcon size={16} color="#FDFDFD" />
                         </div>
-                        <div className="p-1 cursor-pointer" >
+                        <div className="p-1 cursor-pointer">
                           <CrossIcon size={16} color="#121212" />
                         </div>
                       </div>

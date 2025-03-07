@@ -69,6 +69,7 @@ const SideBar: React.FC = () => {
         }
       }
       newState[index] = !newState[index];
+      // newState[index] = true;
       return newState;
     });
     setActiveItem(index); // Set active item when clicked
