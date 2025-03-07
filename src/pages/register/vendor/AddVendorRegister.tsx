@@ -608,7 +608,7 @@ const AddVendorRegister: React.FC = () => {
             <PrimaryButton label={"Cancel"} size={"xl"} variant={"link"} /> 
           </NavLink>
           <div onClick={handleRegister}>
-            <PrimaryButton label={"Register"} size={"xl"} variant={"primary"} />
+            <PrimaryButton label={"Register"} size={"xl"} variant={"primary"} /> 
           </div>
         </div>
       </div>
