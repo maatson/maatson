@@ -280,7 +280,7 @@ const UserDetails: React.FC = () => {
                   alt="companyLogo"
                   className="object-fit h-full w-full"
                 />
-                <div className="absolute top-4 right-4 w-6 h-6 bg-blue-50 rounded flex items-center justify-center z-10 cursor-pointer">
+                <div className="absolute top-4 right-4 w-6 h-6 bg-blue-50 rounded flex items-center justify-center  cursor-pointer">
                   <EditIcon color="#0091FF" size={16} />
                 </div>
               </div>
