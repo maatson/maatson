@@ -79,7 +79,7 @@ const CarrierRegisterList: React.FC = () => {
 
   // table
   const createData = (items: any) => {
-    const { id, modeOfTransport, operationalSince, countryOfOperation } = items;
+    const { id, modeOfTransport } = items;
     const modeOfTransports =
       modeOfTransport.toLowerCase() === "sea freight" ? (
         <BlueChip label={modeOfTransport} size="m" variant="outline" />
@@ -88,12 +88,6 @@ const CarrierRegisterList: React.FC = () => {
       ) : (
         <SecondaryChip label={modeOfTransport} size="m" variant="outline" />
       );
-    const operationalSinces = (
-      <p className="font-bold text-center">{operationalSince}</p>
-    );
-    const countryOfOperations = (
-      <p className="font-bold text-center">{countryOfOperation}</p>
-    );
 
     const actions = (
       <div className="flex justify-center gap-[10px] py-1 px-2">
@@ -111,8 +105,8 @@ const CarrierRegisterList: React.FC = () => {
       carrierName: items?.carrierName,
       carrierCode: items?.carrierCode,
       modeOfTransport: modeOfTransports,
-      operationalSince: operationalSinces,
-      countryOfOperation: countryOfOperations,
+      operationalSince: items?.operationalSince,
+      countryOfOperation: items?.countryOfOperation,
       primaryContactName: items?.primaryContactName,
       action: actions,
     };
