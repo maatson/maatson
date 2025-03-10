@@ -137,6 +137,18 @@ const AddVendorRegister: React.FC = () => {
                 <div className="flex flex-col gap-5">
                   <div className="flex gap-4">
                     <GroupField
+                      label={"Building/Door Number"}
+                      type={"text"}
+                      placeholder={"Enter Building/Door Num.."}
+                      name={"doorNo"}
+                      value={data.doorNo}
+                      onChange={handleChange}
+                      error={false}
+                      errorMessage={""}
+                      leftIcon={<LocationIcon color="#2C398F" />}
+                      parentStyle="max-w-[400px] w-full"
+                    />
+                    <GroupField
                       label={"Street*"}
                       type={"text"}
                       placeholder={"Enter Street"}
@@ -148,26 +160,14 @@ const AddVendorRegister: React.FC = () => {
                       leftIcon={<LocationIcon color="#2C398F" />}
                       parentStyle="max-w-[400px] w-full"
                     />
+                  </div>
+                  <div className="flex gap-[18px]">
                     <GroupField
                       label={"City*"}
                       type={"text"}
                       placeholder={"Enter City"}
                       name={"city"}
                       value={data.city}
-                      onChange={handleChange}
-                      error={false}
-                      errorMessage={""}
-                      leftIcon={<LocationIcon color="#2C398F" />}
-                      parentStyle="max-w-[400px] w-full"
-                    />
-                  </div>
-                  <div className="flex gap-[18px]">
-                    <GroupField
-                      label={"Building/Door Number"}
-                      type={"text"}
-                      placeholder={"Enter Building/Door Num.."}
-                      name={"doorNo"}
-                      value={data.doorNo}
                       onChange={handleChange}
                       error={false}
                       errorMessage={""}
@@ -406,7 +406,7 @@ const AddVendorRegister: React.FC = () => {
             <div className="flex gap-4">
               <GroupField
                 label={"Operational Locations*"}
-                type={"creatable"}
+                type={"select"}
                 placeholder={""}
                 name={""}
                 value={""}
@@ -421,15 +421,11 @@ const AddVendorRegister: React.FC = () => {
                 isMulti
                 errorMessage={""}
                 leftIcon={<GlobalIcon color="#2C398F" />}
-                options={[
-                  { label: "hello", value: "hello" },
-                  { label: "bye", value: "bye" },
-                ]}
                 parentStyle="max-w-[400px] w-full"
               />
               <GroupField
                 label={"Operational Since*"}
-                type={"text"}
+                type={"date"}
                 placeholder={"Enter Year"}
                 name={""}
                 value={""}
@@ -442,7 +438,7 @@ const AddVendorRegister: React.FC = () => {
                 }}
                 error={false}
                 errorMessage={""}
-                leftIcon={<CalenderIcon color="#2C398F" />}
+                // leftIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="max-w-[400px] w-full"
               />
             </div>
@@ -482,49 +478,89 @@ const AddVendorRegister: React.FC = () => {
               {/* regulatory approval */}
               <div className="flex flex-col gap-2">
                 <p className="font-semibold text-grey-ab">
-                  Regulatory Approvals*
+                  Regulatory Approvals
                 </p>
                 <div className="flex gap-8 px-4">
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">IATA</label>
+                    <input
+                      type="checkbox"
+                      name="iata"
+                      id="iata"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="iata">IATA</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">FMC</label>
+                    <input
+                      type="checkbox"
+                      name="fmc"
+                      id="fmc"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="fmc">FMC</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">IMO</label>
+                    <input
+                      type="checkbox"
+                      name="imo"
+                      id="imo"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="imo">IMO</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">DOT</label>
+                    <input
+                      type="checkbox"
+                      name="dot"
+                      id="dot"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="dot">DOT</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">Local Transport Authority</label>
+                    <input
+                      type="checkbox"
+                      name="localTransport"
+                      id="localTransport"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="localTransport">
+                      Local Transport Authority
+                    </label>
                   </div>
                 </div>
               </div>
 
               {/* iso certification */}
               <div className="flex flex-col gap-2">
-                <p className="font-semibold text-grey-ab">
-                  ISO Certifications*
-                </p>
+                <p className="font-semibold text-grey-ab">ISO Certifications</p>
                 <div className="flex gap-8 px-4">
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">ISO 9001</label>
+                    <input
+                      type="checkbox"
+                      name="iso9001"
+                      id="iso9001"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="iso9001">ISO 9001</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">ISO 14001</label>
+                    <input
+                      type="checkbox"
+                      name="iso14001"
+                      id="iso14001"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="iso14001">ISO 14001</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">ISO 28000</label>
+                    <input
+                      type="checkbox"
+                      name="iso28000"
+                      id="iso28000"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="iso28000">ISO 28000</label>
                   </div>
                 </div>
               </div>
@@ -605,10 +641,10 @@ const AddVendorRegister: React.FC = () => {
         {/* buttons */}
         <div className="flex justify-end gap-8 px-5">
           <NavLink to={"/registration-vendor"}>
-            <PrimaryButton label={"Cancel"} size={"xl"} variant={"link"} /> 
+            <PrimaryButton label={"Cancel"} size={"xl"} variant={"link"} />
           </NavLink>
           <div onClick={handleRegister}>
-            <PrimaryButton label={"Register"} size={"xl"} variant={"primary"} /> 
+            <PrimaryButton label={"Register"} size={"xl"} variant={"primary"} />
           </div>
         </div>
       </div>

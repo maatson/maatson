@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import {
   AccountDetailIcon,
+  CategoryIcon,
   CompanyIcon,
   DepartmentIcon,
   DocumentIcon,
@@ -115,6 +116,24 @@ const AddRegister: React.FC = () => {
               <p>Company Address</p>
               <div className="gap-3 flex items-center flex-wrap">
                 <GroupField
+                  label={"Building/Door Number*"}
+                  type={"text"}
+                  placeholder={"Enter Building/Door Number "}
+                  name={""}
+                  value={""}
+                  leftIcon={<LocationIcon color="#2c398f" />}
+                  onChange={function (
+                    e: React.ChangeEvent<
+                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+                    >
+                  ): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                  error={false}
+                  errorMessage={""}
+                  parentStyle="basis-[35%] flex-grow"
+                />
+                <GroupField
                   label={"Street*"}
                   type={"text"}
                   placeholder={"Enter Street "}
@@ -148,26 +167,9 @@ const AddRegister: React.FC = () => {
                   }}
                   error={false}
                   errorMessage={""}
-                  parentStyle="basis-[35%] flex-grow "
-                />
-                <GroupField
-                  label={"Building/Door Number*"}
-                  type={"text"}
-                  placeholder={"Enter Building/Door Number "}
-                  name={""}
-                  value={""}
-                  leftIcon={<LocationIcon color="#2c398f" />}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
-                  error={false}
-                  errorMessage={""}
                   parentStyle="basis-[30%] "
                 />
+
                 <GroupField
                   label={"Postal Code*"}
                   type={"text"}
@@ -267,6 +269,7 @@ const AddRegister: React.FC = () => {
                 placeholder={""}
                 name={""}
                 value={""}
+                leftIcon={<CategoryIcon color="#2c398f" />}
                 onChange={function (
                   e: React.ChangeEvent<
                     HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -448,6 +451,7 @@ const AddRegister: React.FC = () => {
               errorMessage={""}
               label={"Password"}
               placeholder={"Enter Password"}
+              parentStyle="basis-[40%] "
             />
             <GroupField
               type={eyeIcon === "open" ? "text" : "password"}
@@ -467,6 +471,7 @@ const AddRegister: React.FC = () => {
               errorMessage={""}
               label={"Confirm Password"}
               placeholder={"Enter Confirm Password"}
+              parentStyle="basis-[40%] "
             />
           </div>
         </div>

@@ -378,6 +378,18 @@ const EmployeeForm: React.FC = () => {
               <div className="flex flex-col gap-3">
                 <div className="flex gap-4">
                   <GroupField
+                    label={"Building/Door Number"}
+                    type={"text"}
+                    placeholder={"Enter Building/Door Number"}
+                    name={"doorNo"}
+                    value={data.doorNo}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[400px] w-full"
+                  />
+                  <GroupField
                     label={"Street*"}
                     type={"text"}
                     placeholder={"Enter Street"}
@@ -389,28 +401,16 @@ const EmployeeForm: React.FC = () => {
                     leftIcon={<LocationIcon color="#2C398F" />}
                     parentStyle="max-w-[400px] w-full"
                   />
+                </div>
+
+                {/* 3 input section */}
+                <div className="flex gap-[18px]">
                   <GroupField
                     label={"City*"}
                     type={"text"}
                     placeholder={"Enter City"}
                     name={"city"}
                     value={data.city}
-                    onChange={handleChange}
-                    error={false}
-                    errorMessage={""}
-                    leftIcon={<LocationIcon color="#2C398F" />}
-                    parentStyle="max-w-[400px] w-full"
-                  />
-                </div>
-
-                {/* 3 input section */}
-                <div className="flex gap-[18px]">
-                  <GroupField
-                    label={"Building/Door Number"}
-                    type={"text"}
-                    placeholder={"Enter Building/Door Number"}
-                    name={"doorNo"}
-                    value={data.doorNo}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
