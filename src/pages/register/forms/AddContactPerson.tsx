@@ -105,11 +105,12 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
           />
           <GroupField
             label={"Country of Operation"}
-            type={""}
+            type={"select"}
             placeholder={"Enter Country of Operation"}
             name={"countryOfOperation"}
             value={data.countryOfOperation}
             onChange={handleChange}
+            isMulti
             error={false}
             errorMessage={""}
             leftIcon={<CategoryIcon color="#2C398F" />}

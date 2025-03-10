@@ -28,6 +28,8 @@ import SecondaryChip from "../../../components/chips/SecondaryChip";
 import { MenuItem, Select } from "@mui/material";
 import CustomPagination from "../../../components/pagination/CustomPagination";
 import ProfileBoxLayout from "../layouts/ProfileBoxLayout";
+import AddKYC from "../forms/AddKYC";
+import AddContactPerson from "../forms/AddContactPerson";
 
 interface ContactPersonRowData {
   id: string | number;
@@ -88,6 +90,14 @@ const UserDetails: React.FC = () => {
   const [documentRows, setDocumentRows] = useState<DocumentRowData[]>([]);
 
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
+  // add KYC
+  const [isAddKYCOpen, setIsAddKYCOpen] = useState(false);
+  const openAddKYC = () => setIsAddKYCOpen(true);
+  const closeAddKYC = () => setIsAddKYCOpen(false);
+  // contact person
+  const [isAddContactPersonOpen, setIsAddContactPersonOpen] = useState(false);
+  const openAddContactPerson = () => setIsAddContactPersonOpen(true);
+  const closeAddContactPerson = () => setIsAddContactPersonOpen(false);
 
   const handleChangePassword = () => {
     console.log("save");
@@ -444,12 +454,14 @@ const UserDetails: React.FC = () => {
           <div className="bg-grey-aw-50 rounded shadow-xs">
             <div className="flex justify-between px-4 py-3 border-b border-grey-ab-100 items-center">
               <p className=" text-lg font-semibold  "> KYC Document </p>
-              <GreyButton
-                label={"Add Document"}
-                size={"s"}
-                variant={""}
-                rightIcon={<UploadIcon size={16} />}
-              />
+              <div onClick={openAddKYC}>
+                <GreyButton
+                  label={"Add Document"}
+                  size={"s"}
+                  variant={""}
+                  rightIcon={<UploadIcon size={16} />}
+                />
+              </div>
             </div>
             <div className="px-3 py-2">
               <CustomTable
@@ -463,18 +475,22 @@ const UserDetails: React.FC = () => {
             <div className="flex justify-between px-4 py-3 border-b border-grey-ab-100 items-center">
               <p className=" text-lg font-semibold  "> Contact Persons </p>
               <div className="flex items-center gap-4 justify-end">
-                <GreyButton
-                  label={"Add Contact Person"}
-                  size={"s"}
-                  variant={""}
-                  rightIcon={<UploadIcon size={16} />}
-                />
-                <SuccessButton
-                  label={"Export"}
-                  size={"s"}
-                  variant={""}
-                  rightIcon={<ExcelIcon size={16} color="#fdfdfd" />}
-                />
+                <div onClick={openAddContactPerson}>
+                  <GreyButton
+                    label={"Add Contact Person"}
+                    size={"s"}
+                    variant={""}
+                    rightIcon={<UploadIcon size={16} />}
+                  />
+                </div>
+                <div>
+                  <SuccessButton
+                    label={"Export"}
+                    size={"s"}
+                    variant={""}
+                    rightIcon={<ExcelIcon size={16} color="#fdfdfd" />}
+                  />
+                </div>
               </div>
             </div>
             <div className="px-3 py-2">
@@ -532,6 +548,20 @@ const UserDetails: React.FC = () => {
           Chats will develop after backend process implement
         </h6>
       </div>
+
+      {/* AddKYCPopup  */}
+      {isAddKYCOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+          <AddKYC onClose={closeAddKYC} />
+        </div>
+      )}
+
+      {/* ContactPersonPopup  */}
+      {isAddContactPersonOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
+          <AddContactPerson onClose={closeAddContactPerson} />
+        </div>
+      )}
     </>
   );
 };
