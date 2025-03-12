@@ -21,7 +21,7 @@ const FollowUps: React.FC = () => {
             <div>
               <BlackButton
                 label={"Add Follow Ups"}
-                size={"s"}
+                size={"s"}  
                 variant={"outline"}
               />
             </div>
