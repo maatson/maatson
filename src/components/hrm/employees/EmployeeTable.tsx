@@ -71,7 +71,7 @@ const EmployeeTable: React.FC = () => {
       branchLocation,
     } = items;
     const employeeNames = (
-      <div className="min-w-[180px] flex gap-[10px] items-center">
+      <div className="min-w-[180px] flex gap-[10px] items-center py-1">
         <div className="w-10 h-10">
           <img
             src={EmployeeImage || DefaultDp}
