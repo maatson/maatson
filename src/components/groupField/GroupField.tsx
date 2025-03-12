@@ -24,6 +24,7 @@ interface Groupfield {
   errorMessage: string;
   size?: string; //added by suriya
   isMulti?: boolean;
+  isDisabled?: boolean;
 }
 
 // const CustomDropdownIndicator = () => {
@@ -59,6 +60,7 @@ const GroupField: React.FC<Groupfield> = ({
   error,
   errorMessage,
   isMulti,
+  isDisabled,
   size, //added by suriya
 }) => {
   // Handle React-Select change event
@@ -99,6 +101,7 @@ const GroupField: React.FC<Groupfield> = ({
                     : handleReactSelectChange
                 } // React-Select onChange handler
                 isMulti={isMulti ? true : false}
+                isDisabled={isDisabled}
                 options={options}
                 className="p-0 w-full min-w-0 " // Tailwind class for full width
                 classNamePrefix="custom-select" // Optional class prefix for styling
@@ -189,6 +192,7 @@ const GroupField: React.FC<Groupfield> = ({
                 } // React-Select onChange handler
                 isMulti={isMulti ? true : false}
                 options={options}
+                isDisabled={isDisabled}
                 className="p-0 w-full min-w-0 " // Tailwind class for full width
                 classNamePrefix="custom-select" // Optional class prefix for styling
                 placeholder={placeholder || "Select an option"} // Placeholder text
@@ -271,6 +275,7 @@ const GroupField: React.FC<Groupfield> = ({
               name={name}
               value={value}
               id={name}
+              disabled={isDisabled}
               onChange={onChange}
               placeholder={placeholder}
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
@@ -281,6 +286,7 @@ const GroupField: React.FC<Groupfield> = ({
               name={name}
               value={value}
               id={name}
+              disabled={isDisabled}
               onChange={onChange}
               placeholder={placeholder}
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
