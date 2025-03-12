@@ -91,7 +91,10 @@ const CarrierRegisterList: React.FC = () => {
 
     const actions = (
       <div className="flex justify-center gap-[10px] py-1 px-2">
-        <div className="rounded-xs p-1 bg-blue cursor-pointer" onClick={handleEyeIcon}>
+        <div
+          className="rounded-xs p-1 bg-blue cursor-pointer"
+          onClick={handleEyeIcon}
+        >
           <EyeOpenIcon size={16} color="#FDFDFD" />
         </div>
         <div className="rounded-xs p-1 bg-success-600 cursor-pointer">
@@ -178,8 +181,8 @@ const CarrierRegisterList: React.FC = () => {
 
   const navigate = useNavigate();
   const handleEyeIcon = () => {
-    navigate("/registration-carrier/carrier-details/profile")
-  }
+    navigate("/registration-carrier/carrier-details/profile");
+  };
 
   return (
     <>
@@ -261,7 +264,9 @@ const CarrierRegisterList: React.FC = () => {
         <div className="px-3 py-4 flex justify-between items-center rounded-b-xs">
           <div className="text-xs text-grey-ab-200">
             Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
-            {currentPage * itemsPerPage} of {rows.length} Entries
+            {currentPage *
+              (itemsPerPage > rows.length ? rows.length : itemsPerPage)}{" "}
+            of {rows.length} Entries
           </div>
 
           <CustomPagination
