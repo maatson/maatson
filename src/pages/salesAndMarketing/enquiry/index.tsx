@@ -5,7 +5,18 @@ import PageHeader from "../../../components/header/PageHeader";
 const Enquiry: React.FC = () => {
   return (
     <>
-      <PageHeader breadCrums={[]} heading={""} /> 
+      <PageHeader
+        breadCrums={[
+          "Home",
+          "Sales & Marketing",
+          location.pathname === "/enquiry/add"
+            ? ["Leads and CRM", "Add Enquiry"]
+            : location.pathname === "/enquiry/details"
+            ? ["Leads and CRM", "Enquiry Details"]
+            : "Leads and CRM",
+        ].flat()}
+        heading={location.pathname === "/enquiry" ? "Leads and CRM" : "Enquiry"}
+      />{" "}
       <Outlet />
     </>
   );
