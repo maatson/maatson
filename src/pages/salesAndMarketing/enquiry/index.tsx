@@ -5,7 +5,7 @@ import PageHeader from "../../../components/header/PageHeader";
 const Enquiry: React.FC = () => {
   return (
     <>
-      <PageHeader breadCrums={[]} heading={""} />
+      <PageHeader breadCrums={[]} heading={""} /> 
       <Outlet />
     </>
   );
