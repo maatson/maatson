@@ -103,7 +103,7 @@ const SideBar: React.FC = () => {
         leftIcon: <FreightIcon />,
         label: "Sales & Marketing",
         isOpen: openItems[2] || false,
-        children: [],
+        children: [{ label: "booking", link: "/booking" }],
         onClick: () => handleItemClick(2),
       },
       {
