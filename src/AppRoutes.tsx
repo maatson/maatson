@@ -61,6 +61,8 @@ const VendorContact = lazy(
   () => import("./pages/register/vendor/vendorDetails/VendorContact")
 );
 
+//SALES AND CRM (SALES AND MARKING & ENQUIRY & BOOKING)
+
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
 const AttendanceList = lazy(
