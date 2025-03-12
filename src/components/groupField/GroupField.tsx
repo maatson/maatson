@@ -146,6 +146,34 @@ const GroupField: React.FC<Groupfield> = ({
                       state.isSelected || state.isFocused ? "#fff" : "#111827", // Tailwind text colors
                     padding: "0.5rem", // Tailwind padding
                   }),
+                  multiValue: (provided) => ({
+                    ...provided,
+                    backgroundColor: "#ffffff", // Background color of the chip
+                    borderRadius: "16px", // Round shape
+                    border: "solid 1px #2c398f",
+                    padding: "0px 8px", // Padding inside the chip
+                    margin: "4px", // Space between chips
+                  }),
+                  multiValueLabel: (provided) => ({
+                    ...provided,
+                    color: "#2c398f", // Text color inside the chip
+                    fontSize: "12px", // Text size inside the chip
+                    fontWeight: "400",
+                    marginBlock: "0",
+                    paddingInline: "4px",
+                  }),
+                  multiValueRemove: (provided) => ({
+                    ...provided,
+                    color: "#2c398f", // Close icon color
+                    cursor: "pointer",
+                    padding: "0px",
+                    marginBlock: "5px",
+                    ":hover": {
+                      backgroundColor: "#9ea4cf", // Hover effect for remove button
+                      color: "#2c398f", // Text color on hover
+                      padding: "0px ",
+                    },
+                  }),
                 }}
               />
             </>

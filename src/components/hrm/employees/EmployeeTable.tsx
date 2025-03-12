@@ -150,22 +150,6 @@ const EmployeeTable: React.FC = () => {
       department: "Marketing",
       branchLocation: "Mumbai, India",
     },
-    {
-      employeeID: "EMP2022006",
-      employeeName: "Henry, Arthur",
-      employeeEmail: "bill.sanders@example.com",
-      designation: "Sales Executive",
-      department: "Marketing",
-      branchLocation: "Chennai, India",
-    },
-    {
-      employeeID: "EMP2022007",
-      employeeName: "Henry, Arthur",
-      employeeEmail: "bill.sanders@example.com",
-      designation: "Sales Executive",
-      department: "Marketing",
-      branchLocation: "Chennai, India",
-    },
   ];
 
   // Memoize fetchData function with useCallback
@@ -191,8 +175,14 @@ const EmployeeTable: React.FC = () => {
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">
           Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
-          {currentPage * itemsPerPage} of {rows.length} Entries
+          {currentPage *
+            (itemsPerPage > rows.length ? rows.length : itemsPerPage)}{" "}
+          of {rows.length} Entries
         </div>
+        {/* <div className="text-xs text-grey-ab-200">
+          Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
+          {currentPage * itemsPerPage} of {rows.length} Entries
+        </div> */}
 
         <CustomPagination
           totalItems={rows.length}

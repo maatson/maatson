@@ -121,7 +121,7 @@ const UserRegisterList: React.FC = () => {
         case "inactive":
           accountStatusText = (
             <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
-              <ErrorChip label={"In Active"} size={"m"} variant={"outline"} />
+              <ErrorChip label={"inActive"} size={"m"} variant={"outline"} />
             </div>
           );
           break;

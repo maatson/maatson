@@ -182,7 +182,7 @@ const SideBar: React.FC = () => {
           isOpen={item.isOpen}
           children={item.children}
           onClick={item.onClick}
-          isActive={activeItem === index} // Pass active status to SideBarItem
+          isActive={activeItem === index} // Pass active status to SideBarItem 
         />
       ))}
     </div>
