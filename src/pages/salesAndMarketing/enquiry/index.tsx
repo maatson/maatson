@@ -1,9 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import PageHeader from "../../../components/header/PageHeader";
 
 const Enquiry: React.FC = () => {
   return (
     <>
-      <div>Enquiry</div>
+      <PageHeader breadCrums={[]} heading={""} />
+      <Outlet />
     </>
   );
 };

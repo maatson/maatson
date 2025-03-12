@@ -103,7 +103,10 @@ const SideBar: React.FC = () => {
         leftIcon: <FreightIcon />,
         label: "Sales & Marketing",
         isOpen: openItems[2] || false,
-        children: [{ label: "booking", link: "/booking" }],
+        children: [
+          { label: "Leads and CRM", link: "/enquiry" },
+          { label: "Booking", link: "/booking" },
+        ],
         onClick: () => handleItemClick(2),
       },
       {
@@ -182,7 +185,7 @@ const SideBar: React.FC = () => {
           isOpen={item.isOpen}
           children={item.children}
           onClick={item.onClick}
-          isActive={activeItem === index} // Pass active status to SideBarItem 
+          isActive={activeItem === index} // Pass active status to SideBarItem
         />
       ))}
     </div>
@@ -248,7 +251,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
 
 export default SideBar;
 
-// import React from "react";  
+// import React from "react";
 // import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 // import { MessageIcon } from "../icons/Icons";
 
