@@ -62,6 +62,19 @@ const VendorContact = lazy(
 );
 
 //SALES AND CRM (SALES AND MARKING & ENQUIRY & BOOKING)
+const Booking = lazy(() => import("./pages/salesAndMarketing/booking"));
+const BookingDetails = lazy(
+  () => import("./pages/salesAndMarketing/booking/BookingDetails")
+);
+const ConvertToBooking = lazy(
+  () => import("./pages/salesAndMarketing/booking/ConvertToBooking")
+);
+const AddBooking = lazy(
+  () => import("./pages/salesAndMarketing/booking/AddBooking")
+);
+const BookingList = lazy(
+  () => import("./pages/salesAndMarketing/booking/BookingList")
+);
 
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
@@ -159,6 +172,14 @@ const AppRoutes: React.FC = () => {
           <Route index element={<RequirementList />} />
           <Route path="details" element={<RequirementDetails />} />
           {/* <Route path="employee-profile" element={<EmployeeProfile />} /> */}
+        </Route>
+
+        {/* sales and marketting */}
+        <Route path="booking" element={<Booking />}>
+          <Route index element={<BookingList />} />
+          <Route path="add" element={<AddBooking />} />
+          <Route path="convert-to-booking" element={<ConvertToBooking />} />
+          <Route path="details" element={<BookingDetails />} />
         </Route>
 
         {/* testimonials */}
