@@ -147,7 +147,7 @@ const GroupField: React.FC<Groupfield> = ({
                       : "#fff", // Tailwind background colors
                     color:
                       state.isSelected || state.isFocused ? "#fff" : "#111827", // Tailwind text colors
-                    padding: "0.5rem", // Tailwind padding
+                    padding: "0.2rem 0.5rem", // Tailwind padding
                   }),
                   multiValue: (provided) => ({
                     ...provided,
@@ -237,7 +237,7 @@ const GroupField: React.FC<Groupfield> = ({
                       : "#fff", // Tailwind background colors
                     color:
                       state.isSelected || state.isFocused ? "#fff" : "#111827", // Tailwind text colors
-                    padding: "0.5rem", // Tailwind padding
+                    padding: "0.2rem 0.5rem", // Tailwind padding
                   }),
                   multiValue: (provided) => ({
                     ...provided,

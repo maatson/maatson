@@ -17,7 +17,11 @@ const Booking: React.FC = () => {
             ? ["...", "Enquiry", "Convert to Booking"]
             : "Booking",
         ].flat()}
-        heading={location.pathname === "/booking" ? "Booking" : "Booking"}
+        heading={
+          location.pathname === "/booking/convert-to-booking"
+            ? "Convert to Booking"
+            : "Booking"
+        }
       />{" "}
       <Outlet />
     </>
