@@ -25,6 +25,10 @@ import GreyButton from "../../../components/buttons/GreyButton";
 import ErrorButton from "../../../components/buttons/ErrorButton";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import CustomTable from "../../../components/table/CustomTable";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import RedClickHere from "/images/redClickHere.png";
+import BlueClickHere from "/images/blueClickHere.png";
+import YellowClickHere from "/images/yellowClickHere.png";
 
 interface RowData {
   id: string | number;
@@ -50,6 +54,26 @@ const columns: any[] = [
 const EnquiryDetails: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [isCancel, setIsCancel] = useState<boolean>();
+  const [isNegotiation, setIsNegotiation] = useState<boolean>(true);
+  const [isConvertToBooking, setIsConvertToBooking] = useState<boolean>();
+  const handleCancel = () => {
+    // setIsCancel(true);
+    // setIsNegotiation(false);
+    // setIsConvertToBooking(false);
+    navigate(`/enquiry/details/${id}/cancel-enquiry`)
+  };
+  const handleNegotiation = () => {
+    navigate(`/enquiry/details/${id}`)
+
+  };
+  const handleConvertToBooking = () => {
+    navigate(`/enquiry/details/${id}/convertBooking-enquiry`)
+
+  };
 
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
     setSelectedRows(newCheckedRows);
@@ -125,6 +149,59 @@ const EnquiryDetails: React.FC = () => {
     fetchData(); // Call fetchData when the component mounts
   }, [fetchData]); // Only re-run fetchData if fetchData changes
 
+  useEffect(() => {
+    const middleLocation = document.querySelector(
+      ".middle-location"
+    ) as HTMLElement | null;
+    const endLocation = document.querySelector(
+      ".end-location"
+    ) as HTMLElement | null;
+
+    const handleAnimationEnd = () => {
+      if (middleLocation) {
+        middleLocation.style.backgroundColor = "#2c398f"; // Set final color
+      }
+      if (endLocation) {
+        endLocation.style.backgroundColor = "#2c398f"; // Set final color
+      }
+    };
+
+    if (middleLocation) {
+      middleLocation.addEventListener("animationend", handleAnimationEnd);
+    }
+
+    // Cleanup function to remove the event listener when the component unmounts
+    return () => {
+      if (middleLocation) {
+        middleLocation.removeEventListener("animationend", handleAnimationEnd);
+      }
+    };
+  }, []);
+
+  // temporary data
+  const datas =
+    (Number(id) + 1) % 3 === 0 //2 , 5 are getting
+      ? {
+          modeOfTransportation: "land freight",
+          containerType: "",
+          modeOfShipment: "cross trade",
+        }
+      : Number(id) % 3 === 0 // 0, 3 are getting   0,1,2, 3,4,5
+      ? {
+          modeOfTransportation: "sea freight",
+          containerType: "fcl",
+          // containerType: "lcl",
+          // containerType: "bulk",
+          // containerType: "hazardous cargo",
+          // containerType: "over",
+          modeOfShipment: "import",
+        }
+      : {
+          //1, 4 are getting
+          modeOfTransportation: "air freight",
+          containerType: "standard",
+          modeOfShipment: "export",
+        };
   return (
     <>
       <div className="flex flex-col gap-6 py-4">
@@ -167,19 +244,23 @@ const EnquiryDetails: React.FC = () => {
               <div className="flex justify-between">
                 <div className="flex flex-col gap-2">
                   <p className="text-grey-ab-300">Shipment Mode</p>
-                  <div className="font-semibold">Import</div>
+                  <div className="font-semibold capitalize">
+                    {datas.modeOfShipment || ""}
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="text-grey-ab-300">Transportation Mode</p>
-                  <div className="font-semibold text-end">Sea Freight</div>
+                  <div className="font-semibold text-end capitalize">
+                    {datas.modeOfTransportation || ""}
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-col gap-1">
-                <div className="px-10 flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-grey-ab-100"></div>
-                  <div className="w-full h-1 bg-grey-ab-100"></div>
-                  <div className="w-3 h-3 rounded-full bg-grey-ab-100"></div>
+                <div className="px-10 flex items-center ">
+                  <div className="w-3 h-3 rounded-full bg-grey-ab-100 start-location"></div>
+                  <div className="w-full h-1 bg-grey-ab-100 middle-location"></div>
+                  <div className="w-3 h-3 rounded-full bg-grey-ab-100 end-location"></div>
                 </div>
                 <div className="flex justify-between">
                   <div className="flex flex-col gap-1">
@@ -218,36 +299,292 @@ const EnquiryDetails: React.FC = () => {
             {/* container details */}
             <div className="flex flex-col gap-2">
               <ProfileSubHeaders
-                title={"Container Details"}
+                title={"Cargo Details"}
                 icon={<ContainerIcon />}
               />
-              <div className="flex flex-col gap-4">
-                <div className="flex justify-between">
-                  <ProfileBoxLayout
-                    title={"Type of Container"}
-                    value={"FCL (Full Container Load)"}
-                    valueStyle={"font-semibold"}
-                  />
-                  <ProfileBoxLayout
-                    title={"Container Size"}
-                    value={"20'FT Reefer Container"}
-                    valueStyle={"font-semibold"}
-                    titleStyle={"text-end"}
-                  />
+              {datas.modeOfTransportation.toLocaleLowerCase() ===
+              "air freight" ? (
+                <div className="flex flex-col gap-4">
+                  {datas.containerType.toLocaleLowerCase() === "standard" ? (
+                    <>
+                      <ProfileBoxLayout
+                        title={"Type of Container"}
+                        value={"Standard Cargo"}
+                        valueStyle={"font-semibold"}
+                      />
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Length"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Width"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Height"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Measurement"}
+                          value={"meters"}
+                          valueStyle={"font-semibold "}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Volume"}
+                          value={"2000 m3"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Quantity"}
+                          value={"05"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"ULD Container"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"LD-3 Reefers"}
+                          valueStyle={"font-semibold text-end"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Quantity"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="flex justify-between">
-                  <ProfileBoxLayout
-                    title={"Container Count"}
-                    value={"11"}
-                    valueStyle={"font-semibold text-center"}
-                  />
-                  <ProfileBoxLayout
-                    title={"Gross Weight "}
-                    value={"10000 kgs"}
-                    valueStyle={"font-semibold text-end"}
-                  />
+              ) : datas.modeOfTransportation.toLocaleLowerCase() ===
+                "sea freight" ? (
+                <div className="flex flex-col gap-4">
+                  {datas.containerType.toLocaleLowerCase() === "fcl" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"FCL (Full Container Load)"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                    </>
+                  ) : datas.containerType.toLocaleLowerCase() === "lcl" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"LCL (Less Container Load)"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Quantity"}
+                          value={"05"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Package Type "}
+                          value={"Drums"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight"}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Volume"}
+                          value={"12m3"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                    </>
+                  ) : datas.containerType.toLocaleLowerCase() === "bulk" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Bulk"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Ship Type"}
+                          value={"General Cargo"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Loading Rate"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Discharging Rate"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : datas.containerType.toLocaleLowerCase() ===
+                    "hazardous" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Hazardous Cargo"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"UN Number"}
+                          value={"hd1234"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"IMCO Class"}
+                          value={"hd1234"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Over Dimensional Cargo"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Length"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Width"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Height"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Measurement"}
+                          value={"meters"}
+                          valueStyle={"font-semibold "}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
-              </div>
+              ) : (
+                //for land frieght
+                <div className="h-28 border rounded-xs items-center flex justify-center">
+                  <p className="font-semibold"> Will Execute Later..</p>
+                </div>
+              )}
             </div>
 
             {/* goods ready date */}
@@ -440,16 +777,56 @@ const EnquiryDetails: React.FC = () => {
                 Enquiry Status
               </div>
               <div className="px-2 py-2 flex gap-14 justify-center">
-                <div className="px-2 py-1 border-b-2 border-b-tertiary text-sm font-semibold text-grey-ab cursor-pointer">
+                <div
+                  onClick={handleCancel}
+                  className={`px-2 py-1 border-b-2 ${
+                    isCancel ? "border-b-tertiary" : "border-b-grey-aw-50"
+                  } text-sm font-semibold text-grey-ab cursor-pointer`}
+                >
                   Cancel
                 </div>
-                <div className="px-2 py-1 border-b-2 border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer">
+                <div
+                  onClick={handleNegotiation}
+                  className={`px-2 py-1 border-b-2 ${
+                    isNegotiation ? "border-b-tertiary" : "border-b-grey-aw-50"
+                  } text-sm font-semibold text-grey-ab cursor-pointer`}
+                >
                   Negotiation
                 </div>
-                <div className="px-2 py-1 border-b-2 border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer">
+                <div
+                  onClick={handleConvertToBooking}
+                  className={`px-2 py-1 border-b-2 ${
+                    isConvertToBooking
+                      ? "border-b-tertiary"
+                      : "border-b-grey-aw-50"
+                  } border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer`}
+                >
                   Convert to Booking
                 </div>
               </div>
+
+              {/* {isCancel && (
+                <div className="flex flex-col gap-4 px-4 py-2 justify-center">
+                  <div className="flex flex-col gap-2">
+                    <div>
+                      <img src={RedClickHere} alt="RedClickHere" />
+                    </div>
+                    <p className="text-sm text-grey-ab-300 text-center">
+                      Click 'Cancel Booking' to confirm the cancellation of this
+                      Booking.
+                    </p>
+                  </div>
+                  <div className="flex justify-center pb-3" onClick={() => {}}>
+                    <ErrorButton
+                      label={"Cancel Booking"}
+                      size={"l"}
+                      variant={"primary"}
+                    />
+                  </div>
+                </div>
+              )} */}
+              <Outlet />
+              {/*  */}
               <div className="flex flex-col gap-4 px-4 py-3">
                 <div className="flex flex-col gap-3">
                   <p className="text-sm text-grey-ab-300 text-center">
@@ -530,3 +907,30 @@ const EnquiryDetails: React.FC = () => {
 };
 
 export default EnquiryDetails;
+
+
+export const CancelEnquiry: React.FC = () => {
+  return (
+    <>
+      <div>CancelEnquiry</div>
+    </>
+  );
+};
+
+export const NegotiateEnquiry: React.FC = () => {
+  return (
+    <>
+      <div>CancelEnquiry</div>
+    </>
+  );
+};
+
+export const ConvertToBookingEnquiry: React.FC = () => {
+  return (
+    <>
+      <div>CancelEnquiry</div>
+    </>
+  );
+};
+
+
