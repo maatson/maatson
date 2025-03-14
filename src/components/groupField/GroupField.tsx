@@ -93,6 +93,7 @@ const GroupField: React.FC<Groupfield> = ({
           {type === "select" ? (
             <>
               <Select
+                id={name}
                 name={name}
                 value={options?.find((option) => option.value === value)} // Set the selected value
                 onChange={
@@ -183,6 +184,7 @@ const GroupField: React.FC<Groupfield> = ({
           ) : type === "creatable" ? (
             <>
               <CreatableSelect
+                id={name}
                 name={name}
                 value={options?.find((option) => option.value === value)} // Set the selected value
                 onChange={

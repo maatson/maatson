@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import {
   ContainerIcon,
@@ -22,12 +22,19 @@ import BlackButton from "../../../components/buttons/BlackButton";
 import GroupField from "../../../components/groupField/GroupField";
 import CargoShipImage from "/images/cargoShip.png";
 import { useParams } from "react-router-dom";
+import FollowUps from "../../../components/followups/FollowUps";
 import "./style.css";
 import ErrorButton from "../../../components/buttons/ErrorButton";
 import RedClickHere from "/images/redClickHere.png";
 
 const BookingDetails: React.FC = () => {
+  const [isFollowUpOpen, setFollowUp] = useState<boolean>(false);
   const { id } = useParams();
+  const followRef = useRef<HTMLDivElement | null>(null);
+
+  const handleCloseFollowUp = () => {
+    setFollowUp(false);
+  };
 
   const [cancelBooking, setCancelBooking] = useState<boolean>(true);
   const handleCancelBooking = () => {
@@ -88,9 +95,34 @@ const BookingDetails: React.FC = () => {
           containerType: "standard",
           modeOfShipment: "export",
         };
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (followRef.current && !followRef.current.contains(e.target as Node)) {
+        setFollowUp(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <>
       <div className="flex flex-col gap-6 py-4">
+        {isFollowUpOpen && (
+          <>
+            {" "}
+            <div className="inset-0 fixed bg-black/50 h-screen cursor-pointer z-10"></div>
+            <div className="inset-0 fixed z-20 flex justify-end">
+              <div ref={followRef}>
+                <FollowUps onClose={handleCloseFollowUp} />
+              </div>
+            </div>
+          </>
+        )}
         <div className="flex justify-between items-center p-3 rounded-xs shadow-lg bg-grey-aw-50">
           <p className="text-lg font-semibold text-grey-ab-900">
             Booking Details
@@ -741,7 +773,7 @@ const BookingDetails: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <div>
+              <div ref={followRef} onClick={() => setFollowUp(true)}>
                 <PrimaryButton
                   label={"Update Follow Ups"}
                   size={"m"}
