@@ -87,8 +87,8 @@ const columns: any[] = [
 
 const BookingList: React.FC = () => {
   const navigate = useNavigate();
-  const handleViewClick = () => {
-    navigate("/booking/details");
+  const handleViewClick = (id: any) => {
+    navigate(`/booking/details/${id}`);
   };
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -172,7 +172,7 @@ const BookingList: React.FC = () => {
     );
 
     const actions = (
-      <div className="flex justify-center" onClick={handleViewClick}>
+      <div className="flex justify-center" onClick={() => handleViewClick(id)}>
         <NeutralBlueButton
           label={"View"}
           size={"s"}

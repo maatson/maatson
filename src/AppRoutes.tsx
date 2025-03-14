@@ -190,7 +190,7 @@ const AppRoutes: React.FC = () => {
           <Route index element={<BookingList />} />
           <Route path="add" element={<AddBooking />} />
           <Route path="convert-to-booking" element={<ConvertToBooking />} />
-          <Route path="details" element={<BookingDetails />} />
+          <Route path="details/:id" element={<BookingDetails />} />
         </Route>
         <Route path="enquiry" element={<Enquiry />}>
           <Route index element={<EnquiryList />} />
