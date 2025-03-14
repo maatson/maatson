@@ -21,17 +21,27 @@ import DefaultDp from "/images/defaultProfilePic.png";
 import BlackButton from "../../../components/buttons/BlackButton";
 import GroupField from "../../../components/groupField/GroupField";
 import CargoShipImage from "/images/cargoShip.png";
+import { useParams } from "react-router-dom";
 
 const BookingDetails: React.FC = () => {
-  const data = {
-    transportationMode: "sea freight",
-    // containerType: "fcl",
-    // containerType: "lcl",
-    // containerType: "bulk",
-    // containerType: "hazardous cargo",
-    containerType: "over",
-  };
-  // const data = [{transportationMode: "air freight", containerType: "standard"}]
+  const { id } = useParams();
+
+  const data =
+    Number(id) % 2 == 0
+      ? {
+          modeOfTransportation: "sea freight",
+          // containerType: "fcl",
+          // containerType: "lcl",
+          // containerType: "bulk",
+          // containerType: "hazardous cargo",
+          modeOfShipment: "import",
+          containerType: "over",
+        }
+      : {
+          modeOfTransportation: "air freight",
+          containerType: "standard",
+          modeOfShipment: "export",
+        };
   return (
     <>
       <div className="flex flex-col gap-6 py-4">
@@ -70,11 +80,15 @@ const BookingDetails: React.FC = () => {
               <div className="flex justify-between">
                 <div className="flex flex-col gap-2">
                   <p className="text-grey-ab-300">Shipment Mode</p>
-                  <div className="font-semibold">Import</div>
+                  <div className="font-semibold capitalize">
+                    {data.modeOfShipment || ""}
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="text-grey-ab-300">Transportation Mode</p>
-                  <div className="font-semibold text-end">Sea Freight</div>
+                  <div className="font-semibold text-end capitalize">
+                    {data.modeOfTransportation || ""}
+                  </div>
                 </div>
               </div>
 
@@ -121,11 +135,7 @@ const BookingDetails: React.FC = () => {
             {/* container / cargo details */}
             <div className="flex flex-col gap-2">
               <ProfileSubHeaders
-                title={
-                  data.transportationMode.toLocaleLowerCase() === "air freight"
-                    ? "Cargo Details"
-                    : "Container Details"
-                }
+                title={"Cargo Details"}
                 icon={<ContainerIcon />}
               />
               <div className="flex flex-col gap-4">
