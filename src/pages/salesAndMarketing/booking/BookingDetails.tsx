@@ -23,15 +23,18 @@ import GroupField from "../../../components/groupField/GroupField";
 import CargoShipImage from "/images/cargoShip.png";
 
 const BookingDetails: React.FC = () => {
+  // const data = {
+  //   transportationMode: "sea freight",
+  //   containerType: "fcl",
+  //   // containerType: "lcl",
+  //   // containerType: "bulk",
+  //   // containerType: "hazardous cargo",
+  //   // containerType: "over",
+  // };
   const data = {
-    transportationMode: "sea freight",
-    // containerType: "fcl",
-    // containerType: "lcl",
-    // containerType: "bulk",
-    // containerType: "hazardous cargo",
-    containerType: "over",
+    transportationMode: "air freight",
+    containerType: "standard cargo",
   };
-  // const data = [{transportationMode: "air freight", containerType: "standard"}]
   return (
     <>
       <div className="flex flex-col gap-6 py-4">
@@ -128,7 +131,426 @@ const BookingDetails: React.FC = () => {
                 }
                 icon={<ContainerIcon />}
               />
-              <div className="flex flex-col gap-4">
+              {data.transportationMode.toLocaleLowerCase() === "air freight" ? (
+                <div className="flex flex-col gap-4">
+                  {data.containerType.toLocaleLowerCase() ===
+                  "standard cargo" ? (
+                    <>
+                      <ProfileBoxLayout
+                        title={"Type of Container"}
+                        value={"Standard Cargo"}
+                        valueStyle={"font-semibold"}
+                      />
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Length"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Width"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Height"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Measurement"}
+                          value={"meters"}
+                          valueStyle={"font-semibold "}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Volume"}
+                          value={"2000 m3"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Quantity"}
+                          value={"05"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : data.containerType.toLocaleLowerCase() === "lcl" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"LCL (Less Container Load)"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Quantity"}
+                          value={"05"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Package Type "}
+                          value={"Drums"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight"}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Volume"}
+                          value={"12m3"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                    </>
+                  ) : data.containerType.toLocaleLowerCase() === "bulk" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Bulk"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Ship Type"}
+                          value={"General Cargo"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Loading Rate"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Discharging Rate"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : data.containerType.toLocaleLowerCase() ===
+                    "hazardous cargo" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Hazardous Cargo"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"UN Number"}
+                          value={"hd1234"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"IMCO Class"}
+                          value={"hd1234"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Over Dimensional Cargo"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Length"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Width"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Height"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Measurement"}
+                          value={"meters"}
+                          valueStyle={"font-semibold "}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : data.transportationMode.toLocaleLowerCase() ===
+                "sea freight" ? (
+                <div className="flex flex-col gap-4">
+                  {data.containerType.toLocaleLowerCase() === "fcl" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"FCL (Full Container Load)"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                    </>
+                  ) : data.containerType.toLocaleLowerCase() === "lcl" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"LCL (Less Container Load)"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Quantity"}
+                          value={"05"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Package Type "}
+                          value={"Drums"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight"}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Volume"}
+                          value={"12m3"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                    </>
+                  ) : data.containerType.toLocaleLowerCase() === "bulk" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Bulk"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Ship Type"}
+                          value={"General Cargo"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Loading Rate"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Discharging Rate"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : data.containerType.toLocaleLowerCase() ===
+                    "hazardous cargo" ? (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Hazardous Cargo"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"UN Number"}
+                          value={"hd1234"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"IMCO Class"}
+                          value={"hd1234"}
+                          valueStyle={"font-semibold text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Type of Container"}
+                          value={"Over Dimensional Cargo"}
+                          valueStyle={"font-semibold"}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Size"}
+                          value={"20'FT Reefer Container"}
+                          valueStyle={"font-semibold"}
+                          titleStyle={"text-end"}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Length"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Width"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Height"}
+                          value={"123"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Measurement"}
+                          value={"meters"}
+                          valueStyle={"font-semibold "}
+                        />
+                      </div>
+                      <div className="flex justify-between">
+                        <ProfileBoxLayout
+                          title={"Gross Weight "}
+                          value={"10000 kgs"}
+                          valueStyle={"font-semibold "}
+                        />
+                        <ProfileBoxLayout
+                          title={"Container Count"}
+                          value={"11"}
+                          valueStyle={"font-semibold text-center"}
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                //for land frieght
+                <div className="h-28 border rounded-xs items-center flex justify-center">
+                  <p className="font-semibold"> Still Data not given..</p>
+                </div>
+              )}
+              {/* <div className="flex flex-col gap-4">
                 {data.containerType.toLocaleLowerCase() === "fcl" ? (
                   <>
                     <div className="flex justify-between">
@@ -219,12 +641,12 @@ const BookingDetails: React.FC = () => {
                         valueStyle={"font-semibold"}
                       />
                       <ProfileBoxLayout
-                        title={"Loading Rate*"}
+                        title={"Loading Rate"}
                         value={"11"}
                         valueStyle={"font-semibold text-center"}
                       />
                       <ProfileBoxLayout
-                        title={"Discharging Rate*"}
+                        title={"Discharging Rate"}
                         value={"11"}
                         valueStyle={"font-semibold text-center"}
                       />
@@ -322,7 +744,7 @@ const BookingDetails: React.FC = () => {
                     </div>
                   </>
                 )}
-              </div>
+              </div> */}
             </div>
 
             {/* goods ready date */}

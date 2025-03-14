@@ -29,6 +29,7 @@ interface RowData {
   leadSource: string;
   leadHandlePerson: React.ReactNode;
   shipmentMode: React.ReactNode;
+  nextFollowUps: string;
   portOfLoading: string;
   portOfDischarge: string;
   transportationMode: React.ReactNode;
@@ -48,6 +49,7 @@ const columns: any[] = [
     label: "Lead Handle Person",
   },
   { id: "shipmentMode", label: "Shipment Mode", align: "center" },
+  { id: "nextFollowUps", label: "Next Follow Ups", },
   { id: "portOfLoading", label: "Port of Loading", minWidth: 140 },
   {
     id: "portOfDischarge",
@@ -185,6 +187,7 @@ const EnquiryList: React.FC = () => {
       leadSource: items?.leadSource,
       leadHandlePerson: leadHandlePersons,
       shipmentMode: shipmentModes,
+      nextFollowUps: items?.nextFollowUps,
       portOfLoading: items?.portOfLoading,
       portOfDischarge: items?.portOfDischarge,
       transportationMode: transportationModes,
@@ -206,6 +209,7 @@ const EnquiryList: React.FC = () => {
       salesPersonImage: SalesPersonImage,
       branchLocation: "Chennai, India",
       shipmentMode: "Export",
+      nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Rotterdam, Netherlands",
       transportationMode: "Sea Freight",
@@ -222,6 +226,7 @@ const EnquiryList: React.FC = () => {
       salesPersonImage: null,
       branchLocation: "Chennai, India",
       shipmentMode: "Import",
+      nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
       transportationMode: "Land Freight",
@@ -238,6 +243,7 @@ const EnquiryList: React.FC = () => {
       salesPersonImage: SalesPersonImage,
       branchLocation: "Chennai, India",
       shipmentMode: "Cross Trade",
+      nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
       transportationMode: "Air Freight",
@@ -254,6 +260,7 @@ const EnquiryList: React.FC = () => {
       salesPersonImage: SalesPersonImage,
       branchLocation: "Chennai, India",
       shipmentMode: "Export",
+      nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Rotterdam, Netherlands",
       transportationMode: "Sea Freight",
@@ -270,6 +277,7 @@ const EnquiryList: React.FC = () => {
       salesPersonImage: null,
       branchLocation: "Chennai, India",
       shipmentMode: "Import",
+      nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
       transportationMode: "Land Freight",
@@ -286,6 +294,7 @@ const EnquiryList: React.FC = () => {
       salesPersonImage: SalesPersonImage,
       branchLocation: "Chennai, India",
       shipmentMode: "Cross Trade",
+      nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
       transportationMode: "Air Freight",
