@@ -84,8 +84,8 @@ const columns: any[] = [
 
 const EnquiryList: React.FC = () => {
   const navigate = useNavigate();
-  const handleViewClick = () => {
-    navigate("/enquiry/details");
+  const handleViewClick = (id: any) => {
+    navigate(`/enquiry/details/${id}`);
   };
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -169,7 +169,7 @@ const EnquiryList: React.FC = () => {
     );
 
     const actions = (
-      <div className="flex justify-center" onClick={handleViewClick}>
+      <div className="flex justify-center" onClick={() =>handleViewClick(id)}>
         <NeutralBlueButton
           label={"View"}
           size={"s"}
@@ -229,7 +229,7 @@ const EnquiryList: React.FC = () => {
       nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
-      transportationMode: "Land Freight",
+      transportationMode: "Air Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Converted to booking",
       requestedPrice: "2000 USD",
@@ -246,7 +246,7 @@ const EnquiryList: React.FC = () => {
       nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
-      transportationMode: "Air Freight",
+      transportationMode: "Land Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Negotiating",
       requestedPrice: "2000 USD",
@@ -280,7 +280,7 @@ const EnquiryList: React.FC = () => {
       nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
-      transportationMode: "Land Freight",
+      transportationMode: "Air Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Converted to booking",
       requestedPrice: "2000 USD",
@@ -297,7 +297,7 @@ const EnquiryList: React.FC = () => {
       nextFollowUps: "10/21/12",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Antwerp, Belgium",
-      transportationMode: "Air Freight",
+      transportationMode: "Land Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Negotiating",
       requestedPrice: "2000 USD",

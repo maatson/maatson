@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import {
   ContainerIcon,
@@ -22,22 +22,68 @@ import BlackButton from "../../../components/buttons/BlackButton";
 import GroupField from "../../../components/groupField/GroupField";
 import CargoShipImage from "/images/cargoShip.png";
 import { useParams } from "react-router-dom";
+import "./style.css";
+import ErrorButton from "../../../components/buttons/ErrorButton";
+import RedClickHere from "/images/redClickHere.png";
 
 const BookingDetails: React.FC = () => {
   const { id } = useParams();
 
+  const [cancelBooking, setCancelBooking] = useState<boolean>(true);
+  const handleCancelBooking = () => {
+    setCancelBooking(false);
+  };
+  const handleCancel = () => {
+    setCancelBooking(true);
+  }
+  useEffect(() => {
+    const middleLocation = document.querySelector(
+      ".middle-location"
+    ) as HTMLElement | null;
+    const endLocation = document.querySelector(
+      ".end-location"
+    ) as HTMLElement | null;
+
+    const handleAnimationEnd = () => {
+      if (middleLocation) {
+        middleLocation.style.backgroundColor = "#2c398f"; // Set final color
+      }
+      if (endLocation) {
+        endLocation.style.backgroundColor = "#2c398f"; // Set final color
+      }
+    };
+
+    if (middleLocation) {
+      middleLocation.addEventListener("animationend", handleAnimationEnd);
+    }
+
+    // Cleanup function to remove the event listener when the component unmounts
+    return () => {
+      if (middleLocation) {
+        middleLocation.removeEventListener("animationend", handleAnimationEnd);
+      }
+    };
+  }, []);
+
   const data =
-    Number(id) % 2 == 0
+    (Number(id) + 1) % 3 === 0 //2 , 5 are getting
+      ? {
+          modeOfTransportation: "land freight",
+          containerType: "",
+          modeOfShipment: "cross trade",
+        }
+      : Number(id) % 3 === 0 // 0, 3 are getting   0,1,2, 3,4,5
       ? {
           modeOfTransportation: "sea freight",
-          // containerType: "fcl",
+          containerType: "fcl",
           // containerType: "lcl",
           // containerType: "bulk",
           // containerType: "hazardous cargo",
+          // containerType: "over",
           modeOfShipment: "import",
-          containerType: "over",
         }
       : {
+          //1, 4 are getting
           modeOfTransportation: "air freight",
           containerType: "standard",
           modeOfShipment: "export",
@@ -93,10 +139,10 @@ const BookingDetails: React.FC = () => {
               </div>
 
               <div className="flex flex-col gap-1">
-                <div className="px-10 flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-grey-ab-100"></div>
-                  <div className="w-full h-1 bg-grey-ab-100"></div>
-                  <div className="w-3 h-3 rounded-full bg-grey-ab-100"></div>
+                <div className="px-10 flex items-center ">
+                  <div className="w-3 h-3 rounded-full bg-grey-ab-100 start-location"></div>
+                  <div className="w-full h-1 bg-grey-ab-100 middle-location"></div>
+                  <div className="w-3 h-3 rounded-full bg-grey-ab-100 end-location"></div>
                 </div>
                 <div className="flex justify-between">
                   <div className="flex flex-col gap-1">
@@ -138,10 +184,10 @@ const BookingDetails: React.FC = () => {
                 title={"Cargo Details"}
                 icon={<ContainerIcon />}
               />
-              {data.transportationMode.toLocaleLowerCase() === "air freight" ? (
+              {data.modeOfTransportation.toLocaleLowerCase() ===
+              "air freight" ? (
                 <div className="flex flex-col gap-4">
-                  {data.containerType.toLocaleLowerCase() ===
-                  "standard cargo" ? (
+                  {data.containerType.toLocaleLowerCase() === "standard" ? (
                     <>
                       <ProfileBoxLayout
                         title={"Type of Container"}
@@ -218,7 +264,7 @@ const BookingDetails: React.FC = () => {
                     </>
                   )}
                 </div>
-              ) : data.transportationMode.toLocaleLowerCase() ===
+              ) : data.modeOfTransportation.toLocaleLowerCase() ===
                 "sea freight" ? (
                 <div className="flex flex-col gap-4">
                   {data.containerType.toLocaleLowerCase() === "fcl" ? (
@@ -322,8 +368,7 @@ const BookingDetails: React.FC = () => {
                         />
                       </div>
                     </>
-                  ) : data.containerType.toLocaleLowerCase() ===
-                    "hazardous cargo" ? (
+                  ) : data.containerType.toLocaleLowerCase() === "hazardous" ? (
                     <>
                       <div className="flex justify-between">
                         <ProfileBoxLayout
@@ -418,7 +463,7 @@ const BookingDetails: React.FC = () => {
               ) : (
                 //for land frieght
                 <div className="h-28 border rounded-xs items-center flex justify-center">
-                  <p className="font-semibold"> Still Data not given..</p>
+                  <p className="font-semibold"> Will Execute Later..</p>
                 </div>
               )}
               {/* <div className="flex flex-col gap-4">
@@ -803,52 +848,82 @@ const BookingDetails: React.FC = () => {
             </div>
 
             {/* booking status */}
-            <div className="rounded-xs bg-grey-aw-50 shadow-md">
+            <div className="rounded-xs bg-grey-aw-50 shadow-md ">
               <div className="py-3 px-4 border-b border-b-grey-ab-100 font-semibold">
-                Booking Cancel
+                Booking Status
               </div>
-              <div className="flex flex-col gap-4 px-4 py-3">
-                <div className="flex flex-col gap-3">
-                  <p className="text-sm text-grey-ab-300 ">
-                    Please provide a reason for cancelling this Booking.
-                  </p>
-                  <GroupField
-                    label={"Reason for Cancellation"}
-                    type={"textarea"}
-                    placeholder={"Write Reason"}
-                    name={""}
-                    value={""}
-                    onChange={function (
-                      e: React.ChangeEvent<
-                        | HTMLInputElement
-                        | HTMLSelectElement
-                        | HTMLTextAreaElement
-                      >
-                    ): void {
-                      throw new Error("Function not implemented.");
-                    }}
-                    error={false}
-                    errorMessage={""}
-                    labelStyle="font-semibold"
-                  />
-                </div>
-                <div className="flex justify-end gap-3 items-center">
-                  <div>
-                    <PrimaryButton
-                      label={"Cancel"}
-                      size={"l"}
-                      variant={"link"}
-                    />
+
+              {/* Starting */}
+              {cancelBooking && (
+                <div className="flex flex-col gap-4 px-4 py-2 justify-center">
+                  <div className="flex flex-col gap-2">
+                    <div>
+                      <img src={RedClickHere} alt="RedClickHere" />
+                    </div>
+                    <p className="text-sm text-grey-ab-300 text-center">
+                      Click 'Cancel Booking' to confirm the cancellation of this
+                      Booking.
+                    </p>
                   </div>
-                  <div>
-                    <PrimaryButton
-                      label={"Save"}
+                  <div
+                    className="flex justify-center pb-3"
+                    onClick={handleCancelBooking}
+                  >
+                    <ErrorButton
+                      label={"Cancel Booking"}
                       size={"l"}
                       variant={"primary"}
                     />
                   </div>
                 </div>
-              </div>
+              )}
+
+              {/* When clicking cancel */}
+              {!cancelBooking && (
+                <div className="flex flex-col gap-4 px-4 py-3">
+                  <div className="flex flex-col gap-3">
+                    <p className="text-sm text-grey-ab-300 ">
+                      Please provide a reason for cancelling this Booking.
+                    </p>
+                    <GroupField
+                      label={"Reason for Cancellation"}
+                      type={"textarea"}
+                      placeholder={"Write Reason"}
+                      name={""}
+                      value={""}
+                      onChange={function (
+                        e: React.ChangeEvent<
+                          | HTMLInputElement
+                          | HTMLSelectElement
+                          | HTMLTextAreaElement
+                        >
+                      ): void {
+                        throw new Error("Function not implemented.");
+                      }}
+                      error={false}
+                      errorMessage={""}
+                      labelStyle="font-semibold"
+                    />
+                  </div>
+                  <div className="flex justify-end gap-3 items-center">
+                    <div onClick={handleCancel}>
+                      <PrimaryButton
+                        label={"Cancel"}
+                        size={"l"}
+                        variant={"link"}
+                      />
+                    </div>
+                    <div>
+                      <PrimaryButton
+                        label={"Save"}
+                        size={"l"}
+                        variant={"primary"}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {/* create here ui for after cancelling */}
             </div>
 
             <div className="shadow-md rounded-xs bg-grey-aw-50 flex flex-col">
@@ -856,7 +931,7 @@ const BookingDetails: React.FC = () => {
                 Carrier Details
               </div>
               <div className="flex gap-3 p-4 items-center">
-                <div className="w-[100px] h-[100px]">
+                <div className="w-[140px] ">
                   <img
                     src={CargoShipImage}
                     alt="CargoShipImage"
@@ -865,7 +940,7 @@ const BookingDetails: React.FC = () => {
                 </div>
                 <div className="h-full border-l border-l-grey-ab-100"></div>
                 <div className="  flex flex-col gap-4 p-3 bg-secondary-200 rounded-sm flex-auto">
-                  <div className="flex justify-between gap-2">
+                  <div className="flex justify-between gap-2 flex-wrap">
                     <div className="flex flex-col gap-2 p-1">
                       <p className="text-grey-ab-400 text-sm">Carrier Name</p>
                       <p className="text-grey-ab-900 text-sm font-semibold">
@@ -884,8 +959,6 @@ const BookingDetails: React.FC = () => {
                         M1234
                       </p>
                     </div>
-                  </div>
-                  <div className="flex justify-between">
                     <div className="flex flex-col gap-2 p-1">
                       <p className="text-grey-ab-400 text-sm">POL(ETA)</p>
                       <p className="text-grey-ab-900 text-sm font-semibold">
@@ -899,6 +972,9 @@ const BookingDetails: React.FC = () => {
                       </p>
                     </div>
                   </div>
+                  {/* <div className="flex justify-between">
+                   
+                  </div> */}
                 </div>
               </div>
             </div>
