@@ -1719,7 +1719,7 @@ const HeadTitle: React.FC<{ label: string; icon: React.ReactNode }> = ({
 }) => {
   return (
     <>
-      <div className="flex gap-4 border-b pb-2 border-grey-ab-100">
+      <div className="flex gap-4 border-b pb-2  border-grey-ab-100">
         <span>{icon}</span> <p className="font-semibold capitalize">{label}</p>
       </div>
     </>
