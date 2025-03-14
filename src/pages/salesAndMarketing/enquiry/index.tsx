@@ -1,8 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import PageHeader from "../../../components/header/PageHeader";
 
 const Enquiry: React.FC = () => {
+    const location = useLocation();
+  
   return (
     <>
       <PageHeader

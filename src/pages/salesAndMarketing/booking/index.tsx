@@ -1,8 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import PageHeader from "../../../components/header/PageHeader";
 
 const Booking: React.FC = () => {
+  const location = useLocation();
+
   return (
     <>
       <PageHeader
@@ -18,7 +20,7 @@ const Booking: React.FC = () => {
             : "Booking",
         ].flat()}
         heading={location.pathname === "/booking" ? "Booking" : "Booking"}
-      />{" "}
+      />
       <Outlet />
     </>
   );
