@@ -42,7 +42,7 @@ const BookingDetails: React.FC = () => {
   };
   const handleCancel = () => {
     setCancelBooking(true);
-  }
+  };
   useEffect(() => {
     const middleLocation = document.querySelector(
       ".middle-location"
