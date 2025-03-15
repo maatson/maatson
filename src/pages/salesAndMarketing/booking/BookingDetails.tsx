@@ -687,7 +687,7 @@ const BookingDetails: React.FC = () => {
             {/* booking status */}
             <div className="rounded-xs bg-grey-aw-50 shadow-md ">
               <div className="py-3 px-4 border-b border-b-grey-ab-100 font-semibold">
-                Booking Status
+                Booking Cancel
               </div>
 
               <CancelEnquiry />
