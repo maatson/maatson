@@ -73,7 +73,6 @@ const EnquiryDetails: React.FC = () => {
   };
   const handleConvertToBooking = () => {
     navigate(`/enquiry/details/${id}/booking-status/convertBooking`)
-
   };
 
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
