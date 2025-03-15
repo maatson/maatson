@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import {
   ContainerIcon,
@@ -29,6 +29,7 @@ import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import RedClickHere from "/images/redClickHere.png";
 import BlueClickHere from "/images/blueClickHere.png";
 import YellowClickHere from "/images/yellowClickHere.png";
+import FollowUps from "../../../components/followups/FollowUps";
 
 interface RowData {
   id: string | number;
@@ -54,16 +55,21 @@ const columns: any[] = [
 const EnquiryDetails: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
+  const [isFollowUpOpen, setFollowUp] = useState<boolean>(false);
+  const followRef = useRef<HTMLDivElement | null>(null);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleCloseFollowUp = () => {
+    setFollowUp(false);
+  };
   const handleCancel = () => {
     navigate(`/enquiry/details/${id}/booking-status/cancel`)
   };
   const handleNegotiation = () => {
-    navigate(`/enquiry/details/${id}`)
-
+    navigate(`/enquiry/details/${id}`);
   };
   const handleConvertToBooking = () => {
     navigate(`/enquiry/details/${id}/booking-status/convertBooking`)
@@ -197,9 +203,31 @@ const EnquiryDetails: React.FC = () => {
           containerType: "standard",
           modeOfShipment: "export",
         };
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (followRef.current && !followRef.current.contains(e.target as Node)) {
+        setFollowUp(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
   return (
     <>
       <div className="flex flex-col gap-6 py-4">
+        {isFollowUpOpen && (
+          <>
+            <div className="inset-0 fixed bg-black/50 h-screen cursor-pointer z-10"></div>
+            <div className="inset-0 fixed z-20 flex justify-end">
+              <div ref={followRef}>
+                <FollowUps onClose={handleCloseFollowUp} />
+              </div>
+            </div>
+          </>
+        )}
         <div className="flex justify-between items-center p-3 rounded-xs shadow-lg bg-grey-aw-50">
           <p className="text-lg font-semibold text-grey-ab-900">
             Enquiry Details
@@ -660,7 +688,7 @@ const EnquiryDetails: React.FC = () => {
                   </p>
                 </div>
               </div>
-              <div>
+              <div ref={followRef} onClick={() => setFollowUp(true)}>
                 <PrimaryButton
                   label={"Update Follow Ups"}
                   size={"m"}
@@ -839,7 +867,6 @@ const EnquiryDetails: React.FC = () => {
 };
 
 export default EnquiryDetails;
-
 
 
 

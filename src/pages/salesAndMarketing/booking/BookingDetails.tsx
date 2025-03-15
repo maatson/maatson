@@ -43,7 +43,7 @@ const BookingDetails: React.FC = () => {
   };
   const handleCancel = () => {
     setCancelBooking(true);
-  }
+  };
   useEffect(() => {
     const middleLocation = document.querySelector(
       ".middle-location"
@@ -115,7 +115,6 @@ const BookingDetails: React.FC = () => {
       <div className="flex flex-col gap-6 py-4">
         {isFollowUpOpen && (
           <>
-            {" "}
             <div className="inset-0 fixed bg-black/50 h-screen cursor-pointer z-10"></div>
             <div className="inset-0 fixed z-20 flex justify-end">
               <div ref={followRef}>
