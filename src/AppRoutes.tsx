@@ -86,9 +86,9 @@ const EnquiryDetails = lazy(
 const AddEnquiry = lazy(
   () => import("./pages/salesAndMarketing/enquiry/AddEnquiry")
 );
-const CancelEnquiry = lazy(() => import("./pages/salesAndMarketing/enquiry/EnquiryDetails").then(module => ({ default: module.CancelEnquiry })));
-const NegotiateEnquiry = lazy(() => import("./pages/salesAndMarketing/enquiry/EnquiryDetails").then(module => ({ default: module.NegotiateEnquiry })));
-const ConvertToBookingEnquiry = lazy(() => import("./pages/salesAndMarketing/enquiry/EnquiryDetails").then(module => ({ default: module.ConvertToBookingEnquiry })));
+const CancelEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/CancelEnquiry"));
+const NegotiateEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/NegotiateEnquiry"));
+const ConvertToBookingEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/ConvertToBookingEnquiry"));
 
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
@@ -199,9 +199,9 @@ const AppRoutes: React.FC = () => {
           <Route index element={<EnquiryList />} />
           <Route path="add" element={<AddEnquiry />} />
           <Route path="details/:id" element={<EnquiryDetails />} >
-            <Route path="cancel-enquiry"  element={<CancelEnquiry />} />
+            <Route path="booking-status/cancel"  element={<CancelEnquiry />} />
             <Route index element={<NegotiateEnquiry />} />
-            <Route path="convertBooking-enquiry"  element={<ConvertToBookingEnquiry />} />
+            <Route path="booking-status/convertBooking"  element={<ConvertToBookingEnquiry />} />
           </Route>
         </Route>
 

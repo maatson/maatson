@@ -25,7 +25,7 @@ import GreyButton from "../../../components/buttons/GreyButton";
 import ErrorButton from "../../../components/buttons/ErrorButton";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import CustomTable from "../../../components/table/CustomTable";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import RedClickHere from "/images/redClickHere.png";
 import BlueClickHere from "/images/blueClickHere.png";
 import YellowClickHere from "/images/yellowClickHere.png";
@@ -56,22 +56,17 @@ const EnquiryDetails: React.FC = () => {
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [isCancel, setIsCancel] = useState<boolean>();
-  const [isNegotiation, setIsNegotiation] = useState<boolean>(true);
-  const [isConvertToBooking, setIsConvertToBooking] = useState<boolean>();
   const handleCancel = () => {
-    // setIsCancel(true);
-    // setIsNegotiation(false);
-    // setIsConvertToBooking(false);
-    navigate(`/enquiry/details/${id}/cancel-enquiry`)
+    navigate(`/enquiry/details/${id}/booking-status/cancel`)
   };
   const handleNegotiation = () => {
     navigate(`/enquiry/details/${id}`)
 
   };
   const handleConvertToBooking = () => {
-    navigate(`/enquiry/details/${id}/convertBooking-enquiry`)
+    navigate(`/enquiry/details/${id}/booking-status/convertBooking`)
 
   };
 
@@ -780,7 +775,7 @@ const EnquiryDetails: React.FC = () => {
                 <div
                   onClick={handleCancel}
                   className={`px-2 py-1 border-b-2 ${
-                    isCancel ? "border-b-tertiary" : "border-b-grey-aw-50"
+                    location.pathname ===`/enquiry/details/${id}/booking-status/cancel` ? "border-b-tertiary" : "border-b-grey-aw-50"
                   } text-sm font-semibold text-grey-ab cursor-pointer`}
                 >
                   Cancel
@@ -788,7 +783,7 @@ const EnquiryDetails: React.FC = () => {
                 <div
                   onClick={handleNegotiation}
                   className={`px-2 py-1 border-b-2 ${
-                    isNegotiation ? "border-b-tertiary" : "border-b-grey-aw-50"
+                    location.pathname ===`/enquiry/details/${id}` ? "border-b-tertiary" : "border-b-grey-aw-50"
                   } text-sm font-semibold text-grey-ab cursor-pointer`}
                 >
                   Negotiation
@@ -796,7 +791,7 @@ const EnquiryDetails: React.FC = () => {
                 <div
                   onClick={handleConvertToBooking}
                   className={`px-2 py-1 border-b-2 ${
-                    isConvertToBooking
+                    location.pathname ===`/enquiry/details/${id}/booking-status/convertBooking`
                       ? "border-b-tertiary"
                       : "border-b-grey-aw-50"
                   } border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer`}
@@ -805,72 +800,9 @@ const EnquiryDetails: React.FC = () => {
                 </div>
               </div>
 
-              {/* {isCancel && (
-                <div className="flex flex-col gap-4 px-4 py-2 justify-center">
-                  <div className="flex flex-col gap-2">
-                    <div>
-                      <img src={RedClickHere} alt="RedClickHere" />
-                    </div>
-                    <p className="text-sm text-grey-ab-300 text-center">
-                      Click 'Cancel Booking' to confirm the cancellation of this
-                      Booking.
-                    </p>
-                  </div>
-                  <div className="flex justify-center pb-3" onClick={() => {}}>
-                    <ErrorButton
-                      label={"Cancel Booking"}
-                      size={"l"}
-                      variant={"primary"}
-                    />
-                  </div>
-                </div>
-              )} */}
-              <Outlet />
-              {/*  */}
-              <div className="flex flex-col gap-4 px-4 py-3">
-                <div className="flex flex-col gap-3">
-                  <p className="text-sm text-grey-ab-300 text-center">
-                    Please provide a reason for cancelling this enquiry.
-                  </p>
-                  <GroupField
-                    label={"Reason for Cancellation"}
-                    type={"textarea"}
-                    placeholder={"Write Reason"}
-                    name={""}
-                    value={""}
-                    onChange={function (
-                      e: React.ChangeEvent<
-                        | HTMLInputElement
-                        | HTMLSelectElement
-                        | HTMLTextAreaElement
-                      >
-                    ): void {
-                      throw new Error("Function not implemented.");
-                    }}
-                    error={false}
-                    errorMessage={""}
-                    labelStyle="font-semibold"
-                  />
-                </div>
-                <div className="flex justify-end gap-3 items-center">
-                  <div>
-                    <GreyButton
-                      label={"Cancel"}
-                      size={"l"}
-                      variant={"secondary"}
-                    />
-                  </div>
-                  <div>
-                    <ErrorButton
-                      label={"Save"}
-                      size={"l"}
-                      variant={"outline"}
-                    />
-                  </div>
-                </div>
-              </div>
+              <Outlet />              
             </div>
-            {/* enwuiry status end */}
+            {/* enquiry status end */}
           </div>
           {/* right side end */}
         </div>
@@ -909,28 +841,9 @@ const EnquiryDetails: React.FC = () => {
 export default EnquiryDetails;
 
 
-export const CancelEnquiry: React.FC = () => {
-  return (
-    <>
-      <div>CancelEnquiry</div>
-    </>
-  );
-};
 
-export const NegotiateEnquiry: React.FC = () => {
-  return (
-    <>
-      <div>CancelEnquiry</div>
-    </>
-  );
-};
 
-export const ConvertToBookingEnquiry: React.FC = () => {
-  return (
-    <>
-      <div>CancelEnquiry</div>
-    </>
-  );
-};
+
+
 
 
