@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import {
   AccountDetailIcon,
@@ -21,31 +21,28 @@ import FileUpload from "../../../components/fileUpload/FileUpload";
 
 const AddRegister: React.FC = () => {
   const [data, setData] = useState({
-    userName: "",
-    email: "",
-    mobileNo: "",
-    password: "",
-    confirmPassword: "",
-    image: null as File | null,
-    fullName: "",
-    dateofBirth: "",
-    gender: "",
-    personalEmail: "",
-    personalMobileNo: "",
+    comapanyLogo: null as File | null,
+    companyName: "",
+    doorNo: "",
     street: "",
     city: "",
-    doorNo: "",
     postalCode: "",
     country: "",
-    contactPersonName: "",
-    contactPersonEmail: "",
-    contactPersonMobileNo: "",
-    officeLocation: "",
-    joiningDate: "",
-    designation: "",
+    companyEmail: "",
+    companyMobileNumber: "",
+    companyWebsite: "",
+    businessType: ["hello"],
+
+    fullName: "",
+    username: "",
+    email: "",
+    alternativeEmail: "",
+    mobileNumber: "",
     department: "",
-    employeeType: "",
-    employeeResume: null as File | null,
+    companyDocument: null as File | null,
+
+    password: "",
+    confirmPassword: "",
   });
 
   const [eyeIcon, setEyeIcon] = useState("close");
@@ -61,14 +58,25 @@ const AddRegister: React.FC = () => {
   const handleImageChange = (file: File | null) => {
     setData((prevData) => ({
       ...prevData,
-      image: file,
+      comapanyLogo: file,
     }));
   };
-  const handleFileChange = (name: "employeeResume", file: File | null) => {
+  const handleFileChange = (name: "companyDocument", file: File | null) => {
     setData((prevData) => ({
       ...prevData,
       [name]: file,
     }));
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleSubmit = () => {
+    console.log(data);
   };
   return (
     <div className="bg-white rounded flex flex-col gap-6 px-3 py-4 text-grey-ab ">
@@ -101,14 +109,8 @@ const AddRegister: React.FC = () => {
               leftIcon={<UserIcon color="#2c398f" />}
               name={"companyName"}
               parentStyle="max-w-[80%]"
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.companyName}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -119,16 +121,10 @@ const AddRegister: React.FC = () => {
                   label={"Building/Door Number*"}
                   type={"text"}
                   placeholder={"Enter Building/Door Number "}
-                  name={""}
-                  value={""}
+                  name={"doorNo"}
+                  value={data.doorNo}
                   leftIcon={<LocationIcon color="#2c398f" />}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   parentStyle="basis-[35%] flex-grow"
@@ -137,16 +133,10 @@ const AddRegister: React.FC = () => {
                   label={"Street*"}
                   type={"text"}
                   placeholder={"Enter Street "}
-                  name={""}
-                  value={""}
+                  name={"street"}
+                  value={data.street}
                   leftIcon={<LocationIcon color="#2c398f" />}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   parentStyle="basis-[35%] flex-grow"
@@ -156,15 +146,9 @@ const AddRegister: React.FC = () => {
                   type={"text"}
                   placeholder={"Enter City "}
                   leftIcon={<LocationIcon color="#2c398f" />}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"city"}
+                  value={data.city}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   parentStyle="basis-[30%] "
@@ -175,15 +159,9 @@ const AddRegister: React.FC = () => {
                   type={"text"}
                   leftIcon={<LocationIcon color="#2c398f" />}
                   placeholder={"Enter Postal Code"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"postalCode"}
+                  value={data.postalCode}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   parentStyle="basis-[30%] "
@@ -193,15 +171,9 @@ const AddRegister: React.FC = () => {
                   type={"text"}
                   placeholder={"Enter Country "}
                   leftIcon={<LocationIcon color="#2c398f" />}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"country"}
+                  value={data.country}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   parentStyle="basis-[35%] flex-grow"
@@ -210,15 +182,9 @@ const AddRegister: React.FC = () => {
                   label={"Company Email*"}
                   type={"email"}
                   placeholder={"Enter Email"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"companyEmail"}
+                  value={data.companyEmail}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<EmailIcon color="#2c398f" />}
@@ -228,15 +194,9 @@ const AddRegister: React.FC = () => {
                   label={"Company Phone Number*"}
                   type={"phone"}
                   placeholder={"Enter Phone Number"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"companyMobileNumber"}
+                  value={data.companyMobileNumber}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   parentStyle="basis-[35%] flex-grow"
@@ -249,16 +209,10 @@ const AddRegister: React.FC = () => {
               type={"url"}
               placeholder={"Enter Website"}
               leftIcon={<UrlIcon color="#2c398f" />}
-              name={"Website"}
+              name={"companyWebsite"}
               parentStyle="max-w-[40%]"
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.companyWebsite}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -266,17 +220,11 @@ const AddRegister: React.FC = () => {
               <GroupField
                 label={"Business Type*"}
                 type={"creatable"}
-                placeholder={""}
-                name={""}
-                value={""}
+                placeholder={"select type of business"}
+                name={"businessType"}
+                value={data.businessType}
                 leftIcon={<CategoryIcon color="#2c398f" />}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  console.log(e.target.value);
-                }}
+                onChange={handleChange}
                 error={false}
                 isMulti
                 errorMessage={""}
@@ -304,14 +252,8 @@ const AddRegister: React.FC = () => {
               placeholder={"Enter Name"}
               name={"fullName"}
               leftIcon={<UserIcon color="#2c398f" />}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.fullName}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               parentStyle="basis-[48%] "
@@ -321,15 +263,9 @@ const AddRegister: React.FC = () => {
               type={"username"}
               leftIcon={<UserIcon color="#2c398f" />}
               placeholder={"Enter User Name"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              name={"username"}
+              value={data.username}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               parentStyle="basis-[48%] "
@@ -338,16 +274,10 @@ const AddRegister: React.FC = () => {
               label={"Email*"}
               type={"email"}
               placeholder={"Enter Email"}
-              name={""}
-              value={""}
+              name={"email"}
+              value={data.email}
               leftIcon={<EmailIcon color="#2c398f" />}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               parentStyle="basis-[48%] "
@@ -356,16 +286,10 @@ const AddRegister: React.FC = () => {
               label={"Alternative Email"}
               type={"email"}
               placeholder={"Enter Email"}
-              name={""}
-              value={""}
+              name={"alternativeEmail"}
+              value={data.alternativeEmail}
               leftIcon={<EmailIcon color="#2c398f" />}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               parentStyle="basis-[48%] "
@@ -374,16 +298,10 @@ const AddRegister: React.FC = () => {
               label={"Mobile Number*"}
               type={"phone"}
               placeholder={"Enter Mobile Number"}
-              name={""}
-              value={""}
+              name={"mobileNumber"}
+              value={data.mobileNumber}
               leftIcon={<PhoneIcon color="#2c398f" />}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               parentStyle="basis-[48%] "
@@ -392,16 +310,10 @@ const AddRegister: React.FC = () => {
               label={"Department*"}
               type={"text"}
               placeholder={"Enter Department"}
-              name={""}
-              value={""}
+              name={"department"}
+              value={data.department}
               leftIcon={<DepartmentIcon color="#2c398f" />}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               parentStyle="basis-[48%] "
@@ -418,9 +330,9 @@ const AddRegister: React.FC = () => {
           </div>
           <div className="max-w-[816px]">
             <FileUpload
-              onFileChange={(file) => handleFileChange("employeeResume", file)}
+              onFileChange={(file) => handleFileChange("companyDocument", file)}
               label={"Company Registration/Incorporation Certificate*"}
-              fileName={data.employeeResume?.name}
+              fileName={data.companyDocument?.name}
             />
           </div>
         </div>
@@ -437,7 +349,7 @@ const AddRegister: React.FC = () => {
               type={eyeIcon === "open" ? "text" : "password"}
               name={"password"}
               value={data.password}
-              onChange={() => {}}
+              onChange={handleChange}
               leftIcon={<PasswordIcon color="#2C398F" />}
               rightIcon={
                 eyeIcon === "open" ? (
@@ -457,7 +369,7 @@ const AddRegister: React.FC = () => {
               type={eyeIcon === "open" ? "text" : "password"}
               name={"confirmPassword"}
               value={data.confirmPassword}
-              onChange={() => {}}
+              onChange={handleChange}
               leftIcon={<PasswordIcon color="#2C398F" />}
               rightIcon={
                 eyeIcon === "open" ? (
@@ -478,7 +390,10 @@ const AddRegister: React.FC = () => {
       </div>
       <div className="p-5 flex gap-8 justify-end">
         <PrimaryButton label={"Cancel"} size={"xl"} variant={"link"} />
-        <PrimaryButton label={"Register"} size={"xl"} variant={""} />
+        <div onClick={handleSubmit}>
+          {" "}
+          <PrimaryButton label={"Register"} size={"xl"} variant={""} />
+        </div>
       </div>
     </div>
   );

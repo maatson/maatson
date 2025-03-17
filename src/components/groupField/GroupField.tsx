@@ -63,15 +63,25 @@ const GroupField: React.FC<Groupfield> = ({
   isDisabled,
   size, //added by suriya
 }) => {
+  // Dynamically select value for multi or single select
+  const selectedValue = isMulti
+    ? options?.filter(
+        (option) => Array.isArray(value) && value.includes(option.value) // Check if value is an array before using includes
+      )
+    : options?.find((option) => option.value === value);
+
   // Handle React-Select change event
   const handleReactSelectChange = (selectedOption: any) => {
     onChange({
       target: { name, value: selectedOption ? selectedOption.value : "" },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
-  const handleReactMultiSelectChange = (selectedOption: any) => {
+  const handleReactMultiSelectChange = (selectedOptions: any) => {
     onChange({
-      target: { name, value: selectedOption },
+      target: {
+        name,
+        value: selectedOptions.map((option: any) => option.value),
+      },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
   return (
@@ -95,7 +105,7 @@ const GroupField: React.FC<Groupfield> = ({
               <Select
                 id={name}
                 name={name}
-                value={options?.find((option) => option.value === value)} // Set the selected value
+                value={selectedValue} // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange
@@ -186,7 +196,7 @@ const GroupField: React.FC<Groupfield> = ({
               <CreatableSelect
                 id={name}
                 name={name}
-                value={options?.find((option) => option.value === value)} // Set the selected value
+                value={selectedValue} // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange
