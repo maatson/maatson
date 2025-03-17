@@ -550,8 +550,12 @@ const CarrierContactInformation: React.FC = () => {
               {contactCurrentPage * contactItemsPerPage -
                 contactItemsPerPage +
                 1}{" "}
-              to {contactCurrentPage * contactItemsPerPage} of{" "}
-              {contactRows.length} Entries
+              to{" "}
+              {contactCurrentPage *
+                (contactItemsPerPage > contactRows.length
+                  ? contactRows.length
+                  : contactItemsPerPage)}{" "}
+              of {contactRows.length} Entries
             </div>
 
             <CustomPagination

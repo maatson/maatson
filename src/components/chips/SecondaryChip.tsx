@@ -21,7 +21,7 @@ const SecondaryChip: React.FC<ChipProps> = ({
         }
         ${
             variant?.toLocaleLowerCase() === "fill"
-            ? "bg-secondary-50 text-warning"
+            ? "bg-secondary-50 text-secondary"
             : variant?.toLocaleLowerCase() === "outline"
             ? "border border-secondary text-secondary"
             : variant?.toLocaleLowerCase() === "mix"

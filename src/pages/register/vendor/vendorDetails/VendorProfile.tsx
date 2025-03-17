@@ -27,7 +27,7 @@ const VendorProfile: React.FC = () => {
           <div className="flex flex-col gap-4">
             <div className="rounded-sm py-7 px-14 bg-grey-100 flex items-center justify-center relative">
               <img src={CompanyLogo} alt="companylogo" className="" />
-              <div className="absolute top-2 right-2 w-6 h-6 bg-blue-50 rounded flex items-center justify-center z-10 cursor-pointer">
+              <div className="absolute top-2 right-2 w-6 h-6 bg-blue-50 rounded flex items-center justify-center  cursor-pointer">
                 <EditIcon color="#0091FF" size={16} />
               </div>
             </div>

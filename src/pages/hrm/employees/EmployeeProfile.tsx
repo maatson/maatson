@@ -53,10 +53,10 @@ const employeeDocumentColumns: any[] = [
   { id: "action", label: "Action", align: "center", minWidth: "100px" },
 ];
 const columns: any[] = [
-  { id: "date", label: "Date", align:"center"},
-  { id: "attendanceStatus", label: "Attendance Status", align:"center" },
-  { id: "checkIn", label: "Check In", align:"center" },
-  { id: "checkOut", label: "Check Out", align:"center" },
+  { id: "date", label: "Date", align: "center" },
+  { id: "attendanceStatus", label: "Attendance Status", align: "center" },
+  { id: "checkIn", label: "Check In", align: "center" },
+  { id: "checkOut", label: "Check Out", align: "center" },
   {
     id: "workingHours",
     label: "Working Hours",
@@ -65,7 +65,6 @@ const columns: any[] = [
 ];
 
 const EmployeeProfile: React.FC = () => {
-
   // For employee document table
   const [employeeDocumentRows, setEmployeeDocumentRows] = useState<
     EmployeeDocumentRowData[]
@@ -297,7 +296,7 @@ const EmployeeProfile: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
-  
+
   return (
     <>
       <div className="flex justify-end py-4 items-center">
@@ -536,8 +535,15 @@ const EmployeeProfile: React.FC = () => {
           <div className="px-3 py-4 flex justify-between items-center">
             <div className="text-xs text-grey-ab-200">
               Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
-              {currentPage * itemsPerPage} of {rows.length} Entries
+              {currentPage *
+                (itemsPerPage > rows.length ? rows.length : itemsPerPage)}{" "}
+              of {rows.length} Entries
             </div>
+            {/*         
+            <div className="text-xs text-grey-ab-200">
+              Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
+              {currentPage * itemsPerPage} of {rows.length} Entries
+            </div> */}
 
             <CustomPagination
               totalItems={rows.length}

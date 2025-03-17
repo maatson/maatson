@@ -69,6 +69,7 @@ const SideBar: React.FC = () => {
         }
       }
       newState[index] = !newState[index];
+      // newState[index] = true;
       return newState;
     });
     setActiveItem(index); // Set active item when clicked
@@ -102,7 +103,10 @@ const SideBar: React.FC = () => {
         leftIcon: <FreightIcon />,
         label: "Sales & Marketing",
         isOpen: openItems[2] || false,
-        children: [],
+        children: [
+          { label: "Leads and CRM", link: "/enquiry" },
+          { label: "Booking", link: "/booking" },
+        ],
         onClick: () => handleItemClick(2),
       },
       {

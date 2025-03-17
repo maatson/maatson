@@ -24,6 +24,7 @@ interface Groupfield {
   errorMessage: string;
   size?: string; //added by suriya
   isMulti?: boolean;
+  isDisabled?: boolean;
 }
 
 // const CustomDropdownIndicator = () => {
@@ -59,6 +60,7 @@ const GroupField: React.FC<Groupfield> = ({
   error,
   errorMessage,
   isMulti,
+  isDisabled,
   size, //added by suriya
 }) => {
   // Handle React-Select change event
@@ -68,10 +70,20 @@ const GroupField: React.FC<Groupfield> = ({
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
   const handleReactMultiSelectChange = (selectedOption: any) => {
+    const value = selectedOption
+      ? selectedOption.map(
+          (option: { label: string; value: string }) => option.value
+        )
+      : [];
+
     onChange({
-      target: { name, value: selectedOption },
+      target: {
+        name,
+        value: value,
+      },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
+
   return (
     <>
       <div className={`flex flex-col gap-2 ${parentStyle}`}>
@@ -91,14 +103,25 @@ const GroupField: React.FC<Groupfield> = ({
           {type === "select" ? (
             <>
               <Select
+                id={name}
                 name={name}
-                value={options?.find((option) => option.value === value)} // Set the selected value
+                value={
+                  Array.isArray(value)
+                    ? value.map((value) => {
+                        const option = options?.find(
+                          (opt) => opt.value === value
+                        );
+                        return option || { label: value, value }; // For newly created values
+                      })
+                    : options?.find((option) => option.value === value)
+                } // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange
                     : handleReactSelectChange
                 } // React-Select onChange handler
                 isMulti={isMulti ? true : false}
+                isDisabled={isDisabled}
                 options={options}
                 className="p-0 w-full min-w-0 " // Tailwind class for full width
                 classNamePrefix="custom-select" // Optional class prefix for styling
@@ -144,7 +167,35 @@ const GroupField: React.FC<Groupfield> = ({
                       : "#fff", // Tailwind background colors
                     color:
                       state.isSelected || state.isFocused ? "#fff" : "#111827", // Tailwind text colors
-                    padding: "0.5rem", // Tailwind padding
+                    padding: "0.2rem 0.5rem", // Tailwind padding
+                  }),
+                  multiValue: (provided) => ({
+                    ...provided,
+                    backgroundColor: "#ffffff", // Background color of the chip
+                    borderRadius: "16px", // Round shape
+                    border: "solid 1px #2c398f",
+                    padding: "0px 8px", // Padding inside the chip
+                    margin: "4px", // Space between chips
+                  }),
+                  multiValueLabel: (provided) => ({
+                    ...provided,
+                    color: "#2c398f", // Text color inside the chip
+                    fontSize: "12px", // Text size inside the chip
+                    fontWeight: "400",
+                    marginBlock: "0",
+                    paddingInline: "4px",
+                  }),
+                  multiValueRemove: (provided) => ({
+                    ...provided,
+                    color: "#2c398f", // Close icon color
+                    cursor: "pointer",
+                    padding: "0px",
+                    marginBlock: "5px",
+                    ":hover": {
+                      backgroundColor: "#9ea4cf", // Hover effect for remove button
+                      color: "#2c398f", // Text color on hover
+                      padding: "0px ",
+                    },
                   }),
                 }}
               />
@@ -152,8 +203,18 @@ const GroupField: React.FC<Groupfield> = ({
           ) : type === "creatable" ? (
             <>
               <CreatableSelect
+                id={name}
                 name={name}
-                value={options?.find((option) => option.value === value)} // Set the selected value
+                value={
+                  Array.isArray(value)
+                    ? value.map((value) => {
+                        const option = options?.find(
+                          (opt) => opt.value === value
+                        );
+                        return option || { label: value, value }; // For newly created values
+                      })
+                    : options?.find((option) => option.value === value)
+                } // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange
@@ -161,6 +222,7 @@ const GroupField: React.FC<Groupfield> = ({
                 } // React-Select onChange handler
                 isMulti={isMulti ? true : false}
                 options={options}
+                isDisabled={isDisabled}
                 className="p-0 w-full min-w-0 " // Tailwind class for full width
                 classNamePrefix="custom-select" // Optional class prefix for styling
                 placeholder={placeholder || "Select an option"} // Placeholder text
@@ -205,7 +267,7 @@ const GroupField: React.FC<Groupfield> = ({
                       : "#fff", // Tailwind background colors
                     color:
                       state.isSelected || state.isFocused ? "#fff" : "#111827", // Tailwind text colors
-                    padding: "0.5rem", // Tailwind padding
+                    padding: "0.2rem 0.5rem", // Tailwind padding
                   }),
                   multiValue: (provided) => ({
                     ...provided,
@@ -243,6 +305,7 @@ const GroupField: React.FC<Groupfield> = ({
               name={name}
               value={value}
               id={name}
+              disabled={isDisabled}
               onChange={onChange}
               placeholder={placeholder}
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
@@ -253,6 +316,7 @@ const GroupField: React.FC<Groupfield> = ({
               name={name}
               value={value}
               id={name}
+              disabled={isDisabled}
               onChange={onChange}
               placeholder={placeholder}
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}

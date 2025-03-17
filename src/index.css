@@ -3,6 +3,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

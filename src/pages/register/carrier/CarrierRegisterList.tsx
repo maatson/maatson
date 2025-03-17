@@ -79,7 +79,7 @@ const CarrierRegisterList: React.FC = () => {
 
   // table
   const createData = (items: any) => {
-    const { id, modeOfTransport, operationalSince, countryOfOperation } = items;
+    const { id, modeOfTransport } = items;
     const modeOfTransports =
       modeOfTransport.toLowerCase() === "sea freight" ? (
         <BlueChip label={modeOfTransport} size="m" variant="outline" />
@@ -88,16 +88,13 @@ const CarrierRegisterList: React.FC = () => {
       ) : (
         <SecondaryChip label={modeOfTransport} size="m" variant="outline" />
       );
-    const operationalSinces = (
-      <p className="font-bold text-center">{operationalSince}</p>
-    );
-    const countryOfOperations = (
-      <p className="font-bold text-center">{countryOfOperation}</p>
-    );
 
     const actions = (
       <div className="flex justify-center gap-[10px] py-1 px-2">
-        <div className="rounded-xs p-1 bg-blue cursor-pointer" onClick={handleEyeIcon}>
+        <div
+          className="rounded-xs p-1 bg-blue cursor-pointer"
+          onClick={handleEyeIcon}
+        >
           <EyeOpenIcon size={16} color="#FDFDFD" />
         </div>
         <div className="rounded-xs p-1 bg-success-600 cursor-pointer">
@@ -111,8 +108,8 @@ const CarrierRegisterList: React.FC = () => {
       carrierName: items?.carrierName,
       carrierCode: items?.carrierCode,
       modeOfTransport: modeOfTransports,
-      operationalSince: operationalSinces,
-      countryOfOperation: countryOfOperations,
+      operationalSince: items?.operationalSince,
+      countryOfOperation: items?.countryOfOperation,
       primaryContactName: items?.primaryContactName,
       action: actions,
     };
@@ -184,8 +181,8 @@ const CarrierRegisterList: React.FC = () => {
 
   const navigate = useNavigate();
   const handleEyeIcon = () => {
-    navigate("/registration-carrier/carrier-details/profile")
-  }
+    navigate("/registration-carrier/carrier-details/profile");
+  };
 
   return (
     <>
@@ -267,7 +264,9 @@ const CarrierRegisterList: React.FC = () => {
         <div className="px-3 py-4 flex justify-between items-center rounded-b-xs">
           <div className="text-xs text-grey-ab-200">
             Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
-            {currentPage * itemsPerPage} of {rows.length} Entries
+            {currentPage *
+              (itemsPerPage > rows.length ? rows.length : itemsPerPage)}{" "}
+            of {rows.length} Entries
           </div>
 
           <CustomPagination

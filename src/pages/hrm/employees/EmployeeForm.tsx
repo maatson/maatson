@@ -378,6 +378,18 @@ const EmployeeForm: React.FC = () => {
               <div className="flex flex-col gap-3">
                 <div className="flex gap-4">
                   <GroupField
+                    label={"Building/Door Number"}
+                    type={"text"}
+                    placeholder={"Enter Building/Door Number"}
+                    name={"doorNo"}
+                    value={data.doorNo}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="max-w-[400px] w-full"
+                  />
+                  <GroupField
                     label={"Street*"}
                     type={"text"}
                     placeholder={"Enter Street"}
@@ -389,28 +401,16 @@ const EmployeeForm: React.FC = () => {
                     leftIcon={<LocationIcon color="#2C398F" />}
                     parentStyle="max-w-[400px] w-full"
                   />
+                </div>
+
+                {/* 3 input section */}
+                <div className="flex gap-[18px]">
                   <GroupField
                     label={"City*"}
                     type={"text"}
                     placeholder={"Enter City"}
                     name={"city"}
                     value={data.city}
-                    onChange={handleChange}
-                    error={false}
-                    errorMessage={""}
-                    leftIcon={<LocationIcon color="#2C398F" />}
-                    parentStyle="max-w-[400px] w-full"
-                  />
-                </div>
-
-                {/* 3 input section */}
-                <div className="flex gap-[18px]">
-                  <GroupField
-                    label={"Building/Door Number"}
-                    type={"text"}
-                    placeholder={"Enter Building/Door Number"}
-                    name={"doorNo"}
-                    value={data.doorNo}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -581,16 +581,16 @@ const EmployeeForm: React.FC = () => {
                       name="employeeType"
                       className="w-5 h-5"
                     />
-                    <label htmlFor="male">Full- Time</label>
+                    <label htmlFor="fullTime">Full- Time</label>
                   </div>
                   <div className="flex gap-3 font-semibold text-grey-ab-800">
                     <input
                       type="radio"
-                      id="partTime"
+                      id="fullTime"
                       name="employeeType"
                       className="w-5 h-5"
                     />
-                    <label htmlFor="female">Part- Time</label>
+                    <label htmlFor="fullTime">Part- Time</label>
                   </div>
                   <div className="flex gap-3 font-semibold text-grey-ab-800">
                     <input
@@ -599,7 +599,7 @@ const EmployeeForm: React.FC = () => {
                       name="employeeType"
                       className="w-5 h-5"
                     />
-                    <label htmlFor="others">Internship</label>
+                    <label htmlFor="internship">Internship</label>
                   </div>
                 </div>
               </div>

@@ -4,14 +4,12 @@ import { NavLink } from "react-router-dom";
 import {
   AccountDetailIcon,
   BusinessIcon,
-  CalenderIcon,
   CategoryIcon,
   CodeIcon,
   CompanyIcon,
   DepartmentIcon,
   DocumentIcon,
   EmailIcon,
-  FileIcon,
   FreightIcon,
   GlobalIcon,
   InvoiceIcon,
@@ -25,33 +23,67 @@ import ImageUpload from "../../../components/imageUpload/ImageUpload";
 import GroupField from "../../../components/groupField/GroupField";
 import FileUpload from "../../../components/fileUpload/FileUpload";
 
+interface data {
+  companyLogo: File | null;
+  carrierName: string;
+  carrierCode: string;
+  modeOfTransport: string;
+  doorNumber: string;
+  street: string;
+  city: string;
+  postalCode: string;
+  country: string;
+  companyWebsite: string;
+  contactPersonName: string;
+  services: string[];
+  primaryContactName: string;
+  department: string;
+  email: string;
+  mobileNumber: string;
+  alternativeContact: string;
+  countryOfOperation: string;
+  regionsServed: string[];
+  operationalSince: string;
+  businessLicenseNumber: string;
+  regulatoryApprovals: string[];
+  isoCertifications: string[];
+  businessRegistrationCertificate: File | null | any;
+  taxIdentificationNumber: string;
+  paymentTerms: string;
+  taxComplianceCertificate: File | null;
+}
+
 const CarrierRegisterForm: React.FC = () => {
-  const [data, setData] = useState({
-    userName: "",
-    email: "",
-    mobileNo: "",
-    password: "",
-    confirmPassword: "",
-    image: null as File | null,
-    fullName: "",
-    dateofBirth: "",
-    gender: "",
-    personalEmail: "",
-    personalMobileNo: "",
+  const [data, setData] = useState<data>({
+    companyLogo: null as File | null,
+    // image: null as File | null,
+    carrierName: "",
+    carrierCode: "",
+    modeOfTransport: "",
+    doorNumber: "",
     street: "",
     city: "",
-    doorNo: "",
     postalCode: "",
     country: "",
+    companyWebsite: "",
     contactPersonName: "",
-    contactPersonEmail: "",
-    contactPersonMobileNo: "",
-    officeLocation: "",
-    joiningDate: "",
-    designation: "",
+    services: [], //array
+    primaryContactName: "",
     department: "",
-    employeeType: "",
-    employeeResume: null as File | null,
+    email: "",
+    mobileNumber: "",
+    alternativeContact: "",
+    countryOfOperation: "",
+    regionsServed: [], //array
+    operationalSince: "",
+    businessLicenseNumber: "",
+    regulatoryApprovals: [],
+    isoCertifications: [],
+    businessRegistrationCertificate: null as File | null,
+    taxIdentificationNumber: "",
+    paymentTerms: "",
+    taxComplianceCertificate: null as File | null,
+    // employeeResume: null as File | null,
   });
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -59,7 +91,10 @@ const CarrierRegisterForm: React.FC = () => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleFileChange = (name: "employeeResume", file: File | null) => {
+  const handleFileChange = (
+    name: "businessRegistrationCertificate" | "taxComplianceCertificate",
+    file: File | null
+  ) => {
     setData((prevData) => ({
       ...prevData,
       [name]: file,
@@ -68,11 +103,15 @@ const CarrierRegisterForm: React.FC = () => {
   const handleImageChange = (file: File | null) => {
     setData((prevData) => ({
       ...prevData,
-      image: file,
+      companyLogo: file,
+      // image: file,
     }));
   };
 
-  const handleRegister = () => {};
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("data :", data);
+  };
   return (
     <>
       <div className="py-4 px-3 rounded-xs flex flex-col gap-6 bg-grey-aw-50 shadow-lg">
@@ -97,9 +136,7 @@ const CarrierRegisterForm: React.FC = () => {
               <p className="text-grey-ab">Company Logo*</p>
               <ImageUpload
                 label={"Upload Your Company Logo"}
-                onImageChange={function (file: File | null): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onImageChange={handleImageChange}
               />
             </div>
 
@@ -108,15 +145,9 @@ const CarrierRegisterForm: React.FC = () => {
                 label={"Carrier Name*"}
                 type={"text"}
                 placeholder={"Enter Carrier Name"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                name={"carrierName"}
+                value={data.carrierName}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 leftIcon={<FreightIcon color="#2C398F" />}
@@ -128,15 +159,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Carrier Code*"}
                   type={"text"}
                   placeholder={"Enter Carrier Code"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"carrierCode"}
+                  value={data.carrierCode}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<CodeIcon color="#2C398F" />}
@@ -146,15 +171,14 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Mode of Transport*"}
                   type={"select"}
                   placeholder={"Choose Transport Mode"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: React.ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"modeOfTransport"}
+                  value={data.modeOfTransport}
+                  onChange={handleChange}
+                  options={[
+                    { value: "air freight", label: "Air Freight" },
+                    { value: "sea freight", label: "Sea Freight" },
+                    { value: "land freight", label: "Land Freight" },
+                  ]}
                   error={false}
                   errorMessage={""}
                   leftIcon={<FreightIcon color="#2C398F" />}
@@ -165,6 +189,18 @@ const CarrierRegisterForm: React.FC = () => {
                 <p className="text-grey-ab">Company Address</p>
                 <div className="flex flex-col gap-5">
                   <div className="flex gap-4">
+                    <GroupField
+                      label={"Building/Door Number*"}
+                      type={"text"}
+                      placeholder={"Enter Building/Door Num.."}
+                      name={"doorNumber"}
+                      value={data.doorNumber}
+                      onChange={handleChange}
+                      error={false}
+                      errorMessage={""}
+                      leftIcon={<LocationIcon color="#2C398F" />}
+                      parentStyle="max-w-[400px] w-full"
+                    />
                     <GroupField
                       label={"Street*"}
                       type={"text"}
@@ -177,26 +213,14 @@ const CarrierRegisterForm: React.FC = () => {
                       leftIcon={<LocationIcon color="#2C398F" />}
                       parentStyle="max-w-[400px] w-full"
                     />
+                  </div>
+                  <div className="flex gap-[18px]">
                     <GroupField
                       label={"City*"}
                       type={"text"}
                       placeholder={"Enter City"}
                       name={"city"}
                       value={data.city}
-                      onChange={handleChange}
-                      error={false}
-                      errorMessage={""}
-                      leftIcon={<LocationIcon color="#2C398F" />}
-                      parentStyle="max-w-[400px] w-full"
-                    />
-                  </div>
-                  <div className="flex gap-[18px]">
-                    <GroupField
-                      label={"Building/Door Number*"}
-                      type={"text"}
-                      placeholder={"Enter Building/Door Num.."}
-                      name={"doorNo"}
-                      value={data.doorNo}
                       onChange={handleChange}
                       error={false}
                       errorMessage={""}
@@ -232,8 +256,8 @@ const CarrierRegisterForm: React.FC = () => {
                     label={"Company Website"}
                     type={"text"}
                     placeholder={"Enter Website"}
-                    name={""}
-                    value={""}
+                    name={"companyWebsite"}
+                    value={data.companyWebsite}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -246,19 +270,13 @@ const CarrierRegisterForm: React.FC = () => {
                 label={"Services*"}
                 type={"creatable"}
                 placeholder={""}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  console.log(e.target.value);
-                }}
+                name={"services"}
+                value={data.services}
+                onChange={handleChange}
                 error={false}
                 isMulti
                 errorMessage={""}
-                leftIcon={<CategoryIcon color="#2C398F"/>}
+                leftIcon={<CategoryIcon color="#2C398F" />}
                 options={[
                   { label: "hello", value: "hello" },
                   { label: "bye", value: "bye" },
@@ -286,15 +304,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Primary Contact Name*"}
                   type={"text"}
                   placeholder={"Enter Name"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"primaryContactName"}
+                  value={data.primaryContactName}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<UserIcon color="#2C398F" />}
@@ -304,16 +316,15 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Department"}
                   type={"select"}
                   placeholder={"Enter Department"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"department"}
+                  value={data.department}
+                  onChange={handleChange}
                   error={false}
+                  options={[
+                    { value: "manager", label: "Manager" },
+                    { value: "developer", label: "Developer" },
+                    { value: "designer", label: "Designer" },
+                  ]}
                   errorMessage={""}
                   leftIcon={<DepartmentIcon color="#2C398F" />}
                   parentStyle="max-w-[400px] w-full"
@@ -324,15 +335,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Email*"}
                   type={"text"}
                   placeholder={"Enter Email"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"email"}
+                  value={data.email}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<EmailIcon color="#2C398F" />}
@@ -342,15 +347,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Mobile Number*"}
                   type={"text"}
                   placeholder={"Enter Mobile Number"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"mobileNumber"}
+                  value={data.mobileNumber}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<PhoneIcon color="#2C398F" />}
@@ -362,15 +361,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Alternative Contact"}
                   type={"text"}
                   placeholder={"Enter Mobile Number"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"alternativeContact"}
+                  value={data.alternativeContact}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<PhoneIcon color="#2C398F" />}
@@ -380,15 +373,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Country of Operation*"}
                   type={"text"}
                   placeholder={"Enter Country"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"countryOfOperation"}
+                  value={data.countryOfOperation}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<LocationIcon color="#2C398F" />}
@@ -413,43 +400,31 @@ const CarrierRegisterForm: React.FC = () => {
             <div className="flex gap-4">
               <GroupField
                 label={"Regions Served*"}
-                type={"creatable"}
+                type={"select"}
                 placeholder={""}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  console.log(e.target.value);
-                }}
+                name={"regionsServed"}
+                value={data.regionsServed}
+                onChange={handleChange}
                 error={false}
                 isMulti
-                errorMessage={""}
-                leftIcon={<GlobalIcon color="#2C398F" />}
                 options={[
                   { label: "hello", value: "hello" },
                   { label: "bye", value: "bye" },
                 ]}
+                errorMessage={""}
+                leftIcon={<GlobalIcon color="#2C398F" />}
                 parentStyle="max-w-[400px] w-full"
               />
               <GroupField
                 label={"Operational Since*"}
-                type={"text"}
+                type={"date"}
                 placeholder={"Enter Year"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                name={"operationalSince"}
+                value={data.operationalSince}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                leftIcon={<CalenderIcon color="#2C398F" />}
+                // leftIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="max-w-[400px] w-full"
               />
             </div>
@@ -472,67 +447,146 @@ const CarrierRegisterForm: React.FC = () => {
                 label={"Business License Number*"}
                 type={"text"}
                 placeholder={"Enter License Number"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                name={"businessLicenseNumber"}
+                value={data.businessLicenseNumber}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 leftIcon={<AccountDetailIcon color="#2C398F" />}
                 parentStyle="max-w-[400px] w-full"
               />
               {/* regulatory approval */}
-              <div className="flex flex-col gap-2">
+              {/* <div className="flex flex-col gap-2">
                 <p className="font-semibold text-grey-ab">
-                  Regulatory Approvals*
+                  Regulatory Approvals
                 </p>
                 <div className="flex gap-8 px-4">
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">IATA</label>
+                    <input
+                      type="checkbox"
+                      name="iata"
+                      id="iata"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="iata">IATA</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">FMC</label>
+                    <input
+                      type="checkbox"
+                      name="fmc"
+                      id="fmc"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="fmc">FMC</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">IMO</label>
+                    <input
+                      type="checkbox"
+                      name="imo"
+                      id="imo"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="imo">IMO</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">DOT</label>
+                    <input
+                      type="checkbox"
+                      name="dot"
+                      id="dot"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="dot">DOT</label>
                   </div>
                   <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">Local Transport Authority</label>
+                    <input
+                      type="checkbox"
+                      name="localTransport"
+                      id="localTransport"
+                      className="w-5 h-5"
+                    />
+                    <label htmlFor="localTransport">
+                      Local Transport Authority
+                    </label>
                   </div>
+                </div>
+              </div> */}
+
+              {/* Regulatory Approvals */}
+              <div className="flex flex-col gap-2">
+                <p className="font-semibold text-grey-ab">
+                  Regulatory Approvals
+                </p>
+                <div className="flex gap-8 px-4">
+                  {[
+                    "IATA",
+                    "FMC",
+                    "IMO",
+                    "DOT",
+                    "Local Transport Authority",
+                  ].map((approval) => (
+                    <div
+                      key={approval}
+                      className="flex gap-6 text-lg text-grey-ab-800 items-center"
+                    >
+                      <input
+                        type="checkbox"
+                        name="regulatoryApprovals"
+                        id={approval}
+                        className="w-5 h-5"
+                        checked={data.regulatoryApprovals.includes(approval)}
+                        onChange={(e) => {
+                          setData((prevData) => ({
+                            ...prevData,
+                            regulatoryApprovals: e.target.checked
+                              ? [...prevData.regulatoryApprovals, approval] // Add to array
+                              : prevData.regulatoryApprovals.filter(
+                                  (item) => item !== approval
+                                ), // Remove from array
+                          }));
+                        }}
+                      />
+                      <label htmlFor={approval}>{approval}</label>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* iso certification */}
               <div className="flex flex-col gap-2">
-                <p className="font-semibold text-grey-ab">
-                  ISO Certifications*
-                </p>
+                <p className="font-semibold text-grey-ab">ISO Certifications</p>
                 <div className="flex gap-8 px-4">
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">ISO 9001</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">ISO 14001</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input type="checkbox" name="" id="" className="w-5 h-5" />
-                    <label htmlFor="">ISO 28000</label>
-                  </div>
+                  {["ISO 9001", "ISO 14001", "ISO 28000"].map(
+                    (certifications) => (
+                      <div
+                        key={certifications}
+                        className="flex gap-6 text-lg text-grey-ab-800 items-center"
+                      >
+                        <input
+                          type="checkbox"
+                          name="isoCertifications"
+                          id={certifications}
+                          className="w-5 h-5"
+                          checked={data.isoCertifications.includes(
+                            certifications
+                          )}
+                          onChange={(e) => {
+                            setData((prevData) => ({
+                              ...prevData,
+                              isoCertifications: e.target.checked
+                                ? [
+                                    ...prevData.isoCertifications,
+                                    certifications,
+                                  ] // Add to array
+                                : prevData.isoCertifications.filter(
+                                    (item) => item !== certifications
+                                  ), // Remove from array
+                            }));
+                          }}
+                        />
+                        <label htmlFor={certifications}>{certifications}</label>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
 
@@ -540,9 +594,10 @@ const CarrierRegisterForm: React.FC = () => {
               <FileUpload
                 label={"Business Registration Certificate*"}
                 parentStyle="max-w-[816px] w-full"
-                onFileChange={function (file: File | null): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onFileChange={(file) =>
+                  handleFileChange("businessRegistrationCertificate", file)
+                }
+                fileName={data.businessRegistrationCertificate?.name}
               />
             </div>
           </div>
@@ -565,15 +620,9 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Tax Identification Number (TIN)*"}
                   type={"text"}
                   placeholder={"Enter TIN Number"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"taxIdentificationNumber"}
+                  value={data.taxIdentificationNumber}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<PhoneIcon color="#2C398F" />}
@@ -583,15 +632,10 @@ const CarrierRegisterForm: React.FC = () => {
                   label={"Payment Terms*"}
                   type={"select"}
                   placeholder={"Choose Payment Terms"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"paymentTerms"}
+                  value={data.paymentTerms}
+                  onChange={handleChange}
+                  options={[{ value: "bank", label: "Bank" }]}
                   error={false}
                   errorMessage={""}
                   leftIcon={<InvoiceIcon color="#2C398F" />}
@@ -601,9 +645,10 @@ const CarrierRegisterForm: React.FC = () => {
               <FileUpload
                 label={"Tax compliance certificate*"}
                 parentStyle="max-w-[816px] w-full"
-                onFileChange={function (file: File | null): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onFileChange={(file) =>
+                  handleFileChange("taxComplianceCertificate", file)
+                }
+                fileName={data.taxComplianceCertificate?.name}
               />
             </div>
           </div>

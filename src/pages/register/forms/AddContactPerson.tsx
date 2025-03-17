@@ -4,6 +4,7 @@ import {
   AccountDetailIcon,
   CategoryIcon,
   EmailIcon,
+  LocationIcon,
   PhoneIcon,
 } from "../../../components/icons/Icons";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
@@ -18,6 +19,8 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
     department: "",
     email: "",
     mobileNumber: "",
+    alternativeMobileNumber: "",
+    city: "",
     countryOfOperation: "",
   });
 
@@ -34,6 +37,8 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
       department: "",
       email: "",
       mobileNumber: "",
+      alternativeMobileNumber: "",
+      city: "",
       countryOfOperation: "",
     }); // Reset form
     onClose(); // Close popup
@@ -47,15 +52,17 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
       department: "",
       email: "",
       mobileNumber: "",
+      alternativeMobileNumber: "",
+      city: "",
       countryOfOperation: "",
     });
     onClose();
   };
   return (
     <>
-      <div className="flex flex-col gap-6 bg-grey-aw-50 shadow-lg rounded-sm max-w-[448px] w-full max-h-[550px] overflow-auto custom-scrollbar">
-        <div className="border-b border-b-grey-200 p-4 rounded-t-xs font-semibold text-lg text-gry-ab-800">
-          Verification Document
+      <div className="flex flex-col gap-6 bg-grey-aw-50 shadow-lg rounded-sm max-w-[560px] w-full max-h-[550px] overflow-auto custom-scrollbar">
+        <div className="border-b border-b-grey-200 p-4 font-semibold text-lg text-grey-ab-800">
+          Add Contact Person
         </div>
         {/* documents */}
         <div className="px-6 flex flex-col gap-4 ">
@@ -103,17 +110,45 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
             errorMessage={""}
             leftIcon={<PhoneIcon color="#2C398F" />}
           />
+
           <GroupField
-            label={"Country of Operation"}
+            label={"Alternative Mobile Number"}
             type={""}
-            placeholder={"Enter Country of Operation"}
-            name={"countryOfOperation"}
-            value={data.countryOfOperation}
+            placeholder={"Enter Mobile Number"}
+            name={"alternativeMobileNumber"}
+            value={data.alternativeMobileNumber}
             onChange={handleChange}
             error={false}
             errorMessage={""}
-            leftIcon={<CategoryIcon color="#2C398F" />}
+            leftIcon={<PhoneIcon color="#2C398F" />}
           />
+          <div className="flex gap-4 w-full">
+            <GroupField
+              label={"City"}
+              type={""}
+              placeholder={"Enter City"}
+              name={"city"}
+              value={data.city}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              leftIcon={<LocationIcon color="#2C398F" />}
+              parentStyle="w-[50%]"
+            />
+            <GroupField
+              label={"Country of Operation"}
+              type={"select"}
+              placeholder={"Enter Country of .."}
+              name={"countryOfOperation"}
+              value={data.countryOfOperation}
+              onChange={handleChange}
+              isMulti
+              error={false}
+              errorMessage={""}
+              leftIcon={<CategoryIcon color="#2C398F" />}
+              parentStyle="w-[50%]"
+            />
+          </div>
         </div>
         {/* button */}
         <div className="px-6 pb-6 flex gap-4">

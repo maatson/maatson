@@ -121,7 +121,7 @@ const UserRegisterList: React.FC = () => {
         case "inactive":
           accountStatusText = (
             <div className="px-2 py-1 flex items-center font-semibold text-sm justify-center">
-              <ErrorChip label={"In Active"} size={"m"} variant={"outline"} />
+              <ErrorChip label={"inActive"} size={"m"} variant={"outline"} />
             </div>
           );
           break;
@@ -263,7 +263,9 @@ const UserRegisterList: React.FC = () => {
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">
           Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
-          {currentPage * itemsPerPage} of {rows.length} Entries
+          {currentPage *
+            (itemsPerPage > rows.length ? rows.length : itemsPerPage)}{" "}
+          of {rows.length} Entries
         </div>
 
         <CustomPagination

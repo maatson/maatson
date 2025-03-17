@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 import { NotesIcon } from "../../../components/icons/Icons";
@@ -8,6 +8,23 @@ interface UpdateHolidayProps {
 }
 
 const UpdateHoliday: React.FC<UpdateHolidayProps> = ({ cancel }) => {
+  const [data, setData] = useState({
+    title: "",
+    date: "",
+    branchLocation: "",
+    description: "",
+  });
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("data - ", data);
+  };
   return (
     <>
       {" "}
@@ -18,35 +35,22 @@ const UpdateHoliday: React.FC<UpdateHolidayProps> = ({ cancel }) => {
           <div className="flex flex-col gap-4">
             <GroupField
               label={"Title*"}
-              type={"select"}
+              type={"text"}
               placeholder={"Enter Title"}
               leftIcon={<NotesIcon color="#2c398f" />}
               name={"title"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.title}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
-              options={[]}
             />
             <GroupField
               label={"Date*"}
               type={"date"}
               placeholder={"date"}
               name={"date"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.date}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -56,17 +60,11 @@ const UpdateHoliday: React.FC<UpdateHolidayProps> = ({ cancel }) => {
               type={"select"}
               placeholder={"Choose Location"}
               name={"branchLocation"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.branchLocation}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
-              options={[]}
+              options={[{ value: "chennai", label: "Chennai" }]}
             />
 
             <GroupField
@@ -74,14 +72,8 @@ const UpdateHoliday: React.FC<UpdateHolidayProps> = ({ cancel }) => {
               type={"textarea"}
               placeholder={"Write"}
               name={"description"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.description}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -96,7 +88,7 @@ const UpdateHoliday: React.FC<UpdateHolidayProps> = ({ cancel }) => {
                 style="w-full"
               />
             </div>
-            <div className="w-full">
+            <div className="w-full" onClick={handleSave}>
               <PrimaryButton
                 label={"Save"}
                 size={"xl"}

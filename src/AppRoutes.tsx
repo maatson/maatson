@@ -61,6 +61,35 @@ const VendorContact = lazy(
   () => import("./pages/register/vendor/vendorDetails/VendorContact")
 );
 
+//SALES AND CRM (SALES AND MARKING & ENQUIRY & BOOKING)
+const Booking = lazy(() => import("./pages/salesAndMarketing/booking"));
+const BookingDetails = lazy(
+  () => import("./pages/salesAndMarketing/booking/BookingDetails")
+);
+const ConvertToBooking = lazy(
+  () => import("./pages/salesAndMarketing/booking/ConvertToBooking")
+);
+const AddBooking = lazy(
+  () => import("./pages/salesAndMarketing/booking/AddBooking")
+);
+const BookingList = lazy(
+  () => import("./pages/salesAndMarketing/booking/BookingList")
+);
+
+const Enquiry = lazy(() => import("./pages/salesAndMarketing/enquiry"));
+const EnquiryList = lazy(
+  () => import("./pages/salesAndMarketing/enquiry/EnquiryList")
+);
+const EnquiryDetails = lazy(
+  () => import("./pages/salesAndMarketing/enquiry/EnquiryDetails")
+);
+const AddEnquiry = lazy(
+  () => import("./pages/salesAndMarketing/enquiry/AddEnquiry")
+);
+const CancelEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/CancelEnquiry"));
+const NegotiateEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/NegotiateEnquiry"));
+const ConvertToBookingEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/ConvertToBookingEnquiry"));
+
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
 const AttendanceList = lazy(
@@ -157,6 +186,23 @@ const AppRoutes: React.FC = () => {
           <Route index element={<RequirementList />} />
           <Route path="details" element={<RequirementDetails />} />
           {/* <Route path="employee-profile" element={<EmployeeProfile />} /> */}
+        </Route>
+
+        {/* sales and marketting */}
+        <Route path="booking" element={<Booking />}>
+          <Route index element={<BookingList />} />
+          <Route path="add" element={<AddBooking />} />
+          <Route path="convert-to-booking" element={<ConvertToBooking />} />
+          <Route path="details/:id" element={<BookingDetails />} />
+        </Route>
+        <Route path="enquiry" element={<Enquiry />}>
+          <Route index element={<EnquiryList />} />
+          <Route path="add" element={<AddEnquiry />} />
+          <Route path="details/:id" element={<EnquiryDetails />} >
+            <Route path="booking-status/cancel"  element={<CancelEnquiry />} />
+            <Route index element={<NegotiateEnquiry />} />
+            <Route path="booking-status/convertBooking"  element={<ConvertToBookingEnquiry />} />
+          </Route>
         </Route>
 
         {/* testimonials */}
