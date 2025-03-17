@@ -57,7 +57,7 @@ const AddVendorRegister: React.FC = () => {
     setIsProductActive(true);
     setIsServiceActive(false);
   };
-  const handleService = () => {
+  const handleService = () => {  
     setIsProductActive(false);
     setIsServiceActive(true);
   };
