@@ -63,25 +63,15 @@ const GroupField: React.FC<Groupfield> = ({
   isDisabled,
   size, //added by suriya
 }) => {
-  // Dynamically select value for multi or single select
-  const selectedValue = isMulti
-    ? options?.filter(
-        (option) => Array.isArray(value) && value.includes(option.value) // Check if value is an array before using includes
-      )
-    : options?.find((option) => option.value === value);
-
   // Handle React-Select change event
   const handleReactSelectChange = (selectedOption: any) => {
     onChange({
       target: { name, value: selectedOption ? selectedOption.value : "" },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
-  const handleReactMultiSelectChange = (selectedOptions: any) => {
+  const handleReactMultiSelectChange = (selectedOption: any) => {
     onChange({
-      target: {
-        name,
-        value: selectedOptions.map((option: any) => option.value),
-      },
+      target: { name, value: selectedOption },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
   return (
@@ -105,7 +95,7 @@ const GroupField: React.FC<Groupfield> = ({
               <Select
                 id={name}
                 name={name}
-                value={selectedValue} // Set the selected value
+                value={options?.find((option) => option.value === value)} // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange
@@ -196,7 +186,17 @@ const GroupField: React.FC<Groupfield> = ({
               <CreatableSelect
                 id={name}
                 name={name}
-                value={selectedValue} // Set the selected value
+                value={
+                  isMulti
+                    ? Array.isArray(value) &&
+                      value.map(
+                        (val: any) =>
+                          options?.find(
+                            (option) => option.value === val.value
+                          ) || val
+                      )
+                    : options?.find((option) => option.value === value) || value
+                } // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange

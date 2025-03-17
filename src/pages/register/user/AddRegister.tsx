@@ -31,7 +31,7 @@ const AddRegister: React.FC = () => {
     companyEmail: "",
     companyMobileNumber: "",
     companyWebsite: "",
-    businessType: ["hello"],
+    businessType: [] as string[],
 
     fullName: "",
     username: "",
