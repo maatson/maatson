@@ -1,12 +1,36 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
+import { CategoryIcon } from "../../../components/icons/Icons";
 
 interface AddRequirementsProps {
   cancel: () => void;
 }
 
 const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
+  const [data, setData] = useState({
+    jobTitle: "",
+    jobLocation: "",
+    jobDescription: "",
+    jobLevel: "",
+    jobType: "",
+    qualification: "",
+    gender: "",
+    expireDate: "",
+    experience: "",
+    requiredSkills: [],
+  });
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("data - ", data);
+  };
   return (
     <>
       {" "}
@@ -21,14 +45,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"text"}
                 placeholder={"Enter Job Title"}
                 name={"jobtitle"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.jobTitle}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 parentStyle="w-1/2"
@@ -38,17 +56,11 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"select"}
                 placeholder={"Choose Job Title"}
                 name={"jobLocation"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.jobLocation}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                options={[]}
+                options={[{ value: "chennai", label: "Chennai" }]}
                 parentStyle="w-1/2 "
               />
             </div>
@@ -58,14 +70,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"textarea"}
                 placeholder={"Write"}
                 name={"jobDescription"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.jobDescription}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 parentStyle="w-full"
@@ -77,14 +83,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"select"}
                 placeholder={"Choose Job Level"}
                 name={"jobtitle"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.jobLevel}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 parentStyle="w-1/2"
@@ -94,14 +94,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"select"}
                 placeholder={"Choose Job Type"}
                 name={"jobType"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.jobType}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 options={[]}
@@ -114,14 +108,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"select"}
                 placeholder={"Choose Qualification"}
                 name={"qualification"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.qualification}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 parentStyle="w-1/2"
@@ -131,17 +119,15 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"select"}
                 placeholder={"Choose Gender"}
                 name={"gender"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.gender}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                options={[]}
+                options={[
+                  { value: "male", label: "Male" },
+                  { value: "female", label: "Female" },
+                  { value: "others", label: "Others" },
+                ]}
                 parentStyle="w-1/2 "
               />
             </div>
@@ -151,14 +137,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"date"}
                 placeholder={"Enter Date"}
                 name={"expireDate"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.expireDate}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 parentStyle="w-1/2"
@@ -168,14 +148,8 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
                 type={"text"}
                 placeholder={"Enter Experience"}
                 name={"experience"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.experience}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 options={[]}
@@ -183,24 +157,33 @@ const AddRequirement: React.FC<AddRequirementsProps> = ({ cancel }) => {
               />
             </div>
             {/* have to handle required skills */}
-            <div className="flex flex-col gap-2">
-              <p className="">Required Skills</p>
-              <div className="flex  flex-col gap-1">
-                <div></div>
-                <div></div>
-              </div>
-            </div>
+            <GroupField
+              label={"Required Skills"}
+              type={"creatable"}
+              placeholder={""}
+              name={"requiredSkills"}
+              value={data.requiredSkills}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              leftIcon={<CategoryIcon color="#2C398F" />}
+              options={[
+                { value: "logistics", label: "Logistics" },
+                { value: "sales", label: "Sales" },
+              ]}
+            />
           </div>
           <div className="flex items-center gap-6 justify-end">
             <div onClick={cancel}>
-              {" "}
               <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
             </div>
-            <PrimaryButton
-              label={"Post Requirement"}
-              size={"xl"}
-              variant={""}
-            />
+            <div onClick={handleSave}>
+              <PrimaryButton
+                label={"Post Requirement"}
+                size={"xl"}
+                variant={""}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 
@@ -6,6 +6,26 @@ interface AddLeaveFormProps {
   cancel: () => void;
 }
 const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
+  const [data, setData] = useState({
+    employeeName: "",
+    branchLocation: "",
+    leaveType: "",
+    fromDate: "",
+    tillDate: "",
+    days: "",
+    reason: "",
+  });
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("data - ", data);
+  };
   return (
     <>
       {" "}
@@ -20,14 +40,8 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
               type={"text"}
               placeholder={"Choose Employee"}
               name={"employeeName"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.employeeName}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -36,33 +50,22 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
               type={"select"}
               placeholder={"Choose Location"}
               name={"branchLocation"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.branchLocation}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
+              options={[{ value: "chennai", label: "Chennai" }]}
             />
             <GroupField
               label={"Leave Type*"}
               type={"select"}
               placeholder={"Choose Leave"}
               name={"leaveType"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.leaveType}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
-              options={[]}
+              options={[{ value: "sickLeave", label: "Sick Leave" }]}
             />
             <div className="flex items-center gap-4 ">
               <GroupField
@@ -71,33 +74,20 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
                 placeholder={"date"}
                 name={"fromDate"}
                 value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 parentStyle="w-1/2"
               />
               <GroupField
-                label={"Till Date**"}
+                label={"Till Date*"}
                 type={"date"}
                 placeholder={"date"}
                 name={"tillDtae"}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={data.tillDate}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                options={[]}
                 parentStyle="w-1/2 "
               />
             </div>
@@ -106,14 +96,8 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
               type={"number"}
               placeholder={"Enter Days"}
               name={"days"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.days}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -122,14 +106,8 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
               type={"textarea"}
               placeholder={"Write"}
               name={"reason"}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              value={data.reason}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -143,7 +121,7 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
                 style="w-full"
               />
             </div>
-            <div className="w-full">
+            <div className="w-full" onClick={handleSave}>
               {" "}
               <PrimaryButton
                 label={"Post Leave"}

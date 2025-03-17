@@ -47,7 +47,7 @@ interface data {
   businessLicenseNumber: string;
   regulatoryApprovals: string[];
   isoCertifications: string[];
-  businessRegistrationCertificate: File | null;
+  businessRegistrationCertificate: File | null | any;
   taxIdentificationNumber: string;
   paymentTerms: string;
   taxComplianceCertificate: File | null;
@@ -108,8 +108,9 @@ const CarrierRegisterForm: React.FC = () => {
     }));
   };
 
-  const handleRegister = () => {
-    console.log("data : ", data);
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("data :", data);
   };
   return (
     <>
@@ -173,6 +174,11 @@ const CarrierRegisterForm: React.FC = () => {
                   name={"modeOfTransport"}
                   value={data.modeOfTransport}
                   onChange={handleChange}
+                  options={[
+                    { value: "air freight", label: "Air Freight" },
+                    { value: "sea freight", label: "Sea Freight" },
+                    { value: "land freight", label: "Land Freight" },
+                  ]}
                   error={false}
                   errorMessage={""}
                   leftIcon={<FreightIcon color="#2C398F" />}
@@ -187,7 +193,7 @@ const CarrierRegisterForm: React.FC = () => {
                       label={"Building/Door Number*"}
                       type={"text"}
                       placeholder={"Enter Building/Door Num.."}
-                      name={"doorNo"}
+                      name={"doorNumber"}
                       value={data.doorNumber}
                       onChange={handleChange}
                       error={false}
@@ -314,6 +320,11 @@ const CarrierRegisterForm: React.FC = () => {
                   value={data.department}
                   onChange={handleChange}
                   error={false}
+                  options={[
+                    { value: "manager", label: "Manager" },
+                    { value: "developer", label: "Developer" },
+                    { value: "designer", label: "Designer" },
+                  ]}
                   errorMessage={""}
                   leftIcon={<DepartmentIcon color="#2C398F" />}
                   parentStyle="max-w-[400px] w-full"
@@ -586,6 +597,7 @@ const CarrierRegisterForm: React.FC = () => {
                 onFileChange={(file) =>
                   handleFileChange("businessRegistrationCertificate", file)
                 }
+                fileName={data.businessRegistrationCertificate?.name}
               />
             </div>
           </div>
@@ -623,6 +635,7 @@ const CarrierRegisterForm: React.FC = () => {
                   name={"paymentTerms"}
                   value={data.paymentTerms}
                   onChange={handleChange}
+                  options={[{ value: "bank", label: "Bank" }]}
                   error={false}
                   errorMessage={""}
                   leftIcon={<InvoiceIcon color="#2C398F" />}
@@ -635,6 +648,7 @@ const CarrierRegisterForm: React.FC = () => {
                 onFileChange={(file) =>
                   handleFileChange("taxComplianceCertificate", file)
                 }
+                fileName={data.taxComplianceCertificate?.name}
               />
             </div>
           </div>

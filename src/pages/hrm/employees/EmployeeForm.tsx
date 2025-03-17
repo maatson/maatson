@@ -581,16 +581,16 @@ const EmployeeForm: React.FC = () => {
                       name="employeeType"
                       className="w-5 h-5"
                     />
-                    <label htmlFor="male">Full- Time</label>
+                    <label htmlFor="fullTime">Full- Time</label>
                   </div>
                   <div className="flex gap-3 font-semibold text-grey-ab-800">
                     <input
                       type="radio"
-                      id="partTime"
+                      id="fullTime"
                       name="employeeType"
                       className="w-5 h-5"
                     />
-                    <label htmlFor="female">Part- Time</label>
+                    <label htmlFor="fullTime">Part- Time</label>
                   </div>
                   <div className="flex gap-3 font-semibold text-grey-ab-800">
                     <input
@@ -599,7 +599,7 @@ const EmployeeForm: React.FC = () => {
                       name="employeeType"
                       className="w-5 h-5"
                     />
-                    <label htmlFor="others">Internship</label>
+                    <label htmlFor="internship">Internship</label>
                   </div>
                 </div>
               </div>
