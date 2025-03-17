@@ -26,31 +26,31 @@ import FileUpload from "../../../components/fileUpload/FileUpload";
 
 const AddVendorRegister: React.FC = () => {
   const [data, setData] = useState({
-    userName: "",
-    email: "",
-    mobileNumber: "",
-    password: "",
-    confirmPassword: "",
-    image: null as File | null,
-    fullName: "",
-    dateofBirth: "",
-    gender: "",
-    personalEmail: "",
-    personalMobileNo: "",
+    companyLogo: null as File | null,
+    companyName: "",
+    doorNumber: "",
     street: "",
     city: "",
-    doorNo: "",
     postalCode: "",
     country: "",
-    contactPersonName: "",
-    contactPersonEmail: "",
-    contactPersonMobileNo: "",
-    officeLocation: "",
-    joiningDate: "",
-    designation: "",
+    companyEmail: "",
+    companyMobileNumber: "",
+    companyWebsite: "",
+    vendorProductOrServices: [] as string[], //array
+    primaryContactName: "",
     department: "",
-    employeeType: "",
-    employeeResume: null as File | null,
+    contactPersonEmail: "",
+    contactPersonMobileNumber: "",
+    operationalLocation: "",
+    operationalSince: "",
+    businessLicenseNumber: "",
+    regulatoryApprovals: [] as string[],
+    isoCertifications: [] as string[],
+    businessRegistrationCertificate: null as File | null,
+    taxIdentificationNumber: "",
+    paymentTerms: "",
+    taxComplianceCertificate: null as File | null,
+    // employeeResume: null as File | null,
   });
 
   const [isProductActive, setIsProductActive] = useState<boolean>(true);
@@ -70,7 +70,10 @@ const AddVendorRegister: React.FC = () => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleFileChange = (name: "employeeResume", file: File | null) => {
+  const handleFileChange = (
+    name: "businessRegistrationCertificate" | "taxComplianceCertificate",
+    file: File | null
+  ) => {
     setData((prevData) => ({
       ...prevData,
       [name]: file,
@@ -79,11 +82,16 @@ const AddVendorRegister: React.FC = () => {
   const handleImageChange = (file: File | null) => {
     setData((prevData) => ({
       ...prevData,
-      image: file,
+      companyLogo: file,
+      // image: file,
     }));
   };
 
-  const handleRegister = () => {};
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("data :", data);
+  };
+
   return (
     <>
       <div className="rounded-xs  bg-grey-aw-50 py-4 px-3 flex flex-col gap-6 shadow-lg">
@@ -118,15 +126,9 @@ const AddVendorRegister: React.FC = () => {
                 label={"Vendor Company Name*"}
                 type={"text"}
                 placeholder={"Enter Company Name"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                name={"companyName"}
+                value={data.companyName}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 leftIcon={<FreightIcon color="#2C398F" />}
@@ -140,8 +142,8 @@ const AddVendorRegister: React.FC = () => {
                       label={"Building/Door Number"}
                       type={"text"}
                       placeholder={"Enter Building/Door Num.."}
-                      name={"doorNo"}
-                      value={data.doorNo}
+                      name={"doorNumber"}
+                      value={data.doorNumber}
                       onChange={handleChange}
                       error={false}
                       errorMessage={""}
@@ -205,8 +207,8 @@ const AddVendorRegister: React.FC = () => {
                       label={"Email*"}
                       type={"text"}
                       placeholder={"Enter Email"}
-                      name={"email"}
-                      value={data.email}
+                      name={"companyEmail"}
+                      value={data.companyEmail}
                       onChange={handleChange}
                       error={false}
                       errorMessage={""}
@@ -217,8 +219,8 @@ const AddVendorRegister: React.FC = () => {
                       label={"Mobile Number*"}
                       type={"text"}
                       placeholder={"Enter Mobile Number"}
-                      name={"mobileNumber"}
-                      value={data.mobileNumber}
+                      name={"companyMobileNumber"}
+                      value={data.companyMobileNumber}
                       onChange={handleChange}
                       error={false}
                       errorMessage={""}
@@ -230,8 +232,8 @@ const AddVendorRegister: React.FC = () => {
                     label={"Company Website"}
                     type={"text"}
                     placeholder={"Enter Website"}
-                    name={""}
-                    value={""}
+                    name={"companyWebsite"}
+                    value={data.companyWebsite}
                     onChange={handleChange}
                     error={false}
                     errorMessage={""}
@@ -273,17 +275,9 @@ const AddVendorRegister: React.FC = () => {
                     label={""}
                     type={"creatable"}
                     placeholder={""}
-                    name={""}
-                    value={""}
-                    onChange={function (
-                      e: React.ChangeEvent<
-                        | HTMLInputElement
-                        | HTMLSelectElement
-                        | HTMLTextAreaElement
-                      >
-                    ): void {
-                      console.log(e.target.value);
-                    }}
+                    name={"vendorProductOrServices"}
+                    value={data.vendorProductOrServices}
+                    onChange={handleChange}
                     error={false}
                     isMulti
                     errorMessage={""}
@@ -317,15 +311,9 @@ const AddVendorRegister: React.FC = () => {
                   label={"Primary Contact Name*"}
                   type={"text"}
                   placeholder={"Enter Name"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"primaryContactName"}
+                  value={data.primaryContactName}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<UserIcon color="#2C398F" />}
@@ -335,15 +323,10 @@ const AddVendorRegister: React.FC = () => {
                   label={"Department*"}
                   type={"select"}
                   placeholder={"Enter Department"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"department"}
+                  value={data.department}
+                  onChange={handleChange}
+                  options={[{ value: "manager", label: "Manager" }]}
                   error={false}
                   errorMessage={""}
                   leftIcon={<DepartmentIcon color="#2C398F" />}
@@ -355,15 +338,9 @@ const AddVendorRegister: React.FC = () => {
                   label={"Email*"}
                   type={"text"}
                   placeholder={"Enter Email"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"contactPersonEmail"}
+                  value={data.contactPersonEmail}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<EmailIcon color="#2C398F" />}
@@ -373,15 +350,9 @@ const AddVendorRegister: React.FC = () => {
                   label={"Mobile Number*"}
                   type={"text"}
                   placeholder={"Enter Mobile Number"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"contactPersonMobileNumber"}
+                  value={data.contactPersonMobileNumber}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<PhoneIcon color="#2C398F" />}
@@ -408,17 +379,15 @@ const AddVendorRegister: React.FC = () => {
                 label={"Operational Locations*"}
                 type={"select"}
                 placeholder={""}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: React.ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  console.log(e.target.value);
-                }}
+                name={"operationalLocation"}
+                value={data.operationalLocation}
+                onChange={handleChange}
                 error={false}
                 isMulti
+                options={[
+                  { value: "chennai", label: "Chennai" },
+                  { value: "mumbai", label: "Mumbai" },
+                ]}
                 errorMessage={""}
                 leftIcon={<GlobalIcon color="#2C398F" />}
                 parentStyle="max-w-[400px] w-full"
@@ -427,15 +396,9 @@ const AddVendorRegister: React.FC = () => {
                 label={"Operational Since*"}
                 type={"date"}
                 placeholder={"Enter Year"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                name={"operationalSince"}
+                value={data.operationalSince}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 // leftIcon={<CalenderIcon color="#2C398F" />}
@@ -461,15 +424,9 @@ const AddVendorRegister: React.FC = () => {
                 label={"Business License Number*"}
                 type={"text"}
                 placeholder={"Enter License Number"}
-                name={""}
-                value={""}
-                onChange={function (
-                  e: ChangeEvent<
-                    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                  >
-                ): void {
-                  throw new Error("Function not implemented.");
-                }}
+                name={"businessLicenseNumber"}
+                value={data.businessLicenseNumber}
+                onChange={handleChange}
                 error={false}
                 errorMessage={""}
                 leftIcon={<AccountDetailIcon color="#2C398F" />}
@@ -481,53 +438,37 @@ const AddVendorRegister: React.FC = () => {
                   Regulatory Approvals
                 </p>
                 <div className="flex gap-8 px-4">
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="iata"
-                      id="iata"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="iata">IATA</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="fmc"
-                      id="fmc"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="fmc">FMC</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="imo"
-                      id="imo"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="imo">IMO</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="dot"
-                      id="dot"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="dot">DOT</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="localTransport"
-                      id="localTransport"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="localTransport">
-                      Local Transport Authority
-                    </label>
-                  </div>
+                  {[
+                    "IATA",
+                    "FMC",
+                    "IMO",
+                    "DOT",
+                    "Local Transport Authority",
+                  ].map((approval) => (
+                    <div
+                      key={approval}
+                      className="flex gap-6 text-lg text-grey-ab-800 items-center"
+                    >
+                      <input
+                        type="checkbox"
+                        name="regulatoryApprovals"
+                        id={approval}
+                        className="w-5 h-5"
+                        checked={data.regulatoryApprovals.includes(approval)}
+                        onChange={(e) => {
+                          setData((prevData) => ({
+                            ...prevData,
+                            regulatoryApprovals: e.target.checked
+                              ? [...prevData.regulatoryApprovals, approval] // Add to array
+                              : prevData.regulatoryApprovals.filter(
+                                  (item) => item !== approval
+                                ), // Remove from array
+                          }));
+                        }}
+                      />
+                      <label htmlFor={approval}>{approval}</label>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -535,33 +476,38 @@ const AddVendorRegister: React.FC = () => {
               <div className="flex flex-col gap-2">
                 <p className="font-semibold text-grey-ab">ISO Certifications</p>
                 <div className="flex gap-8 px-4">
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="iso9001"
-                      id="iso9001"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="iso9001">ISO 9001</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="iso14001"
-                      id="iso14001"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="iso14001">ISO 14001</label>
-                  </div>
-                  <div className="flex gap-6 text-lg text-grey-ab-800 items-center">
-                    <input
-                      type="checkbox"
-                      name="iso28000"
-                      id="iso28000"
-                      className="w-5 h-5"
-                    />
-                    <label htmlFor="iso28000">ISO 28000</label>
-                  </div>
+                  {["ISO 9001", "ISO 14001", "ISO 28000"].map(
+                    (certifications) => (
+                      <div
+                        key={certifications}
+                        className="flex gap-6 text-lg text-grey-ab-800 items-center"
+                      >
+                        <input
+                          type="checkbox"
+                          name="isoCertifications"
+                          id={certifications}
+                          className="w-5 h-5"
+                          checked={data.isoCertifications.includes(
+                            certifications
+                          )}
+                          onChange={(e) => {
+                            setData((prevData) => ({
+                              ...prevData,
+                              isoCertifications: e.target.checked
+                                ? [
+                                    ...prevData.isoCertifications,
+                                    certifications,
+                                  ] // Add to array
+                                : prevData.isoCertifications.filter(
+                                    (item) => item !== certifications
+                                  ), // Remove from array
+                            }));
+                          }}
+                        />
+                        <label htmlFor={certifications}>{certifications}</label>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
 
@@ -569,9 +515,10 @@ const AddVendorRegister: React.FC = () => {
               <FileUpload
                 label={"Business Registration Certificate*"}
                 parentStyle="max-w-[816px] w-full"
-                onFileChange={function (file: File | null): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onFileChange={(file) =>
+                  handleFileChange("businessRegistrationCertificate", file)
+                }
+                fileName={data.businessRegistrationCertificate?.name}
               />
             </div>
           </div>
@@ -594,15 +541,9 @@ const AddVendorRegister: React.FC = () => {
                   label={"Tax Identification Number (TIN)*"}
                   type={"text"}
                   placeholder={"Enter TIN Number"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"taxIdentificationNumber"}
+                  value={data.taxIdentificationNumber}
+                  onChange={handleChange}
                   error={false}
                   errorMessage={""}
                   leftIcon={<PhoneIcon color="#2C398F" />}
@@ -612,15 +553,10 @@ const AddVendorRegister: React.FC = () => {
                   label={"Payment Terms*"}
                   type={"select"}
                   placeholder={"Choose Payment Terms"}
-                  name={""}
-                  value={""}
-                  onChange={function (
-                    e: ChangeEvent<
-                      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                    >
-                  ): void {
-                    throw new Error("Function not implemented.");
-                  }}
+                  name={"paymentTerms"}
+                  value={data.paymentTerms}
+                  onChange={handleChange}
+                  options={[{ value: "bank", label: "bank" }]}
                   error={false}
                   errorMessage={""}
                   leftIcon={<InvoiceIcon color="#2C398F" />}
@@ -630,9 +566,10 @@ const AddVendorRegister: React.FC = () => {
               <FileUpload
                 label={"Tax compliance certificate*"}
                 parentStyle="max-w-[816px] w-full"
-                onFileChange={function (file: File | null): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onFileChange={(file) =>
+                  handleFileChange("taxComplianceCertificate", file)
+                }
+                fileName={data.taxComplianceCertificate?.name}
               />
             </div>
           </div>
