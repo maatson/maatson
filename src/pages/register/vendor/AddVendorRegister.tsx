@@ -4,9 +4,7 @@ import { NavLink } from "react-router-dom";
 import {
   AccountDetailIcon,
   BusinessIcon,
-  CalenderIcon,
   CategoryIcon,
-  CodeIcon,
   CompanyIcon,
   DepartmentIcon,
   DocumentIcon,
