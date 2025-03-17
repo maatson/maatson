@@ -31,7 +31,7 @@ const AddRegister: React.FC = () => {
     companyEmail: "",
     companyMobileNumber: "",
     companyWebsite: "",
-    businessType: [] as string[],
+    businessType: [],
 
     fullName: "",
     username: "",
@@ -226,7 +226,7 @@ const AddRegister: React.FC = () => {
                 leftIcon={<CategoryIcon color="#2c398f" />}
                 onChange={handleChange}
                 error={false}
-                isMulti
+                // isMulti
                 errorMessage={""}
                 options={[
                   { label: "hello", value: "hello" },

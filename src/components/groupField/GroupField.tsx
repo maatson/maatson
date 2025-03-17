@@ -70,10 +70,20 @@ const GroupField: React.FC<Groupfield> = ({
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
   const handleReactMultiSelectChange = (selectedOption: any) => {
+    const value = selectedOption
+      ? selectedOption.map(
+          (option: { label: string; value: string }) => option.value
+        )
+      : [];
+
     onChange({
-      target: { name, value: selectedOption },
+      target: {
+        name,
+        value: value,
+      },
     } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
   };
+
   return (
     <>
       <div className={`flex flex-col gap-2 ${parentStyle}`}>
@@ -95,7 +105,16 @@ const GroupField: React.FC<Groupfield> = ({
               <Select
                 id={name}
                 name={name}
-                value={options?.find((option) => option.value === value)} // Set the selected value
+                value={
+                  Array.isArray(value)
+                    ? value.map((value) => {
+                        const option = options?.find(
+                          (opt) => opt.value === value
+                        );
+                        return option || { label: value, value }; // For newly created values
+                      })
+                    : options?.find((option) => option.value === value)
+                } // Set the selected value
                 onChange={
                   isMulti
                     ? handleReactMultiSelectChange
@@ -187,15 +206,14 @@ const GroupField: React.FC<Groupfield> = ({
                 id={name}
                 name={name}
                 value={
-                  isMulti
-                    ? Array.isArray(value) &&
-                      value.map(
-                        (val: any) =>
-                          options?.find(
-                            (option) => option.value === val.value
-                          ) || val
-                      )
-                    : options?.find((option) => option.value === value) || value
+                  Array.isArray(value)
+                    ? value.map((value) => {
+                        const option = options?.find(
+                          (opt) => opt.value === value
+                        );
+                        return option || { label: value, value }; // For newly created values
+                      })
+                    : options?.find((option) => option.value === value)
                 } // Set the selected value
                 onChange={
                   isMulti
