@@ -19,13 +19,10 @@ import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SampleImage from "/images/sample/salesPerson.png";
 import DefaultDp from "/images/defaultProfilePic.png";
 import BlackButton from "../../../components/buttons/BlackButton";
-import GroupField from "../../../components/groupField/GroupField";
 import CargoShipImage from "/images/cargoShip.png";
 import { useParams } from "react-router-dom";
 import FollowUps from "../../../components/followups/FollowUps";
 import "./style.css";
-import ErrorButton from "../../../components/buttons/ErrorButton";
-import RedClickHere from "/images/redClickHere.png";
 import CancelEnquiry from "../layouts/CancelEnquiry";
 
 const BookingDetails: React.FC = () => {
@@ -37,13 +34,13 @@ const BookingDetails: React.FC = () => {
     setFollowUp(false);
   };
 
-  const [cancelBooking, setCancelBooking] = useState<boolean>(true);
-  const handleCancelBooking = () => {
-    setCancelBooking(false);
-  };
-  const handleCancel = () => {
-    setCancelBooking(true);
-  };
+  // const [cancelBooking, setCancelBooking] = useState<boolean>(true);
+  // const handleCancelBooking = () => {
+  //   setCancelBooking(false);
+  // };
+  // const handleCancel = () => {
+  //   setCancelBooking(true);
+  // };
   useEffect(() => {
     const middleLocation = document.querySelector(
       ".middle-location"

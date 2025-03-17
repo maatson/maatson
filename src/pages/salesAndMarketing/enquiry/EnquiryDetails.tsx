@@ -20,16 +20,11 @@ import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import SampleImage from "/images/sample/salesPerson.png";
 import DefaultDp from "/images/defaultProfilePic.png";
 import BlackButton from "../../../components/buttons/BlackButton";
-import GroupField from "../../../components/groupField/GroupField";
-import GreyButton from "../../../components/buttons/GreyButton";
-import ErrorButton from "../../../components/buttons/ErrorButton";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import CustomTable from "../../../components/table/CustomTable";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import RedClickHere from "/images/redClickHere.png";
-import BlueClickHere from "/images/blueClickHere.png";
-import YellowClickHere from "/images/yellowClickHere.png";
 import FollowUps from "../../../components/followups/FollowUps";
+import "../booking/style.css"
 
 interface RowData {
   id: string | number;
@@ -66,13 +61,13 @@ const EnquiryDetails: React.FC = () => {
     setFollowUp(false);
   };
   const handleCancel = () => {
-    navigate(`/enquiry/details/${id}/booking-status/cancel`)
+    navigate(`/enquiry/details/${id}/booking-status/cancel`);
   };
   const handleNegotiation = () => {
     navigate(`/enquiry/details/${id}`);
   };
   const handleConvertToBooking = () => {
-    navigate(`/enquiry/details/${id}/booking-status/convertBooking`)
+    navigate(`/enquiry/details/${id}/booking-status/convertBooking`);
   };
 
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -802,7 +797,10 @@ const EnquiryDetails: React.FC = () => {
                 <div
                   onClick={handleCancel}
                   className={`px-2 py-1 border-b-2 ${
-                    location.pathname ===`/enquiry/details/${id}/booking-status/cancel` ? "border-b-tertiary" : "border-b-grey-aw-50"
+                    location.pathname ===
+                    `/enquiry/details/${id}/booking-status/cancel`
+                      ? "border-b-tertiary"
+                      : "border-b-grey-aw-50"
                   } text-sm font-semibold text-grey-ab cursor-pointer`}
                 >
                   Cancel
@@ -810,7 +808,9 @@ const EnquiryDetails: React.FC = () => {
                 <div
                   onClick={handleNegotiation}
                   className={`px-2 py-1 border-b-2 ${
-                    location.pathname ===`/enquiry/details/${id}` ? "border-b-tertiary" : "border-b-grey-aw-50"
+                    location.pathname === `/enquiry/details/${id}`
+                      ? "border-b-tertiary"
+                      : "border-b-grey-aw-50"
                   } text-sm font-semibold text-grey-ab cursor-pointer`}
                 >
                   Negotiation
@@ -818,7 +818,8 @@ const EnquiryDetails: React.FC = () => {
                 <div
                   onClick={handleConvertToBooking}
                   className={`px-2 py-1 border-b-2 ${
-                    location.pathname ===`/enquiry/details/${id}/booking-status/convertBooking`
+                    location.pathname ===
+                    `/enquiry/details/${id}/booking-status/convertBooking`
                       ? "border-b-tertiary"
                       : "border-b-grey-aw-50"
                   } border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer`}
@@ -827,7 +828,7 @@ const EnquiryDetails: React.FC = () => {
                 </div>
               </div>
 
-              <Outlet />              
+              <Outlet />
             </div>
             {/* enquiry status end */}
           </div>
@@ -866,10 +867,3 @@ const EnquiryDetails: React.FC = () => {
 };
 
 export default EnquiryDetails;
-
-
-
-
-
-
-
