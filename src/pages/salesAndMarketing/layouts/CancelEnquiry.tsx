@@ -19,7 +19,6 @@ const CancelEnquiry: React.FC = () => {
     setReason(e.target.value);
   };
 
-  
   const handleCancel = () => {
     setCancelCard(false);
     setReasonCard(true);
@@ -57,12 +56,11 @@ const CancelEnquiry: React.FC = () => {
   };
 
   useEffect(() => {
-    if(reason !== "")
-    {
-        setEditCard(true);
-        setCancelCard(false);
+    if (reason !== "") {
+      setEditCard(true);
+      setCancelCard(false);
     }
-  },[])
+  }, []);
 
   return (
     <>
@@ -70,7 +68,11 @@ const CancelEnquiry: React.FC = () => {
         <div className="flex flex-col gap-4 px-4 py-2 justify-center">
           <div className="flex flex-col gap-2">
             <div>
-              <img src={RedClickHere} alt="RedClickHere" />
+              <img
+                src={RedClickHere}
+                alt="RedClickHere"
+                className="object-fill w-full"
+              />
             </div>
             <p className="text-sm text-grey-ab-300 text-center">
               Click 'Cancel Booking' to confirm the cancellation of this
