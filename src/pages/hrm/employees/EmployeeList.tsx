@@ -70,7 +70,7 @@ const EmployeeList: React.FC = () => {
           <div className="flex gap-6 items-center">
             <div className="flex gap-2 rounded-sm border p-2 border-grey-200">
               <div
-                className={`w-6 h-6 rounded-xs p-1 ${
+                className={`w-6 h-6 rounded-xs p-1 cursor-pointer ${
                   hambergerMenuIcon ? "bg-secondary" : "bg-grey-600"
                 }`}
                 onClick={handleHambergerMenuIcon}
@@ -78,7 +78,7 @@ const EmployeeList: React.FC = () => {
                 <HambergerMenuIcon size="16px" />
               </div>
               <div
-                className={`w-6 h-6 rounded-xs p-1 ${
+                className={`w-6 h-6 rounded-xs p-1 cursor-pointer ${
                   cubeIcon ? "bg-secondary" : "bg-grey-600"
                 }`}
                 onClick={handleCubeIcon}
