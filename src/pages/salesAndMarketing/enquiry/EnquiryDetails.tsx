@@ -22,9 +22,15 @@ import DefaultDp from "/images/defaultProfilePic.png";
 import BlackButton from "../../../components/buttons/BlackButton";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import CustomTable from "../../../components/table/CustomTable";
-import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import FollowUps from "../../../components/followups/FollowUps";
-import "../booking/style.css"
+import "../booking/style.css";
 
 interface RowData {
   id: string | number;
@@ -238,7 +244,7 @@ const EnquiryDetails: React.FC = () => {
 
         <div className="grid grid-cols-2 gap-6 text-grey-ab-800">
           {/* left side */}
-          <div className="bg-grey-aw-50 flex flex-col gap-4 px-8 py-5 rounded-xs shadow-md">
+          <div className="bg-grey-aw-50 flex flex-col gap-4 px-8 py-5 rounded-xs shadow-md h-fit">
             <div className="flex justify-between">
               <div className="flex flex-col gap-1">
                 <p className="text-sm text-grey-ab-300">Enquiry ID</p>
@@ -793,39 +799,42 @@ const EnquiryDetails: React.FC = () => {
               <div className="py-3 px-4 border-b border-b-grey-ab-100 font-semibold">
                 Enquiry Status
               </div>
-              <div className="px-2 py-2 flex gap-14 justify-center">
-                <div
-                  onClick={handleCancel}
-                  className={`px-2 py-1 border-b-2 ${
-                    location.pathname ===
-                    `/enquiry/details/${id}/booking-status/cancel`
-                      ? "border-b-tertiary"
-                      : "border-b-grey-aw-50"
-                  } text-sm font-semibold text-grey-ab cursor-pointer`}
+              <div className="px-4 py-2 flex gap-2 text-center justify-center ">
+                <NavLink
+                  to={`/enquiry/details/${id}/booking-status/cancel`}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "border-b-tertiary" : ""
+                    } px-2 py-1 border-b-2  border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer transition-all duration-500 ease-in-out flex-1`
+                  }
+                  end
                 >
                   Cancel
-                </div>
-                <div
-                  onClick={handleNegotiation}
-                  className={`px-2 py-1 border-b-2 ${
-                    location.pathname === `/enquiry/details/${id}`
-                      ? "border-b-tertiary"
-                      : "border-b-grey-aw-50"
-                  } text-sm font-semibold text-grey-ab cursor-pointer`}
+                </NavLink>
+
+                <NavLink
+                  to={`/enquiry/details/${id}`}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "border-b-tertiary" : ""
+                    } px-2 py-1 border-b-2 border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer transition-all duration-500 ease-in-out flex-1`
+                  }
+                  end
                 >
                   Negotiation
-                </div>
-                <div
-                  onClick={handleConvertToBooking}
-                  className={`px-2 py-1 border-b-2 ${
-                    location.pathname ===
-                    `/enquiry/details/${id}/booking-status/convertBooking`
-                      ? "border-b-tertiary"
-                      : "border-b-grey-aw-50"
-                  } border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer`}
+                </NavLink>
+
+                <NavLink
+                  to={`/enquiry/details/${id}/booking-status/convertBooking`}
+                  className={({ isActive }) =>
+                    `${
+                      isActive ? "border-b-tertiary" : ""
+                    } px-2 py-1 border-b-2 border-b-grey-aw-50 text-sm font-semibold text-grey-ab cursor-pointer transition-all duration-500 ease-in-out flex-1`
+                  }
+                  end
                 >
                   Convert to Booking
-                </div>
+                </NavLink>
               </div>
 
               <Outlet />
