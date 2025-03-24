@@ -127,7 +127,57 @@ const RequirementDetails = lazy(
   () => import("./pages/hrm/requirement/RequirementDetails")
 );
 
-// testimonials
+// CUSTOMER SERVICE
+const SeaAirSchedule = lazy(
+  () => import("./pages/customerService/sea-air-schedule")
+);
+//sea
+const SeaFreight = lazy(
+  () => import("./pages/customerService/sea-air-schedule/sea-freight")
+);
+const UpdateSchedule = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/UpdateSchedule"
+    )
+);
+const ScheduleDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/scheduleDetails/ScheduleDetails"
+    )
+);
+const BulkScheduleUpdates = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/bulkScheduleUpdates/BulkScheduleUpdates"
+    )
+);
+
+//air
+const AirFreight = lazy(
+  () => import("./pages/customerService/sea-air-schedule/air-freight")
+);
+const UpdateScheduleAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/UpdateSchedule"
+    )
+);
+const ScheduleDetailsAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/scheduleDetails/ScheduleDetails"
+    )
+);
+const BulkScheduleUpdatesAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/bulkScheduleUpdates/BulkScheduleUpdates"
+    )
+);
+
+// TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
   () => import("./pages/testimonials/TestimonialList")
@@ -213,6 +263,28 @@ const AppRoutes: React.FC = () => {
             />
           </Route>
         </Route>
+
+        {/* customer services */}
+        <Route path="sea-air-schedule" element={<SeaAirSchedule />}>
+          <Route path="sea-freight" element={<SeaFreight />}>
+            <Route index element={<UpdateSchedule />} />
+            <Route path="schedule-details" element={<ScheduleDetails />} />
+            <Route
+              path="bulk-schedule-updates"
+              element={<BulkScheduleUpdates />}
+            />
+          </Route>
+          <Route path="air-freight" element={<AirFreight />}>
+            <Route index element={<UpdateScheduleAir />} />
+            <Route path="schedule-details" element={<ScheduleDetailsAir />} />
+            <Route
+              path="bulk-schedule-updates"
+              element={<BulkScheduleUpdatesAir />}
+            />
+          </Route>
+        </Route>
+        <Route path="shipment-updates" element={<Requirement />}></Route>
+        <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>
