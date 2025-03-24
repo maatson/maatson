@@ -25,8 +25,6 @@ import CustomTable from "../../../components/table/CustomTable";
 import {
   NavLink,
   Outlet,
-  useLocation,
-  useNavigate,
   useParams,
 } from "react-router-dom";
 import FollowUps from "../../../components/followups/FollowUps";
@@ -39,6 +37,7 @@ interface RowData {
   voyageNumber: string;
   arrivalDate: string;
   departureDate: string;
+  localChargesTarrif: string | React.ReactNode;
   price: string | React.ReactNode;
   priceValidity: string;
 }
@@ -49,6 +48,7 @@ const columns: any[] = [
   { id: "voyageNumber", label: "Voyage Number", minWidth: 140 },
   { id: "arrivalDate", label: "Arrival Number", minWidth: 140 },
   { id: "departureDate", label: "Departure Date", minWidth: 120 },
+  { id: "localChargesTarrif", label: "Local Charges Tarrif", minWidth: 150, },
   { id: "price", label: "Price", minWidth: 120, align: "center" },
   { id: "priceValidity", label: "Price Validity", minWidth: 120 },
 ];
@@ -60,20 +60,9 @@ const EnquiryDetails: React.FC = () => {
   const followRef = useRef<HTMLDivElement | null>(null);
 
   const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const handleCloseFollowUp = () => {
     setFollowUp(false);
-  };
-  const handleCancel = () => {
-    navigate(`/enquiry/details/${id}/booking-status/cancel`);
-  };
-  const handleNegotiation = () => {
-    navigate(`/enquiry/details/${id}`);
-  };
-  const handleConvertToBooking = () => {
-    navigate(`/enquiry/details/${id}/booking-status/convertBooking`);
   };
 
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -82,9 +71,10 @@ const EnquiryDetails: React.FC = () => {
   console.log(selectedRows, "selected Rows");
 
   const createData = (items: any) => {
-    const { id, price } = items;
+    const { id, price, localChargesTarrif } = items;
 
     const prices = <div className="font-semibold text-center">{price}</div>;
+    const localChargesTarrifs = <div className="font-semibold text-center">{localChargesTarrif}</div>;
 
     const updatedData = {
       id: id,
@@ -93,6 +83,7 @@ const EnquiryDetails: React.FC = () => {
       voyageNumber: items?.voyageNumber,
       arrivalDate: items?.arrivalDate,
       departureDate: items?.departureDate,
+      localChargesTarrif : localChargesTarrifs,
       price: prices,
       priceValidity: items?.priceValidity,
     };
@@ -106,6 +97,7 @@ const EnquiryDetails: React.FC = () => {
       voyageNumber: "M1234	",
       arrivalDate: "2025-02-25",
       departureDate: "2025-02-25	",
+      localChargesTarrif: "2000 USD",
       price: "2000 USD",
       priceValidity: "2025-02-13",
     },
@@ -115,6 +107,7 @@ const EnquiryDetails: React.FC = () => {
       voyageNumber: "M1234	",
       arrivalDate: "2025-02-25",
       departureDate: "2025-02-25	",
+      localChargesTarrif: "2000 USD",
       price: "2000 USD",
       priceValidity: "2025-02-13",
     },
@@ -124,6 +117,7 @@ const EnquiryDetails: React.FC = () => {
       voyageNumber: "M1234	",
       arrivalDate: "2025-02-25",
       departureDate: "2025-02-25	",
+      localChargesTarrif: "2000 USD",
       price: "2000 USD",
       priceValidity: "2025-02-13",
     },
@@ -133,6 +127,7 @@ const EnquiryDetails: React.FC = () => {
       voyageNumber: "M1234	",
       arrivalDate: "2025-02-25",
       departureDate: "2025-02-25	",
+      localChargesTarrif: "2000 USD",
       price: "2000 USD",
       priceValidity: "2025-02-13",
     },
@@ -847,7 +842,7 @@ const EnquiryDetails: React.FC = () => {
         <div className="rounded-xs bg-grey-aw-50 shadow-lg">
           <div className="flex justify-between px-4 py-3 border-b border-b-grey-ab-100 items-center">
             <p className="text-lg text-grey-ab-800 font-semibold">
-              Carrier Details
+              Enquiry Pricing Details
             </p>
             <div>
               <SuccessButton

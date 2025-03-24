@@ -82,7 +82,7 @@ const EmployeeProfile: React.FC = () => {
   const createEmployeeDocumentData = (items: any) => {
     const { id, fileName } = items;
     const document = (
-      <div className="flex gap-3 py-1 px-2 items-center justify-start">
+      <div className="flex gap-3 py-1 items-center justify-start">
         <DocumentIcon color="#2C398F" />
         <div className="text-grey-ab-800">{fileName}.pdf</div>
       </div>
@@ -324,7 +324,7 @@ const EmployeeProfile: React.FC = () => {
             </div>
 
             <div className="mx-auto flex flex-col gap-2 ">
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 items-center justify-center">
                 <p className="text-lg  font-semibold text-grey-ab text-center">
                   @andrew_202
                 </p>
@@ -493,8 +493,8 @@ const EmployeeProfile: React.FC = () => {
               <CustomTable
                 columns={employeeDocumentColumns}
                 rows={employeeDocumentRows}
-                isCheckbox={true}
-                onCheckedRowsChange={handleEmployeeDocumentCheckedRowsChange}
+                isCheckbox={false}
+                // onCheckedRowsChange={handleEmployeeDocumentCheckedRowsChange}
               />
             </div>
 
