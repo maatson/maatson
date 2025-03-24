@@ -28,6 +28,7 @@ interface SideBarItemProps {
 interface SideBarChildProps {
   label: string;
   link: string;
+  active?: string;
 }
 
 const SideBar: React.FC = () => {
@@ -40,7 +41,7 @@ const SideBar: React.FC = () => {
     // Set the active item based on the current route
     sideBarItems.forEach((item, index) => {
       item.children.forEach((child) => {
-        if (location.pathname.startsWith(child.link)) {
+        if (location.pathname.startsWith(child.active || child.link)) {
           setActiveItem(index); // Set the active item based on the current route
           setOpenItems((prevState) => ({
             ...prevState,
@@ -113,7 +114,15 @@ const SideBar: React.FC = () => {
         leftIcon: <CustomerServiceIcon />,
         label: "Customer Service",
         isOpen: openItems[3] || false,
-        children: [],
+        children: [
+          {
+            label: "Air & Sea Schedule",
+            link: "/sea-air-schedule/sea-freight",
+            active: "/sea-air-schedule",
+          },
+          { label: "Shipment Updates", link: "/customer-service" },
+          { label: "Cargo Arrival Notice", link: "/customer-service" },
+        ],
         onClick: () => handleItemClick(3),
       },
       {
@@ -234,7 +243,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
               to={child.link}
               key={index}
               className={`py-2 px-6 rounded flex items-center gap-2 ${
-                location.pathname.startsWith(child.link)
+                location.pathname.startsWith(child.active || child.link)
                   ? "bg-[#ffffff] bg-opacity-40 "
                   : ""
               }`}
