@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
+import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import { Link } from "react-router-dom";
-import ProfileSubHeaders from "../salesAndMarketing/layouts/ProfileSubHeaders";
+import ProfileSubHeaders from "../../../../salesAndMarketing/layouts/ProfileSubHeaders";
 import {
   CalenderIcon,
   FreightIcon,
@@ -10,9 +10,9 @@ import {
   RoutingIcon,
   ServiceIcon,
   ShipIcon,
-} from "../../components/icons/Icons";
-import GroupField from "../../components/groupField/GroupField";
-import GreyButton from "../../components/buttons/GreyButton";
+} from "../../../../../components/icons/Icons";
+import GroupField from "../../../../../components/groupField/GroupField";
+import GreyButton from "../../../../../components/buttons/GreyButton";
 
 const AddSchedule: React.FC = () => {
   const [data, setData] = useState({
