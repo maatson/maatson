@@ -196,7 +196,7 @@ const AddSeaScheduleForm: React.FC = () => {
                   />
                 </div>
               </div>
-              {data.servingRoutes.length.map((index) => (
+              {data.servingRoutes.map(() => (
                 <div className="flex gap-4">
                   <GroupField
                     label={"Route Port*"}

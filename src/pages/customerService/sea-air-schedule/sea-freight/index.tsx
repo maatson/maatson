@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { SendIcon } from "../../../../components/icons/Icons";
+import {
+  JsonFileIcon,
+  LeaveCalenderIcon,
+  UpdateIcon,
+} from "../../../../components/icons/Icons";
 
 const SeaFreight: React.FC = () => {
   const location = useLocation();
@@ -18,7 +22,7 @@ const SeaFreight: React.FC = () => {
           }
         >
           <p> Update Schedules</p>
-          <SendIcon
+          <UpdateIcon
             color={`${
               location.pathname === "/sea-air-schedule/sea-freight"
                 ? "#eeaa1f"
@@ -40,7 +44,7 @@ const SeaFreight: React.FC = () => {
           }
         >
           <p> Schedule Details </p>
-          <SendIcon
+          <LeaveCalenderIcon
             color={`${
               location.pathname ===
               "/sea-air-schedule/sea-freight/schedule-details"
@@ -64,7 +68,7 @@ const SeaFreight: React.FC = () => {
           }
         >
           <p> Bulk Schedule Updates </p>
-          <SendIcon
+          <JsonFileIcon
             color={`${
               location.pathname ===
               "/sea-air-schedule/sea-freight/bulk-schedule-updates"
