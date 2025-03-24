@@ -3,10 +3,13 @@ import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import { Link } from "react-router-dom";
 import ProfileSubHeaders from "../../../../salesAndMarketing/layouts/ProfileSubHeaders";
 import {
+  AddIcon,
   CalenderIcon,
+  DeleteIcon,
   FreightIcon,
   InfoIcon,
   LocationIcon,
+  RangeCalenderIcon,
   RoutingIcon,
   ServiceIcon,
   ShipIcon,
@@ -14,7 +17,7 @@ import {
 import GroupField from "../../../../../components/groupField/GroupField";
 import GreyButton from "../../../../../components/buttons/GreyButton";
 
-const AddSchedule: React.FC = () => {
+const AddSeaScheduleForm: React.FC = () => {
   const [data, setData] = useState({
     carrierName: "",
     vesselName: "",
@@ -22,7 +25,16 @@ const AddSchedule: React.FC = () => {
     SCACNumber: "",
     portOfLoading: "",
     portOfDischarge: "",
+    serviceName: "",
+    servingRoutes: [{ routePort: "", estimateTimeOfArrival: "" }],
+    estimateTimeOfDeparture: "",
+    actualTimeOfDeparture: "",
+    estimateTimeOfArrival: "",
+    actualTimeOfArrival: "",
+    vesselCutOff: "",
+    vgmCutOff: "",
   });
+  const [showServingRoutes, setShowServingRoutes] = useState<boolean>(false);
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -34,6 +46,21 @@ const AddSchedule: React.FC = () => {
     e.preventDefault();
     console.log("data :", data);
   };
+
+  const handleYesOrCancel = () => {
+    setShowServingRoutes((prev) => !prev);
+    setData((prevData) => ({
+      ...prevData,
+      servingRoutes: [
+        ...prevData.servingRoutes,
+        { routePort: "", estimateTimeOfArrival: "" },
+      ],
+    }));
+  };
+
+  const handleAdd = () => {};
+
+  const handleDelete = () => {};
   return (
     <>
       <div className="flex flex-col gap-8 px-8 py-4 rounded-xs bg-grey-aw-50 shadow-lg">
@@ -161,58 +188,160 @@ const AddSchedule: React.FC = () => {
                 <p className="text-sm">
                   Do you want to cancel the Serving Routes input?
                 </p>
-                <GreyButton label={"Cancel"} size={"s"} variant={"primary"} />
-              </div>
-              <div className="flex flex-col gap-4">
-                <GroupField
-                  label={"Route Port*"}
-                  type={""}
-                  placeholder={"Enter Route Port"}
-                  name={""}
-                  value={""}
-                  onChange={handleChange}
-                  error={false}
-                  errorMessage={""}
-                  leftIcon={<LocationIcon color="#2C398F" />}
-                  parentStyle="w-[30%]"
-                />
-                <GroupField
-                  label={"Estimate Time of Arrival"}
-                  type={""}
-                  placeholder={"Enter ETA"}
-                  name={""}
-                  value={""}
-                  onChange={handleChange}
-                  error={false}
-                  errorMessage={""}
-                  rightIcon={<CalenderIcon color="#2C398F" />}
-                  parentStyle="w-[30%]"
-                />
-                <div className="flex gap-4">
-                  <div></div>
+                <div onClick={handleYesOrCancel}>
+                  <GreyButton
+                    label={showServingRoutes ? "Cancel" : "Yes"}
+                    size={"s"}
+                    variant={"primary"}
+                  />
                 </div>
               </div>
+              {data.servingRoutes.length.map((index) => (
+                <div className="flex gap-4">
+                  <GroupField
+                    label={"Route Port*"}
+                    type={""}
+                    placeholder={"Enter Route Port"}
+                    name={""}
+                    value={""}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<LocationIcon color="#2C398F" />}
+                    parentStyle="w-[30%]"
+                  />
+                  <GroupField
+                    label={"Estimate Time of Arrival"}
+                    type={""}
+                    placeholder={"Enter ETA"}
+                    name={""}
+                    value={""}
+                    onChange={handleChange}
+                    error={false}
+                    errorMessage={""}
+                    rightIcon={<CalenderIcon color="#2C398F" />}
+                    parentStyle="w-[30%]"
+                  />
+                  <div className="flex gap-1 items-end">
+                    <div
+                      className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-error"
+                      onClick={handleDelete}
+                    >
+                      <DeleteIcon color="#FDFDFD" size={16} />
+                    </div>
+                    <div
+                      className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab"
+                      onClick={handleAdd}
+                    >
+                      <AddIcon color="#FDFDFD" size={16} />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* departure */}
-          <div></div>
+          <div className="flex flex-col gap-6">
+            <ProfileSubHeaders
+              title={"Departure"}
+              icon={<RangeCalenderIcon />}
+            />
+            <div className="flex gap-4">
+              <GroupField
+                label={"Estimated Time of Departure"}
+                type={""}
+                placeholder={"Enter ETD"}
+                name={""}
+                value={""}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                rightIcon={<CalenderIcon color="#2C398F" />}
+                parentStyle="w-[40%]"
+              />
+              <GroupField
+                label={"Actual Time of Departure"}
+                type={""}
+                placeholder={"Enter ATD"}
+                name={""}
+                value={""}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                rightIcon={<CalenderIcon color="#2C398F" />}
+                parentStyle="w-[40%]"
+              />
+            </div>
+          </div>
 
           {/* arrival */}
-          <div></div>
+          <div className="flex flex-col gap-6">
+            <ProfileSubHeaders title={"Arrival"} icon={<RangeCalenderIcon />} />
+            <div className="flex gap-4">
+              <GroupField
+                label={"Estimated Time of Arrival"}
+                type={""}
+                placeholder={"Enter ETA"}
+                name={""}
+                value={""}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                rightIcon={<CalenderIcon color="#2C398F" />}
+                parentStyle="w-[40%]"
+              />
+              <GroupField
+                label={"Actual Time of Arrival"}
+                type={""}
+                placeholder={"Enter ATA"}
+                name={""}
+                value={""}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                rightIcon={<CalenderIcon color="#2C398F" />}
+                parentStyle="w-[40%]"
+              />
+            </div>
+          </div>
 
           {/* cut off */}
-          <div></div>
+          <div className="flex flex-col gap-6">
+            <ProfileSubHeaders title={"Cut Off"} icon={<RangeCalenderIcon />} />
+            <div className="flex gap-4">
+              <GroupField
+                label={"Vessel Cut Off"}
+                type={""}
+                placeholder={"Enter Vessel Cut Off"}
+                name={""}
+                value={""}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                rightIcon={<CalenderIcon color="#2C398F" />}
+                parentStyle="w-[40%]"
+              />
+              <GroupField
+                label={"Vgm Cut Off"}
+                type={""}
+                placeholder={"Enter Vessel Cut Off"}
+                name={""}
+                value={""}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                rightIcon={<CalenderIcon color="#2C398F" />}
+                parentStyle="w-[40%]"
+              />
+            </div>
+          </div>
         </div>
 
         {/* buttons */}
         <div className="flex gap-6 items-center justify-end">
-          <Link to={"/"}>
-            <PrimaryButton
-              label={"Cancel //add routes"}
-              size={"xl"}
-              variant={"outline"}
-            />
+          <Link to={"/sea-air-schedule/sea-freight"}>
+            <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
           </Link>
           <div onClick={handleRegister}>
             <PrimaryButton
@@ -227,4 +356,4 @@ const AddSchedule: React.FC = () => {
   );
 };
 
-export default AddSchedule;
+export default AddSeaScheduleForm;

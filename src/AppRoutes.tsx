@@ -153,6 +153,7 @@ const BulkScheduleUpdates = lazy(
       "./pages/customerService/sea-air-schedule/sea-freight/bulkScheduleUpdates/BulkScheduleUpdates"
     )
 );
+const AddSeaScheduleForm = lazy(() => import("./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/AddSeaScheduleForm"))
 
 //air
 const AirFreight = lazy(
@@ -273,7 +274,11 @@ const AppRoutes: React.FC = () => {
               path="bulk-schedule-updates"
               element={<BulkScheduleUpdates />}
             />
+            
           </Route>
+          
+          <Route path="add-sea-schedule" element={<AddSeaScheduleForm />}></Route>
+
           <Route path="air-freight" element={<AirFreight />}>
             <Route index element={<UpdateScheduleAir />} />
             <Route path="schedule-details" element={<ScheduleDetailsAir />} />

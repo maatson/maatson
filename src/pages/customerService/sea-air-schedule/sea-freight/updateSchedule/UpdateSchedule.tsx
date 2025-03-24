@@ -7,6 +7,7 @@ import {
 } from "../../../../../components/icons/Icons";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
+import { Link } from "react-router-dom";
 
 const UpdateSchedule: React.FC = () => {
   return (
@@ -32,12 +33,14 @@ const UpdateSchedule: React.FC = () => {
         />
       </div>
       <div className="flex gap-2 items-center">
-        <PrimaryButton
-          label={"Add Schedule"}
-          size={"l"}
-          variant={""}
-          leftIcon={<AddIcon color="#ffffff" />}
-        />
+        <Link to={"/sea-air-schedule/add-sea-schedule"}>
+          <PrimaryButton
+            label={"Add Schedule"}
+            size={"l"}
+            variant={""}
+            leftIcon={<AddIcon color="#ffffff" />}
+          />
+        </Link>
         <SuccessButton
           label={"Export"}
           size={""}
