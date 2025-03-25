@@ -39,6 +39,7 @@ const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight }) => {
                 )
               }
             />
+
             <div className="text-xs rounded-xl border border-grey-ab-50 bg-grey-aw-50 text-blue flex items-center gap-2 px-2 py-1">
               <span>Voy No:</span>{" "}
               <span className="font-semibold px-2 py-1 bg-grey-300 rounded-lg">
