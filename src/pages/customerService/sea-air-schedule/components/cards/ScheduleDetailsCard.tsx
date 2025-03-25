@@ -1,17 +1,20 @@
 import React from "react";
 import PrimaryChip from "../../../../../components/chips/PrimaryChip";
 import {
+  AeroplaneIcon,
   CodeIcon,
-  EditIcon,
   LeaveCalenderIcon,
   LocationIcon,
   ShipIcon,
 } from "../../../../../components/icons/Icons";
 import SecondaryChip from "../../../../../components/chips/SecondaryChip";
 import GreyButton from "../../../../../components/buttons/GreyButton";
-import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
 
-const UpdateScheduleCard: React.FC = React.memo(() => {
+interface CardProps {
+  isSeaFreight: boolean;
+}
+
+const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight }) => {
   return (
     <div className="rounded-sm border-primary border-2">
       <div className="p-2 gap-2 flex flex-col">
@@ -27,20 +30,18 @@ const UpdateScheduleCard: React.FC = React.memo(() => {
               label={"Maersk Denver"}
               size={"m"}
               variant={""}
-              leftIcon={<ShipIcon size={16} color="#ffffff" />}
+              leftIcon={
+                isSeaFreight ? (
+                  <ShipIcon size={16} color="#ffffff" />
+                ) : (
+                  <AeroplaneIcon size={16} color="#ffffff" />
+                )
+              }
             />
             <div className="text-xs rounded-xl border border-grey-ab-50 bg-grey-aw-50 text-blue flex items-center gap-2 px-2 py-1">
               <span>Voy No:</span>{" "}
               <span className="font-semibold px-2 py-1 bg-grey-300 rounded-lg">
                 MAE1234
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <div className="text-2xs rounded-xl border border-grey-ab-50 bg-secondary-300 text-grey-ab-800 flex items-center gap-2 px-2 py-2">
-              <span>Updated On</span>{" "}
-              <span className="font-semibold px-2 py-1 bg-secondary-100 rounded-lg text-3xs">
-                01-02-2025{" "}
               </span>
             </div>
           </div>
@@ -124,26 +125,32 @@ const UpdateScheduleCard: React.FC = React.memo(() => {
                 sea freight services to Shanghai and Hong Kong{" "}
               </p>
             </div>
-            <div className="p-1 gap-2 flex flex-col">
-              <p className="text-grey-ab-300 text-xs">Vessel Cut Off</p>
-              <p className="text-grey-ab-600 font-semibold text-xs">
-                09-02-2025{" "}
-              </p>
-            </div>
-            <div className="p-1 gap-2 flex flex-col">
-              <p className="text-grey-ab-300 text-xs">VGM Cut Off</p>
-              <p className="text-grey-ab-600 font-semibold text-xs">
-                10-02-2025{" "}
-              </p>
-            </div>
+            {isSeaFreight ? (
+              <>
+                {" "}
+                <div className="p-1 gap-2 flex flex-col">
+                  <p className="text-grey-ab-300 text-xs">Vessel Cut Off</p>
+                  <p className="text-grey-ab-600 font-semibold text-xs">
+                    09-02-2025{" "}
+                  </p>
+                </div>
+                <div className="p-1 gap-2 flex flex-col">
+                  <p className="text-grey-ab-300 text-xs">VGM Cut Off</p>
+                  <p className="text-grey-ab-600 font-semibold text-xs">
+                    10-02-2025{" "}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <div className="p-1 gap-2 flex flex-col">
+                <p className="text-grey-ab-300 text-xs">Onboarding Cut off</p>
+                <p className="text-grey-ab-600 font-semibold text-xs">
+                  10-02-2025{" "}
+                </p>
+              </div>
+            )}
           </div>
           <div className="flex gap-2 items-center">
-            <NeutralBlueButton
-              label={"Edit"}
-              size={"l"}
-              variant={""}
-              leftIcon={<EditIcon color="#ffffff" />}
-            />
             <GreyButton
               label={"View Details"}
               size={"l"}
@@ -155,6 +162,6 @@ const UpdateScheduleCard: React.FC = React.memo(() => {
       </div>
     </div>
   );
-});
+};
 
-export default UpdateScheduleCard;
+export default ScheduleDetailsCard;

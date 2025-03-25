@@ -10,8 +10,8 @@ import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
-import UpdateScheduleCard from "../cards/UpdateScheduleCard";
 import BlackButton from "../../../../../components/buttons/BlackButton";
+import UpdateScheduleCard from "../../components/cards/UpdateScheduleCard";
 
 interface RowData {
   id: string | number;
@@ -112,8 +112,8 @@ const UpdateSchedule: React.FC = () => {
         </div>
       </div>
       <div className="px-8 py-6 gap-4 flex flex-col">
-        <UpdateScheduleCard />
-        <UpdateScheduleCard />
+        <UpdateScheduleCard isSeaFreight={true} />
+        <UpdateScheduleCard isSeaFreight={true} />
       </div>
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">
@@ -122,10 +122,6 @@ const UpdateSchedule: React.FC = () => {
             (itemsPerPage > rows.length ? rows.length : itemsPerPage)}{" "}
           of {rows.length} Entries
         </div>
-        {/* <div className="text-xs text-grey-ab-200">
-          Showing {currentPage * itemsPerPage - itemsPerPage + 1} to{" "}
-          {currentPage * itemsPerPage} of {rows.length} Entries
-        </div> */}
 
         <CustomPagination
           totalItems={rows.length}
