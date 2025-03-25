@@ -11,6 +11,7 @@ import {
 import SecondaryChip from "../../../../../components/chips/SecondaryChip";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
 import GreyButton from "../../../../../components/buttons/GreyButton";
+import { Link } from "react-router-dom";
 
 interface CardProps {
   isSeaFreight: boolean;
@@ -166,18 +167,22 @@ const UpdateScheduleCard: React.FC<CardProps> = React.memo(
               )}
             </div>
             <div className="flex gap-2 items-center">
-              <NeutralBlueButton
-                label={"Edit"}
-                size={"l"}
-                variant={""}
-                leftIcon={<EditIcon color="#ffffff" />}
-              />
-              <GreyButton
-                label={"View Details"}
-                size={"l"}
-                variant={""}
-                leftIcon={<CodeIcon />}
-              />
+              <Link to={""}>
+                <NeutralBlueButton
+                  label={"Edit"}
+                  size={"l"}
+                  variant={""}
+                  leftIcon={<EditIcon color="#ffffff" />}
+                />
+              </Link>
+              <Link to={""}>
+                <GreyButton
+                  label={"View Details"}
+                  size={"l"}
+                  variant={""}
+                  leftIcon={<CodeIcon />}
+                />
+              </Link>
             </div>
           </div>
         </div>
