@@ -33,7 +33,7 @@ const ScheduleDetails: React.FC = () => {
   const handleItemsPerPageChange = useCallback(
     (event: SelectChangeEvent<number>) => {
       setItemsPerPage(Number(event.target.value));
-      setCurrentPage(1);
+      setCurrentPage(1);  
     },
     []
   );
