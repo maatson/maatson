@@ -37,7 +37,7 @@ const EditSeaScheduleForm: React.FC = () => {
     vesselCutOff: "11-03-2025",
     vgmCutOff: "11-03-2025",
   });
-  const [showServingRoutes, setShowServingRoutes] = useState<boolean>(false);
+  const [showServingRoutes, setShowServingRoutes] = useState<boolean>(true);
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -52,6 +52,12 @@ const EditSeaScheduleForm: React.FC = () => {
 
   const handleYesOrCancel = () => {
     setShowServingRoutes((prev) => !prev);
+      if (showServingRoutes) {
+      setData((prevData) => ({
+        ...prevData,
+        servingRoutes: [{ routePort: "", estimateTimeOfArrival: "" }],
+      }));
+    }
   };
 
   const handleAdd = () => {
@@ -71,14 +77,14 @@ const EditSeaScheduleForm: React.FC = () => {
     }));
   };
 
-  useEffect(() => {
-    if (showServingRoutes) {
-      setData((prevData) => ({
-        ...prevData,
-        servingRoutes: [{ routePort: "", estimateTimeOfArrival: "" }],
-      }));
-    }
-  }, [showServingRoutes]);
+  // useEffect(() => {
+  //   if (showServingRoutes) {
+  //     setData((prevData) => ({
+  //       ...prevData,
+  //       servingRoutes: [{ routePort: "", estimateTimeOfArrival: "" }],
+  //     }));
+  //   }
+  // }, [showServingRoutes]);
 
   return (
     <>
