@@ -283,7 +283,7 @@ const EditSeaScheduleForm: React.FC = () => {
                           onClick={handleAdd}
                         >
                           <AddIcon color="#FDFDFD" size={16} />
-                        </div> */}
+                        </div> */}  
                       </div>
                     </div>
                   ))}
