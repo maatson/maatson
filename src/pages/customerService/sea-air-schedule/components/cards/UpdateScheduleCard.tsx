@@ -15,10 +15,12 @@ import { Link } from "react-router-dom";
 
 interface CardProps {
   isSeaFreight: boolean;
+  editpath: string;
+  viewPath:string;
 }
 
 const UpdateScheduleCard: React.FC<CardProps> = React.memo(
-  ({ isSeaFreight }) => {
+  ({ isSeaFreight, editpath, viewPath }) => {
     return (
       <div className="rounded-sm border-primary border-2">
         <div className="p-2 gap-2 flex flex-col">
@@ -167,7 +169,7 @@ const UpdateScheduleCard: React.FC<CardProps> = React.memo(
               )}
             </div>
             <div className="flex gap-2 items-center">
-              <Link to={""}>
+              <Link to={editpath}>
                 <NeutralBlueButton
                   label={"Edit"}
                   size={"l"}
@@ -175,7 +177,7 @@ const UpdateScheduleCard: React.FC<CardProps> = React.memo(
                   leftIcon={<EditIcon color="#ffffff" />}
                 />
               </Link>
-              <Link to={""}>
+              <Link to={viewPath}>
                 <GreyButton
                   label={"View Details"}
                   size={"l"}

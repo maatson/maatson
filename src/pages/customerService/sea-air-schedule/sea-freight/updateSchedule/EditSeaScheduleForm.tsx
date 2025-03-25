@@ -67,7 +67,7 @@ const EditSeaScheduleForm: React.FC = () => {
   const handleDelete = (index: number) => {
     setData((prevData) => ({
       ...prevData,
-      servingRoutes: prevData.servingRoutes.filter((item, i) => i !== index),
+      servingRoutes: prevData.servingRoutes.filter((_, i) => i !== index),
     }));
   };
 
@@ -217,7 +217,7 @@ const EditSeaScheduleForm: React.FC = () => {
               </div>
               {showServingRoutes && (
                 <>
-                  {data.servingRoutes.map((item, index) => (
+                  {data.servingRoutes.map((_, index) => (
                     <div className="flex gap-4">
                       <GroupField
                         label={"Route Port*"}

@@ -116,8 +116,16 @@ const UpdateSchedule: React.FC = () => {
         </div>
       </div>
       <div className="px-8 py-6 gap-4 flex flex-col">
-        <UpdateScheduleCard isSeaFreight={true} />
-        <UpdateScheduleCard isSeaFreight={true} />
+        <UpdateScheduleCard
+          isSeaFreight={true}
+          editpath="/sea-air-schedule/edit-sea-schedule"
+          viewPath="/sea-air-schedule/vessel-details"
+        />
+        <UpdateScheduleCard
+          isSeaFreight={true}
+          editpath="/sea-air-schedule/edit-sea-schedule"
+          viewPath="/sea-air-schedule/vessel-details"
+        />
       </div>
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">

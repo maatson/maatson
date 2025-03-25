@@ -130,24 +130,6 @@ const ViewCard: React.FC = () => {
                 </p>
               </div>
             </div>
-            {/* <div className="flex gap-2 items-center">
-              <Link to={editPath}>
-                <NeutralBlueButton
-                  label={"Edit"}
-                  size={"l"}
-                  variant={""}
-                  leftIcon={<EditIcon color="#ffffff" />}
-                />
-              </Link>
-              <Link to={viewDetailsPath}>
-                <GreyButton
-                  label={"View Details"}
-                  size={"l"}
-                  variant={""}
-                  leftIcon={<CodeIcon />}
-                />
-              </Link>
-            </div> */}
           </div>
         </div>
       </div>

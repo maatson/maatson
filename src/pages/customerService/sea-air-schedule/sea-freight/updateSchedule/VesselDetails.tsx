@@ -9,6 +9,7 @@ import {
   StopIcon,
 } from "../../../../../components/icons/Icons";
 import ViewCard from "../../components/cards/ViewCard";
+import { Link } from "react-router-dom";
 
 const VesselDetails: React.FC = () => {
   return (
@@ -25,12 +26,14 @@ const VesselDetails: React.FC = () => {
               variant={"primary"}
               leftIcon={<DeleteIcon color="#FDFDFD" />}
             />
-            <PrimaryButton
-              label={"Edit Schedule"}
-              size={"l"}
-              variant={"primary"}
-              leftIcon={<EditIcon color="#FDFDFD" />}
-            />
+            <Link to={"/sea-air-schedule/edit-sea-schedule"}>
+              <PrimaryButton
+                label={"Edit Schedule"}
+                size={"l"}
+                variant={"primary"}
+                leftIcon={<EditIcon color="#FDFDFD" />}
+              />
+            </Link>
           </div>
         </div>
 
