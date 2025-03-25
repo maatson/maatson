@@ -1,6 +1,7 @@
 import React from "react";
 import PrimaryChip from "../../../../../components/chips/PrimaryChip";
 import {
+  AeroplaneIcon,
   CodeIcon,
   EditIcon,
   LeaveCalenderIcon,
@@ -8,17 +9,16 @@ import {
   ShipIcon,
 } from "../../../../../components/icons/Icons";
 import SecondaryChip from "../../../../../components/chips/SecondaryChip";
-import GreyButton from "../../../../../components/buttons/GreyButton";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
+import GreyButton from "../../../../../components/buttons/GreyButton";
 import { Link } from "react-router-dom";
 
-interface UpdateScheduleCardProps {
-  editPath: string;
-  viewDetailsPath: string;
+interface CardProps {
+  isSeaFreight: boolean;
 }
 
-const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
-  ({ editPath, viewDetailsPath }) => {
+const UpdateScheduleCard: React.FC<CardProps> = React.memo(
+  ({ isSeaFreight }) => {
     return (
       <div className="rounded-sm border-primary border-2">
         <div className="p-2 gap-2 flex flex-col">
@@ -38,10 +38,16 @@ const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
                 label={"Maersk Denver"}
                 size={"m"}
                 variant={""}
-                leftIcon={<ShipIcon size={16} color="#ffffff" />}
+                leftIcon={
+                  isSeaFreight ? (
+                    <ShipIcon size={16} color="#ffffff" />
+                  ) : (
+                    <AeroplaneIcon size={16} color="#ffffff" />
+                  )
+                }
               />
               <div className="text-xs rounded-xl border border-grey-ab-50 bg-grey-aw-50 text-blue flex items-center gap-2 px-2 py-1">
-                <span>Voy No:</span>{" "}
+                <span>{isSeaFreight ? "Voy No:" : "Flight No:"}</span>
                 <span className="font-semibold px-2 py-1 bg-grey-300 rounded-lg">
                   MAE1234
                 </span>
@@ -135,21 +141,33 @@ const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
                   sea freight services to Shanghai and Hong Kong{" "}
                 </p>
               </div>
-              <div className="p-1 gap-2 flex flex-col">
-                <p className="text-grey-ab-300 text-xs">Vessel Cut Off</p>
-                <p className="text-grey-ab-600 font-semibold text-xs">
-                  09-02-2025{" "}
-                </p>
-              </div>
-              <div className="p-1 gap-2 flex flex-col">
-                <p className="text-grey-ab-300 text-xs">VGM Cut Off</p>
-                <p className="text-grey-ab-600 font-semibold text-xs">
-                  10-02-2025{" "}
-                </p>
-              </div>
+              {isSeaFreight ? (
+                <>
+                  {" "}
+                  <div className="p-1 gap-2 flex flex-col">
+                    <p className="text-grey-ab-300 text-xs">Vessel Cut Off</p>
+                    <p className="text-grey-ab-600 font-semibold text-xs">
+                      09-02-2025{" "}
+                    </p>
+                  </div>
+                  <div className="p-1 gap-2 flex flex-col">
+                    <p className="text-grey-ab-300 text-xs">VGM Cut Off</p>
+                    <p className="text-grey-ab-600 font-semibold text-xs">
+                      10-02-2025{" "}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <div className="p-1 gap-2 flex flex-col">
+                  <p className="text-grey-ab-300 text-xs">Onboarding Cut off</p>
+                  <p className="text-grey-ab-600 font-semibold text-xs">
+                    09-02-2025{" "}
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex gap-2 items-center">
-              <Link to={editPath}>
+              <Link to={""}>
                 <NeutralBlueButton
                   label={"Edit"}
                   size={"l"}
@@ -157,7 +175,7 @@ const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
                   leftIcon={<EditIcon color="#ffffff" />}
                 />
               </Link>
-              <Link to={viewDetailsPath}>
+              <Link to={""}>
                 <GreyButton
                   label={"View Details"}
                   size={"l"}
