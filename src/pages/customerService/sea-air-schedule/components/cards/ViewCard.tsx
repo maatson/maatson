@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AeroplaneIcon,
   LeaveCalenderIcon,
   LocationIcon,
   ShipIcon,
@@ -7,7 +8,11 @@ import {
 import SecondaryChip from "../../../../../components/chips/SecondaryChip";
 import PrimaryChip from "../../../../../components/chips/PrimaryChip";
 
-const ViewCard: React.FC = () => {
+interface ViewCardProps {
+  isSeaFreight: boolean;
+}
+
+const ViewCard: React.FC<ViewCardProps> = ({ isSeaFreight }) => {
   return (
     <>
       <div className="rounded-sm border-2 border-primary  ">
@@ -28,10 +33,16 @@ const ViewCard: React.FC = () => {
                 label={"Maersk Denver"}
                 size={"m"}
                 variant={""}
-                leftIcon={<ShipIcon size={16} color="#ffffff" />}
+                leftIcon={
+                  isSeaFreight ? (
+                    <ShipIcon size={16} color="#ffffff" />
+                  ) : (
+                    <AeroplaneIcon size={16} color="#ffffff" />
+                  )
+                }
               />
               <div className="text-xs rounded-xl border border-grey-ab-50 bg-grey-aw-50 text-blue flex items-center gap-2 px-2 py-1">
-                <span>Voy No:</span>
+                <span>{isSeaFreight ? "Voy No:" : "Flight No:"}</span>
                 <span className="font-semibold px-2 py-1 bg-grey-300 rounded-lg">
                   MAE1234
                 </span>
@@ -117,18 +128,29 @@ const ViewCard: React.FC = () => {
                   sea freight services to Shanghai and Hong Kong{" "}
                 </p>
               </div>
-              <div className="p-1 gap-2 flex flex-col">
-                <p className="text-grey-ab-300 text-xs">Vessel Cut Off</p>
-                <p className="text-grey-ab-600 font-semibold text-xs">
-                  09-02-2025{" "}
-                </p>
-              </div>
-              <div className="p-1 gap-2 flex flex-col">
-                <p className="text-grey-ab-300 text-xs">VGM Cut Off</p>
-                <p className="text-grey-ab-600 font-semibold text-xs">
-                  10-02-2025{" "}
-                </p>
-              </div>
+              {isSeaFreight ? (
+                <>
+                  <div className="p-1 gap-2 flex flex-col">
+                    <p className="text-grey-ab-300 text-xs">Vessel Cut Off</p>
+                    <p className="text-grey-ab-600 font-semibold text-xs">
+                      09-02-2025
+                    </p>
+                  </div>
+                  <div className="p-1 gap-2 flex flex-col">
+                    <p className="text-grey-ab-300 text-xs">VGM Cut Off</p>
+                    <p className="text-grey-ab-600 font-semibold text-xs">
+                      10-02-2025
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <div className="p-1 gap-2 flex flex-col">
+                  <p className="text-grey-ab-300 text-xs">Onboarding Cut Off</p>
+                  <p className="text-grey-ab-600 font-semibold text-xs">
+                    10-02-2025
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -9,14 +9,12 @@ import {
 } from "../../../../../components/icons/Icons";
 import SecondaryChip from "../../../../../components/chips/SecondaryChip";
 import GreyButton from "../../../../../components/buttons/GreyButton";
-import { Link } from "react-router-dom";
 
 interface CardProps {
   isSeaFreight: boolean;
-  viewDetailsPath: string;
 }
 
-const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight, viewDetailsPath }) => {
+const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight }) => {
   return (
     <div className="rounded-sm border-primary border-2">
       <div className="p-2 gap-2 flex flex-col">
@@ -155,13 +153,12 @@ const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight, viewDetailsPat
             )}
           </div>
           <div className="flex gap-2 items-center">
-            <Link to={viewDetailsPath}>
             <GreyButton
               label={"View Details"}
               size={"l"}
               variant={""}
               leftIcon={<CodeIcon />}
-            /></Link>
+            />
           </div>
         </div>
       </div>

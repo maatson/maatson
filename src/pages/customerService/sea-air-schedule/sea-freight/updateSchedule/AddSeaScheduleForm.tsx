@@ -42,6 +42,18 @@ const AddSeaScheduleForm: React.FC = () => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleRouteChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    index: number
+  ) => {
+    const { name, value } = e.target;
+    setData((prev) => {
+      const newRoutes = [...prev.servingRoutes];
+      newRoutes[index] = { ...newRoutes[index], [name]: value };
+      return { ...prev, servingRoutes: newRoutes };
+    });
+  };
+
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("data :", data);
@@ -64,7 +76,7 @@ const AddSeaScheduleForm: React.FC = () => {
   const handleDelete = (index: number) => {
     setData((prevData) => ({
       ...prevData,
-      servingRoutes: prevData.servingRoutes.filter((item, i) => i !== index),
+      servingRoutes: prevData.servingRoutes.filter((_, i) => i !== index),
     }));
   };
 
@@ -220,9 +232,9 @@ const AddSeaScheduleForm: React.FC = () => {
                         label={"Route Port*"}
                         type={""}
                         placeholder={"Enter Route Port"}
-                        name={""}
-                        value={""}
-                        onChange={handleChange}
+                        name={"routePort"}
+                        value={item.routePort}
+                        onChange={(e)=>handleRouteChange(e, index)}
                         error={false}
                         errorMessage={""}
                         leftIcon={<LocationIcon color="#2C398F" />}
@@ -232,9 +244,9 @@ const AddSeaScheduleForm: React.FC = () => {
                         label={"Estimate Time of Arrival"}
                         type={""}
                         placeholder={"Enter ETA"}
-                        name={""}
-                        value={""}
-                        onChange={handleChange}
+                        name={"estimateTimeOfArrival"}
+                        value={item.estimateTimeOfArrival}
+                        onChange={(e)=>handleRouteChange(e, index)}
                         error={false}
                         errorMessage={""}
                         rightIcon={<CalenderIcon color="#2C398F" />}
@@ -282,26 +294,24 @@ const AddSeaScheduleForm: React.FC = () => {
             <div className="flex gap-4">
               <GroupField
                 label={"Estimated Time of Departure"}
-                type={""}
+                type={"date"}
                 placeholder={"Enter ETD"}
-                name={""}
-                value={""}
+                name={"estimateTimeOfDeparture"}
+                value={data.estimateTimeOfDeparture}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                rightIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="w-[40%]"
               />
               <GroupField
                 label={"Actual Time of Departure"}
-                type={""}
+                type={"date"}
                 placeholder={"Enter ATD"}
-                name={""}
-                value={""}
+                name={"actualTimeOfDeparture"}
+                value={data.actualTimeOfDeparture}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                rightIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="w-[40%]"
               />
             </div>
@@ -313,26 +323,24 @@ const AddSeaScheduleForm: React.FC = () => {
             <div className="flex gap-4">
               <GroupField
                 label={"Estimated Time of Arrival"}
-                type={""}
+                type={"date"}
                 placeholder={"Enter ETA"}
-                name={""}
-                value={""}
+                name={"estimateTimeOfArrival"}
+                value={data.estimateTimeOfArrival}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                rightIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="w-[40%]"
               />
               <GroupField
                 label={"Actual Time of Arrival"}
-                type={""}
+                type={"date"}
                 placeholder={"Enter ATA"}
-                name={""}
-                value={""}
+                name={"actualTimeOfArrival"}
+                value={data.actualTimeOfArrival}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                rightIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="w-[40%]"
               />
             </div>
@@ -344,26 +352,24 @@ const AddSeaScheduleForm: React.FC = () => {
             <div className="flex gap-4">
               <GroupField
                 label={"Vessel Cut Off"}
-                type={""}
+                type={"date"}
                 placeholder={"Enter Vessel Cut Off"}
-                name={""}
-                value={""}
+                name={"vesselCutOff"}
+                value={data.vesselCutOff}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                rightIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="w-[40%]"
               />
               <GroupField
                 label={"Vgm Cut Off"}
-                type={""}
+                type={"date"}
                 placeholder={"Enter Vessel Cut Off"}
-                name={""}
-                value={""}
+                name={"vgmCutOff"}
+                value={data.vgmCutOff}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
-                rightIcon={<CalenderIcon color="#2C398F" />}
                 parentStyle="w-[40%]"
               />
             </div>

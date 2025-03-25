@@ -15,7 +15,7 @@ const SeaAirSchedule: React.FC = () => {
             ? ["Air & Sea Schedule", "Add Schedule"]
             : location.pathname === "/sea-air-schedule/edit-sea-schedule"
             ? ["Air & Sea Schedule", "Edit Schedule"]
-            : location.pathname === "/sea-air-schedule/vessel-details"
+            : location.pathname === "/sea-air-schedule/vessel-details" || "/sea-air-schedule/schedule-details/vessel-details"
             ? ["Air & Sea Schedule", "Vessel Details"]
             : "Air & Sea Schedule",
         ].flat()}
@@ -24,14 +24,15 @@ const SeaAirSchedule: React.FC = () => {
             ? "Add Schedule"
             : location.pathname === "/sea-air-schedule/edit-sea-schedule"
             ? "Edit Schedule"
-            : location.pathname === "/sea-air-schedule/vessel-details"
+            : location.pathname === "/sea-air-schedule/vessel-details" || "/sea-air-schedule/schedule-details/vessel-details"
             ? "Vessel Details"
             : "Air & Sea Schedule"
         }
       />
       {location.pathname !== "/sea-air-schedule/add-sea-schedule" &&
         location.pathname !== "/sea-air-schedule/edit-sea-schedule" &&
-        location.pathname !== "/sea-air-schedule/vessel-details" && (
+        location.pathname !== "/sea-air-schedule/vessel-details" &&
+        location.pathname !== "/sea-air-schedule/schedule-details/vessel-details" && (
           <div className="flex items-center text-sm">
             <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold ">
               <button>

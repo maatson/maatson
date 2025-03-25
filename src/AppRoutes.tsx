@@ -282,6 +282,7 @@ const AppRoutes: React.FC = () => {
           <Route path="add-sea-schedule" element={<AddSeaScheduleForm />}></Route>
           <Route path="edit-sea-schedule" element={<EditSeaScheduleForm />}></Route>
           <Route path="vessel-details" element={<VesselDetails />}></Route>
+          <Route path="schedule-details/vessel-details" element={<VesselDetails />}></Route>
 
           <Route path="air-freight" element={<AirFreight />}>
             <Route index element={<UpdateScheduleAir />} />

@@ -4,14 +4,17 @@ import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import {
   DeleteIcon,
   EditIcon,
+  ExcelIcon,
   LocationIcon,
   ShipIcon,
   StopIcon,
 } from "../../../../../components/icons/Icons";
 import ViewCard from "../../components/cards/ViewCard";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import SuccessButton from "../../../../../components/buttons/SuccessButton";
 
 const VesselDetails: React.FC = () => {
+  const location = useLocation();
   return (
     <>
       <div className="bg-grey-aw-50 sahdow-lg rounded-xs ">
@@ -19,7 +22,27 @@ const VesselDetails: React.FC = () => {
           <p className="text-lg font-bold text-grey-ab-900">
             Chennai Port (INMAA) to Izmir (TRIZM){" "}
           </p>
-          <div className="flex gap-4 ">
+          {location.pathname === "/sea-air-schedule/vessel-details" ? (
+            <div className="flex gap-4 ">
+              <ErrorButton
+                label={"Delete Schedule"}
+                size={"l"}
+                variant={"primary"}
+                leftIcon={<DeleteIcon color="#FDFDFD" />}
+              />
+              <Link to={"/sea-air-schedule/edit-sea-schedule"}>
+                <PrimaryButton
+                  label={"Edit Schedule"}
+                  size={"l"}
+                  variant={"primary"}
+                  rightIcon={<EditIcon color="#FCFCFC" />}
+                />
+              </Link>
+            </div>
+          ) : (
+            <div><SuccessButton label={"Export"} size={"l"} variant={"primary"} leftIcon={<ExcelIcon color="#FDFDFD"/>} /></div>
+          )}
+          {/* <div className="flex gap-4 ">
             <ErrorButton
               label={"Delete Schedule"}
               size={"l"}
@@ -34,11 +57,11 @@ const VesselDetails: React.FC = () => {
                 leftIcon={<EditIcon color="#FDFDFD" />}
               />
             </Link>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-4 px-8 py-6">
-          <ViewCard />
+          <ViewCard isSeaFreight={true} />
 
           {/* schedule details */}
           <div className="rounded-xs shadow-sm">

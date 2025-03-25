@@ -128,8 +128,8 @@ const ScheduleDetails: React.FC = () => {
         </div>
       </div>
       <div className="px-8 py-6 gap-4 flex flex-col">
-        <ScheduleDetailsCard isSeaFreight={true} />
-        <ScheduleDetailsCard isSeaFreight={true} />
+        <ScheduleDetailsCard isSeaFreight={true} viewDetailsPath="/sea-air-schedule/schedule-details/vessel-details" />
+        <ScheduleDetailsCard isSeaFreight={true} viewDetailsPath="/sea-air-schedule/schedule-details/vessel-details"/>
       </div>
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">
