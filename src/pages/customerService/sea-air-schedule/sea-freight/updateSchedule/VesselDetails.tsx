@@ -8,7 +8,7 @@ import {
   ShipIcon,
   StopIcon,
 } from "../../../../../components/icons/Icons";
-import ViewCard from "../cards/ViewCard";
+import ViewCard from "../../components/cards/ViewCard";
 
 const VesselDetails: React.FC = () => {
   return (

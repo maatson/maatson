@@ -12,8 +12,8 @@ import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
 import BlackButton from "../../../../../components/buttons/BlackButton";
-import ScheduleDetailsCard from "../../components/cards/ScheduleDetailsCard";
 import DateRange from "../../components/date/DateRange";
+import ScheduleDetailsCard from "../../components/cards/ScheduleDetailsCard";
 
 interface RowData {
   id: string | number;
