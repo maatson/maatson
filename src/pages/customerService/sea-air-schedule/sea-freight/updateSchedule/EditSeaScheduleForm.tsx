@@ -240,7 +240,6 @@ const EditSeaScheduleForm: React.FC = () => {
                         label={"Route Port*"}
                         type={""}
                         placeholder={"Enter Route Port"}
-                        // name={`servingRoutes[${index}].routePort`}
                         name={"routePort"}
                         value={item.routePort}
                         onChange={(e) => handleRouteChange(e, index)}
