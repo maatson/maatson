@@ -24,20 +24,11 @@ const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight }) => {
               <img src="/images/frameLogo.svg" alt="" className="object-fill" />
             </div>
           </div>
-          <div className="px-12 flex items-center justify-between">
-            <div className="flex gap-4">
-              <div className="flex flex-col p-1">
-                <p className="text-grey-ab-300 text-sm">ETD</p>
-                <p className=" text-xs font-semibold">09-02-2025</p>
-              </div>
-              <div className="flex flex-col p-1">
-                <p className="text-grey-ab-300 text-sm">ATD</p>
-                <p className=" text-xs font-semibold">10-02-2025</p>
-              </div>
-            </div>
-            <SecondaryChip
-              label={"28 days"}
-              size={""}
+
+          <div className="flex items-center gap-4">
+            <PrimaryChip
+              label={"Maersk Denver"}
+              size={"m"}
               variant={""}
               leftIcon={
                 isSeaFreight ? (
