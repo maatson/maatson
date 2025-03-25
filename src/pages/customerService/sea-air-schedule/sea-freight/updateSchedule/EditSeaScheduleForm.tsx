@@ -17,22 +17,25 @@ import {
 import GroupField from "../../../../../components/groupField/GroupField";
 import GreyButton from "../../../../../components/buttons/GreyButton";
 
-const AddSeaScheduleForm: React.FC = () => {
+const EditSeaScheduleForm: React.FC = () => {
   const [data, setData] = useState({
-    carrierName: "",
-    vesselName: "",
-    voyageNumber: "",
-    SCACNumber: "",
-    portOfLoading: "",
-    portOfDischarge: "",
-    serviceName: "",
-    servingRoutes: [{ routePort: "", estimateTimeOfArrival: "" }],
-    estimateTimeOfDeparture: "",
-    actualTimeOfDeparture: "",
-    estimateTimeOfArrival: "",
-    actualTimeOfArrival: "",
-    vesselCutOff: "",
-    vgmCutOff: "",
+    carrierName: "Maersk Line",
+    vesselName: "Maersk Chennai",
+    voyageNumber: "MCHN1234",
+    SCACNumber: "MAEU",
+    portOfLoading: "Chennai",
+    portOfDischarge: "Colombo",
+    serviceName: "Asia-Europe Express",
+    servingRoutes: [
+      { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "12-03-2025" },
+      { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "12-03-2025" },
+    ],
+    estimateTimeOfDeparture: "11-03-2025",
+    actualTimeOfDeparture: "11-03-2025",
+    estimateTimeOfArrival: "11-03-2025",
+    actualTimeOfArrival: "11-03-2025",
+    vesselCutOff: "11-03-2025",
+    vgmCutOff: "11-03-2025",
   });
   const [showServingRoutes, setShowServingRoutes] = useState<boolean>(false);
   const handleChange = (
@@ -81,7 +84,7 @@ const AddSeaScheduleForm: React.FC = () => {
     <>
       <div className="flex flex-col gap-8 px-8 py-4 rounded-xs bg-grey-aw-50 shadow-lg">
         <div className="px-3 py-4 text-lg font-semibold text-grey-ab-900">
-          Add Sea Freight Schedule
+          Edit Sea Freight Schedule
         </div>
 
         <div className="flex flex-col gap-8">
@@ -187,8 +190,8 @@ const AddSeaScheduleForm: React.FC = () => {
               label={"Service Name"}
               type={""}
               placeholder={"Enter Service Name"}
-              name={""}
-              value={""}
+              name={"serviceName"}
+              value={data.serviceName}
               onChange={handleChange}
               error={false}
               errorMessage={""}
@@ -284,8 +287,8 @@ const AddSeaScheduleForm: React.FC = () => {
                 label={"Estimated Time of Departure"}
                 type={""}
                 placeholder={"Enter ETD"}
-                name={""}
-                value={""}
+                name={"estimateTimeOfDeparture"}
+                value={data.estimateTimeOfDeparture}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -296,8 +299,8 @@ const AddSeaScheduleForm: React.FC = () => {
                 label={"Actual Time of Departure"}
                 type={""}
                 placeholder={"Enter ATD"}
-                name={""}
-                value={""}
+                name={"actualTimeOfDeparture"}
+                value={data.actualTimeOfDeparture}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -315,8 +318,8 @@ const AddSeaScheduleForm: React.FC = () => {
                 label={"Estimated Time of Arrival"}
                 type={""}
                 placeholder={"Enter ETA"}
-                name={""}
-                value={""}
+                name={"estimateTimeOfArrival"}
+                value={data.estimateTimeOfArrival}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -327,8 +330,8 @@ const AddSeaScheduleForm: React.FC = () => {
                 label={"Actual Time of Arrival"}
                 type={""}
                 placeholder={"Enter ATA"}
-                name={""}
-                value={""}
+                name={"actualTimeOfArrival"}
+                value={data.actualTimeOfArrival}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -346,8 +349,8 @@ const AddSeaScheduleForm: React.FC = () => {
                 label={"Vessel Cut Off"}
                 type={""}
                 placeholder={"Enter Vessel Cut Off"}
-                name={""}
-                value={""}
+                name={"vesselCutOff"}
+                value={data.vesselCutOff}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -358,8 +361,8 @@ const AddSeaScheduleForm: React.FC = () => {
                 label={"Vgm Cut Off"}
                 type={""}
                 placeholder={"Enter Vessel Cut Off"}
-                name={""}
-                value={""}
+                name={"vgmCutOff"}
+                value={data.vgmCutOff}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -388,4 +391,4 @@ const AddSeaScheduleForm: React.FC = () => {
   );
 };
 
-export default AddSeaScheduleForm;
+export default EditSeaScheduleForm;

@@ -12,6 +12,7 @@ import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
 import UpdateScheduleCard from "../cards/UpdateScheduleCard";
 import BlackButton from "../../../../../components/buttons/BlackButton";
+import { Link } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -40,6 +41,7 @@ const UpdateSchedule: React.FC = () => {
   ) => {
     setCurrentPage(page);
   };
+
   return (
     <>
       <div className="p-3 flex justify-between items-center text-grey-ab-900">
@@ -58,12 +60,14 @@ const UpdateSchedule: React.FC = () => {
           />
         </div>
         <div className="flex gap-2 items-center">
-          <PrimaryButton
-            label={"Add Schedule"}
-            size={"l"}
-            variant={""}
-            leftIcon={<AddIcon color="#ffffff" />}
-          />
+          <Link to="/sea-air-schedule/add-sea-schedule">
+            <PrimaryButton
+              label={"Add Schedule"}
+              size={"l"}
+              variant={""}
+              leftIcon={<AddIcon color="#ffffff" />}
+            />
+          </Link>
           <SuccessButton
             label={"Export"}
             size={""}
@@ -112,8 +116,14 @@ const UpdateSchedule: React.FC = () => {
         </div>
       </div>
       <div className="px-8 py-6 gap-4 flex flex-col">
-        <UpdateScheduleCard />
-        <UpdateScheduleCard />
+        <UpdateScheduleCard
+          editPath="/sea-air-schedule/edit-sea-schedule"
+          viewDetailsPath="/sea-air-schedule/vessel-details"
+        />
+        <UpdateScheduleCard
+           editPath="/sea-air-schedule/edit-sea-schedule"
+          viewDetailsPath="/sea-air-schedule/vessel-details"
+        />
       </div>
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">

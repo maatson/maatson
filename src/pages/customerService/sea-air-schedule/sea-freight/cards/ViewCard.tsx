@@ -1,26 +1,16 @@
 import React from "react";
-import PrimaryChip from "../../../../../components/chips/PrimaryChip";
 import {
-  CodeIcon,
-  EditIcon,
   LeaveCalenderIcon,
   LocationIcon,
   ShipIcon,
 } from "../../../../../components/icons/Icons";
 import SecondaryChip from "../../../../../components/chips/SecondaryChip";
-import GreyButton from "../../../../../components/buttons/GreyButton";
-import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
-import { Link } from "react-router-dom";
+import PrimaryChip from "../../../../../components/chips/PrimaryChip";
 
-interface UpdateScheduleCardProps {
-  editPath: string;
-  viewDetailsPath: string;
-}
-
-const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
-  ({ editPath, viewDetailsPath }) => {
-    return (
-      <div className="rounded-sm border-primary border-2">
+const ViewCard: React.FC = () => {
+  return (
+    <>
+      <div className="rounded-sm border-2 border-primary  ">
         <div className="p-2 gap-2 flex flex-col">
           <div className="px-3 flex justify-between">
             <div className="px-2 py-1 gap-3 flex items-center">
@@ -41,17 +31,9 @@ const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
                 leftIcon={<ShipIcon size={16} color="#ffffff" />}
               />
               <div className="text-xs rounded-xl border border-grey-ab-50 bg-grey-aw-50 text-blue flex items-center gap-2 px-2 py-1">
-                <span>Voy No:</span>{" "}
+                <span>Voy No:</span>
                 <span className="font-semibold px-2 py-1 bg-grey-300 rounded-lg">
                   MAE1234
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center">
-              <div className="text-2xs rounded-xl border border-grey-ab-50 bg-secondary-300 text-grey-ab-800 flex items-center gap-2 px-2 py-2">
-                <span>Updated On</span>{" "}
-                <span className="font-semibold px-2 py-1 bg-secondary-100 rounded-lg text-3xs">
-                  01-02-2025{" "}
                 </span>
               </div>
             </div>
@@ -148,7 +130,7 @@ const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
                 </p>
               </div>
             </div>
-            <div className="flex gap-2 items-center">
+            {/* <div className="flex gap-2 items-center">
               <Link to={editPath}>
                 <NeutralBlueButton
                   label={"Edit"}
@@ -165,12 +147,12 @@ const UpdateScheduleCard: React.FC<UpdateScheduleCardProps> = React.memo(
                   leftIcon={<CodeIcon />}
                 />
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-    );
-  }
-);
+    </>
+  );
+};
 
-export default UpdateScheduleCard;
+export default ViewCard;
