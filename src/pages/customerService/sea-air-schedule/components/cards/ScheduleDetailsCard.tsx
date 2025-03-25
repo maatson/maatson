@@ -25,6 +25,7 @@ const ScheduleDetailsCard: React.FC<CardProps> = ({ isSeaFreight }) => {
             </div>
             <p className="text-xs font-semibold">Hapag-Llyod</p>
           </div>
+
           <div className="flex items-center gap-4">
             <PrimaryChip
               label={"Maersk Denver"}
