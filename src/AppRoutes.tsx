@@ -332,19 +332,13 @@ const AppRoutes: React.FC = () => {
             path="schedule-details/vessel-details"
             element={<VesselDetails />}
           />
-          <Route
-            path="add-air-schedule"
-            element={<AddAirScheduleForm />}
-          ></Route>
-          <Route
-            path="edit-air-schedule"
-            element={<EditAirScheduleForm />}
-          ></Route>
-          <Route path="flight-details" element={<FlightDetails />}></Route>
+          <Route path="add-air-schedule" element={<AddAirScheduleForm />} />
+          <Route path="edit-air-schedule" element={<EditAirScheduleForm />} />
+          <Route path="flight-details" element={<FlightDetails />} />
           <Route
             path="schedule-details/flight-details"
             element={<FlightDetails />}
-          ></Route>
+          />
         </Route>
 
         <Route path="shipment-updates" element={<ShipmentUpdates />}></Route>
