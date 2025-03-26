@@ -217,6 +217,64 @@ const FlightDetails = lazy(
 const ShipmentUpdates = lazy(
   () => import("./pages/customerService/shipment-updates")
 );
+// sea
+const ShipmentSeaFreight = lazy(
+  () => import("./pages/customerService/shipment-updates/sea-freight")
+); //index
+const Updates = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/updates/Updates"
+    )
+); //index
+const ContainerPickUp = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/containerPickUp/ContainerPickUp"
+    )
+); //index
+const TerminalGateIn = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateIn"
+    )
+); //index
+const OnboardConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/OnboardConfirmation"
+    )
+); //index
+const TransitInfo = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/transitInfo/TransitInfo"
+    )
+); //index
+const DeliveryOrderCollected = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollected"
+    )
+); //index
+const EmptyReturnConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/emptyReturnConfirmation/EmptyReturnConfirmation"
+    )
+); //index
+
+// air
+const ShipmentAirFreight = lazy(
+  () => import("./pages/customerService/shipment-updates/air-freight")
+); //index
+const UpdatesAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/updates/Updates"))
+const AirportGateInDateAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/airportGateInDate/AirportGateInDate"))
+const CargoHandoverUpdateAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/CargoHandoverUpdate"))
+const DepartureConfirmationAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/departureConfirmation/DepartureConfirmation"))
+const TransitInfoAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/transitInfo/TransitInfo"))
+const DeliveryOrderCollectedAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollected"))
+
 
 // PRICING AND PROCUREMENT
 
@@ -356,7 +414,27 @@ const AppRoutes: React.FC = () => {
           />
         </Route>
 
-        <Route path="shipment-updates" element={<ShipmentUpdates />}></Route>
+        <Route path="shipment-updates" element={<ShipmentUpdates />}>
+          <Route path="sea-freight" element={<ShipmentSeaFreight />}>
+            <Route index element={<Updates />} />
+            <Route path="container-pickup" element={<ContainerPickUp />} />
+            <Route path="terminal-gateIn" element={<TerminalGateIn />} />
+            <Route path="onboard-confirmation" element={<OnboardConfirmation />} />
+            <Route path="transit-info" element={<TransitInfo />} />
+            <Route path="delivery-order-collected" element={<DeliveryOrderCollected />} />
+            <Route path="empty-return-confirmation" element={<EmptyReturnConfirmation />} />
+          </Route>
+
+          <Route path="air-freight" element={<ShipmentAirFreight />}>
+            <Route index element={<UpdatesAir />} />
+            <Route path="airport-gatein-date" element={<AirportGateInDateAir />} />
+            <Route path="cargo-handover-update" element={<CargoHandoverUpdateAir />} />
+            <Route path="departure-confirmation" element={<DepartureConfirmationAir />} />
+            <Route path="transit-info" element={<TransitInfoAir />} />
+            <Route path="delivery-order-collected" element={<DeliveryOrderCollectedAir />} />
+          </Route>
+
+        </Route>
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* pricing & procurement */}
