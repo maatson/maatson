@@ -179,6 +179,10 @@ const BulkScheduleUpdatesAir = lazy(
       "./pages/customerService/sea-air-schedule/air-freight/bulkScheduleUpdates/BulkScheduleUpdates"
     )
 );
+const AddAirScheduleForm = lazy(() => import("./pages/customerService/sea-air-schedule/air-freight/updateSchedule/AddAirScheduleForm"))
+const EditAirScheduleForm = lazy(() => import("./pages/customerService/sea-air-schedule/air-freight/updateSchedule/EditAirScheduleForm"))
+const FlightDetails = lazy(() => import("./pages/customerService/sea-air-schedule/air-freight/updateSchedule/FlightDetails"))
+
 
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
@@ -276,7 +280,6 @@ const AppRoutes: React.FC = () => {
               path="bulk-schedule-updates"
               element={<BulkScheduleUpdates />}
             />
-            
           </Route>
           
           <Route path="add-sea-schedule" element={<AddSeaScheduleForm />}></Route>
@@ -292,6 +295,12 @@ const AppRoutes: React.FC = () => {
               element={<BulkScheduleUpdatesAir />}
             />
           </Route>
+
+          <Route path="add-air-schedule" element={<AddAirScheduleForm />}></Route>
+          <Route path="edit-air-schedule" element={<EditAirScheduleForm />}></Route>
+          <Route path="flight-details" element={<FlightDetails />}></Route>
+          <Route path="schedule-details/flight-details" element={<FlightDetails />}></Route>
+
         </Route>
         <Route path="shipment-updates" element={<Requirement />}></Route>
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>

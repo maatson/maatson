@@ -2,6 +2,7 @@ import React from "react";
 import ErrorButton from "../../../../../components/buttons/ErrorButton";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import {
+    AeroplaneIcon,
   DeleteIcon,
   EditIcon,
   ExcelIcon,
@@ -13,16 +14,16 @@ import ViewCard from "../../components/cards/ViewCard";
 import { Link, useLocation } from "react-router-dom";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 
-const VesselDetails: React.FC = () => {
+const FlightDetails: React.FC = () => {
   const location = useLocation();
   return (
     <>
       <div className="bg-grey-aw-50 sahdow-lg rounded-xs ">
         <div className="p-3 flex justify-between items-center border-b border-b-grey-ab-50">
           <p className="text-lg font-bold text-grey-ab-900">
-            Chennai Port (INMAA) to Izmir (TRIZM){" "}
+            Chennai Port (INMAA) to Izmir (TRIZM)
           </p>
-          {location.pathname === "/sea-air-schedule/vessel-details" ? (
+          {location.pathname === "/sea-air-schedule/flight-details" ? (
             <div className="flex gap-4 ">
               <ErrorButton
                 label={"Delete Schedule"}
@@ -30,7 +31,7 @@ const VesselDetails: React.FC = () => {
                 variant={"primary"}
                 leftIcon={<DeleteIcon color="#FDFDFD" />}
               />
-              <Link to={"/sea-air-schedule/edit-sea-schedule"}>
+              <Link to={"/sea-air-schedule/edit-air-schedule"}>
                 <PrimaryButton
                   label={"Edit Schedule"}
                   size={"l"}
@@ -61,7 +62,7 @@ const VesselDetails: React.FC = () => {
         </div>
 
         <div className="flex flex-col gap-4 px-8 py-6">
-          <ViewCard isSeaFreight={true} />
+          <ViewCard isSeaFreight={false} />
 
           {/* schedule details */}
           <div className="rounded-xs shadow-sm">
@@ -97,7 +98,7 @@ const VesselDetails: React.FC = () => {
                   <div className="p-1 rounded-xs bg-grey-ab-50 ">
                     <div className="flex flex-col gap-2">
                       <p className="text-xs font-bold text-grey-ab-600">
-                        CHENNAI, INMAA
+                      Paris (CDG)
                       </p>
                       <div className="flex gap-2">
                         <p className="text-xs text-grey-ab-300">ETD</p>
@@ -110,17 +111,17 @@ const VesselDetails: React.FC = () => {
                   <div className="p-1 rounded-xs bg-tertiary-50 ">
                     <div className="flex gap-4">
                       <div className="p-1 h-6 w-6">
-                        <ShipIcon size={20} color="#122C38" />
+                        <AeroplaneIcon size={20} color="#122C38" />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <p className="text-xs text-grey-ab-300">Vessel Name</p>
+                        <p className="text-xs text-grey-ab-300">Aircraft Type</p>
                         <p className="text-xs text-grey-ab-600">
                           CHENNAI, INMAA
                         </p>
                       </div>
                       <div className="flex flex-col gap-2">
                         <p className="text-xs text-grey-ab-300">
-                          Voyage Number
+                          Flight Number
                         </p>
                         <p className="text-xs text-grey-ab-600">11hg234243</p>
                       </div>
@@ -148,17 +149,17 @@ const VesselDetails: React.FC = () => {
                   <div className="p-1 rounded-xs bg-tertiary-50 ">
                     <div className="flex gap-4">
                       <div className="p-1 h-6 w-6">
-                        <ShipIcon size={20} color="#122C38" />
+                        <AeroplaneIcon size={20} color="#122C38" />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <p className="text-xs text-grey-ab-300">Vessel Name</p>
+                        <p className="text-xs text-grey-ab-300">Aircraft Type</p>
                         <p className="text-xs text-grey-ab-600">
                           CHENNAI, INMAA
                         </p>
                       </div>
                       <div className="flex flex-col gap-2">
                         <p className="text-xs text-grey-ab-300">
-                          Voyage Number
+                          Flight Number
                         </p>
                         <p className="text-xs text-grey-ab-600">11hg234243</p>
                       </div>
@@ -191,4 +192,4 @@ const VesselDetails: React.FC = () => {
   );
 };
 
-export default VesselDetails;
+export default FlightDetails;

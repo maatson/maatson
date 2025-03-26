@@ -14,6 +14,7 @@ import GroupField from "../../../../../components/groupField/GroupField";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import DateRange from "../../components/date/DateRange";
+import { Link } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -67,12 +68,14 @@ const ScheduleDetails: React.FC = () => {
           />
         </div>
         <div className="flex gap-2 items-center">
-          <PrimaryButton
-            label={"Add Schedule"}
-            size={"l"}
-            variant={""}
-            leftIcon={<AddIcon color="#ffffff" />}
-          />
+        <Link to="/sea-air-schedule/add-air-schedule">
+            <PrimaryButton
+              label={"Add Schedule"}
+              size={"l"}
+              variant={""}
+              leftIcon={<AddIcon color="#ffffff" />}
+            />
+          </Link>
           <SuccessButton
             label={"Export"}
             size={""}
@@ -128,8 +131,14 @@ const ScheduleDetails: React.FC = () => {
         </div>
       </div>
       <div className="px-8 py-6 gap-4 flex flex-col">
-        <ScheduleDetailsCard isSeaFreight={false} />
-        <ScheduleDetailsCard isSeaFreight={false} />
+      <ScheduleDetailsCard
+          isSeaFreight={false}
+          viewDetailsPath="/sea-air-schedule/schedule-details/flight-details"
+        />
+        <ScheduleDetailsCard
+          isSeaFreight={false}
+          viewDetailsPath="/sea-air-schedule/schedule-details/flight-details"
+        />
       </div>
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">

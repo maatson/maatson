@@ -12,6 +12,7 @@ import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import UpdateScheduleCard from "../../components/cards/UpdateScheduleCard";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
+import { Link } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -58,12 +59,14 @@ const UpdateSchedule: React.FC = () => {
           />
         </div>
         <div className="flex gap-2 items-center">
-          <PrimaryButton
-            label={"Add Schedule"}
-            size={"l"}
-            variant={""}
-            leftIcon={<AddIcon color="#ffffff" />}
-          />
+          <Link to="/sea-air-schedule/add-air-schedule">
+            <PrimaryButton
+              label={"Add Schedule"}
+              size={"l"}
+              variant={""}
+              leftIcon={<AddIcon color="#ffffff" />}
+            />
+          </Link>
           <SuccessButton
             label={"Export"}
             size={""}
@@ -112,8 +115,16 @@ const UpdateSchedule: React.FC = () => {
         </div>
       </div>
       <div className="px-8 py-6 gap-4 flex flex-col">
-        <UpdateScheduleCard isSeaFreight={false} />
-        <UpdateScheduleCard isSeaFreight={false} />
+        <UpdateScheduleCard
+          isSeaFreight={false}
+          editpath="/sea-air-schedule/edit-air-schedule"
+          viewPath="/sea-air-schedule/flight-details"
+        />
+        <UpdateScheduleCard
+          isSeaFreight={false}
+          editpath="/sea-air-schedule/edit-air-schedule"
+          viewPath="/sea-air-schedule/flight-details"
+        />
       </div>
       <div className="px-3 py-4 flex justify-between items-center">
         <div className="text-xs text-grey-ab-200">
