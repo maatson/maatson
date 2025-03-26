@@ -120,7 +120,7 @@ const SideBar: React.FC = () => {
             link: "/sea-air-schedule/sea-freight",
             active: "/sea-air-schedule",
           },
-          { label: "Shipment Updates", link: "/customer-service" },
+          { label: "Shipment Updates", link: "/shipment-updates" },
           { label: "Cargo Arrival Notice", link: "/customer-service" },
         ],
         onClick: () => handleItemClick(3),
@@ -214,9 +214,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
       <div
         className={`flex items-center rounded justify-between px-4 py-2 transition-all duration-300    ${
           isOpen ? "bg-grey-50 text-primary" : ""
-        }  ${
-          isActive ? "bg-blue-500 " : "hover:bg-white hover:bg-opacity-30 "
-        }`}
+        }  ${isActive ? "bg-blue-500" : "hover:bg-white hover:bg-opacity-30 "}`}
         onClick={onClick}
       >
         <div className={`flex items-center justify-start gap-4 w-full`}>

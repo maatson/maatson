@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 interface CardProps {
   isSeaFreight: boolean;
   editpath: string;
-  viewPath:string;
+  viewPath: string;
 }
 
 const UpdateScheduleCard: React.FC<CardProps> = React.memo(
@@ -98,7 +98,6 @@ const UpdateScheduleCard: React.FC<CardProps> = React.memo(
             </div>
             <div className="border border-grey-ab-200 w-full"></div>
             <div className="flex items-center gap-2 w-full">
-              {" "}
               <div className="border border-grey-ab-200  w-1/3"></div>
               <div className="border border-grey-ab-200 w-2/5"></div>
               <div className="border border-grey-ab-200 w-2/3"></div>
