@@ -218,6 +218,21 @@ const ShipmentUpdates = lazy(
   () => import("./pages/customerService/shipment-updates")
 );
 
+// PRICING AND PROCUREMENT
+
+const AllRates = lazy(() => import("./pages/pricing&procurement/allRates"));
+const EnquiryRateFiling = lazy(
+  () => import("./pages/pricing&procurement/enquiryRateFiling")
+);
+const NewRateFiling = lazy(
+  () => import("./pages/pricing&procurement/newRateFiling")
+);
+const RateMailing = lazy(
+  () => import("./pages/pricing&procurement/rateMailing")
+);
+const OtherVendors = lazy(
+  () => import("./pages/pricing&procurement/otherVendors")
+);
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
@@ -343,6 +358,16 @@ const AppRoutes: React.FC = () => {
 
         <Route path="shipment-updates" element={<ShipmentUpdates />}></Route>
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
+
+        {/* PRICING & PROCUREMENT */}
+        <Route path="all-Rates" element={<AllRates />}></Route>
+        <Route
+          path="enquiry-rate-filing"
+          element={<EnquiryRateFiling />}
+        ></Route>
+        <Route path="new-rate-filing" element={<NewRateFiling />}></Route>
+        <Route path="rate-mailing" element={<RateMailing />}></Route>
+        <Route path="other-vendors" element={<OtherVendors />}></Route>
 
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>
