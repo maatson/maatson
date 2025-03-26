@@ -127,7 +127,7 @@ const RequirementDetails = lazy(
   () => import("./pages/hrm/requirement/RequirementDetails")
 );
 
-// CUSTOMER SERVICE
+// CUSTOMER SERVICE : Sea Schedule
 const SeaAirSchedule = lazy(
   () => import("./pages/customerService/sea-air-schedule")
 );
@@ -153,9 +153,24 @@ const BulkScheduleUpdates = lazy(
       "./pages/customerService/sea-air-schedule/sea-freight/bulkScheduleUpdates/BulkScheduleUpdates"
     )
 );
-const AddSeaScheduleForm = lazy(() => import("./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/AddSeaScheduleForm"))
-const EditSeaScheduleForm = lazy(() => import("./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/EditSeaScheduleForm"))
-const VesselDetails = lazy(() => import("./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/VesselDetails"))
+const AddSeaScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/AddSeaScheduleForm"
+    )
+);
+const EditSeaScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/EditSeaScheduleForm"
+    )
+);
+const VesselDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/VesselDetails"
+    )
+);
 
 //air
 const AirFreight = lazy(
@@ -178,6 +193,11 @@ const BulkScheduleUpdatesAir = lazy(
     import(
       "./pages/customerService/sea-air-schedule/air-freight/bulkScheduleUpdates/BulkScheduleUpdates"
     )
+);
+
+// CUSTOMER SERVICE :Shipment updates
+const ShipmentUpdates = lazy(
+  () => import("./pages/customerService/shipment-updates")
 );
 
 // TESTIMONALS
@@ -276,13 +296,7 @@ const AppRoutes: React.FC = () => {
               path="bulk-schedule-updates"
               element={<BulkScheduleUpdates />}
             />
-            
           </Route>
-          
-          <Route path="add-sea-schedule" element={<AddSeaScheduleForm />}></Route>
-          <Route path="edit-sea-schedule" element={<EditSeaScheduleForm />}></Route>
-          <Route path="vessel-details" element={<VesselDetails />}></Route>
-          <Route path="schedule-details/vessel-details" element={<VesselDetails />}></Route>
 
           <Route path="air-freight" element={<AirFreight />}>
             <Route index element={<UpdateScheduleAir />} />
@@ -292,8 +306,17 @@ const AppRoutes: React.FC = () => {
               element={<BulkScheduleUpdatesAir />}
             />
           </Route>
+
+          <Route path="add-sea-schedule" element={<AddSeaScheduleForm />} />
+          <Route path="edit-sea-schedule" element={<EditSeaScheduleForm />} />
+          <Route path="vessel-details" element={<VesselDetails />} />
+          <Route
+            path="schedule-details/vessel-details"
+            element={<VesselDetails />}
+          />
         </Route>
-        <Route path="shipment-updates" element={<Requirement />}></Route>
+
+        <Route path="shipment-updates" element={<ShipmentUpdates />}></Route>
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* testimonials */}

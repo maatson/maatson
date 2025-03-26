@@ -120,7 +120,7 @@ const SideBar: React.FC = () => {
             link: "/sea-air-schedule/sea-freight",
             active: "/sea-air-schedule",
           },
-          { label: "Shipment Updates", link: "/customer-service" },
+          { label: "Shipment Updates", link: "/shipment-updates" },
           { label: "Cargo Arrival Notice", link: "/customer-service" },
         ],
         onClick: () => handleItemClick(3),
