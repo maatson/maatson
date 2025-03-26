@@ -194,6 +194,24 @@ const BulkScheduleUpdatesAir = lazy(
       "./pages/customerService/sea-air-schedule/air-freight/bulkScheduleUpdates/BulkScheduleUpdates"
     )
 );
+const AddAirScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/AddAirScheduleForm"
+    )
+);
+const EditAirScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/EditAirScheduleForm"
+    )
+);
+const FlightDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/FlightDetails"
+    )
+);
 
 // CUSTOMER SERVICE :Shipment updates
 const ShipmentUpdates = lazy(
@@ -314,6 +332,19 @@ const AppRoutes: React.FC = () => {
             path="schedule-details/vessel-details"
             element={<VesselDetails />}
           />
+          <Route
+            path="add-air-schedule"
+            element={<AddAirScheduleForm />}
+          ></Route>
+          <Route
+            path="edit-air-schedule"
+            element={<EditAirScheduleForm />}
+          ></Route>
+          <Route path="flight-details" element={<FlightDetails />}></Route>
+          <Route
+            path="schedule-details/flight-details"
+            element={<FlightDetails />}
+          ></Route>
         </Route>
 
         <Route path="shipment-updates" element={<ShipmentUpdates />}></Route>
