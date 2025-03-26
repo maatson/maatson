@@ -148,9 +148,15 @@ const SideBar: React.FC = () => {
       },
       {
         leftIcon: <PriceTagIcon />,
-        label: "Procurement",
+        label: "Pricing & Procurement",
         isOpen: openItems[7] || false,
-        children: [],
+        children: [
+          { label: "All Rates", link: "/all-rates" },
+          { label: "Rate Filing(Enquiry)", link: "/enquiry-rate-filing" },
+          { label: "Rate Filing (New)", link: "/new-rate-filing" },
+          { label: "Rate Mailing", link: "/rate-mailing" },
+          { label: "Other Vendors", link: "/other-vendors" },
+        ],
         onClick: () => handleItemClick(7),
       },
       {
