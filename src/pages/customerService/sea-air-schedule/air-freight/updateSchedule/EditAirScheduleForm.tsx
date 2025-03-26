@@ -103,7 +103,7 @@ const EditAirScheduleForm: React.FC = () => {
       <div className="flex flex-col gap-8 px-8 py-4 rounded-xs bg-grey-aw-50 shadow-lg">
         <div className="px-3 py-4 text-lg font-semibold text-grey-ab-900">
           Edit Air Freight Schedule
-        </div>
+        </div> 
 
         <div className="flex flex-col gap-8">
           {/* carrier information */}
