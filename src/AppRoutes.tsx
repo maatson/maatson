@@ -359,8 +359,8 @@ const AppRoutes: React.FC = () => {
         <Route path="shipment-updates" element={<ShipmentUpdates />}></Route>
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
-        {/* PRICING & PROCUREMENT */}
-        <Route path="all-Rates" element={<AllRates />}></Route>
+        {/* pricing & procurement */}
+        <Route path="all-rates" element={<AllRates />}></Route>
         <Route
           path="enquiry-rate-filing"
           element={<EnquiryRateFiling />}
