@@ -21,30 +21,63 @@ const VesselDetails: React.FC = () => {
     portOfLoading: "Chennai",
     portOfDischarge: "New York",
     servingRoutes: [
-      { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "2025-03-12" },
-      { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "2025-03-12" },
+      // { routePort: "", estimateTimeOfArrival: "" },
       // { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "2025-03-12" },
       // { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "2025-03-12" },
-    ],
+      // { routePort: "Colombo, Sri Lanka", estimateTimeOfArrival: "2025-03-12" },
+    ] as { routePort: string; estimateTimeOfArrival: string }[],
   });
   const [expandIcon, setExpandIcon] = useState<boolean>(true);
+  const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [totalPorts, setTotalPorts] = useState<string[]>([]);
-  
+
+  const [scheduleData, setScheduleData] = useState([
+    {
+      from: "chennai",
+      to: "colombo",
+      ship: "Ship1",
+      voyageNumber: "11hg234243",
+    },
+    {
+      from: "colombo",
+      to: "malaysia",
+      ship: "Ship1",
+      voyageNumber: "11hg234243",
+    },
+    {
+      from: "malaysia",
+      to: "dubai",
+      ship: "Ship2",
+      voyageNumber: "22hg234243",
+    },
+  ]);
+
   const handleIcon = () => {
+    setIsSpinning(true)
+    setTimeout(() => setIsSpinning(false), 700);
     setExpandIcon((prev) => !prev);
   };
 
   useEffect(() => {
     if (expandIcon) {
-      setTotalPorts([data.portOfLoading, data.portOfDischarge]);
-    } else {
       setTotalPorts([
-        data.portOfLoading,
-        ...data.servingRoutes.map((route) => route.routePort),
-        data.portOfDischarge,
+        scheduleData[0].from,
+        scheduleData[scheduleData.length - 1].to,
       ]);
+    } else {
+      const routes =
+        scheduleData.length > 1 ? scheduleData.map((items) => items.from) : [];
+      if (scheduleData.length > 1) {
+        setTotalPorts([...routes, scheduleData[scheduleData.length - 1].to]);
+      } else {
+        setTotalPorts([
+          scheduleData[0].from,
+          scheduleData[scheduleData.length - 1].to,
+        ]);
+      }
     }
-  }, [expandIcon, data]);
+  }, [expandIcon]);
+  console.log(totalPorts);
 
   return (
     <>
@@ -110,7 +143,7 @@ const VesselDetails: React.FC = () => {
                             <div className="h-[112px] w-[1px] flex flex-col gap-2 items-center">
                               <div className="border-l h-full border-l-grey-ab-400 border-dashed"></div>
                               <div
-                                className="w-6 h-6 rounded-xs p-1 bg-grey-ab cursor-pointer"
+                                className={`w-6 h-6  p-1 bg-grey-ab cursor-pointer ${isSpinning ? "animate-spin animate rounded-full" :"rounded-xs"} `}
                                 onClick={handleIcon}
                               >
                                 {expandIcon ? (
@@ -138,7 +171,22 @@ const VesselDetails: React.FC = () => {
                       <div className="p-1 rounded-xs bg-grey-ab-50 ">
                         <div className="flex flex-col gap-2">
                           <p className="text-xs font-bold text-grey-ab-600">
-                            CHENNAI, INMAA
+                            {/* {expandIcon ? (
+                              <>
+                                {index === 0
+                                  ? scheduleData[0].from.toUpperCase()
+                                  : scheduleData[
+                                      scheduleData.length - 1
+                                    ].to.toUpperCase()}
+                              </>
+                            ) : (
+                              <>
+                                {index !== totalPorts.length - 1
+                                  ? scheduleData[index].from.toUpperCase()
+                                  : scheduleData[index - 1].to.toUpperCase()}
+                              </>
+                            )} */}
+                            {totalPorts[index].toUpperCase()}
                           </p>
                           <div className="flex gap-2">
                             <p className="text-xs text-grey-ab-300">ETD</p>
@@ -160,7 +208,7 @@ const VesselDetails: React.FC = () => {
                                 Vessel Name
                               </p>
                               <p className="text-xs text-grey-ab-600">
-                                CHENNAI, INMAA
+                                {scheduleData[index].ship}
                               </p>
                             </div>
                             <div className="flex flex-col gap-2">
@@ -168,7 +216,7 @@ const VesselDetails: React.FC = () => {
                                 Voyage Number
                               </p>
                               <p className="text-xs text-grey-ab-600">
-                                11hg234243
+                                {scheduleData[index].voyageNumber}
                               </p>
                             </div>
                             <div className="flex flex-col gap-2">
