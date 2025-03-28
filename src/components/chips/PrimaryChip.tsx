@@ -38,7 +38,7 @@ const PrimaryChip: React.FC<ChipProps> = ({
             ? "border border-primary text-primary bg-primary-50"
             : "bg-primary text-grey-aw-50"
         }
-        ${style} flex items-center justify-between gap-2`}
+        ${style} ${leftIcon&&" flex items-center justify-between gap-2 "}`}
       >
         {leftIcon && <div>{leftIcon}</div>}
         <span> {label}</span>

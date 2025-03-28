@@ -32,7 +32,7 @@ const SecondaryChip: React.FC<ChipProps> = ({
             ? "border border-secondary text-secondary bg-secondary-50"
             : "bg-secondary text-grey-aw-50"
         }
-        ${style} flex items-center justify-between gap-2`}
+        ${style}  ${leftIcon&&" flex items-center justify-between gap-2 "}`}
       >
         {leftIcon && <div>{leftIcon}</div>}
         <span> {label}</span>{" "}
