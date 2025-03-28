@@ -1,9 +1,55 @@
 import React, { useEffect, useState } from "react";
 
+interface Chip {
+  id: number;
+  label: string;
+}
 const PageNotFound: React.FC = () => {
   
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
+
+  const [chips, setChips] = useState<Chip[]>([
+    { id: 1, label: "Chip 1" },
+    { id: 2, label: "Chip 2" },
+    { id: 3, label: "Chip 3" },
+  ]);
+
+  const [droppedChips, setDroppedChips] = useState<Chip[]>([]);
+
+  const handleDragStart = (
+    e: React.DragEvent<HTMLDivElement>,
+    chipId: number
+  ) => {
+    e.dataTransfer.setData("chipId", chipId.toString());
+  };
+
+  const handleDrop = (
+    e: React.DragEvent<HTMLDivElement>,
+    target: "chips" | "dropped"
+  ) => {
+    e.preventDefault();
+    const chipId = e.dataTransfer.getData("chipId");
+    const chip =
+      chips.find((c) => c.id === parseInt(chipId)) ||
+      droppedChips.find((c) => c.id === parseInt(chipId));
+
+    if (chip) {
+      if (target === "chips") {
+        // Move chip back to the original chips container
+        setChips((prev) => [...prev, chip]);
+        setDroppedChips((prev) => prev.filter((c) => c.id !== chip.id));
+      } else {
+        // Move chip to the dropped chips container
+        setDroppedChips((prev) => [...prev, chip]);
+        setChips((prev) => prev.filter((c) => c.id !== chip.id));
+      }
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
   const data: any[] = [
     { name: "vick", age: 21, role: "developer" },
     { productused: "mouse", name: "ezhil", age: 25, role: "desinger" },
@@ -55,14 +101,6 @@ const PageNotFound: React.FC = () => {
   const result = mapArray.set("name", "vick");
   // console.log(result.has("nadme"), "roho");
 
-  // let left;
-  // let top;
-
-  // left = Math.random() * 100;
-  // top = Math.random() * 100;
-
-
-  console.log(left, top);
   useEffect(() => {
     const intervalId = setInterval(() => {
       // Generate random left and top values (between 0 and 100)
@@ -80,8 +118,8 @@ const PageNotFound: React.FC = () => {
         Page Not Found 404 !!
       </p>
       {data && (
-        <table className="bg-red w-4/5 mx-auto rounded-lg relative z-10">
-          <thead>
+        <table className="bg-red w-4/5 mx-auto rounded-sm relative z-10">
+          <thead className="">
             <tr className="w-full">
               {columns.map((item, index) => (
                 <th key={index} className="capitalize tracking-[.5rem]">
@@ -90,13 +128,16 @@ const PageNotFound: React.FC = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {data.map((row, index) => (
-              <tr key={index} className="w-full text-center">
+              <tr key={index} className="w-full text-center  ">
                 {columns.map((item, index) => (
                   <td key={index} className="bg-red-100 ">
                     {
-                      <p className="text-white bg-red-300 inline-block px-3 my-1 rounded-sm ">
+                      <p
+                        draggable
+                        className="text-white bg-red-300 inline-block px-3 my-1 rounded-sm "
+                      >
                         {row[item] || "-"}
                       </p>
                     }
@@ -108,7 +149,6 @@ const PageNotFound: React.FC = () => {
         </table>
       )}
       {/* <RippleButton children={"hello"} /> */}
-      {/* <div className="w-full h-[400px] bg-blue-50 "> */}
 
       <div
         style={{
@@ -150,7 +190,7 @@ const PageNotFound: React.FC = () => {
           right: `${left + Math.random() * 20}%`,
           bottom: `${top + Math.random() * 60}%`,
         }}
-        className={`w-10 h-10 bg-green-300 rounded-full absolute transition-all duration-500 animate-bounce`}
+        className={`w-10 h-10 bg-green-300 rounded-full absolute transition-all duration-500 animate-pulse`}
       ></div>
       <div
         style={{
@@ -159,6 +199,63 @@ const PageNotFound: React.FC = () => {
         }}
         className={`w-10 h-10 bg-pink-300 rounded absolute transition-all duration-500 animate-spin`}
       ></div>
+      <div
+        style={{
+          right: `${left + Math.random() * 99}%`,
+          bottom: `${top + Math.random() * 43}%`,
+          width: 0,
+          height: 0,
+          borderTop: "50px solid #2c398f  ",
+          // borderBottom: "50px solid transparent",
+          borderRight: "25px solid transparent ",
+          borderLeft: "25px solid transparent",
+        }}
+        className={`  rounded absolute transition-all duration-500 animate-spin `}
+      ></div>
+
+      <div className="flex justify-center items-start space-x-8 p-10">
+        {/* Draggable Chips Container */}
+        <div
+          className="w-1/2 min-h-[300px] bg-blue-100 p-4 rounded-lg"
+          onDrop={(e) => handleDrop(e, "chips")}
+          onDragOver={handleDragOver}
+        >
+          <h2 className="text-xl mb-4 text-center">Chips</h2>
+          <div className="space-y-4">
+            {chips.map((chip) => (
+              <div
+                key={chip.id}
+                className="chip bg-green-500 text-white py-2 px-4 rounded-full cursor-pointer"
+                draggable
+                onDragStart={(e) => handleDragStart(e, chip.id)}
+              >
+                {chip.label}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dropped Chips Area */}
+        <div
+          className="w-1/2 min-h-[300px] bg-gray-200 p-4 rounded-lg"
+          onDrop={(e) => handleDrop(e, "dropped")}
+          onDragOver={handleDragOver}
+        >
+          <h2 className="text-xl mb-4 text-center">Dropped Chips</h2>
+          <div className="space-y-4">
+            {droppedChips.map((chip) => (
+              <div
+                key={chip.id}
+                className="chip bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer"
+                draggable
+                onDragStart={(e) => handleDragStart(e, chip.id)}
+              >
+                {chip.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
