@@ -232,7 +232,7 @@ const Updates: React.FC = () => {
           </Select>
         </div>
       </div>
-    </>
+    </> 
   );
 };
 
