@@ -268,13 +268,42 @@ const EmptyReturnConfirmation = lazy(
 const ShipmentAirFreight = lazy(
   () => import("./pages/customerService/shipment-updates/air-freight")
 ); //index
-const UpdatesAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/updates/Updates"))
-const AirportGateInDateAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/airportGateInDate/AirportGateInDate"))
-const CargoHandoverUpdateAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/CargoHandoverUpdate"))
-const DepartureConfirmationAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/departureConfirmation/DepartureConfirmation"))
-const TransitInfoAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/transitInfo/TransitInfo"))
-const DeliveryOrderCollectedAir = lazy(() => import("./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollected"))
-
+const UpdatesAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/updates/Updates"
+    )
+);
+const AirportGateInDateAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/airportGateInDate/AirportGateInDate"
+    )
+);
+const CargoHandoverUpdateAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/CargoHandoverUpdate"
+    )
+);
+const DepartureConfirmationAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/departureConfirmation/DepartureConfirmation"
+    )
+);
+const TransitInfoAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/transitInfo/TransitInfo"
+    )
+);
+const DeliveryOrderCollectedAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollected"
+    )
+);
 
 // PRICING AND PROCUREMENT
 
@@ -419,31 +448,51 @@ const AppRoutes: React.FC = () => {
             <Route index element={<Updates />} />
             <Route path="container-pickup" element={<ContainerPickUp />} />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
-            <Route path="onboard-confirmation" element={<OnboardConfirmation />} />
+            <Route
+              path="onboard-confirmation"
+              element={<OnboardConfirmation />}
+            />
             <Route path="transit-info" element={<TransitInfo />} />
-            <Route path="delivery-order-collected" element={<DeliveryOrderCollected />} />
-            <Route path="empty-return-confirmation" element={<EmptyReturnConfirmation />} />
+            <Route
+              path="delivery-order-collected"
+              element={<DeliveryOrderCollected />}
+            />
+            <Route
+              path="empty-return-confirmation"
+              element={<EmptyReturnConfirmation />}
+            />
           </Route>
 
           <Route path="air-freight" element={<ShipmentAirFreight />}>
             <Route index element={<UpdatesAir />} />
-            <Route path="airport-gatein-date" element={<AirportGateInDateAir />} />
-            <Route path="cargo-handover-update" element={<CargoHandoverUpdateAir />} />
-            <Route path="departure-confirmation" element={<DepartureConfirmationAir />} />
+            <Route
+              path="airport-gatein-date"
+              element={<AirportGateInDateAir />}
+            />
+            <Route
+              path="cargo-handover-update"
+              element={<CargoHandoverUpdateAir />}
+            />
+            <Route
+              path="departure-confirmation"
+              element={<DepartureConfirmationAir />}
+            />
             <Route path="transit-info" element={<TransitInfoAir />} />
-            <Route path="delivery-order-collected" element={<DeliveryOrderCollectedAir />} />
+            <Route
+              path="delivery-order-collected"
+              element={<DeliveryOrderCollectedAir />}
+            />
           </Route>
-
         </Route>
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
-        {/* PRICING & PROCUREMENT */}
-        <Route path="all-Rates" element={<AllRates />}></Route>
+        {/* pricing & procurement */}
+        <Route path="all-rates" element={<AllRates />}></Route>
         <Route
-          path="enquiry-rate-filing"
+          path="rate-filing-enquiry"
           element={<EnquiryRateFiling />}
         ></Route>
-        <Route path="new-rate-filing" element={<NewRateFiling />}></Route>
+        <Route path="rate-filing-new" element={<NewRateFiling />}></Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
         <Route path="other-vendors" element={<OtherVendors />}></Route>
 

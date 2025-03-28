@@ -66,6 +66,14 @@ input[type="checkbox"] {
     [&::-webkit-scrollbar-thumb]:rounded 
     [&::-webkit-scrollbar-thumb]:bg-primary-400 ;
   }
+  .custom-scrollbar-small {
+    @apply [&::-webkit-scrollbar]:w-[2px]
+    [&::-webkit-scrollbar]:h-[2px]
+    [&::-webkit-scrollbar-track]:rounded
+    [&::-webkit-scrollbar-track]:bg-grey-200
+    [&::-webkit-scrollbar-thumb]:rounded 
+    [&::-webkit-scrollbar-thumb]:bg-primary-400 ;
+  }
  
 }
 

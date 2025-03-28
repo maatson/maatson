@@ -7,8 +7,8 @@ const ShipmentSeaFreight: React.FC = () => {
   return (
     <>
       <div className="bg-grey-aw-50 h-full rounded">
-        <div className="border-b border-grey-ab-100 flex p-2 gap-2 text-sm font-semibold items-center overflow-auto custom-scrollbar ">
-          <div className="pe-2 border-r border-r-grey-ab-100 text-nowrap">
+        <div className="border-b border-grey-ab-100 flex p-2  text-sm font-semibold items-center overflow-auto custom-scrollbar-small ">
+          <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
             <NavLink
               to={"/shipment-updates/sea-freight"}
               className={({ isActive }) =>
@@ -23,7 +23,7 @@ const ShipmentSeaFreight: React.FC = () => {
               <p> Updates</p>
             </NavLink>
           </div>
-          <div className="pe-2 border-r border-r-grey-ab-100 text-nowrap">
+          <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
             <NavLink
               to={"/shipment-updates/sea-freight/container-pickup"}
               end
@@ -40,7 +40,7 @@ const ShipmentSeaFreight: React.FC = () => {
               <p> Container Pickup </p>
             </NavLink>
           </div>
-          <div className="pe-2 border-r border-r-grey-ab-100 text-nowrap">
+          <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
             <NavLink
               to={"/shipment-updates/sea-freight/terminal-gateIn"}
               end
@@ -58,7 +58,7 @@ const ShipmentSeaFreight: React.FC = () => {
               <p> Terminal Gate In </p>
             </NavLink>
           </div>
-          <div className="pe-2 border-r border-r-grey-ab-100 text-nowrap">
+          <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
             <NavLink
               to={"/shipment-updates/sea-freight/onboard-confirmation"}
               end
@@ -76,7 +76,7 @@ const ShipmentSeaFreight: React.FC = () => {
               <p> Onboard Confirmation </p>
             </NavLink>
           </div>
-          <div className="pe-2 border-r border-r-grey-ab-100 text-nowrap">
+          <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
             <NavLink
               to={"/shipment-updates/sea-freight/transit-info"}
               end
@@ -94,7 +94,7 @@ const ShipmentSeaFreight: React.FC = () => {
               <p> Transit Info </p>
             </NavLink>
           </div>
-          <div className="pe-2 border-r border-r-grey-ab-100 text-nowrap">
+          <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
             <NavLink
               to={"/shipment-updates/sea-freight/delivery-order-collected"}
               end
@@ -112,7 +112,7 @@ const ShipmentSeaFreight: React.FC = () => {
               <p> Delivery Order Collected </p>
             </NavLink>
           </div>
-          <div className="text-nowrap">
+          <div className="text-nowrap px-1">
             <NavLink
               to={"/shipment-updates/sea-freight/empty-return-confirmation"}
               end
