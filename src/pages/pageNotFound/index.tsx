@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+
 const PageNotFound: React.FC = () => {
+  
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   const data: any[] = [
@@ -59,6 +61,7 @@ const PageNotFound: React.FC = () => {
   // left = Math.random() * 100;
   // top = Math.random() * 100;
 
+
   console.log(left, top);
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -109,7 +112,7 @@ const PageNotFound: React.FC = () => {
 
       <div
         style={{
-          right: `${top + Math.random() * 73}%`,
+          right: `${top + Math.random() * 73}%`, 
           top: `${left + Math.random() * 33}%`,
         }}
         className={`w-10 h-10 bg-blue rounded-full absolute transition-all duration-1000 animate-ping`}
