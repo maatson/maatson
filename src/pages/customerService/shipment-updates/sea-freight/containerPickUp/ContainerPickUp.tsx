@@ -70,7 +70,7 @@ const ContainerPickUp: React.FC = () => {
   const createData = (items: any) => {
     const { id, modeOfTransport } = items;
 
-    const actions = <div>d</div>;
+    const actions = <div>d</div>;  
 
     const updatedData = {
       id: id,
