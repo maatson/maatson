@@ -72,7 +72,7 @@ const CustomTable: React.FC<TableProps> = React.memo(
                       minWidth: "10px",
                       padding: "6px 8px",
                     }}
-                    className="bg-grey-100 "
+                    className="bg-grey-100  "
                   >
                     <input
                       type="checkbox"
@@ -101,7 +101,9 @@ const CustomTable: React.FC<TableProps> = React.memo(
                     }}
                     className="bg-grey-100 bre"
                   >
-                    <span className="font-semibold">{column.label}</span>
+                    <span className="font-semibold capitalize">
+                      {column.label}
+                    </span>
                   </TableCell>
                 ))}
               </TableRow>

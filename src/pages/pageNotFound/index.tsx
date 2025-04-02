@@ -24,6 +24,20 @@ const PageNotFound: React.FC = () => {
     e.dataTransfer.setData("chipId", chipId.toString());
   };
 
+  const getDropIndex = (
+    e: React.DragEvent<HTMLDivElement>,
+    container: "chips" | "dropped"
+  ) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const offset = e.clientY - rect.top;
+    const index = Math.floor(
+      offset /
+        (rect.height /
+          (container === "chips" ? chips.length : droppedChips.length))
+    );
+    return index;
+  };
+
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
     target: "chips" | "dropped"
@@ -34,14 +48,30 @@ const PageNotFound: React.FC = () => {
       chips.find((c) => c.id === parseInt(chipId)) ||
       droppedChips.find((c) => c.id === parseInt(chipId));
 
+    const dropIndex = getDropIndex(e, target); // Get the index based on where it is dropped
+
     if (chip) {
       if (target === "chips") {
         // Move chip back to the original chips container
-        setChips((prev) => [...prev, chip]);
+
+        setChips((prev) => {
+          const filteredChips = prev.filter(
+            (item) => item.id != Number(chipId)
+          );
+          const newChips = [...filteredChips];
+          newChips.splice(dropIndex, 0, chip); // Insert at the correct position(startindex,delete item,add items)
+          return newChips;
+        });
         setDroppedChips((prev) => prev.filter((c) => c.id !== chip.id));
       } else {
-        // Move chip to the dropped chips container
-        setDroppedChips((prev) => [...prev, chip]);
+        setDroppedChips((prev) => {
+          const filteredChips = prev.filter(
+            (item) => item.id != Number(chipId)
+          );
+          const newChips = [...filteredChips];
+          newChips.splice(dropIndex, 0, chip); // Insert at the correct position(startindex,delete item,add items)
+          return newChips;
+        });
         setChips((prev) => prev.filter((c) => c.id !== chip.id));
       }
     }
@@ -95,7 +125,7 @@ const PageNotFound: React.FC = () => {
 
     return results;
   };
-  console.log(checkAtmCard("6079227276000421"));
+  // console.log(checkAtmCard("6079227276000421"));
 
   const mapArray = new Map();
   const result = mapArray.set("name", "vick");
@@ -225,7 +255,7 @@ const PageNotFound: React.FC = () => {
             {chips.map((chip) => (
               <div
                 key={chip.id}
-                className="chip bg-green-500 text-white py-2 px-4 rounded-full cursor-pointer"
+                className="chip bg-green text-black py-2 px-4 rounded-full cursor-pointer"
                 draggable
                 onDragStart={(e) => handleDragStart(e, chip.id)}
               >
@@ -246,7 +276,7 @@ const PageNotFound: React.FC = () => {
             {droppedChips.map((chip) => (
               <div
                 key={chip.id}
-                className="chip bg-blue-500 text-white py-2 px-4 rounded-full cursor-pointer"
+                className="chip bg-blue text-black py-2 px-4 rounded-full cursor-pointer"
                 draggable
                 onDragStart={(e) => handleDragStart(e, chip.id)}
               >
