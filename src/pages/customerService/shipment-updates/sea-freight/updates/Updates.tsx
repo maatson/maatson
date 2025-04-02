@@ -166,7 +166,7 @@ const Updates: React.FC = () => {
                 HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
               >
             ): void {
-              throw new Error(e+"Function not implemented.");
+              throw new Error(e + "Function not implemented.");
             }}
             error={false}
             errorMessage={""}
@@ -232,7 +232,7 @@ const Updates: React.FC = () => {
           </Select>
         </div>
       </div>
-    </> 
+    </>
   );
 };
 
