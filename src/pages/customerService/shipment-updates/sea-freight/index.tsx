@@ -12,6 +12,9 @@ const ShipmentSeaFreight: React.FC = () => {
         ) &&
           !location.pathname.startsWith(
             "/shipment-updates/sea-freight/onboard-confirmation/edit"
+          ) &&
+          !location.pathname.startsWith(
+            "/shipment-updates/sea-freight/transit-view"
           ) && (
             <div className="border-b border-grey-ab-100 flex p-2  text-sm font-semibold items-center overflow-auto custom-scrollbar-small ">
               <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
