@@ -226,43 +226,56 @@ const Updates = lazy(
     import(
       "./pages/customerService/shipment-updates/sea-freight/updates/Updates"
     )
-); //index
+);
 const ContainerPickUp = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/containerPickUp/ContainerPickUp"
     )
-); //index
+);
 const TerminalGateIn = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateIn"
     )
-); //index
+);
+// vick routes
 const OnboardConfirmation = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/OnboardConfirmation"
     )
-); //index
+);
+const ViewOnboardConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/ViewOnBoardConfirmation"
+    )
+);
+const EditOnboardConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/EditOnBoardConfirmation"
+    )
+);
 const TransitInfo = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/transitInfo/TransitInfo"
     )
-); //index
+);
 const DeliveryOrderCollected = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollected"
     )
-); //index
+);
 const EmptyReturnConfirmation = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/emptyReturnConfirmation/EmptyReturnConfirmation"
     )
-); //index
+);
 
 // air
 const ShipmentAirFreight = lazy(
@@ -408,6 +421,8 @@ const AppRoutes: React.FC = () => {
         </Route>
 
         {/* customer services */}
+        {/* sea-air-schedule */}
+
         <Route path="sea-air-schedule" element={<SeaAirSchedule />}>
           <Route path="sea-freight" element={<SeaFreight />}>
             <Route index element={<UpdateSchedule />} />
@@ -442,6 +457,7 @@ const AppRoutes: React.FC = () => {
             element={<FlightDetails />}
           />
         </Route>
+        {/* shipment-updates */}
 
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
@@ -451,6 +467,14 @@ const AppRoutes: React.FC = () => {
             <Route
               path="onboard-confirmation"
               element={<OnboardConfirmation />}
+            />
+            <Route
+              path="onboard-confirmation/view/:bookingId"
+              element={<ViewOnboardConfirmation />}
+            />
+            <Route
+              path="onboard-confirmation/edit/:bookingId"
+              element={<EditOnboardConfirmation />}
             />
             <Route path="transit-info" element={<TransitInfo />} />
             <Route
