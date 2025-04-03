@@ -227,10 +227,22 @@ const Updates = lazy(
       "./pages/customerService/shipment-updates/sea-freight/updates/Updates"
     )
 );
+const UpdateDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/updates/UpdateDetails"
+    )
+);
 const ContainerPickUp = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/sea-freight/containerPickUp/ContainerPickUp"
+    )
+);
+const ContainerPickUpDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/containerPickUp/ContainerPickupDetails"
     )
 );
 const TerminalGateIn = lazy(
@@ -462,7 +474,9 @@ const AppRoutes: React.FC = () => {
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
             <Route index element={<Updates />} />
+            <Route path ="updates/update-details" element={<UpdateDetails />} />
             <Route path="container-pickup" element={<ContainerPickUp />} />
+            <Route path="container-pickup/details" element={<ContainerPickUpDetails />} />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
             <Route
               path="onboard-confirmation"

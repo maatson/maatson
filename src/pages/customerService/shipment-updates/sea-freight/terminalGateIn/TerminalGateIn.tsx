@@ -5,40 +5,33 @@ import GroupField from "../../../../../components/groupField/GroupField";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
 import CustomTable from "../../../../../components/table/CustomTable";
+import GreyButton from "../../../../../components/buttons/GreyButton";
+import WarningChip from "../../../../../components/chips/WarningChip";
+import SuccessChip from "../../../../../components/chips/SuccessChip";
 
 interface RowData {
   id: string | number;
-  carrierName: string;
-  carrierCode: string;
-  modeOfTransport: React.ReactNode;
-  operationalSince: string | React.ReactNode;
-  countryOfOperation: string | React.ReactNode;
-  primaryContactName: string;
+  bookingID: string;
+  companyName: string;
+  portOfLoading: string;
+  portOfDischarge: string;
+  terminalGateInStatus: React.ReactNode;
+  terminalGateIn: string;
   action: React.ReactNode;
 }
 
 const columns: any[] = [
-  { id: "carrierName", label: "Carrier Name", minWidth: 160 },
-  { id: "carrierCode", label: "Carrier Code", minWidth: 140 },
+  { id: "bookingID", label: "Booking ID", minWidth: 100 },
+  { id: "companyName", label: "Company Name" },
+  { id: "portOfLoading", label: "Port of loading", minWidth: 160 },
+  { id: "portOfDischarge", label: "Port of Discharge", minWidth: 160 },
   {
-    id: "modeOfTransport",
-    label: "Mode of Transport",
-    minWidth: 160,
-    align: "center",
-  },
-  {
-    id: "operationalSince",
-    label: "Operational Since",
-    minWidth: 130,
-    align: "center",
-  },
-  {
-    id: "countryOfOperation",
-    label: "Country of Operation",
+    id: "terminalGateInStatus",
+    label: "Terminal Gate In Status",
     minWidth: 180,
     align: "center",
   },
-  { id: "primaryContactName", label: "Primary Contact Name", minWidth: 140 },
+  { id: "terminalGateIn", label: "Terminal Gate In" },
   { id: "action", label: "Action", minWidth: 120, align: "center" },
 ];
 
@@ -68,18 +61,37 @@ const TerminalGateIn: React.FC = () => {
 
   // table
   const createData = (items: any) => {
-    const { id, modeOfTransport } = items;
+    const { id, terminalGateInStatus } = items;
 
-    const actions = <div>d</div>;
+    const terminalGateInStatuses = (
+      <>
+        {terminalGateInStatus.toLowerCase() === "pending" ? (
+          <WarningChip
+            label={terminalGateInStatus}
+            size={"m"}
+            variant={"mix"}
+          />
+        ) : (
+          <SuccessChip
+            label={terminalGateInStatus}
+            size={"m"}
+            variant={"mix"}
+          />
+        )}
+      </>
+    );
+    const actions = (
+      <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
+    );
 
     const updatedData = {
       id: id,
-      carrierName: items?.carrierName,
-      carrierCode: items?.carrierCode,
-      modeOfTransport: modeOfTransport,
-      operationalSince: items?.operationalSince,
-      countryOfOperation: items?.countryOfOperation,
-      primaryContactName: items?.primaryContactName,
+      bookingID: items?.bookingID,
+      companyName: items?.companyName,
+      portOfLoading: items?.portOfLoading,
+      portOfDischarge: items?.portOfDischarge,
+      terminalGateInStatus: terminalGateInStatuses,
+      terminalGateIn: items?.terminalGateIn,
       action: actions,
     };
     return updatedData;
@@ -87,52 +99,36 @@ const TerminalGateIn: React.FC = () => {
 
   const data = [
     {
-      carrierName: "MSC Shipping",
-      carrierCode: "MSC-001",
-      modeOfTransport: "Sea Freight",
-      operationalSince: "2020",
-      countryOfOperation: "USA",
-      primaryContactName: "Varga Dóra",
+      bookingID: "0000001",
+      companyName: "Farrel Kurniawan",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: "Rotterdam, Netherlands",
+      terminalGateIn: "11/10/25",
+      terminalGateInStatus: "Pending",
     },
     {
-      carrierName: "DHL Logistics	",
-      carrierCode: "DHL",
-      modeOfTransport: "Land Freight",
-      operationalSince: "2008",
-      countryOfOperation: "Greece",
-      primaryContactName: "Halász Emese",
+      bookingID: "0000002",
+      companyName: "Dimas Kamal",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: " Netherlands",
+      terminalGateIn: "11/10/25",
+      terminalGateInStatus: "Arrived",
     },
     {
-      carrierName: "FedEx Freight	",
-      carrierCode: "FDX",
-      modeOfTransport: "Air Freight",
-      operationalSince: "2017",
-      countryOfOperation: "Canada",
-      primaryContactName: "Surány Izabella",
+      bookingID: "0000003",
+      companyName: "Farrel Kurniawan",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: "Rotterdam",
+      terminalGateIn: "11/10/25",
+      terminalGateInStatus: "Pending",
     },
     {
-      carrierName: "MSC Shipping",
-      carrierCode: "MSC-001",
-      modeOfTransport: "Sea Freight",
-      operationalSince: "2020",
-      countryOfOperation: "USA",
-      primaryContactName: "Varga Dóra",
-    },
-    {
-      carrierName: "DHL Logistics	",
-      carrierCode: "DHL",
-      modeOfTransport: "Land Freight",
-      operationalSince: "2008",
-      countryOfOperation: "Greece",
-      primaryContactName: "Halász Emese",
-    },
-    {
-      carrierName: "FedEx Freight	",
-      carrierCode: "FDX",
-      modeOfTransport: "Air Freight",
-      operationalSince: "2017",
-      countryOfOperation: "Canada",
-      primaryContactName: "Surány Izabella",
+      bookingID: "0000004",
+      companyName: "Farrel Kurniawan",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: " Netherlands",
+      terminalGateIn: "11/10/25",
+      terminalGateInStatus: "Arrived",
     },
   ];
 

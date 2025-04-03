@@ -5,40 +5,31 @@ import GroupField from "../../../../../components/groupField/GroupField";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
 import CustomTable from "../../../../../components/table/CustomTable";
+import BlackChip from "../../../../../components/chips/BlackChip";
+import SecondaryChip from "../../../../../components/chips/SecondaryChip";
+import GreyButton from "../../../../../components/buttons/GreyButton";
+import { Link } from "react-router-dom";
 
 interface RowData {
   id: string | number;
-  carrierName: string;
-  carrierCode: string;
-  modeOfTransport: React.ReactNode;
-  operationalSince: string | React.ReactNode;
-  countryOfOperation: string | React.ReactNode;
-  primaryContactName: string;
+  bookingID: string;
+  companyName: string;
+  portOfLoading: string;
+  portOfDischarge: string;
+  bookingValidityDate: string;
+  currentUpdate: React.ReactNode;
+  transhipmentPort: React.ReactNode;
   action: React.ReactNode;
 }
 
 const columns: any[] = [
-  { id: "carrierName", label: "Carrier Name", minWidth: 160 },
-  { id: "carrierCode", label: "Carrier Code", minWidth: 140 },
-  {
-    id: "modeOfTransport",
-    label: "Mode of Transport",
-    minWidth: 160,
-    align: "center",
-  },
-  {
-    id: "operationalSince",
-    label: "Operational Since",
-    minWidth: 130,
-    align: "center",
-  },
-  {
-    id: "countryOfOperation",
-    label: "Country of Operation",
-    minWidth: 180,
-    align: "center",
-  },
-  { id: "primaryContactName", label: "Primary Contact Name", minWidth: 140 },
+  { id: "bookingID", label: "Booking ID", minWidth: 100 },
+  { id: "companyName", label: "Company Name" },
+  { id: "portOfLoading", label: "Port of loading", minWidth: 160 },
+  { id: "portOfDischarge", label: "Port of Discharge", minWidth: 160 },
+  { id: "bookingValidityDate", label: "Booking Validity Date", minWidth: 160 },
+  { id: "currentUpdate", label: "Current Update", align: "center" },
+  { id: "transhipmentPort", label: "Transhipment Port", align: "center" },
   { id: "action", label: "Action", minWidth: 120, align: "center" },
 ];
 
@@ -68,18 +59,29 @@ const Updates: React.FC = () => {
 
   // table
   const createData = (items: any) => {
-    const { id, modeOfTransport } = items;
+    const { id, currentUpdate, transhipmentPort } = items;
 
-    const actions = <div>d</div>;
+    const currentUpdates = (
+      <BlackChip label={currentUpdate} size={"m"} variant={"mix"} />
+    );
+    const transhipmentPorts = (
+      <SecondaryChip label={transhipmentPort} size={"m"} variant={"mix"} />
+    );
+    const actions = (
+      <Link to={"/shipment-updates/sea-freight/updates/update-details"}>
+        <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
+      </Link>
+    );
 
     const updatedData = {
       id: id,
-      carrierName: items?.carrierName,
-      carrierCode: items?.carrierCode,
-      modeOfTransport: modeOfTransport,
-      operationalSince: items?.operationalSince,
-      countryOfOperation: items?.countryOfOperation,
-      primaryContactName: items?.primaryContactName,
+      bookingID: items?.bookingID,
+      companyName: items?.companyName,
+      portOfLoading: items?.portOfLoading,
+      portOfDischarge: items?.portOfDischarge,
+      bookingValidityDate: items?.bookingValidityDate,
+      currentUpdate: currentUpdates,
+      transhipmentPort: transhipmentPorts,
       action: actions,
     };
     return updatedData;
@@ -87,52 +89,40 @@ const Updates: React.FC = () => {
 
   const data = [
     {
-      carrierName: "MSC Shipping",
-      carrierCode: "MSC-001",
-      modeOfTransport: "Sea Freight",
-      operationalSince: "2020",
-      countryOfOperation: "USA",
-      primaryContactName: "Varga Dóra",
+      bookingID: "0000001",
+      companyName: "Farrel Kurniawan",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: "Rotterdam, Netherlands",
+      bookingValidityDate: "11/10/25",
+      currentUpdate: "Terminal Gate In",
+      transhipmentPort: "Los Angeles, USA",
     },
     {
-      carrierName: "DHL Logistics	",
-      carrierCode: "DHL",
-      modeOfTransport: "Land Freight",
-      operationalSince: "2008",
-      countryOfOperation: "Greece",
-      primaryContactName: "Halász Emese",
+      bookingID: "0000002",
+      companyName: "Dimas Kamal",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: " Netherlands",
+      bookingValidityDate: "11/10/25",
+      currentUpdate: "Container Pickup",
+      transhipmentPort: "Vancouver, Canada",
     },
     {
-      carrierName: "FedEx Freight	",
-      carrierCode: "FDX",
-      modeOfTransport: "Air Freight",
-      operationalSince: "2017",
-      countryOfOperation: "Canada",
-      primaryContactName: "Surány Izabella",
+      bookingID: "0000003",
+      companyName: "Farrel Kurniawan",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: "Rotterdam",
+      bookingValidityDate: "11/10/25",
+      currentUpdate: "Terminal Gate In",
+      transhipmentPort: "Los Angeles, USA",
     },
     {
-      carrierName: "MSC Shipping",
-      carrierCode: "MSC-001",
-      modeOfTransport: "Sea Freight",
-      operationalSince: "2020",
-      countryOfOperation: "USA",
-      primaryContactName: "Varga Dóra",
-    },
-    {
-      carrierName: "DHL Logistics	",
-      carrierCode: "DHL",
-      modeOfTransport: "Land Freight",
-      operationalSince: "2008",
-      countryOfOperation: "Greece",
-      primaryContactName: "Halász Emese",
-    },
-    {
-      carrierName: "FedEx Freight	",
-      carrierCode: "FDX",
-      modeOfTransport: "Air Freight",
-      operationalSince: "2017",
-      countryOfOperation: "Canada",
-      primaryContactName: "Surány Izabella",
+      bookingID: "0000004",
+      companyName: "Farrel Kurniawan",
+      portOfLoading: "Los Angeles, USA",
+      portOfDischarge: " Netherlands",
+      bookingValidityDate: "11/10/25",
+      currentUpdate: "Terminal Gate In",
+      transhipmentPort: "Los Angeles, USA",
     },
   ];
 
@@ -231,7 +221,7 @@ const Updates: React.FC = () => {
             ))}
           </Select>
         </div>
-      </div>  
+      </div>
     </>
   );
 };
