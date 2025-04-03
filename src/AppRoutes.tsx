@@ -276,6 +276,12 @@ const TransitInfo = lazy(
       "./pages/customerService/shipment-updates/sea-freight/transitInfo/TransitInfo"
     )
 );
+const TransitView = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/transitInfo/TransitView"
+    )
+);
 const DeliveryOrderCollected = lazy(
   () =>
     import(
@@ -491,6 +497,7 @@ const AppRoutes: React.FC = () => {
               element={<EditOnboardConfirmation />}
             />
             <Route path="transit-info" element={<TransitInfo />} />
+            <Route path="transit-view/:id" element={<TransitView />} />
             <Route
               path="delivery-order-collected"
               element={<DeliveryOrderCollected />}

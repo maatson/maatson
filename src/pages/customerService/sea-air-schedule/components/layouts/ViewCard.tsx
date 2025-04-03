@@ -8,7 +8,7 @@ const ViewCard: React.FC<{
   valueStyle?: string;
 }> = React.memo(({ label, value, style, labelStyle, valueStyle }) => {
   return (
-    <div className={`flex gap-2 items-center text-sm ${style}`}>
+    <div className={`flex gap-2 text-sm  ${style} `}>
       <p className={`font-semibold ${labelStyle}`}>{label}</p>
       <p className={`${valueStyle}`}>{value}</p>
     </div>

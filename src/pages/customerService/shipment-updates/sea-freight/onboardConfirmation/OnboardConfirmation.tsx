@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  AttendenceIcon,
   DocumentIcon,
   EditIcon,
-  EmailIcon,
   ExcelIcon,
   SearchIcon,
   SendIcon,
@@ -13,7 +11,6 @@ import GroupField from "../../../../../components/groupField/GroupField";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";
 import CustomTable from "../../../../../components/table/CustomTable";
-import GreyButton from "../../../../../components/buttons/GreyButton";
 import { Link } from "react-router-dom";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import ErrorChip from "../../../../../components/chips/ErrorChip";
@@ -61,7 +58,6 @@ const OnboardConfirmation: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
-  const [isAddAttendance, setAddAttendance] = useState<boolean>();
 
   // Handle the change in checked rows
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -226,9 +222,9 @@ const OnboardConfirmation: React.FC = () => {
           </p>
           <GroupField
             label={""}
-            type={""}
+            type={"text"}
             placeholder={"Search"}
-            name={""}
+            name={"search"}
             value={""}
             onChange={() => {}}
             parentStyle="max-w-[320px] w-full min-w-[180px]"

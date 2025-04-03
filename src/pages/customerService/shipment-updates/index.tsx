@@ -29,6 +29,10 @@ const ShippingUpdates: React.FC = () => {
                 "/shipment-updates/sea-freight/onboard-confirmation/edit"
               )
             ? ["...", "OnBoard Confirmation", "Edit"]
+            : location.pathname.startsWith(
+                "/shipment-updates/sea-freight/transit-view"
+              )
+            ? ["Shipment Updates", "Transit Info"]
             : "Shipment Updates",
         ].flat()}
         heading={
@@ -50,6 +54,10 @@ const ShippingUpdates: React.FC = () => {
                 "/shipment-updates/sea-freight/onboard-confirmation/edit"
               )
             ? "OnBoard Confirmation Edit"
+            : location.pathname.startsWith(
+                "/shipment-updates/sea-freight/transit-view"
+              )
+            ? "Transit Info"
             : "Shipment Updates"
         }
       />
@@ -58,6 +66,9 @@ const ShippingUpdates: React.FC = () => {
       ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/onboard-confirmation/edit"
+        ) &&
+        !location.pathname.startsWith(
+          "/shipment-updates/sea-freight/transit-view"
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/updates/update-details"
