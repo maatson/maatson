@@ -261,6 +261,7 @@ const UpdateDetails: React.FC = () => {
     },
   ];
 
+  // bulk
   const createBulkData = (items: any) => {
     const { id } = items;
     const updatedData = {
@@ -289,6 +290,7 @@ const UpdateDetails: React.FC = () => {
     },
   ];
 
+  // fcltransit
   const createFCLTransitData = (items: any) => {
     const { id } = items;
     const updatedData = {
@@ -322,6 +324,8 @@ const UpdateDetails: React.FC = () => {
       ata: "12/06/2020",
     },
   ];
+
+  // lcltransit
   const createLCLTransitData = (items: any) => {
     const { id } = items;
     const updatedData = {

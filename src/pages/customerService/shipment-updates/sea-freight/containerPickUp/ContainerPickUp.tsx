@@ -8,6 +8,7 @@ import CustomTable from "../../../../../components/table/CustomTable";
 import GreyButton from "../../../../../components/buttons/GreyButton";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import WarningChip from "../../../../../components/chips/WarningChip";
+import { Link } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -68,7 +69,9 @@ const ContainerPickUp: React.FC = () => {
       </>
     );
     const actions = (
-      <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
+      <Link to={"/shipment-updates/sea-freight/container-pickup/details"}>
+        <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
+      </Link>
     );
 
     const updatedData = {
