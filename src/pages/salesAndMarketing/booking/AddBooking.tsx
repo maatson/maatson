@@ -601,7 +601,7 @@ const AddBooking: React.FC = () => {
                       { label: "Hazardous", value: "hazardous" },
                       { label: "LCL", value: "lcl" },
                       { label: "FCL", value: "fcl" },
-                      { label: "Over dimentional", value: "over dimentional" },
+                      { label: "Over dimensional", value: "over dimensional" },
                     ]
                   : data.modeOfTransportation === "air freight"
                   ? [
@@ -897,6 +897,10 @@ const AddBooking: React.FC = () => {
                     errorMessage={""}
                     leftIcon={<FreightIcon color="#2c398f" />}
                     parentStyle="basis-1/3 max-w-[80%]"
+                    options={[
+                      { label: "box", value: "box" },
+                      { label: "cryons", value: "cryons" },
+                    ]}
                   />
 
                   <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
@@ -1082,7 +1086,7 @@ const AddBooking: React.FC = () => {
                 </div>
               ))}
             {/* Over dimentional */}
-            {data.cargoDetails.cargoType === "over dimentional" &&
+            {data.cargoDetails.cargoType === "over dimensional" &&
               data.cargoDetails.cargoDimensions.map((dimension, index) => (
                 <div className="flex items-end flex-wrap gap-6 " key={index}>
                   <GroupField
