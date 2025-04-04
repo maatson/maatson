@@ -22,11 +22,7 @@ import DefaultDp from "/images/defaultProfilePic.png";
 import BlackButton from "../../../components/buttons/BlackButton";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import CustomTable from "../../../components/table/CustomTable";
-import {
-  NavLink,
-  Outlet,
-  useParams,
-} from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import FollowUps from "../../../components/followups/FollowUps";
 import "../booking/style.css";
 
@@ -48,7 +44,7 @@ const columns: any[] = [
   { id: "voyageNumber", label: "Voyage Number", minWidth: 140 },
   { id: "arrivalDate", label: "Arrival Number", minWidth: 140 },
   { id: "departureDate", label: "Departure Date", minWidth: 120 },
-  { id: "localChargesTarrif", label: "Local Charges Tarrif", minWidth: 150, },
+  { id: "localChargesTarrif", label: "Local Charges Tarrif", minWidth: 150 },
   { id: "price", label: "Price", minWidth: 120, align: "center" },
   { id: "priceValidity", label: "Price Validity", minWidth: 120 },
 ];
@@ -74,7 +70,9 @@ const EnquiryDetails: React.FC = () => {
     const { id, price, localChargesTarrif } = items;
 
     const prices = <div className="font-semibold text-center">{price}</div>;
-    const localChargesTarrifs = <div className="font-semibold text-center">{localChargesTarrif}</div>;
+    const localChargesTarrifs = (
+      <div className="font-semibold text-center">{localChargesTarrif}</div>
+    );
 
     const updatedData = {
       id: id,
@@ -83,7 +81,7 @@ const EnquiryDetails: React.FC = () => {
       voyageNumber: items?.voyageNumber,
       arrivalDate: items?.arrivalDate,
       departureDate: items?.departureDate,
-      localChargesTarrif : localChargesTarrifs,
+      localChargesTarrif: localChargesTarrifs,
       price: prices,
       priceValidity: items?.priceValidity,
     };
@@ -625,11 +623,14 @@ const EnquiryDetails: React.FC = () => {
                       valueStyle={"font-semibold"}
                     />
                   </div>
-                  <ProfileBoxLayout
-                    title={"Indicated Rate"}
-                    value={"2000 USD"}
-                    valueStyle={"font-semibold h6 text-end"}
-                  />
+                  {/* make it dynamic vicknote */}
+                  {
+                    <ProfileBoxLayout
+                      title={"Indicated Rate"}
+                      value={"2000 USD"}
+                      valueStyle={"font-semibold h6 text-end"}
+                    />
+                  }
                 </div>
                 <div className="border-t border-t-grey-ab-100"></div>
                 <div className="flex flex-col gap-2">

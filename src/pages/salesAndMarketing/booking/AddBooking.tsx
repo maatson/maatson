@@ -157,6 +157,8 @@ const AddBooking: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
+          indicatedRate: "",
+          currency: "USD",
         },
       ];
     } else if (value === "lcl") {
@@ -178,6 +180,8 @@ const AddBooking: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
+          indicatedRate: "",
+          currency: "USD",
         },
       ];
     } else if (value === "over dimensional") {
@@ -191,6 +195,8 @@ const AddBooking: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
+          indicatedRate: "",
+          currency: "USD",
         },
       ];
     } else if (value === "standard cargo") {
@@ -271,6 +277,8 @@ const AddBooking: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
+            indicatedRate: "",
+            currency: "USD",
           }
         : data.cargoDetails.cargoType === "lcl"
         ? {
@@ -288,6 +296,8 @@ const AddBooking: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
+            indicatedRate: "",
+            currency: "USD",
           }
         : data.cargoDetails.cargoType === "over dimensional"
         ? {
@@ -299,6 +309,8 @@ const AddBooking: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
+            indicatedRate: "",
+            currency: "USD",
           }
         : data.cargoDetails.cargoType === "standard cargo"
         ? {
@@ -844,6 +856,38 @@ const AddBooking: React.FC = () => {
                     errorMessage={""}
                     parentStyle="basis-1/3"
                   />
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={dimension.currency || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={dimension.indicatedRate}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
                   {index != data.cargoDetails.cargoDimensions.length - 1 ? (
                     <button onClick={() => removeContainer(index)}>
                       {" "}
@@ -1058,6 +1102,38 @@ const AddBooking: React.FC = () => {
                     errorMessage={""}
                     parentStyle="basis-1/5"
                   />
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={dimension.currency || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={dimension.indicatedRate}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
                   {index != data.cargoDetails.cargoDimensions.length - 1 ? (
                     <button onClick={() => removeContainer(index)}>
                       {" "}
@@ -1195,6 +1271,38 @@ const AddBooking: React.FC = () => {
                     errorMessage={""}
                     parentStyle="basis-1/5"
                   />
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={dimension.currency || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={dimension.indicatedRate}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
                   {index != data.cargoDetails.cargoDimensions.length - 1 ? (
                     <button onClick={() => removeContainer(index)}>
                       {" "}
@@ -1506,38 +1614,42 @@ const AddBooking: React.FC = () => {
                 errorMessage={""}
                 parentStyle="basis-1/4"
               />
-              <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
-                <p>Indicated Rate</p>
-                <div className="flex">
-                  <GroupField
-                    label={""}
-                    type={"select"}
-                    placeholder={"select"}
-                    name={"currency"}
-                    value={data.goodsDateInformation.currency || ""}
-                    onChange={handleGoodsReadyDate}
-                    error={false}
-                    errorMessage={""}
-                    options={[
-                      { value: "USD", label: "USD" },
-                      { value: "INR", label: "INR" },
-                    ]}
-                    parentStyle="w-1/3"
-                  />
-                  <GroupField
-                    label={""}
-                    type={"number"}
-                    placeholder={"Enter rate"}
-                    name={"indicatedRate"}
-                    value={data.goodsDateInformation.indicatedRate}
-                    onChange={handleGoodsReadyDate}
-                    error={false}
-                    errorMessage={""}
-                    parentStyle="w-1/2"
-                    inputStyle="placeholder:text-xs"
-                  />{" "}
-                </div>
-              </div>
+              {data.cargoDetails.cargoType !== "fcl" &&
+                data.cargoDetails.cargoType !== "hazardous" &&
+                data.cargoDetails.cargoType !== "over dimensional" && (
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={data.goodsDateInformation.currency || ""}
+                        onChange={handleGoodsReadyDate}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={data.goodsDateInformation.indicatedRate}
+                        onChange={handleGoodsReadyDate}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
+                )}
               <GroupField
                 label={"Description"}
                 type={"textarea"}
