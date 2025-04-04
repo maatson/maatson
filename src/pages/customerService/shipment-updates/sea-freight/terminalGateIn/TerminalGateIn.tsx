@@ -8,6 +8,7 @@ import CustomTable from "../../../../../components/table/CustomTable";
 import GreyButton from "../../../../../components/buttons/GreyButton";
 import WarningChip from "../../../../../components/chips/WarningChip";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
+import { Link } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -81,7 +82,11 @@ const TerminalGateIn: React.FC = () => {
       </>
     );
     const actions = (
-      <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
+      <Link
+        to={`/shipment-updates/sea-freight/terminal-gateIn/details/${id + 1}`}
+      >
+        <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
+      </Link>
     );
 
     const updatedData = {
@@ -149,7 +154,7 @@ const TerminalGateIn: React.FC = () => {
       <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center">
         <div className="w-[60%] flex gap-4 items-center">
           <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-            Shipment Updates List
+            Terminal Gate In List
           </p>
           <GroupField
             label={""}

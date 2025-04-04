@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   AddIcon,
   CrossIcon,
+  DeleteIcon,
   EditIcon,
   ExcelIcon,
   SendIcon,
@@ -81,6 +82,10 @@ const ContainerPickupDetails: React.FC = () => {
   const handleEdit = (id: number) => {
     setEditingRows((prev) => ({ ...prev, [id]: true }));
   };
+  
+  const handleDelete = (id: number) => {
+    setLCLData((prev) => prev.filter((_, index) => index !== id));
+  }
 
   const handleCancel = (id: number) => {
     setEditingRows((prev) => ({ ...prev, [id]: false }));
@@ -211,12 +216,32 @@ const ContainerPickupDetails: React.FC = () => {
             </div>
           </>
         ) : (
-          <div
-            className="p-1 rounded-xs bg-blue cursor-pointer"
-            onClick={() => handleEdit(index)}
-          >
-            <EditIcon size={16} color="#FDFDFD" />
-          </div>
+          <>
+            {index === 0 ? (
+              <div
+                className="p-1 rounded-xs bg-blue cursor-pointer"
+                onClick={() => handleEdit(index)}
+              >
+                <EditIcon size={16} color="#FDFDFD" />
+              </div>
+            ) : (
+              <>
+                {" "}
+                <div
+                  className="p-1 rounded-xs bg-blue cursor-pointer"
+                  onClick={() => handleEdit(index)}
+                >
+                  <EditIcon size={16} color="#FDFDFD" />
+                </div>
+                <div
+                  className="p-1 rounded-xs bg-error cursor-pointer"
+                  onClick={() => handleDelete(index)}
+                >
+                  <DeleteIcon size={16} color="#FDFDFD" />
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
     );

@@ -1,11 +1,314 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import WarningChip from "../../../../../components/chips/WarningChip";
-import { ExcelIcon, InfoIcon, SendIcon } from "../../../../../components/icons/Icons";
+import {
+  CrossIcon,
+  EditIcon,
+  ExcelIcon,
+  InfoIcon,
+  SendIcon,
+  TickIcon,
+} from "../../../../../components/icons/Icons";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
+import CustomTable from "../../../../../components/table/CustomTable";
+
+interface FCLRowData {
+  id: string | number;
+  No: string | number;
+  containerNumber: string;
+  pickupDate: React.ReactNode;
+  terminalGateIn: React.ReactNode;
+  action: React.ReactNode;
+}
+interface LCLRowData {
+  id: string | number;
+  No: string | number;
+  containerNumber: string;
+  quantity: string;
+  pickupDate: React.ReactNode;
+  terminalGateIn: React.ReactNode;
+  action: React.ReactNode;
+}
+interface BulkRowData {
+  id: string | number;
+  No: string | number;
+  grossWeight: string;
+  pickupDate: React.ReactNode;
+  terminalGateIn: React.ReactNode;
+  action: React.ReactNode;
+}
+
+const FCLColumns: any[] = [
+  { id: "No", label: "NO", minWidth: 30, align: "center" },
+  {
+    id: "containerNumber",
+    label: "Container Number",
+    minWidth: 140,
+    align: "center",
+  },
+  { id: "pickupDate", label: "Pickup Date", align: "center" },
+  { id: "terminalGateIn", label: "Terminal Gate In", align: "center" },
+  { id: "action", label: "Action", align: "center" },
+];
+
+const LCLColumns: any[] = [
+  { id: "No", label: "NO", minWidth: 30, align: "center" },
+  {
+    id: "containerNumber",
+    label: "Container Number",
+    minWidth: 140,
+    align: "center",
+  },
+  { id: "quantity", label: "Quantity", align: "center" },
+  { id: "pickupDate", label: "Pickup Date", align: "center" },
+  { id: "terminalGateIn", label: "Terminal Gate In", align: "center" },
+  { id: "action", label: "Action", align: "center" },
+];
+
+const BulkColumns: any[] = [
+  { id: "No", label: "NO", minWidth: 30, align: "center" },
+  { id: "grossWeight", label: "Gross Weight", align: "center" },
+  { id: "pickupDate", label: "Pickup Date", align: "center" },
+  { id: "terminalGateIn", label: "Terminal Gate In", align: "center" },
+  { id: "action", label: "Action", align: "center" },
+];
 
 const TerminalGateInDetails: React.FC = () => {
+  const [fclRows, setFCLRows] = useState<FCLRowData[]>([]);
+  const [lclRows, setLCLRows] = useState<LCLRowData[]>([]);
+  const [bulkRows, setBulkRows] = useState<BulkRowData[]>([]);
+
+  const [editingRows, setEditingRows] = useState<{ [key: number]: boolean }>(
+    {}
+  );
+
+  const handleEdit = (id: number) => {
+    setEditingRows((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const handleCancel = (id: number) => {
+    setEditingRows((prev) => ({ ...prev, [id]: false }));
+  };
+
+  const handleSave = (id: number) => {
+    setEditingRows((prev) => ({ ...prev, [id]: false }));
+    console.log(`Row ${id} saved.`);
+  };
+
+  const createFCLData = (items: any, index: number) => {
+    const { id } = items;
+    const isEditing = editingRows[index] || false;
+    const terminalGateIns = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="date" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+
+    const actions = (
+      <div className="flex gap-3 justify-center" key={index}>
+        {isEditing ? (
+          <>
+            <div
+              className="p-1 rounded-xs bg-error cursor-pointer"
+              onClick={() => handleCancel(index)}
+            >
+              <CrossIcon size={16} color="#FDFDFD" />
+            </div>
+            <div
+              className="p-1 rounded-xs bg-success-600 cursor-pointer"
+              onClick={() => handleSave(index)}
+            >
+              <TickIcon size={16} color="#FDFDFD" />
+            </div>
+          </>
+        ) : (
+          <div
+            className="p-1 rounded-xs bg-blue cursor-pointer"
+            onClick={() => handleEdit(index)}
+          >
+            <EditIcon size={16} color="#FDFDFD" />
+          </div>
+        )}
+      </div>
+    );
+    const updatedData = {
+      id: id,
+      No: (id + 1).toString().padStart(2, "0"),
+      containerNumber: items?.containerNumber,
+      pickupDate: items?.pickupDate,
+      terminalGateIn: terminalGateIns,
+      action: actions,
+    };
+    return updatedData;
+  };
+
+  const FCLData = [
+    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
+  ];
+
+  const createLCLData = (items: any, index: number) => {
+    const { id } = items;
+    const isEditing = editingRows[index] || false;
+    const terminalGateIns = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="date" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+
+    const actions = (
+      <div className="flex gap-3 justify-center" key={index}>
+        {isEditing ? (
+          <>
+            <div
+              className="p-1 rounded-xs bg-error cursor-pointer"
+              onClick={() => handleCancel(index)}
+            >
+              <CrossIcon size={16} color="#FDFDFD" />
+            </div>
+            <div
+              className="p-1 rounded-xs bg-success-600 cursor-pointer"
+              onClick={() => handleSave(index)}
+            >
+              <TickIcon size={16} color="#FDFDFD" />
+            </div>
+          </>
+        ) : (
+          <div
+            className="p-1 rounded-xs bg-blue cursor-pointer"
+            onClick={() => handleEdit(index)}
+          >
+            <EditIcon size={16} color="#FDFDFD" />
+          </div>
+        )}
+      </div>
+    );
+    const updatedData = {
+      id: id,
+      No: (id + 1).toString().padStart(2, "0"),
+      containerNumber: items?.containerNumber,
+      quantity: items?.quantity,
+      pickupDate: items?.pickupDate,
+      terminalGateIn: terminalGateIns,
+      action: actions,
+    };
+    return updatedData;
+  };
+
+  const LCLData = [
+    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
+    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
+  ];
+
+  const createBulkData = (items: any, index: number) => {
+    const { id } = items;
+    const isEditing = editingRows[index] || false;
+    const terminalGateIns = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="date" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+
+    const actions = (
+      <div className="flex gap-3 justify-center" key={index}>
+        {isEditing ? (
+          <>
+            <div
+              className="p-1 rounded-xs bg-error cursor-pointer"
+              onClick={() => handleCancel(index)}
+            >
+              <CrossIcon size={16} color="#FDFDFD" />
+            </div>
+            <div
+              className="p-1 rounded-xs bg-success-600 cursor-pointer"
+              onClick={() => handleSave(index)}
+            >
+              <TickIcon size={16} color="#FDFDFD" />
+            </div>
+          </>
+        ) : (
+          <div
+            className="p-1 rounded-xs bg-blue cursor-pointer"
+            onClick={() => handleEdit(index)}
+          >
+            <EditIcon size={16} color="#FDFDFD" />
+          </div>
+        )}
+      </div>
+    );
+    const updatedData = {
+      id: id,
+      No: (id + 1).toString().padStart(2, "0"),
+      grossWeight: items?.grossWeight,
+      pickupDate: items?.pickupDate,
+      terminalGateIn: terminalGateIns,
+      action: actions,
+    };
+    return updatedData;
+  };
+
+  const bulkData = [
+    { grossWeight: "10000kgs", pickupDate: "12-02-2024" },
+  ];
+
+  const fetchFCLData = useCallback(() => {
+    const arr = FCLData.map((items, index) => {
+      return createFCLData({ ...items, id: index }, index);
+    });
+    setFCLRows(arr);
+  }, [editingRows]);
+
+  const fetchLCLData = useCallback(() => {
+    const arr = LCLData.map((items, index) => {
+      return createLCLData({ ...items, id: index }, index);
+    });
+    setLCLRows(arr);
+  }, [editingRows]);
+
+  const fetchBulkData = useCallback(() => {
+    const arr = bulkData.map((items, index) => {
+      return createBulkData({ ...items, id: index }, index);
+    });
+    setBulkRows(arr);
+  }, [editingRows]);
+
+  useEffect(() => {
+    fetchFCLData();
+  }, [fetchFCLData]);
+
+  useEffect(() => {
+    fetchLCLData();
+  }, [fetchLCLData]);
+
+  useEffect(() => {
+    fetchBulkData();
+  }, [fetchBulkData]);
+
   return (
     <div className="flex flex-col gap-6 bg-primary-50">
       <div className="flex justify-between p-3 rounded-xs bg-grey-aw-50 text-grey-ab-900 text-lg font-bold items-center">
@@ -60,11 +363,15 @@ const TerminalGateInDetails: React.FC = () => {
       {/* container type */}
       <div className="flex flex-col gap-3">
         <div className="bg-blue-50 rounded-sm flex gap-6 p-2 items-center w-fit">
-            <div className="flex gap-4 items-center">
-                <InfoIcon color="#0091FF"/>
-                <p className="text-blue-600">Do you want to split this booking ?</p>
-            </div>
-            <NeutralBlueButton label={"Split Booking Request"} size={"s"} variant={"primary"} />
+          <div className="flex gap-4 items-center">
+            <InfoIcon color="#0091FF" />
+            <p className="text-blue-600">Do you want to split this booking ?</p>
+          </div>
+          <NeutralBlueButton
+            label={"Split Booking Request"}
+            size={"s"}
+            variant={"primary"}
+          />
         </div>
         {/*  */}
         <div className="flex px-4 py-2 justify-between bg-grey-aw-50 rounded-sm text-grey-ab-900 items-center">
@@ -86,6 +393,9 @@ const TerminalGateInDetails: React.FC = () => {
         </div>
 
         {/* tables */}
+        <CustomTable columns={FCLColumns} rows={fclRows} isCheckbox={false} />
+        {/* <CustomTable columns={LCLColumns} rows={lclRows} isCheckbox={false} /> */}
+        {/* <CustomTable columns={BulkColumns} rows={bulkRows} isCheckbox={false} /> */}
       </div>
     </div>
   );

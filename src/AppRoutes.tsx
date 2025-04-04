@@ -486,11 +486,11 @@ const AppRoutes: React.FC = () => {
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
             <Route index element={<Updates />} />
-            <Route path ="updates/update-details" element={<UpdateDetails />} />
+            <Route path ="updates/update-details/:id" element={<UpdateDetails />} />
             <Route path="container-pickup" element={<ContainerPickUp />} />
-            <Route path="container-pickup/details" element={<ContainerPickUpDetails />} />
+            <Route path="container-pickup/details/:id" element={<ContainerPickUpDetails />} />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
-            <Route path="terminal-gateIn/details" element={<TerminalGateInDetails />} />
+            <Route path="terminal-gateIn/details/:id" element={<TerminalGateInDetails />} />
             <Route
               path="onboard-confirmation"
               element={<OnboardConfirmation />}

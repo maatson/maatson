@@ -68,7 +68,7 @@ const Updates: React.FC = () => {
       <SecondaryChip label={transhipmentPort} size={"m"} variant={"mix"} />
     );
     const actions = (
-      <Link to={"/shipment-updates/sea-freight/updates/update-details"}>
+      <Link to={`/shipment-updates/sea-freight/updates/update-details/${(id)+1}`}>
         <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
       </Link>
     );
