@@ -153,6 +153,7 @@ const AddEnquiry: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
+          // adding indicated rate for pricing
         },
       ];
     } else if (value === "over dimensional") {
