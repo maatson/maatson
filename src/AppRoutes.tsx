@@ -251,6 +251,12 @@ const TerminalGateIn = lazy(
       "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateIn"
     )
 );
+const TerminalGateInDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateInDetails"
+    )
+);
 // vick routes
 const OnboardConfirmation = lazy(
   () =>
@@ -484,6 +490,7 @@ const AppRoutes: React.FC = () => {
             <Route path="container-pickup" element={<ContainerPickUp />} />
             <Route path="container-pickup/details" element={<ContainerPickUpDetails />} />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
+            <Route path="terminal-gateIn/details" element={<TerminalGateInDetails />} />
             <Route
               path="onboard-confirmation"
               element={<OnboardConfirmation />}

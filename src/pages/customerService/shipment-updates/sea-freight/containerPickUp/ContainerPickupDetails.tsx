@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
+  AddIcon,
   CrossIcon,
   EditIcon,
   ExcelIcon,
@@ -53,12 +54,12 @@ const LCLColumns: any[] = [
   {
     id: "containerNumber",
     label: "Container Number",
-    minWidth: 140,
+    minWidth: 180,
     align: "center",
   },
-  { id: "quantity", label: "Quantity", align: "center" },
-  { id: "pickupDate", label: "Pickup Date", align: "center" },
-  { id: "action", label: "Action", align: "center" },
+  { id: "quantity", label: "Quantity", align: "center", minWidth: 180 },
+  { id: "pickupDate", label: "Pickup Date", align: "center", minWidth: 180 },
+  { id: "action", label: "Action", align: "center", minWidth: 180 },
 ];
 
 const BulkColumns: any[] = [
@@ -88,6 +89,11 @@ const ContainerPickupDetails: React.FC = () => {
   const handleSave = (id: number) => {
     setEditingRows((prev) => ({ ...prev, [id]: false }));
     console.log(`Row ${id} saved.`);
+  };
+
+  const handleAddMore = () => {
+    setLCLData([...LCLData, { containerNumber: "" }]);
+    console.log(LCLData);
   };
 
   // fcl
@@ -151,15 +157,73 @@ const ContainerPickupDetails: React.FC = () => {
     { containerNumber: "mmi0301123" },
   ];
 
-  const createLCLData = (items: any) => {
+  const createLCLData = (items: any, index: number) => {
     const { id } = items;
-    const quantities = <div>90</div>;
-    const pickupDates = <div>hi</div>;
-    const actions = <div>action</div>;
+    const isEditing = editingRows[index] || false;
+    const containerNumbers = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const quantities = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const pickupDates = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="date" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const actions = (
+      <div className="flex gap-3 justify-center" key={index}>
+        {isEditing ? (
+          <>
+            <div
+              className="p-1 rounded-xs bg-error cursor-pointer"
+              onClick={() => handleCancel(index)}
+            >
+              <CrossIcon size={16} color="#FDFDFD" />
+            </div>
+            <div
+              className="p-1 rounded-xs bg-success-600 cursor-pointer"
+              onClick={() => handleSave(index)}
+            >
+              <TickIcon size={16} color="#FDFDFD" />
+            </div>
+          </>
+        ) : (
+          <div
+            className="p-1 rounded-xs bg-blue cursor-pointer"
+            onClick={() => handleEdit(index)}
+          >
+            <EditIcon size={16} color="#FDFDFD" />
+          </div>
+        )}
+      </div>
+    );
     const updatedData = {
       id: id,
       No: (id + 1).toString().padStart(2, "0"),
-      containerNumber: items?.containerNumber,
+      containerNumber: containerNumbers,
       quantity: quantities,
       pickupDate: pickupDates,
       action: actions,
@@ -167,16 +231,50 @@ const ContainerPickupDetails: React.FC = () => {
     return updatedData;
   };
 
-  const LCLData = [
-    { containerNumber: "mmi0301123" },
-    { containerNumber: "mmi0301123" },
-    { containerNumber: "mmi0301123" },
-  ];
+  const [LCLData, setLCLData] = useState([{ containerNumber: "" }]);
 
-  const createBulkData = (items: any) => {
+  const createBulkData = (items: any, index: number) => {
     const { id } = items;
-    const pickupDates = <div>hi</div>;
-    const actions = <div>action</div>;
+    const isEditing = editingRows[index] || false;
+    const pickupDates = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="date" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+
+    const actions = (
+      <div className="flex gap-3 justify-center" key={index}>
+        {isEditing ? (
+          <>
+            <div
+              className="p-1 rounded-xs bg-error cursor-pointer"
+              onClick={() => handleCancel(index)}
+            >
+              <CrossIcon size={16} color="#FDFDFD" />
+            </div>
+            <div
+              className="p-1 rounded-xs bg-success-600 cursor-pointer"
+              onClick={() => handleSave(index)}
+            >
+              <TickIcon size={16} color="#FDFDFD" />
+            </div>
+          </>
+        ) : (
+          <div
+            className="p-1 rounded-xs bg-blue cursor-pointer"
+            onClick={() => handleEdit(index)}
+          >
+            <EditIcon size={16} color="#FDFDFD" />
+          </div>
+        )}
+      </div>
+    );
     const updatedData = {
       id: id,
       No: (id + 1).toString().padStart(2, "0"),
@@ -187,11 +285,7 @@ const ContainerPickupDetails: React.FC = () => {
     return updatedData;
   };
 
-  const bulkData = [
-    { grossWeight: "10000 kgs" },
-    { grossWeight: "10000 kgs" },
-    { grossWeight: "10000 kgs" },
-  ];
+  const bulkData = [{ grossWeight: "10000 kgs" }];
 
   const fetchFCLData = useCallback(() => {
     const arr = FCLData.map((items, index) => {
@@ -202,17 +296,17 @@ const ContainerPickupDetails: React.FC = () => {
 
   const fetchLCLData = useCallback(() => {
     const arr = LCLData.map((items, index) => {
-      return createLCLData({ ...items, id: index });
+      return createLCLData({ ...items, id: index }, index);
     });
     setLCLRows(arr);
-  }, []);
+  }, [editingRows, LCLData]);
 
   const fetchBulkData = useCallback(() => {
     const arr = bulkData.map((items, index) => {
-      return createBulkData({ ...items, id: index });
+      return createBulkData({ ...items, id: index }, index);
     });
     setBulkRows(arr);
-  }, []);
+  }, [editingRows]);
 
   useEffect(() => {
     fetchFCLData();
@@ -297,32 +391,25 @@ const ContainerPickupDetails: React.FC = () => {
           </div>
         </div>
 
+        {/* for fcl table */}
         <CustomTable columns={FCLColumns} rows={fclRows} isCheckbox={false} />
-        {/* <CustomTable columns={LCLColumns} rows={lclRows} isCheckbox={false} /> */}
-        {/* <CustomTable columns={BulkColumns} rows={bulkRows} isCheckbox={false} /> */}
-      </div>
 
-      <div className="flex flex-col gap-3">
-        <div className="flex px-4 py-3 justify-between bg-grey-aw-50 rounded-sm text-grey-ab-900 items-center">
-          <div className="flex gap-2 text-sm">
-            <p>Container Type</p>
-            <p className="font-bold">40’ft Dry Container</p>
-          </div>
-          <div className="flex gap-2 text-sm">
-            <p>Quantity</p>
-            <p className="font-bold">05</p>
-          </div>
-
-          <div className="rounded-xl bg-secondary-50 flex gap-1 py-1 pl-2 pr-1 items-center">
-            <p className="text-2xs font-bold text-secondary">Pending</p>
-            <div className="rounded-full bg-secondary-300 p-1 text-2xs font-bold text-grey-aw-50 w-[20px] h-[20px] flex items-center justify-center">
-              <p>05</p>
+        {/* for lcl table */}
+        <div>
+          <CustomTable columns={LCLColumns} rows={lclRows} isCheckbox={false} />
+          <div className="w-full bg-grey-aw-50 px-4 py-2 rounded-b-xs">
+            <div onClick={handleAddMore}>
+              <BlackButton
+                label={"Add More"}
+                size={"s"}
+                variant={"primary"}
+                leftIcon={<AddIcon size={16} color="#E9E9E9" />}
+              />
             </div>
           </div>
         </div>
 
-        <CustomTable columns={FCLColumns} rows={fclRows} isCheckbox={false} />
-        {/* <CustomTable columns={LCLColumns} rows={lclRows} isCheckbox={false} /> */}
+        {/* for bulk table */}
         {/* <CustomTable columns={BulkColumns} rows={bulkRows} isCheckbox={false} /> */}
       </div>
     </div>

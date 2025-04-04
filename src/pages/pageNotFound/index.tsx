@@ -286,6 +286,10 @@ const PageNotFound: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <div className="w-full h-60 bg-white">
+        <a href="sms:+917358567362">Header Hi</a>
+      </div>
     </div>
   );
 };
