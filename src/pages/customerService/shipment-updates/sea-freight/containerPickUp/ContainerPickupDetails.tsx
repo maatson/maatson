@@ -432,7 +432,7 @@ const ContainerPickupDetails: React.FC = () => {
               />
             </div>
           </div>
-        </div>
+        </div> 
 
         {/* for bulk table */}
         {/* <CustomTable columns={BulkColumns} rows={bulkRows} isCheckbox={false} /> */}
