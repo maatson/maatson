@@ -132,6 +132,8 @@ const AddEnquiry: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
+          indicatedRate: "",
+          currency: "USD",
         },
       ];
     } else if (value === "lcl") {
@@ -154,6 +156,8 @@ const AddEnquiry: React.FC = () => {
           grossWeightUnit: "kgs",
           containerCount: "",
           // adding indicated rate for pricing
+          indicatedRate: "",
+          currency: "USD",
         },
       ];
     } else if (value === "over dimensional") {
@@ -167,6 +171,8 @@ const AddEnquiry: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
+          indicatedRate: "",
+          currency: "USD",
         },
       ];
     } else if (value === "standard cargo") {
@@ -247,6 +253,8 @@ const AddEnquiry: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
+            indicatedRate: "",
+            currency: "USD",
           }
         : data.cargoDetails.cargoType === "lcl"
         ? {
@@ -264,6 +272,8 @@ const AddEnquiry: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
+            indicatedRate: "",
+            currency: "USD",
           }
         : data.cargoDetails.cargoType === "over dimensional"
         ? {
@@ -275,6 +285,8 @@ const AddEnquiry: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
+            indicatedRate: "",
+            currency: "USD",
           }
         : data.cargoDetails.cargoType === "standard cargo"
         ? {
@@ -563,7 +575,7 @@ const AddEnquiry: React.FC = () => {
                       { label: "Hazardous", value: "hazardous" },
                       { label: "LCL", value: "lcl" },
                       { label: "FCL", value: "fcl" },
-                      { label: "Over dimentional", value: "over dimentional" },
+                      { label: "Over dimensional", value: "over dimensional" },
                     ]
                   : data.modeOfTransportation === "air freight"
                   ? [
@@ -735,123 +747,149 @@ const AddEnquiry: React.FC = () => {
             {data.cargoDetails.cargoType === "hazardous" &&
               Array.isArray(data.cargoDetails.cargoDimensions) &&
               data.cargoDetails.cargoDimensions.map((dimension, index) => (
-                <>
-                  <div className="flex items-end flex-wrap gap-6" key={index}>
-                    <GroupField
-                      label={"Container Size*"}
-                      type={"select"}
-                      placeholder={"Choose Container Size"}
-                      name={"containerSize"}
-                      value={dimension?.containerSize || ""}
-                      onChange={(e) => handleCargoDimensionsChange(e, index)}
-                      error={false}
-                      errorMessage={""}
-                      leftIcon={<ContainerIcon color="#2c398f" />}
-                      parentStyle="basis-1/3 max-w-[80%]"
-                      options={[{ label: "reefers", value: "reefers" }]}
-                    />
-                    <GroupField
-                      label={"UN Number*"}
-                      type={"text"}
-                      placeholder={"Enter UN Number"}
-                      name={"unNumber"}
-                      value={dimension?.unNumber || ""}
-                      onChange={(e) => handleCargoDimensionsChange(e, index)}
-                      error={false}
-                      errorMessage={""}
-                      leftIcon={<ContainerIcon color="#2c398f" />}
-                      parentStyle="basis-1/3"
-                    />
-                    <GroupField
-                      label={"IMCO Class*"}
-                      type={"text"}
-                      placeholder={"Enter IMCO CLASS"}
-                      name={"imcoClass"}
-                      value={dimension.imcoClass || ""}
-                      onChange={(e) => handleCargoDimensionsChange(e, index)}
-                      error={false}
-                      errorMessage={""}
-                      leftIcon={<ContainerIcon color="#2c398f" />}
-                      parentStyle="basis-1/3"
-                    />
+                <div className="flex items-end flex-wrap gap-6" key={index}>
+                  <GroupField
+                    label={"Container Size*"}
+                    type={"select"}
+                    placeholder={"Choose Container Size"}
+                    name={"containerSize"}
+                    value={dimension?.containerSize || ""}
+                    onChange={(e) => handleCargoDimensionsChange(e, index)}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<ContainerIcon color="#2c398f" />}
+                    parentStyle="basis-1/3 max-w-[80%]"
+                    options={[{ label: "reefers", value: "reefers" }]}
+                  />
+                  <GroupField
+                    label={"UN Number*"}
+                    type={"text"}
+                    placeholder={"Enter UN Number"}
+                    name={"unNumber"}
+                    value={dimension?.unNumber || ""}
+                    onChange={(e) => handleCargoDimensionsChange(e, index)}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<ContainerIcon color="#2c398f" />}
+                    parentStyle="basis-1/3"
+                  />
+                  <GroupField
+                    label={"IMCO Class*"}
+                    type={"text"}
+                    placeholder={"Enter IMCO CLASS"}
+                    name={"imcoClass"}
+                    value={dimension.imcoClass || ""}
+                    onChange={(e) => handleCargoDimensionsChange(e, index)}
+                    error={false}
+                    errorMessage={""}
+                    leftIcon={<ContainerIcon color="#2c398f" />}
+                    parentStyle="basis-1/3"
+                  />
 
-                    <div className="basis-2/5 max-w-[40%] flex flex-col gap-2">
-                      <p>Gross Weight *</p>
-                      <div className="flex">
-                        <GroupField
-                          label={""}
-                          type={"number"}
-                          placeholder={"Enter Volume"}
-                          name={"grossWeight"}
-                          value={dimension.grossWeight || ""}
-                          onChange={(e) =>
-                            handleCargoDimensionsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                          parentStyle="w-1/2"
-                          leftIcon={<WeightIcon color="#2c398f" />}
-                          inputStyle="placeholder:text-xs"
-                        />{" "}
-                        <GroupField
-                          label={""}
-                          type={"select"}
-                          placeholder={"select"}
-                          name={"grossWeightUnit"}
-                          value={dimension.grossWeightUnit || "kgs"}
-                          onChange={(e) =>
-                            handleCargoDimensionsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                          options={[
-                            { value: "kgs", label: "Kgs" },
-                            { value: "lbs", label: "Lbs" },
-                            { value: "mt", label: "Mt" },
-                            { value: "grams", label: "Grams" },
-                          ]}
-                          parentStyle="w-1/3"
-                        />
-                      </div>
+                  <div className="basis-2/5 max-w-[40%] flex flex-col gap-2">
+                    <p>Gross Weight *</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter Volume"}
+                        name={"grossWeight"}
+                        value={dimension.grossWeight || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        leftIcon={<WeightIcon color="#2c398f" />}
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"grossWeightUnit"}
+                        value={dimension.grossWeightUnit || "kgs"}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "kgs", label: "Kgs" },
+                          { value: "lbs", label: "Lbs" },
+                          { value: "mt", label: "Mt" },
+                          { value: "grams", label: "Grams" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
                     </div>
-                    <GroupField
-                      label={"Container Count*"}
-                      type={"number"}
-                      placeholder={"eg:1"}
-                      name={"containerCount"}
-                      value={dimension.containerCount || ""}
-                      onChange={(e) => handleCargoDimensionsChange(e, index)}
-                      error={false}
-                      errorMessage={""}
-                      parentStyle="basis-1/3"
-                    />
-                    {index != data.cargoDetails.cargoDimensions.length - 1 ? (
-                      <button onClick={() => removeContainer(index)}>
-                        {" "}
-                        <DeleteIcon />
-                      </button>
-                    ) : (
-                      <div className="flex items-center gap-6">
-                        {" "}
-                        <div onClick={addContainer}>
-                          {" "}
-                          <BlackButton
-                            label={"Add More"}
-                            size={"m"}
-                            variant={""}
-                            leftIcon={<AddIcon color="#fdfdfd" size={16} />}
-                          />
-                        </div>{" "}
-                        {index !== 0 && (
-                          <button onClick={() => removeContainer(index)}>
-                            {" "}
-                            <DeleteIcon />
-                          </button>
-                        )}
-                      </div>
-                    )}
                   </div>
-                </>
+                  <GroupField
+                    label={"Container Count*"}
+                    type={"number"}
+                    placeholder={"eg:1"}
+                    name={"containerCount"}
+                    value={dimension.containerCount || ""}
+                    onChange={(e) => handleCargoDimensionsChange(e, index)}
+                    error={false}
+                    errorMessage={""}
+                    parentStyle="basis-1/3"
+                  />
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={dimension.currency || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={dimension.indicatedRate}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
+                  {index != data.cargoDetails.cargoDimensions.length - 1 ? (
+                    <button onClick={() => removeContainer(index)}>
+                      {" "}
+                      <DeleteIcon />
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-6">
+                      {" "}
+                      <div onClick={addContainer}>
+                        {" "}
+                        <BlackButton
+                          label={"Add More"}
+                          size={"m"}
+                          variant={""}
+                          leftIcon={<AddIcon color="#fdfdfd" size={16} />}
+                        />
+                      </div>{" "}
+                      {index !== 0 && (
+                        <button onClick={() => removeContainer(index)}>
+                          {" "}
+                          <DeleteIcon />
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
               ))}
             {/* Lcl */}
             {data.cargoDetails.cargoType === "lcl" &&
@@ -1037,6 +1075,38 @@ const AddEnquiry: React.FC = () => {
                     errorMessage={""}
                     parentStyle="basis-1/5"
                   />
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={dimension.currency || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={dimension.indicatedRate}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
                   {index != data.cargoDetails.cargoDimensions.length - 1 ? (
                     <button onClick={() => removeContainer(index)}>
                       {" "}
@@ -1064,8 +1134,8 @@ const AddEnquiry: React.FC = () => {
                   )}
                 </div>
               ))}
-            {/* Over dimentional */}
-            {data.cargoDetails.cargoType === "over dimentional" &&
+            {/* Over dimensional */}
+            {data.cargoDetails.cargoType === "over dimensional" &&
               data.cargoDetails.cargoDimensions.map((dimension, index) => (
                 <div className="flex items-end flex-wrap gap-6 " key={index}>
                   <GroupField
@@ -1174,6 +1244,38 @@ const AddEnquiry: React.FC = () => {
                     errorMessage={""}
                     parentStyle="basis-1/5"
                   />
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={dimension.currency || ""}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={dimension.indicatedRate}
+                        onChange={(e) => handleCargoDimensionsChange(e, index)}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
                   {index != data.cargoDetails.cargoDimensions.length - 1 ? (
                     <button onClick={() => removeContainer(index)}>
                       {" "}
@@ -1477,38 +1579,42 @@ const AddEnquiry: React.FC = () => {
                 errorMessage={""}
                 parentStyle="basis-1/4"
               />
-              <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
-                <p>Indicated Rate</p>
-                <div className="flex">
-                  <GroupField
-                    label={""}
-                    type={"select"}
-                    placeholder={"select"}
-                    name={"currency"}
-                    value={data.goodsDateInformation.currency || ""}
-                    onChange={handleGoodsReadyDate}
-                    error={false}
-                    errorMessage={""}
-                    options={[
-                      { value: "USD", label: "USD" },
-                      { value: "INR", label: "INR" },
-                    ]}
-                    parentStyle="w-1/3"
-                  />
-                  <GroupField
-                    label={""}
-                    type={"number"}
-                    placeholder={"Enter rate"}
-                    name={"indicatedRate"}
-                    value={data.goodsDateInformation.indicatedRate}
-                    onChange={handleGoodsReadyDate}
-                    error={false}
-                    errorMessage={""}
-                    parentStyle="w-1/2"
-                    inputStyle="placeholder:text-xs"
-                  />{" "}
-                </div>
-              </div>
+              {data.cargoDetails.cargoType !== "fcl" &&
+                data.cargoDetails.cargoType !== "hazardous" &&
+                data.cargoDetails.cargoType !== "over dimensional" && (
+                  <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
+                    <p>Indicated Rate</p>
+                    <div className="flex">
+                      <GroupField
+                        label={""}
+                        type={"select"}
+                        placeholder={"select"}
+                        name={"currency"}
+                        value={data.goodsDateInformation.currency || ""}
+                        onChange={handleGoodsReadyDate}
+                        error={false}
+                        errorMessage={""}
+                        options={[
+                          { value: "USD", label: "USD" },
+                          { value: "INR", label: "INR" },
+                        ]}
+                        parentStyle="w-1/3"
+                      />
+                      <GroupField
+                        label={""}
+                        type={"number"}
+                        placeholder={"Enter rate"}
+                        name={"indicatedRate"}
+                        value={data.goodsDateInformation.indicatedRate}
+                        onChange={handleGoodsReadyDate}
+                        error={false}
+                        errorMessage={""}
+                        parentStyle="w-1/2"
+                        inputStyle="placeholder:text-xs"
+                      />{" "}
+                    </div>
+                  </div>
+                )}
               <GroupField
                 label={"Description"}
                 type={"textarea"}

@@ -34,7 +34,6 @@ interface RowData {
   nextFollowUps: string;
   bookingStatus: React.ReactNode;
   bookingValidityDate: string;
-  agreedRate: string | React.ReactNode;
   action: React.ReactNode;
 }
 
@@ -76,12 +75,7 @@ const columns: any[] = [
     label: "Booking Validity Date",
     minWidth: 160,
   },
-  {
-    id: "agreedRate",
-    label: "Agreed Rate",
-    minWidth: 100,
-    align: "center",
-  },
+
   { id: "action", label: "Action", minWidth: 120, align: "center" },
 ];
 
@@ -123,7 +117,6 @@ const BookingList: React.FC = () => {
       branchLocation,
       transportationMode,
       bookingStatus,
-      agreedRate,
     } = items;
     const bookingHandlePersons = (
       <div className="min-w-[140px] flex gap-2 items-center py-1">
@@ -167,10 +160,6 @@ const BookingList: React.FC = () => {
         <SuccessChip label={bookingStatus} size="m" variant="fill" />
       );
 
-    const agreedRates = (
-      <div className="font-semibold text-center">{agreedRate}</div>
-    );
-
     const actions = (
       <div className="flex justify-center" onClick={() => handleViewClick(id)}>
         <NeutralBlueButton
@@ -195,7 +184,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: items?.nextFollowUps,
       bookingStatus: bookingStatuses,
       bookingValidityDate: items?.bookingValidityDate,
-      agreedRate: agreedRates,
       action: actions,
     };
     return updatedData;
@@ -216,7 +204,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: "11/10/25",
       bookingStatus: "Cancelled",
       bookingValidityDate: "11/10/25",
-      agreedRate: "2000 USD",
     },
     {
       bookingID: "3233856",
@@ -232,7 +219,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: "11/10/25",
       bookingStatus: "Processing",
       bookingValidityDate: "11/10/25",
-      agreedRate: "2000 USD",
     },
     {
       bookingID: "3233856",
@@ -248,7 +234,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: "11/10/25",
       bookingStatus: "Confirm",
       bookingValidityDate: "11/10/25",
-      agreedRate: "2000 USD",
     },
     {
       bookingID: "3233856",
@@ -264,7 +249,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: "11/10/25",
       bookingStatus: "Cancelled",
       bookingValidityDate: "11/10/25",
-      agreedRate: "2000 USD",
     },
     {
       bookingID: "3233856",
@@ -280,7 +264,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: "11/10/25",
       bookingStatus: "Processing",
       bookingValidityDate: "11/10/25",
-      agreedRate: "2000 USD",
     },
     {
       bookingID: "3233856",
@@ -296,7 +279,6 @@ const BookingList: React.FC = () => {
       nextFollowUps: "11/10/25",
       bookingStatus: "Confirm",
       bookingValidityDate: "11/10/25",
-      agreedRate: "2000 USD",
     },
   ];
 
@@ -333,13 +315,7 @@ const BookingList: React.FC = () => {
               placeholder={"Search"}
               name={""}
               value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={() => {}}
               error={false}
               errorMessage={""}
               rightIcon={<SearchIcon color="#6A6A6A" />}
@@ -351,13 +327,7 @@ const BookingList: React.FC = () => {
               placeholder={"Transportation Mode"}
               name={""}
               value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={() => {}}
               error={false}
               errorMessage={""}
               parentStyle="w-[30%]"
@@ -368,13 +338,7 @@ const BookingList: React.FC = () => {
               placeholder={"Booking Status"}
               name={""}
               value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={() => {}}
               error={false}
               errorMessage={""}
               parentStyle="w-[25%]"
