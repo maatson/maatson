@@ -12,6 +12,7 @@ import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
 import CustomTable from "../../../../../components/table/CustomTable";
+import { Link, useParams } from "react-router-dom";
 
 interface FCLRowData {
   id: string | number;
@@ -75,6 +76,7 @@ const BulkColumns: any[] = [
 ];
 
 const TerminalGateInDetails: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [fclRows, setFCLRows] = useState<FCLRowData[]>([]);
   const [lclRows, setLCLRows] = useState<LCLRowData[]>([]);
   const [bulkRows, setBulkRows] = useState<BulkRowData[]>([]);
@@ -367,11 +369,12 @@ const TerminalGateInDetails: React.FC = () => {
             <InfoIcon color="#0091FF" />
             <p className="text-blue-600">Do you want to split this booking ?</p>
           </div>
+          <Link to={`/shipment-updates/sea-freight/create-split-booking/${id}`}>
           <NeutralBlueButton
             label={"Split Booking Request"}
             size={"s"}
             variant={"primary"}
-          />
+          /></Link>
         </div>
         {/*  */}
         <div className="flex px-4 py-2 justify-between bg-grey-aw-50 rounded-sm text-grey-ab-900 items-center">

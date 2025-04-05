@@ -257,6 +257,12 @@ const TerminalGateInDetails = lazy(
       "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateInDetails"
     )
 );
+const CreateSplitBooking = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/CreateSplitBooking"
+    )
+);
 // vick routes
 const OnboardConfirmation = lazy(
   () =>
@@ -294,10 +300,16 @@ const DeliveryOrderCollected = lazy(
       "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollected"
     )
 );
-const EmptyReturnConfirmation = lazy(
+const EmptyGateInConfirmation = lazy(
   () =>
     import(
-      "./pages/customerService/shipment-updates/sea-freight/emptyReturnConfirmation/EmptyReturnConfirmation"
+      "./pages/customerService/shipment-updates/sea-freight/emptyGateInConfirmation/EmptyGateInConfirmation"
+    )
+);
+const ViewEmptyGateIn = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/emptyGateInConfirmation/ViewEmptyGateIn"
     )
 );
 
@@ -481,6 +493,7 @@ const AppRoutes: React.FC = () => {
             element={<FlightDetails />}
           />
         </Route>
+
         {/* shipment-updates */}
 
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
@@ -491,6 +504,7 @@ const AppRoutes: React.FC = () => {
             <Route path="container-pickup/details/:id" element={<ContainerPickUpDetails />} />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
             <Route path="terminal-gateIn/details/:id" element={<TerminalGateInDetails />} />
+            <Route path="create-split-booking/:id" element={<CreateSplitBooking />} />
             <Route
               path="onboard-confirmation"
               element={<OnboardConfirmation />}
@@ -510,9 +524,10 @@ const AppRoutes: React.FC = () => {
               element={<DeliveryOrderCollected />}
             />
             <Route
-              path="empty-return-confirmation"
-              element={<EmptyReturnConfirmation />}
+              path="empty-gateIn-confirmation"
+              element={<EmptyGateInConfirmation />}
             />
+            <Route path="empty-gateIn-confirmation/view/:id" element={<ViewEmptyGateIn />} />
           </Route>
 
           <Route path="air-freight" element={<ShipmentAirFreight />}>

@@ -69,7 +69,10 @@ const ContainerPickUp: React.FC = () => {
       </>
     );
     const actions = (
-      <Link to={`/shipment-updates/sea-freight/container-pickup/details/${(id)+1}`}>
+      <Link
+        to={`/shipment-updates/sea-freight/container-pickup/details/${id + 1}`}
+        className="flex justify-center"
+      >
         <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
       </Link>
     );

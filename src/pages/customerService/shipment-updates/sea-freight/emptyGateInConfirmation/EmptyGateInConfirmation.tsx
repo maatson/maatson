@@ -16,8 +16,8 @@ interface RowData {
   companyName: string;
   portOfLoading: string;
   portOfDischarge: string;
-  terminalGateInStatus: React.ReactNode;
-  terminalGateIn: string;
+  emptyGateInConfirmationStatus: React.ReactNode;
+  emptyGateInDate: string | React.ReactNode;
   action: React.ReactNode;
 }
 
@@ -27,16 +27,15 @@ const columns: any[] = [
   { id: "portOfLoading", label: "Port of loading", minWidth: 160 },
   { id: "portOfDischarge", label: "Port of Discharge", minWidth: 160 },
   {
-    id: "terminalGateInStatus",
-    label: "Terminal Gate In Status",
-    minWidth: 180,
-    align: "center",
+    id: "emptyGateInConfirmationStatus",
+    label: "Empty Gate In Confirmation Status",
+    minWidth: 160,
   },
-  { id: "terminalGateIn", label: "Terminal Gate In" },
-  { id: "action", label: "Action", minWidth: 120, align: "center" },
+  { id: "emptyGateInDate", label: "Empty Gate In Confirmation Date" },
+  { id: "action", label: "Action", minWidth: 140, align: "center" },
 ];
 
-const TerminalGateIn: React.FC = () => {
+const EmptyGateInConfirmation: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
@@ -62,28 +61,32 @@ const TerminalGateIn: React.FC = () => {
 
   // table
   const createData = (items: any) => {
-    const { id, terminalGateInStatus } = items;
+    const { id, emptyGateInConfirmationStatus, emptyGateInDate } = items;
 
-    const terminalGateInStatuses = (
-      <>
-        {terminalGateInStatus.toLowerCase() === "pending" ? (
+    const emptyGateInConfirmationStatuses = (
+      <div className="flex justify-center">
+        {emptyGateInConfirmationStatus.toLowerCase() === "pending" ? (
           <WarningChip
-            label={terminalGateInStatus}
+            label={emptyGateInConfirmationStatus}
             size={"m"}
             variant={"mix"}
           />
         ) : (
           <SuccessChip
-            label={terminalGateInStatus}
+            label={emptyGateInConfirmationStatus}
             size={"m"}
             variant={"mix"}
           />
         )}
-      </>
+      </div>
     );
+    const emptyGateInDates = (
+      <div className="text-center">{emptyGateInDate || "-"}</div>
+    );
+
     const actions = (
       <Link
-        to={`/shipment-updates/sea-freight/terminal-gateIn/details/${id + 1}`}
+        to={`/shipment-updates/sea-freight/empty-gateIn-confirmation/view/${id + 1}`}
         className="flex justify-center"
       >
         <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
@@ -96,8 +99,8 @@ const TerminalGateIn: React.FC = () => {
       companyName: items?.companyName,
       portOfLoading: items?.portOfLoading,
       portOfDischarge: items?.portOfDischarge,
-      terminalGateInStatus: terminalGateInStatuses,
-      terminalGateIn: items?.terminalGateIn,
+      emptyGateInConfirmationStatus: emptyGateInConfirmationStatuses,
+      emptyGateInDate: emptyGateInDates,
       action: actions,
     };
     return updatedData;
@@ -109,32 +112,32 @@ const TerminalGateIn: React.FC = () => {
       companyName: "Farrel Kurniawan",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Rotterdam, Netherlands",
-      terminalGateIn: "11/10/25",
-      terminalGateInStatus: "Pending",
+      emptyGateInDate: "",
+      emptyGateInConfirmationStatus: "Pending",
     },
     {
       bookingID: "0000002",
       companyName: "Dimas Kamal",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: " Netherlands",
-      terminalGateIn: "11/10/25",
-      terminalGateInStatus: "Arrived",
+      emptyGateInDate: "11/10/25",
+      emptyGateInConfirmationStatus: "Updated",
     },
     {
       bookingID: "0000003",
       companyName: "Farrel Kurniawan",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Rotterdam",
-      terminalGateIn: "11/10/25",
-      terminalGateInStatus: "Pending",
+      emptyGateInDate: "",
+      emptyGateInConfirmationStatus: "Pending",
     },
     {
       bookingID: "0000004",
       companyName: "Farrel Kurniawan",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: " Netherlands",
-      terminalGateIn: "11/10/25",
-      terminalGateInStatus: "Arrived",
+      emptyGateInDate: "11/10/25",
+      emptyGateInConfirmationStatus: "Updated",
     },
   ];
 
@@ -155,7 +158,7 @@ const TerminalGateIn: React.FC = () => {
       <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center">
         <div className="w-[60%] flex gap-4 items-center">
           <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-            Terminal Gate In List
+            Empty Return Confirmation List
           </p>
           <GroupField
             label={""}
@@ -236,4 +239,4 @@ const TerminalGateIn: React.FC = () => {
   );
 };
 
-export default TerminalGateIn;
+export default EmptyGateInConfirmation;

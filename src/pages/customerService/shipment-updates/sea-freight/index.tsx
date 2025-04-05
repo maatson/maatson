@@ -24,6 +24,12 @@ const ShipmentSeaFreight: React.FC = () => {
           ) && 
           !location.pathname.startsWith(
             "/shipment-updates/sea-freight/terminal-gateIn/details"
+          ) && 
+          !location.pathname.startsWith(
+            "/shipment-updates/sea-freight/create-split-booking"
+          ) && 
+          !location.pathname.startsWith(
+            "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
           ) && (
             <div className="border-b border-grey-ab-100 flex p-2  text-sm font-semibold items-center overflow-auto custom-scrollbar-small ">
               <div className="px-1 border-r border-r-grey-ab-100 text-nowrap">
@@ -132,20 +138,20 @@ const ShipmentSeaFreight: React.FC = () => {
               </div>
               <div className="text-nowrap px-1">
                 <NavLink
-                  to={"/shipment-updates/sea-freight/empty-return-confirmation"}
+                  to={"/shipment-updates/sea-freight/empty-gateIn-confirmation"}
                   end
                   className={({ isActive }) =>
                     `${
                       isActive &&
                       location.pathname.startsWith(
-                        "/shipment-updates/sea-freight/empty-return-confirmation"
+                        "/shipment-updates/sea-freight/empty-gateIn-confirmation"
                       )
                         ? "text-secondary  border-b-2 border-secondary"
                         : " border-b-2  border-transparent"
                     } flex px-2 py-1 gap-[10px] items-center`
                   }
                 >
-                  <p> Empty Return Confirmation </p>
+                  <p> Empty Gate In Confirmation </p>
                 </NavLink>
               </div>
             </div>

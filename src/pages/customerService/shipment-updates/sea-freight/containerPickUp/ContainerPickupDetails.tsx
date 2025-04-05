@@ -431,7 +431,7 @@ const ContainerPickupDetails: React.FC = () => {
                 leftIcon={<AddIcon size={16} color="#E9E9E9" />}
               />
             </div>
-          </div>
+          </div> 
         </div> 
 
         {/* for bulk table */}
