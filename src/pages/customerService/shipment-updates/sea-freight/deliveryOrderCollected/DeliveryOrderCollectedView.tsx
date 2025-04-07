@@ -47,7 +47,7 @@ interface DataProps {
 }
 
 const fclColumns: any[] = [
-  { id: "sNo", label: "s.no", minWidth: "100px" },
+  { id: "sNo", label: "s.no", minWidth: "100px" }, 
   {
     id: "containerNumber",
     label: "Container Number",
