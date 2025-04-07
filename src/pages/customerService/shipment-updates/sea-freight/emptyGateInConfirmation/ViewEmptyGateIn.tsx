@@ -42,33 +42,33 @@ interface DataProps {
 }
 
 const fclColumns: any[] = [
-  { id: "s.no", label: "s.no", minWidth: "100px", align: "Center" },
+  { id: "sNo", label: "s.no", minWidth: "100px", align: "center" },
   {
     id: "containerNumber",
     label: "Container Number",
-    align: "Center",
+    align: "center",
   },
-  { id: "pickupDate", label: "Pickup Date", align: "Center" },
-  { id: "terminalGateInDate", label: "Terminal Gate In", align: "Center" },
-  { id: "onboardDate", label: "Onboard Date", align: "Center" },
-  { id: "ata_pod", label: "ATA (POD)", align: "Center" },
-  { id: "doc", label: "Delivery Order Collected (DOC)", align: "Center" },
-  { id: "emptyGateInDate", label: "Empty Gate In Date", align: "Center" },
+  { id: "pickupDate", label: "Pickup Date", align: "center" },
+  { id: "terminalGateInDate", label: "Terminal Gate In", align: "center" },
+  { id: "onboardDate", label: "Onboard Date", align: "center" },
+  { id: "ata_pod", label: "ATA (POD)", align: "center" },
+  { id: "doc", label: "Delivery Order Collected (DOC)", align: "center" },
+  { id: "emptyGateInDate", label: "Empty Gate In Date", align: "center" },
   { id: "action", label: "Action", minWidth: "100px", align: "center" },
 ];
 const columns: any[] = [
-  { id: "s.no", label: "s.no", minWidth: "100px", align: "Center" },
+  { id: "sNo", label: "s.no", minWidth: "100px", align: "center" },
   {
     id: "containerNumber",
     label: "Container Number",
-    align: "Center",
+    align: "center",
   },
-  { id: "pickupDate", label: "Pickup Date", align: "Center" },
-  { id: "terminalGateInDate", label: "Terminal Gate In", align: "Center" },
-  { id: "onboardDate", label: "Onboard Date", align: "Center" },
-  { id: "ata_pod", label: "ATA (POD)", align: "Center" },
-  { id: "doc", label: "Delivery Order Collected (DOC)", align: "Center" },
-  { id: "emptyGateInDate", label: "Empty Gate In Date", align: "Center" },
+  { id: "pickupDate", label: "Pickup Date", align: "center" },
+  { id: "terminalGateInDate", label: "Terminal Gate In", align: "center" },
+  { id: "onboardDate", label: "Onboard Date", align: "center" },
+  { id: "ata_pod", label: "ATA (POD)", align: "center" },
+  { id: "doc", label: "Delivery Order Collected (DOC)", align: "center" },
+  { id: "emptyGateInDate", label: "Empty Gate In Date", align: "center" },
   { id: "action", label: "Action", minWidth: "100px", align: "center" },
 ];
 
@@ -276,18 +276,19 @@ const ViewEmptyGateIn: React.FC = () => {
           className="px-1 rounded border border-grey-200 hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400  placeholder-grey-ab-200 focus:outline-none bg-primary-50  active:outline-none text-grey-ab-800"
         />
       ) : (
-        doc
+        emptyGateInDate
       );
   
       const updatedRowData = {
         id: id,
+        sNo: id+1,
         containerNumber,
         pickupDate,
         terminalGateInDate,
         onboardDate,
         ata_pod,
         doc,
-        emptyGateInDate: emptyGateInDateValue,
+        emptyGateInDate: emptyGateInDateValue || "-",
         action: actionValue,
       };
   
