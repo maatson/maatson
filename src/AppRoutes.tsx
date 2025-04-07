@@ -288,6 +288,12 @@ const DeliveryOrderCollected = lazy(
       "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollected"
     )
 );
+const DeliveryOrderCollectedView = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollectedView"
+    )
+);
 const EmptyReturnConfirmation = lazy(
   () =>
     import(
@@ -480,9 +486,12 @@ const AppRoutes: React.FC = () => {
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
             <Route index element={<Updates />} />
-            <Route path ="updates/update-details" element={<UpdateDetails />} />
+            <Route path="updates/update-details" element={<UpdateDetails />} />
             <Route path="container-pickup" element={<ContainerPickUp />} />
-            <Route path="container-pickup/details" element={<ContainerPickUpDetails />} />
+            <Route
+              path="container-pickup/details"
+              element={<ContainerPickUpDetails />}
+            />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
             <Route
               path="onboard-confirmation"
@@ -501,6 +510,10 @@ const AppRoutes: React.FC = () => {
             <Route
               path="delivery-order-collected"
               element={<DeliveryOrderCollected />}
+            />
+            <Route
+              path="delivery-order-collected/view/:id"
+              element={<DeliveryOrderCollectedView />}
             />
             <Route
               path="empty-return-confirmation"

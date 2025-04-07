@@ -44,7 +44,7 @@ interface BookingProps {
   goodsDateInformation: {
     date: Date;
     alternativeDate: Date;
-    indicatedRate: string;
+    agreedRate: string;
     currency: string;
     description: string;
   };
@@ -79,7 +79,7 @@ const AddBooking: React.FC = () => {
     goodsDateInformation: {
       date: new Date(),
       alternativeDate: new Date(),
-      indicatedRate: "",
+      agreedRate: "",
       currency: "USD",
       description: "",
     },
@@ -157,7 +157,7 @@ const AddBooking: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
-          indicatedRate: "",
+          agreedRate: "",
           currency: "USD",
         },
       ];
@@ -180,7 +180,7 @@ const AddBooking: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
-          indicatedRate: "",
+          agreedRate: "",
           currency: "USD",
         },
       ];
@@ -195,7 +195,7 @@ const AddBooking: React.FC = () => {
           grossWeight: "",
           grossWeightUnit: "kgs",
           containerCount: "",
-          indicatedRate: "",
+          agreedRate: "",
           currency: "USD",
         },
       ];
@@ -277,7 +277,7 @@ const AddBooking: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
-            indicatedRate: "",
+            agreedRate: "",
             currency: "USD",
           }
         : data.cargoDetails.cargoType === "lcl"
@@ -296,7 +296,7 @@ const AddBooking: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
-            indicatedRate: "",
+            agreedRate: "",
             currency: "USD",
           }
         : data.cargoDetails.cargoType === "over dimensional"
@@ -309,7 +309,7 @@ const AddBooking: React.FC = () => {
             grossWeight: "",
             grossWeightUnit: "kgs",
             containerCount: "",
-            indicatedRate: "",
+            agreedRate: "",
             currency: "USD",
           }
         : data.cargoDetails.cargoType === "standard cargo"
@@ -857,7 +857,7 @@ const AddBooking: React.FC = () => {
                     parentStyle="basis-1/3"
                   />
                   <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
-                    <p>Indicated Rate</p>
+                    <p>Agreed Rate</p>
                     <div className="flex">
                       <GroupField
                         label={""}
@@ -878,8 +878,8 @@ const AddBooking: React.FC = () => {
                         label={""}
                         type={"number"}
                         placeholder={"Enter rate"}
-                        name={"indicatedRate"}
-                        value={dimension.indicatedRate}
+                        name={"agreedRate"}
+                        value={dimension.agreedRate}
                         onChange={(e) => handleCargoDimensionsChange(e, index)}
                         error={false}
                         errorMessage={""}
@@ -1103,7 +1103,7 @@ const AddBooking: React.FC = () => {
                     parentStyle="basis-1/5"
                   />
                   <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
-                    <p>Indicated Rate</p>
+                    <p>Agreed Rate</p>
                     <div className="flex">
                       <GroupField
                         label={""}
@@ -1124,8 +1124,8 @@ const AddBooking: React.FC = () => {
                         label={""}
                         type={"number"}
                         placeholder={"Enter rate"}
-                        name={"indicatedRate"}
-                        value={dimension.indicatedRate}
+                        name={"agreedRate"}
+                        value={dimension.agreedRate}
                         onChange={(e) => handleCargoDimensionsChange(e, index)}
                         error={false}
                         errorMessage={""}
@@ -1272,7 +1272,7 @@ const AddBooking: React.FC = () => {
                     parentStyle="basis-1/5"
                   />
                   <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
-                    <p>Indicated Rate</p>
+                    <p>Agreed Rate</p>
                     <div className="flex">
                       <GroupField
                         label={""}
@@ -1293,8 +1293,8 @@ const AddBooking: React.FC = () => {
                         label={""}
                         type={"number"}
                         placeholder={"Enter rate"}
-                        name={"indicatedRate"}
-                        value={dimension.indicatedRate}
+                        name={"agreedRate"}
+                        value={dimension.agreedRate}
                         onChange={(e) => handleCargoDimensionsChange(e, index)}
                         error={false}
                         errorMessage={""}
@@ -1618,7 +1618,7 @@ const AddBooking: React.FC = () => {
                 data.cargoDetails.cargoType !== "hazardous" &&
                 data.cargoDetails.cargoType !== "over dimensional" && (
                   <div className="basis-1/3 max-w-[33.3%] flex flex-col gap-2">
-                    <p>Indicated Rate</p>
+                    <p>Agreed Rate</p>
                     <div className="flex">
                       <GroupField
                         label={""}
@@ -1639,8 +1639,8 @@ const AddBooking: React.FC = () => {
                         label={""}
                         type={"number"}
                         placeholder={"Enter rate"}
-                        name={"indicatedRate"}
-                        value={data.goodsDateInformation.indicatedRate}
+                        name={"agreedRate"}
+                        value={data.goodsDateInformation.agreedRate}
                         onChange={handleGoodsReadyDate}
                         error={false}
                         errorMessage={""}

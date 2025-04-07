@@ -518,7 +518,7 @@ const BookingDetails: React.FC = () => {
                     />
                   </div>
                   <ProfileBoxLayout
-                    title={"Indicated Rate"}
+                    title={"Agreed Rate"}
                     value={"2000 USD"}
                     valueStyle={"font-semibold h6 text-end"}
                   />

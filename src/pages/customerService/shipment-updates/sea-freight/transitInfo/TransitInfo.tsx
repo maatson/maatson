@@ -79,7 +79,7 @@ const TransitInfo: React.FC = () => {
     } = items;
     // Define your actions or any other custom logic you need for each row
     const actions = (
-      <div className="px-2 py-1 gap-2 flex justify-center items-center font-semibold">
+      <div className=" flex justify-center items-center font-semibold">
         <Link
           className="p-1 rounded  "
           to={`/shipment-updates/sea-freight/transit-view/${bookingId}`}
