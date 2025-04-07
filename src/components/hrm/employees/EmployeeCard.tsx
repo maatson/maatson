@@ -6,6 +6,12 @@ import PrimaryChip from "../../chips/PrimaryChip";
 import { EmailIcon, PhoneIcon } from "../../icons/Icons";
 import CustomPagination from "../../pagination/CustomPagination";
 import { useNavigate } from "react-router-dom";
+import PinkChip from "../../chips/PinkChip";
+import BlueChip from "../../chips/BlueChip";
+import TertiaryChip from "../../chips/TertiaryChip";
+import SecondaryChip from "../../chips/SecondaryChip";
+import SuccessChip from "../../chips/SuccessChip";
+import NormalChip from "../../chips/NormalChip";
 
 interface Employee {
   id: number;
@@ -33,7 +39,7 @@ const employees: Employee[] = [
     id: 2,
     name: "Smith, John",
     image: "/images/sample/employee2.png",
-    department: "Market Manager",
+    department: "Manager",
     branchLocation: "Mumbai, India",
     email: "john.smith@email.com",
     phone: "+61 3 5678 4321",
@@ -53,7 +59,7 @@ const employees: Employee[] = [
     id: 4,
     name: "Williams, David",
     image: "/images/sample/employee4.png",
-    department: "Director",
+    department: "Sales & Marketing",
     branchLocation: "Bangalore, India",
     email: "david.williams@email.com",
     phone: "+61 5 3456 7890",
@@ -73,7 +79,7 @@ const employees: Employee[] = [
     id: 6,
     name: "Johnson, Michael",
     image: "/images/sample/employee6.png",
-    department: "Software Engineer",
+    department: "Operations",
     branchLocation: "Pune, India",
     email: "michael.johnson@email.com",
     phone: "+61 7 1234 5678",
@@ -83,7 +89,7 @@ const employees: Employee[] = [
     id: 7,
     name: "Davis, Laura",
     image: "/images/sample/employee7.png",
-    department: "Product Manager",
+    department: "Finance Executive",
     branchLocation: "Kolkata, India",
     email: "laura.davis@email.com",
     phone: "+61 8 8765 4321",
@@ -93,7 +99,7 @@ const employees: Employee[] = [
     id: 8,
     name: "Martinez, Robert",
     image: "/images/sample/employee8.png",
-    department: "QA Analyst",
+    department: "Customer Service",
     branchLocation: "Ahmedabad, India",
     email: "robert.martinez@email.com",
     phone: "+61 9 5678 1234",
@@ -103,7 +109,7 @@ const employees: Employee[] = [
     id: 9,
     name: "Clark, Sophia",
     image: "/images/sample/employee9.png",
-    department: "UX Designer",
+    department: "Inventory Manager",
     branchLocation: "Jaipur, India",
     email: "sophia.clark@email.com",
     phone: "+61 10 3456 7890",
@@ -716,14 +722,14 @@ const EmployeeCard: React.FC = () => {
 
   const navigate = useNavigate();
   const handleImageClick = () => {
-    navigate("/hrm/employees/employee-profile") ;  
-  }
+    navigate("/hrm/employees/employee-profile");
+  };
   return (
     <>
       <div className="py-4 px-2 grid grid-cols-3 xl:grid-cols-4 gap-3 items-center">
         {paginatedEmployees.map((employee) => (
           <div
-            key={employee.id} 
+            key={employee.id}
             className="bg-grey-aw-50 rounded-sm flex flex-col gap-3 shadow-lg p-3 max-w-[245px] w-full mx-auto"
           >
             <div className="flex justify-between">
@@ -743,7 +749,10 @@ const EmployeeCard: React.FC = () => {
             </div>
             <div className="flex flex-col gap-1 justify-center items-center">
               <div className="flex flex-col gap-2 items-center">
-                <div className="w-16 h-16 cursor-pointer" onClick={handleImageClick}>
+                <div
+                  className="w-16 h-16 cursor-pointer"
+                  onClick={handleImageClick}
+                >
                   <img
                     src={EmployeeImage}
                     alt={employee.name}
@@ -756,11 +765,69 @@ const EmployeeCard: React.FC = () => {
               </div>
               <div className="flex gap-1">
                 {/* make it dynamically */}
-                <GradientChip
+                {employee.department.toLowerCase() === "ceo" ? (
+                  <GradientChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() === "manager" ? (
+                  <PrimaryChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() === "hr executive" ? (
+                  <PinkChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() ===
+                  "sales & marketing" ? (
+                  <BlueChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() === "operations" ? (
+                  <TertiaryChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() ===
+                  "finance executive" ? (
+                  <SecondaryChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() === "customer service" ? (
+                  <SuccessChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : employee.department.toLowerCase() ===
+                  "inventory manager" ? (
+                  <BlackChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                ) : (
+                  <PrimaryChip
+                    label={employee.department}
+                    size={"s"}
+                    variant={"fill"}
+                  />
+                )}
+                {/* <GradientChip
                   label={employee.department}
                   size={"s"}
                   variant={"fill"}
-                />
+                /> */}
                 <PrimaryChip
                   label={"Department"}
                   size={"s"}

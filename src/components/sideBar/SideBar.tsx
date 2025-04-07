@@ -28,6 +28,7 @@ interface SideBarItemProps {
 interface SideBarChildProps {
   label: string;
   link: string;
+  active?: string;
 }
 
 const SideBar: React.FC = () => {
@@ -40,7 +41,7 @@ const SideBar: React.FC = () => {
     // Set the active item based on the current route
     sideBarItems.forEach((item, index) => {
       item.children.forEach((child) => {
-        if (location.pathname.startsWith(child.link)) {
+        if (location.pathname.startsWith(child.active || child.link)) {
           setActiveItem(index); // Set the active item based on the current route
           setOpenItems((prevState) => ({
             ...prevState,
@@ -113,7 +114,15 @@ const SideBar: React.FC = () => {
         leftIcon: <CustomerServiceIcon />,
         label: "Customer Service",
         isOpen: openItems[3] || false,
-        children: [],
+        children: [
+          {
+            label: "Air & Sea Schedule",
+            link: "/sea-air-schedule/sea-freight",
+            active: "/sea-air-schedule",
+          },
+          { label: "Shipment Updates", link: "/shipment-updates/sea-freight", active:"/shipment-updates" },
+          { label: "Cargo Arrival Notice", link: "/customer-service" },
+        ],
         onClick: () => handleItemClick(3),
       },
       {
@@ -139,9 +148,15 @@ const SideBar: React.FC = () => {
       },
       {
         leftIcon: <PriceTagIcon />,
-        label: "Procurement",
+        label: "Pricing & Procurement",
         isOpen: openItems[7] || false,
-        children: [],
+        children: [
+          { label: "All Rates", link: "/all-rates" },
+          { label: "Rate Filing(Enquiry)", link: "/rate-filing-enquiry" },
+          { label: "Rate Filing (New)", link: "/rate-filing-new" },
+          { label: "Rate Mailing", link: "/rate-mailing" },
+          { label: "Other Vendors", link: "/other-vendors" },
+        ],
         onClick: () => handleItemClick(7),
       },
       {
@@ -205,9 +220,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
       <div
         className={`flex items-center rounded justify-between px-4 py-2 transition-all duration-300    ${
           isOpen ? "bg-grey-50 text-primary" : ""
-        }  ${
-          isActive ? "bg-blue-500 " : "hover:bg-white hover:bg-opacity-30 "
-        }`}
+        }  ${isActive ? "bg-blue-500" : "hover:bg-white hover:bg-opacity-30 "}`}
         onClick={onClick}
       >
         <div className={`flex items-center justify-start gap-4 w-full`}>
@@ -234,7 +247,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
               to={child.link}
               key={index}
               className={`py-2 px-6 rounded flex items-center gap-2 ${
-                location.pathname.startsWith(child.link)
+                location.pathname.startsWith(child.active || child.link)
                   ? "bg-[#ffffff] bg-opacity-40 "
                   : ""
               }`}

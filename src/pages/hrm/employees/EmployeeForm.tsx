@@ -100,7 +100,7 @@ const EmployeeForm: React.FC = () => {
   const createData = (items: any) => {
     const { id, fileName } = items;
     const documentFile = (
-      <div className="flex gap-3 py-1 px-2 items-center justify-start">
+      <div className="flex gap-3 py-1 items-center justify-start">
         <DocumentIcon color="#2C398F" />
         <div className="text-grey-ab-800">{fileName}.pdf</div>
       </div>

@@ -16,6 +16,18 @@ const Attendance: React.FC = () => {
             ? "Holidays"
             : "Attendance",
         ].flat()}
+        // breadCrums={[
+        //   { label: "Home", path: "/" },
+        //   { label: "HRM", path: "/hrm/employees" },
+        //   location.pathname === "/hrm/attendance/detail"
+        //     ? [
+        //         { label: "Attendance", path: "/hrm/attendance" },
+        //         { label: "Attendance Detail", path: "/hrm/attendance/detail" },
+        //       ]
+        //     : location.pathname === "/hrm/attendance/holidays"
+        //     ? { label: "Holidays", path: "/hrm/attendance/holidays" }
+        //     : { label: "Attendance", path: "/hrm/attendance" },
+        // ].flat()}
         heading={
           location.pathname === "/hrm/attendance/detail"
             ? "Attendance Detail"

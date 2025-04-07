@@ -39,8 +39,8 @@ const EmployeeTable: React.FC = () => {
   };
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
+  const [rows, setRows] = useState<RowData[]>([]);
   const [selectedRows, setSelectedRows] = useState<(string | number)[]>([]); // Track selected row ids
 
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {

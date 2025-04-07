@@ -86,9 +86,15 @@ const EnquiryDetails = lazy(
 const AddEnquiry = lazy(
   () => import("./pages/salesAndMarketing/enquiry/AddEnquiry")
 );
-const CancelEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/CancelEnquiry"));
-const NegotiateEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/NegotiateEnquiry"));
-const ConvertToBookingEnquiry = lazy(() => import("./pages/salesAndMarketing/layouts/ConvertToBookingEnquiry"));
+const CancelEnquiry = lazy(
+  () => import("./pages/salesAndMarketing/layouts/CancelEnquiry")
+);
+const NegotiateEnquiry = lazy(
+  () => import("./pages/salesAndMarketing/layouts/NegotiateEnquiry")
+);
+const ConvertToBookingEnquiry = lazy(
+  () => import("./pages/salesAndMarketing/layouts/ConvertToBookingEnquiry")
+);
 
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
@@ -121,7 +127,237 @@ const RequirementDetails = lazy(
   () => import("./pages/hrm/requirement/RequirementDetails")
 );
 
-// testimonials
+// CUSTOMER SERVICE : Sea Schedule
+const SeaAirSchedule = lazy(
+  () => import("./pages/customerService/sea-air-schedule")
+);
+//sea
+const SeaFreight = lazy(
+  () => import("./pages/customerService/sea-air-schedule/sea-freight")
+);
+const UpdateSchedule = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/UpdateSchedule"
+    )
+);
+const ScheduleDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/scheduleDetails/ScheduleDetails"
+    )
+);
+const BulkScheduleUpdates = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/bulkScheduleUpdates/BulkScheduleUpdates"
+    )
+);
+const AddSeaScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/AddSeaScheduleForm"
+    )
+);
+const EditSeaScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/EditSeaScheduleForm"
+    )
+);
+const VesselDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/sea-freight/updateSchedule/VesselDetails"
+    )
+);
+
+//air
+const AirFreight = lazy(
+  () => import("./pages/customerService/sea-air-schedule/air-freight")
+);
+const UpdateScheduleAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/UpdateSchedule"
+    )
+);
+const ScheduleDetailsAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/scheduleDetails/ScheduleDetails"
+    )
+);
+const BulkScheduleUpdatesAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/bulkScheduleUpdates/BulkScheduleUpdates"
+    )
+);
+const AddAirScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/AddAirScheduleForm"
+    )
+);
+const EditAirScheduleForm = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/EditAirScheduleForm"
+    )
+);
+const FlightDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/sea-air-schedule/air-freight/updateSchedule/FlightDetails"
+    )
+);
+
+// CUSTOMER SERVICE :Shipment updates
+const ShipmentUpdates = lazy(
+  () => import("./pages/customerService/shipment-updates")
+);
+// sea
+const ShipmentSeaFreight = lazy(
+  () => import("./pages/customerService/shipment-updates/sea-freight")
+); //index
+const Updates = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/updates/Updates"
+    )
+);
+const UpdateDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/updates/UpdateDetails"
+    )
+);
+const ContainerPickUp = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/containerPickUp/ContainerPickUp"
+    )
+);
+const ContainerPickUpDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/containerPickUp/ContainerPickupDetails"
+    )
+);
+const TerminalGateIn = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateIn"
+    )
+);
+// vick routes
+const OnboardConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/OnboardConfirmation"
+    )
+);
+const ViewOnboardConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/ViewOnBoardConfirmation"
+    )
+);
+const EditOnboardConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/onboardConfirmation/EditOnBoardConfirmation"
+    )
+);
+const TransitInfo = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/transitInfo/TransitInfo"
+    )
+);
+const TransitView = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/transitInfo/TransitView"
+    )
+);
+const DeliveryOrderCollected = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollected"
+    )
+);
+const DeliveryOrderCollectedView = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollectedView"
+    )
+);
+const EmptyReturnConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/emptyReturnConfirmation/EmptyReturnConfirmation"
+    )
+);
+
+// air
+const ShipmentAirFreight = lazy(
+  () => import("./pages/customerService/shipment-updates/air-freight")
+); //index
+const UpdatesAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/updates/Updates"
+    )
+);
+const AirportGateInDateAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/airportGateInDate/AirportGateInDate"
+    )
+);
+const CargoHandoverUpdateAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/CargoHandoverUpdate"
+    )
+);
+const DepartureConfirmationAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/departureConfirmation/DepartureConfirmation"
+    )
+);
+const TransitInfoAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/transitInfo/TransitInfo"
+    )
+);
+const DeliveryOrderCollectedAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollected"
+    )
+);
+
+// PRICING AND PROCUREMENT
+
+const AllRates = lazy(() => import("./pages/pricing&procurement/allRates"));
+const EnquiryRateFiling = lazy(
+  () => import("./pages/pricing&procurement/enquiryRateFiling")
+);
+const NewRateFiling = lazy(
+  () => import("./pages/pricing&procurement/newRateFiling")
+);
+const RateMailing = lazy(
+  () => import("./pages/pricing&procurement/rateMailing")
+);
+const OtherVendors = lazy(
+  () => import("./pages/pricing&procurement/otherVendors")
+);
+// TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
   () => import("./pages/testimonials/TestimonialList")
@@ -198,12 +434,125 @@ const AppRoutes: React.FC = () => {
         <Route path="enquiry" element={<Enquiry />}>
           <Route index element={<EnquiryList />} />
           <Route path="add" element={<AddEnquiry />} />
-          <Route path="details/:id" element={<EnquiryDetails />} >
-            <Route path="booking-status/cancel"  element={<CancelEnquiry />} />
+          <Route path="details/:id" element={<EnquiryDetails />}>
+            <Route path="booking-status/cancel" element={<CancelEnquiry />} />
             <Route index element={<NegotiateEnquiry />} />
-            <Route path="booking-status/convertBooking"  element={<ConvertToBookingEnquiry />} />
+            <Route
+              path="booking-status/convertBooking"
+              element={<ConvertToBookingEnquiry />}
+            />
           </Route>
         </Route>
+
+        {/* customer services */}
+        {/* sea-air-schedule */}
+
+        <Route path="sea-air-schedule" element={<SeaAirSchedule />}>
+          <Route path="sea-freight" element={<SeaFreight />}>
+            <Route index element={<UpdateSchedule />} />
+            <Route path="schedule-details" element={<ScheduleDetails />} />
+            <Route
+              path="bulk-schedule-updates"
+              element={<BulkScheduleUpdates />}
+            />
+          </Route>
+
+          <Route path="air-freight" element={<AirFreight />}>
+            <Route index element={<UpdateScheduleAir />} />
+            <Route path="schedule-details" element={<ScheduleDetailsAir />} />
+            <Route
+              path="bulk-schedule-updates"
+              element={<BulkScheduleUpdatesAir />}
+            />
+          </Route>
+
+          <Route path="add-sea-schedule" element={<AddSeaScheduleForm />} />
+          <Route path="edit-sea-schedule" element={<EditSeaScheduleForm />} />
+          <Route path="vessel-details" element={<VesselDetails />} />
+          <Route
+            path="schedule-details/vessel-details"
+            element={<VesselDetails />}
+          />
+          <Route path="add-air-schedule" element={<AddAirScheduleForm />} />
+          <Route path="edit-air-schedule" element={<EditAirScheduleForm />} />
+          <Route path="flight-details" element={<FlightDetails />} />
+          <Route
+            path="schedule-details/flight-details"
+            element={<FlightDetails />}
+          />
+        </Route>
+        {/* shipment-updates */}
+
+        <Route path="shipment-updates" element={<ShipmentUpdates />}>
+          <Route path="sea-freight" element={<ShipmentSeaFreight />}>
+            <Route index element={<Updates />} />
+            <Route path="updates/update-details" element={<UpdateDetails />} />
+            <Route path="container-pickup" element={<ContainerPickUp />} />
+            <Route
+              path="container-pickup/details"
+              element={<ContainerPickUpDetails />}
+            />
+            <Route path="terminal-gateIn" element={<TerminalGateIn />} />
+            <Route
+              path="onboard-confirmation"
+              element={<OnboardConfirmation />}
+            />
+            <Route
+              path="onboard-confirmation/view/:bookingId"
+              element={<ViewOnboardConfirmation />}
+            />
+            <Route
+              path="onboard-confirmation/edit/:bookingId"
+              element={<EditOnboardConfirmation />}
+            />
+            <Route path="transit-info" element={<TransitInfo />} />
+            <Route path="transit-view/:id" element={<TransitView />} />
+            <Route
+              path="delivery-order-collected"
+              element={<DeliveryOrderCollected />}
+            />
+            <Route
+              path="delivery-order-collected/view/:id"
+              element={<DeliveryOrderCollectedView />}
+            />
+            <Route
+              path="empty-return-confirmation"
+              element={<EmptyReturnConfirmation />}
+            />
+          </Route>
+
+          <Route path="air-freight" element={<ShipmentAirFreight />}>
+            <Route index element={<UpdatesAir />} />
+            <Route
+              path="airport-gatein-date"
+              element={<AirportGateInDateAir />}
+            />
+            <Route
+              path="cargo-handover-update"
+              element={<CargoHandoverUpdateAir />}
+            />
+            <Route
+              path="departure-confirmation"
+              element={<DepartureConfirmationAir />}
+            />
+            <Route path="transit-info" element={<TransitInfoAir />} />
+            <Route
+              path="delivery-order-collected"
+              element={<DeliveryOrderCollectedAir />}
+            />
+          </Route>
+        </Route>
+        <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
+
+        {/* pricing & procurement */}
+        <Route path="all-rates" element={<AllRates />}></Route>
+        <Route
+          path="rate-filing-enquiry"
+          element={<EnquiryRateFiling />}
+        ></Route>
+        <Route path="rate-filing-new" element={<NewRateFiling />}></Route>
+        <Route path="rate-mailing" element={<RateMailing />}></Route>
+        <Route path="other-vendors" element={<OtherVendors />}></Route>
 
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>

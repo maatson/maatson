@@ -25,6 +25,7 @@ interface Groupfield {
   size?: string; //added by suriya
   isMulti?: boolean;
   isDisabled?: boolean;
+  id?: string;
 }
 
 // const CustomDropdownIndicator = () => {
@@ -62,6 +63,7 @@ const GroupField: React.FC<Groupfield> = ({
   isMulti,
   isDisabled,
   size, //added by suriya
+  id, //added ny vick
 }) => {
   // Handle React-Select change event
   const handleReactSelectChange = (selectedOption: any) => {
@@ -87,7 +89,7 @@ const GroupField: React.FC<Groupfield> = ({
   return (
     <>
       <div className={`flex flex-col gap-2 ${parentStyle}`}>
-        {label && (
+        {type != "radio" && label && (
           <label htmlFor={name} className={`text-grey-ab-800 ${labelStyle}`}>
             {label}
           </label>
@@ -100,6 +102,14 @@ const GroupField: React.FC<Groupfield> = ({
              }   ${inputStyle}`}
         >
           {leftIcon && <div className="flex-shrink-0">{leftIcon}</div>}
+          {type === "radio" && label && (
+            <label
+              htmlFor={type === "radio" ? id || name : name}
+              className={`text-grey-ab-800 ${labelStyle}`}
+            >
+              {label}
+            </label>
+          )}
           {type === "select" ? (
             <>
               <Select
@@ -315,7 +325,7 @@ const GroupField: React.FC<Groupfield> = ({
               type={type}
               name={name}
               value={value}
-              id={name}
+              id={type === "radio" ? id || name : name}
               disabled={isDisabled}
               onChange={onChange}
               placeholder={placeholder}

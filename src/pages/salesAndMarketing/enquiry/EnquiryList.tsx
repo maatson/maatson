@@ -35,7 +35,6 @@ interface RowData {
   transportationMode: React.ReactNode;
   cargoReadinessDate: string;
   enquiryStatus: React.ReactNode;
-  requestedPrice: string | React.ReactNode;
   action: React.ReactNode;
 }
 
@@ -49,7 +48,7 @@ const columns: any[] = [
     label: "Lead Handle Person",
   },
   { id: "shipmentMode", label: "Shipment Mode", align: "center" },
-  { id: "nextFollowUps", label: "Next Follow Ups", },
+  { id: "nextFollowUps", label: "Next Follow Ups" },
   { id: "portOfLoading", label: "Port of Loading", minWidth: 140 },
   {
     id: "portOfDischarge",
@@ -73,12 +72,7 @@ const columns: any[] = [
     minWidth: 160,
     align: "center",
   },
-  {
-    id: "requestedPrice",
-    label: "Requested Price",
-    minWidth: 130,
-    align: "center",
-  },
+
   { id: "action", label: "Action", minWidth: 100, align: "center" },
 ];
 
@@ -120,7 +114,6 @@ const EnquiryList: React.FC = () => {
       shipmentMode,
       transportationMode,
       enquiryStatus,
-      requestedPrice,
     } = items;
     const leadHandlePersons = (
       <div className="min-w-[140px] flex gap-2 items-center py-1">
@@ -164,12 +157,8 @@ const EnquiryList: React.FC = () => {
         <SuccessChip label={enquiryStatus} size="m" variant="fill" />
       );
 
-    const requestedPrices = (
-      <div className="font-semibold text-center">{requestedPrice}</div>
-    );
-
     const actions = (
-      <div className="flex justify-center" onClick={() =>handleViewClick(id)}>
+      <div className="flex justify-center" onClick={() => handleViewClick(id)}>
         <NeutralBlueButton
           label={"View"}
           size={"s"}
@@ -193,7 +182,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: transportationModes,
       cargoReadinessDate: items?.cargoReadinessDate,
       enquiryStatus: enquiryStatuses,
-      requestedPrice: requestedPrices,
       action: actions,
     };
     return updatedData;
@@ -215,7 +203,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Sea Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Cancelled",
-      requestedPrice: "2000 USD",
     },
     {
       enquiryID: "3233856",
@@ -232,7 +219,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Air Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Converted to booking",
-      requestedPrice: "2000 USD",
     },
     {
       enquiryID: "3233856",
@@ -249,7 +235,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Land Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Negotiating",
-      requestedPrice: "2000 USD",
     },
     {
       enquiryID: "3233856",
@@ -266,7 +251,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Sea Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Cancelled",
-      requestedPrice: "2000 USD",
     },
     {
       enquiryID: "3233856",
@@ -283,7 +267,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Air Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Converted to booking",
-      requestedPrice: "2000 USD",
     },
     {
       enquiryID: "3233856",
@@ -300,7 +283,6 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Land Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Negotiating",
-      requestedPrice: "2000 USD",
     },
   ];
 
@@ -338,13 +320,7 @@ const EnquiryList: React.FC = () => {
               placeholder={"Search"}
               name={""}
               value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={() => {}}
               error={false}
               errorMessage={""}
               rightIcon={<SearchIcon color="#6A6A6A" />}
@@ -356,13 +332,7 @@ const EnquiryList: React.FC = () => {
               placeholder={"Transportation Mode"}
               name={""}
               value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={() => {}}
               error={false}
               errorMessage={""}
               parentStyle="w-[30%]"
@@ -373,13 +343,7 @@ const EnquiryList: React.FC = () => {
               placeholder={"Enquiry Status"}
               name={""}
               value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={() => {}}
               error={false}
               errorMessage={""}
               parentStyle="w-[25%]"

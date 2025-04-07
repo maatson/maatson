@@ -203,6 +203,7 @@ const AttendanceDetail: React.FC = () => {
     const arr = data.map((items, index) => {
       return createData({ ...items, id: index }); // Ensure createData returns the transformed data
     });
+    console.log(arr, "aaray");
     setAttendanceRows(arr); // Set the rows with the updated data
   }, []); // Empty dependency array ensures this function is only created once
 

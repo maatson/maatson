@@ -130,7 +130,7 @@ const AddLeaveForm: React.FC<AddLeaveFormProps> = ({ cancel }) => {
                 style="w-full"
               />
             </div>
-          </div>
+          </div>  
         </div>
       </div>
     </>

@@ -5,12 +5,14 @@ export interface ChipProps {
   label: string;
   size: string;
   variant: string;
+  leftIcon?: React.ReactNode;
 }
 
 const PrimaryChip: React.FC<ChipProps> = ({
   style,
   label,
   size,
+  leftIcon,
   variant = "primary",
 }) => {
   return (
@@ -36,9 +38,10 @@ const PrimaryChip: React.FC<ChipProps> = ({
             ? "border border-primary text-primary bg-primary-50"
             : "bg-primary text-grey-aw-50"
         }
-        ${style}`}
+        ${style} ${leftIcon&&" flex items-center justify-between gap-2 "}`}
       >
-        {label}
+        {leftIcon && <div>{leftIcon}</div>}
+        <span> {label}</span>
       </span>
     </div>
   );
