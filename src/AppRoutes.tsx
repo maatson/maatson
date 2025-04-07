@@ -505,15 +505,24 @@ const AppRoutes: React.FC = () => {
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
             <Route index element={<Updates />} />
-            <Route path ="updates/update-details/:id" element={<UpdateDetails />} />
+            <Route
+              path="updates/update-details/:id"
+              element={<UpdateDetails />}
+            />
             <Route path="container-pickup" element={<ContainerPickUp />} />
             <Route
               path="container-pickup/details/:id"
               element={<ContainerPickUpDetails />}
             />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
-            <Route path="terminal-gateIn/details/:id" element={<TerminalGateInDetails />} />
-            <Route path="create-split-booking/:id" element={<CreateSplitBooking />} />
+            <Route
+              path="terminal-gateIn/details/:id"
+              element={<TerminalGateInDetails />}
+            />
+            <Route
+              path="create-split-booking/:id"
+              element={<CreateSplitBooking />}
+            />
             <Route
               path="onboard-confirmation"
               element={<OnboardConfirmation />}
@@ -537,10 +546,13 @@ const AppRoutes: React.FC = () => {
               element={<DeliveryOrderCollectedView />}
             />
             <Route
-              path="empty-return-confirmation"
-              element={<EmptyReturnConfirmation />}
+              path="empty-gateIn-confirmation"
+              element={<EmptyGateInConfirmation />}
             />
-            <Route path="empty-gateIn-confirmation/view/:id" element={<ViewEmptyGateIn />} />
+            <Route
+              path="empty-gateIn-confirmation/view/:id"
+              element={<ViewEmptyGateIn />}
+            />
           </Route>
 
           <Route path="air-freight" element={<ShipmentAirFreight />}>

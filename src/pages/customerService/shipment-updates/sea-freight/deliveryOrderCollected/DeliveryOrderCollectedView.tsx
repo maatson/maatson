@@ -57,7 +57,7 @@ const fclColumns: any[] = [
   { id: "onboardDate", label: "Onboard Date" },
   { id: "ata_pod", label: "ATA (POD)" },
   { id: "doc", label: "Delivery Order Collected (DOC)" },
-  { id: "action", label: "Action", minWidth: "100px" },
+  { id: "action", label: "Action", minWidth: "100px", align:"center" },
 ];
 const columns: any[] = [
   { id: "s.no", label: "s.no", minWidth: "100px" },
@@ -70,7 +70,7 @@ const columns: any[] = [
   { id: "onboardDate", label: "Onboard Date" },
   { id: "ata_pod", label: "ATA (POD)" },
   { id: "doc", label: "Delivery Order Collected (DOC)" },
-  { id: "action", label: "Action", minWidth: "100px" },
+  { id: "action", label: "Action", minWidth: "100px", align:"center" },
 ];
 
 const DeliveryOrderCollectedView: React.FC = () => {
@@ -236,7 +236,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
     } = items;
 
     const actionValue = (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 justify-center">
         {!isEditing ? (
           <div
             className="p-1 rounded bg-blue flex items-center cursor-pointer"
@@ -251,7 +251,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
               onClick={() => handleToggleEdit(dimensionId, id, false)}
             >
               <CrossIcon color="#ffffff" size={16} />
-            </div>{" "}
+            </div>
             <div className="p-1 rounded bg-success flex items-center cursor-pointer">
               <TickIcon color="#ffffff" size={16} />
             </div>
@@ -389,14 +389,12 @@ const DeliveryOrderCollectedView: React.FC = () => {
                 <ViewCard
                   label={"Container Type"}
                   value={dimension.containerSize}
-                  style="flex-col"
                   labelStyle="font-normal"
                   valueStyle="font-semibold"
                 />
                 <ViewCard
                   label={"Quantity"}
                   value={dimension.containerCount}
-                  style="flex-col"
                   labelStyle="font-normal"
                   valueStyle="font-semibold"
                 />
