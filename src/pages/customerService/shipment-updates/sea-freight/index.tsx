@@ -21,6 +21,9 @@ const ShipmentSeaFreight: React.FC = () => {
           ) &&
           !location.pathname.startsWith(
             "/shipment-updates/sea-freight/container-pickup/details"
+          ) &&
+          !location.pathname.startsWith(
+            "/shipment-updates/sea-freight/delivery-order-collected/view"
           ) && 
           !location.pathname.startsWith(
             "/shipment-updates/sea-freight/terminal-gateIn/details"

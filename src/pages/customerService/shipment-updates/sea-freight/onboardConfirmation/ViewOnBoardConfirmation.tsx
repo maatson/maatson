@@ -9,8 +9,8 @@ import {
 } from "../../../../../components/icons/Icons";
 import { Link, useParams } from "react-router-dom";
 import maatsonLogo from "/images/logo.svg";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 import CustomTable from "../../../../../components/table/CustomTable";
+import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 
 const ViewOnBoardConfirmation: React.FC = () => {
   const { bookingId } = useParams();
@@ -146,26 +146,71 @@ const ViewOnBoardConfirmation: React.FC = () => {
         {/*  */}
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-4">
-            <ViewCard label={"Bill of Lading Number:"} value={"123dd4545"} />
+            <ViewCard
+              label={"Bill of Lading Number:"}
+              value={"123dd4545"}
+              labelStyle="font-semibold"
+            />
             <ViewCard
               label={"Cargo Type :"}
               value={"FCL(Full Container Load)"}
+              labelStyle="font-semibold"
             />
-            <ViewCard label={"Carrier Name:"} value={"123dd4545"} />
-            <ViewCard label={"Vessel Name:"} value={"123dd4545"} />
-            <ViewCard label={"Voyage Number:"} value={"123dd4545"} />
+            <ViewCard
+              label={"Carrier Name:"}
+              value={"123dd4545"}
+              labelStyle="font-semibold"
+            />
+            <ViewCard
+              label={"Vessel Name:"}
+              value={"123dd4545"}
+              labelStyle="font-semibold"
+            />
+            <ViewCard
+              label={"Voyage Number:"}
+              value={"123dd4545"}
+              labelStyle="font-semibold"
+            />
           </div>
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <ViewCard label={"Booking Number:"} value={"BOOKd4545"} />
-              <ViewCard label={"Vessel Sailed Date:"} value={"11-04-2025"} />
-              <ViewCard label={"Vessel Sailed Time:"} value={"-"} />
+              <ViewCard
+                label={"Booking Number:"}
+                value={"BOOKd4545"}
+                labelStyle="font-semibold"
+              />
+              <ViewCard
+                label={"Vessel Sailed Date:"}
+                value={"11-04-2025"}
+                labelStyle="font-semibold"
+              />
+              <ViewCard
+                label={"Vessel Sailed Time:"}
+                value={"-"}
+                labelStyle="font-semibold"
+              />
             </div>
             <div className="flex flex-col gap-4">
-              <ViewCard label={"Port of Loading:"} value={"Chennai"} />
-              <ViewCard label={"POD(Transshipment):"} value={"Colombo"} />
-              <ViewCard label={"POD(Transshipment):"} value={"Mumbai"} />
-              <ViewCard label={"Final Port of Discharge:"} value={"Dubai"} />
+              <ViewCard
+                label={"Port of Loading:"}
+                value={"Chennai"}
+                labelStyle="font-semibold"
+              />
+              <ViewCard
+                label={"POD(Transshipment):"}
+                value={"Colombo"}
+                labelStyle="font-semibold"
+              />
+              <ViewCard
+                label={"POD(Transshipment):"}
+                value={"Mumbai"}
+                labelStyle="font-semibold"
+              />
+              <ViewCard
+                label={"Final Port of Discharge:"}
+                value={"Dubai"}
+                labelStyle="font-semibold"
+              />
             </div>
           </div>
         </div>

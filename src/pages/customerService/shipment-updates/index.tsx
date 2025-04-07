@@ -42,6 +42,10 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["Shipment Updates", "Transit Info"]
             : location.pathname.startsWith(
+                "/shipment-updates/sea-freight/delivery-order-collected/view"
+              )
+            ? ["Shipment Updates", "Delivery Order Collected (DOC)"]
+            : location.pathname.startsWith(
               "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
             )
           ? ["Shipment Updates", "Empty Gate In Confirmation"]
@@ -79,6 +83,10 @@ const ShippingUpdates: React.FC = () => {
               )
             ? "Transit Info"
             : location.pathname.startsWith(
+                "/shipment-updates/sea-freight/delivery-order-collected/view"
+              )
+            ? "Delivery Order Collected (DOC) Details"
+            : location.pathname.startsWith(
               "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
             )
           ? "Empty Gate In Confirmation"
@@ -99,6 +107,9 @@ const ShippingUpdates: React.FC = () => {
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/container-pickup/details"
+        ) &&
+        !location.pathname.startsWith(
+          "/shipment-updates/sea-freight/delivery-order-collected/view"
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/terminal-gateIn/details"

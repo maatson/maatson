@@ -4,6 +4,7 @@ import GroupField from "../../../../../components/groupField/GroupField";
 import { AddIcon, DeleteIcon } from "../../../../../components/icons/Icons";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 
 const EditOnBoardConfirmation: React.FC = () => {
   const [data, setData] = useState({
@@ -109,7 +110,33 @@ const EditOnBoardConfirmation: React.FC = () => {
         <p className="text-grey-ab font-semibold mx-auto">
           ONBOARD CONFIRMATION ( Sea Freight)
         </p>
-        <div className="px-4 gap-4 py-3 flex flex-col bg-grey-200 rounded">
+        <div className="px-3 gap-4 py-3 flex justify-between">
+          <div className="flex flex-col gap-3">
+            <ViewCard
+              label={"Branch/Agent Name"}
+              value={data.branchName}
+              labelStyle="font-semibold"
+            />
+            <ViewCard
+              label={"Address"}
+              value={data.address}
+              labelStyle="font-semibold"
+            />
+          </div>
+          <div className="flex flex-col gap-3">
+            <ViewCard
+              label={"Email"}
+              value={data.email}
+              labelStyle="font-semibold"
+            />
+            <ViewCard
+              label={"Mobile Number"}
+              value={data.mobile}
+              labelStyle="font-semibold"
+            />
+          </div>
+        </div>
+        {/* <div className="px-4 gap-4 py-3 flex flex-col bg-grey-200 rounded">
           <p className="text-lg font-semibold">Branch/Agent Information</p>
           <div className="flex gap-2 justify-between flex-wrap">
             <GroupField
@@ -157,7 +184,7 @@ const EditOnBoardConfirmation: React.FC = () => {
               parentStyle="basis-1/3"
             />
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="flex items-start justify-between">
         <div className="flex flex-col gap-4 w-1/3">
