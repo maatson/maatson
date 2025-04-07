@@ -158,7 +158,7 @@ const EmptyGateInConfirmation: React.FC = () => {
       <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center">
         <div className="w-[60%] flex gap-4 items-center">
           <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-            Empty Return Confirmation List
+            Empty Gate In Confirmation List
           </p>
           <GroupField
             label={""}

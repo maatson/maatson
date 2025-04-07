@@ -174,7 +174,7 @@ const TransitView: React.FC = () => {
                       containerDetailIndex === activeTransitLeg
                         ? " bg-black text-grey-ab-50"
                         : "text-black "
-                    } px-4 py-1 rounded text-sm font-semibold transition-all duration-500`}
+                    } px-4 py-1 rounded text-sm font-semibold transition-all duration-500 cursor-pointer`}
                     onClick={() => setActiveTransitLeg(containerDetailIndex)}
                   >
                     Transit leg {containerDetailIndex + 1}
