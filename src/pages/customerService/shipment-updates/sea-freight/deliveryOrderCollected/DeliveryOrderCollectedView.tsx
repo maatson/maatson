@@ -47,7 +47,7 @@ interface DataProps {
 }
 
 const fclColumns: any[] = [
-  { id: "s.no", label: "s.no", minWidth: "100px" },
+  { id: "sNo", label: "s.no", minWidth: "100px" },
   {
     id: "containerNumber",
     label: "Container Number",
@@ -274,6 +274,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
 
     const updatedRowData = {
       id: id,
+      sNo: id + 1,
       containerNumber,
       pickupDate,
       terminalGateInDate,
@@ -389,14 +390,12 @@ const DeliveryOrderCollectedView: React.FC = () => {
                 <ViewCard
                   label={"Container Type"}
                   value={dimension.containerSize}
-                  style="flex-col"
                   labelStyle="font-normal"
                   valueStyle="font-semibold"
                 />
                 <ViewCard
                   label={"Quantity"}
                   value={dimension.containerCount}
-                  style="flex-col"
                   labelStyle="font-normal"
                   valueStyle="font-semibold"
                 />
