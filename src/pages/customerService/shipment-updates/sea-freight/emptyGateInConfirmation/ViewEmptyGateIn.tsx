@@ -1,10 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import WarningChip from "../../../../../components/chips/WarningChip";
-import { CrossIcon, EditIcon, ExcelIcon, SendIcon, TickIcon } from "../../../../../components/icons/Icons";
+import {
+  CrossIcon,
+  EditIcon,
+  ExcelIcon,
+  SendIcon,
+  TickIcon,
+} from "../../../../../components/icons/Icons";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import CustomTable from "../../../../../components/table/CustomTable";
 import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ship from "/images/cargoShip.png";
 
 interface FCLcontainerProps {
   containerNumber: string;
@@ -173,35 +180,35 @@ const ViewEmptyGateIn: React.FC = () => {
     ],
   });
 
-   const handleChange = (
-      e: React.ChangeEvent<HTMLInputElement>,
-      dimensionalId: number,
-      containerIndex: number
-    ) => {
-      const { name, value } = e.target;
-  
-      const updatedContainerDetails = [
-        ...dummydata.cargoDimensions[dimensionalId]?.containerDetails,
-      ];
-      updatedContainerDetails[containerIndex] = {
-        ...updatedContainerDetails[containerIndex],
-        [name]: value,
-      };
-      // Create a new copy of the cargoDimensions array with updated containerDetails
-      const updatedCargoDimensions = [...dummydata.cargoDimensions];
-      updatedCargoDimensions[dimensionalId] = {
-        ...dummydata.cargoDimensions[dimensionalId],
-        containerDetails: updatedContainerDetails,
-      };
-  
-      // Set the updated state with the updated cargoDimensions array
-      setDummyData((prevData) => ({
-        ...prevData, // Keep the rest of the state unchanged
-        cargoDimensions: updatedCargoDimensions,
-      }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    dimensionalId: number,
+    containerIndex: number
+  ) => {
+    const { name, value } = e.target;
+
+    const updatedContainerDetails = [
+      ...dummydata.cargoDimensions[dimensionalId]?.containerDetails,
+    ];
+    updatedContainerDetails[containerIndex] = {
+      ...updatedContainerDetails[containerIndex],
+      [name]: value,
+    };
+    // Create a new copy of the cargoDimensions array with updated containerDetails
+    const updatedCargoDimensions = [...dummydata.cargoDimensions];
+    updatedCargoDimensions[dimensionalId] = {
+      ...dummydata.cargoDimensions[dimensionalId],
+      containerDetails: updatedContainerDetails,
     };
 
-      // handle edit
+    // Set the updated state with the updated cargoDimensions array
+    setDummyData((prevData) => ({
+      ...prevData, // Keep the rest of the state unchanged
+      cargoDimensions: updatedCargoDimensions,
+    }));
+  };
+
+  // handle edit
   const handleToggleEdit = (
     dimensionalId: number,
     id: number,
@@ -228,100 +235,100 @@ const ViewEmptyGateIn: React.FC = () => {
     }));
   };
 
-   const createRowData = (items: any) => {
-      const {
-        id,
-        dimensionId,
-        containerNumber,
-        pickupDate,
-        terminalGateInDate,
-        onboardDate,
-        doc,
-        emptyGateInDate,
-        ata_pod,
-        isEditing = false,
-      } = items;
-  
-      const actionValue = (
-        <div className="flex items-center gap-3 justify-center">
-          {!isEditing ? (
+  const createRowData = (items: any) => {
+    const {
+      id,
+      dimensionId,
+      containerNumber,
+      pickupDate,
+      terminalGateInDate,
+      onboardDate,
+      doc,
+      emptyGateInDate,
+      ata_pod,
+      isEditing = false,
+    } = items;
+
+    const actionValue = (
+      <div className="flex items-center gap-3 justify-center">
+        {!isEditing ? (
+          <div
+            className="p-1 rounded bg-blue flex items-center cursor-pointer"
+            onClick={() => handleToggleEdit(dimensionId, id, true)}
+          >
+            <EditIcon color="#ffffff" size={16} />
+          </div>
+        ) : (
+          <>
             <div
-              className="p-1 rounded bg-blue flex items-center cursor-pointer"
-              onClick={() => handleToggleEdit(dimensionId, id, true)}
+              className="p-1 rounded bg-red flex items-center cursor-pointer"
+              onClick={() => handleToggleEdit(dimensionId, id, false)}
             >
-              <EditIcon color="#ffffff" size={16} />
+              <CrossIcon color="#ffffff" size={16} />
             </div>
-          ) : (
-            <>
-              <div
-                className="p-1 rounded bg-red flex items-center cursor-pointer"
-                onClick={() => handleToggleEdit(dimensionId, id, false)}
-              >
-                <CrossIcon color="#ffffff" size={16} />
-              </div>
-              <div className="p-1 rounded bg-success flex items-center cursor-pointer">
-                <TickIcon color="#ffffff" size={16} />
-              </div>
-            </>
-          )}
-        </div>
-      );
-  
-      const emptyGateInDateValue = isEditing ? (
-        <input
-          type="date"
-          value={emptyGateInDate || ""}
-          name="emptyGateInDate"
-          onChange={(e) => handleChange(e, dimensionId, id)}
-          className="px-1 rounded border border-grey-200 hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400  placeholder-grey-ab-200 focus:outline-none bg-primary-50  active:outline-none text-grey-ab-800"
-        />
-      ) : (
-        emptyGateInDate
-      );
-  
-      const updatedRowData = {
-        id: id,
-        sNo: id+1,
-        containerNumber,
-        pickupDate,
-        terminalGateInDate,
-        onboardDate,
-        ata_pod,
-        doc,
-        emptyGateInDate: emptyGateInDateValue || "-",
-        action: actionValue,
-      };
-  
-      return updatedRowData;
+            <div className="p-1 rounded bg-success flex items-center cursor-pointer">
+              <TickIcon color="#ffffff" size={16} />
+            </div>
+          </>
+        )}
+      </div>
+    );
+
+    const emptyGateInDateValue = isEditing ? (
+      <input
+        type="date"
+        value={emptyGateInDate || ""}
+        name="emptyGateInDate"
+        onChange={(e) => handleChange(e, dimensionId, id)}
+        className="px-1 rounded border border-grey-200 hover:border-grey-ab-100 focus:border-primary-400 active:border-primary-400 focus-within:border-primary-400  placeholder-grey-ab-200 focus:outline-none bg-primary-50  active:outline-none text-grey-ab-800"
+      />
+    ) : (
+      emptyGateInDate
+    );
+
+    const updatedRowData = {
+      id: id,
+      sNo: id + 1,
+      containerNumber,
+      pickupDate,
+      terminalGateInDate,
+      onboardDate,
+      ata_pod,
+      doc,
+      emptyGateInDate: emptyGateInDateValue || "-",
+      action: actionValue,
     };
-  
-    const createData = (items: any) => {
-      const { id, containerDetails } = items;
-      const arr = containerDetails.map((rowItems: any, rowIndex: number) => {
-        return createRowData({ ...rowItems, id: rowIndex, dimensionId: id }); //create each row data
-      });
-      // Ensure all columns have a value (or a default) for each row.
-      const updatedData = {
-        dimensionId: id,
-        containerDetails: arr,
-      };
-  
-      return updatedData;
+
+    return updatedRowData;
+  };
+
+  const createData = (items: any) => {
+    const { id, containerDetails } = items;
+    const arr = containerDetails.map((rowItems: any, rowIndex: number) => {
+      return createRowData({ ...rowItems, id: rowIndex, dimensionId: id }); //create each row data
+    });
+    // Ensure all columns have a value (or a default) for each row.
+    const updatedData = {
+      dimensionId: id,
+      containerDetails: arr,
     };
-  
-    // Memoize fetchData function with useCallback
-    const fetchData = useCallback(() => {
-      const arr = dummydata.cargoDimensions.map((items, index) => {
-        return createData({ ...items, id: index }); 
-      });
-      console.log(arr, "array", dummydata);
-      setRows(arr); 
-    }, [dummydata]); 
-  
-    useEffect(() => {
-      fetchData(); 
-    }, [fetchData]); 
-    
+
+    return updatedData;
+  };
+
+  // Memoize fetchData function with useCallback
+  const fetchData = useCallback(() => {
+    const arr = dummydata.cargoDimensions.map((items, index) => {
+      return createData({ ...items, id: index });
+    });
+    console.log(arr, "array", dummydata);
+    setRows(arr);
+  }, [dummydata]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <div className="flex flex-col gap-6 bg-primary-50">
       <div className="flex justify-between p-3 rounded-xs bg-grey-aw-50 text-grey-ab-900 text-lg font-bold items-center">
@@ -373,32 +380,37 @@ const ViewEmptyGateIn: React.FC = () => {
         </div>
       </div>
 
-      {/* container type */}
-      {/* <div className="flex flex-col gap-3">
-        <div className="flex px-4 py-2 justify-between bg-grey-aw-50 rounded-sm text-grey-ab-900 items-center">
-          <div className="flex gap-2 text-sm">
-            <p>Container Type</p>
-            <p className="font-bold">20’ft Dry Container</p>
-          </div>
-          <div className="flex gap-2 text-sm">
-            <p>Quantity</p>
-            <p className="font-bold">05</p>
-          </div>
-
-          <div className="rounded-xl bg-secondary-50 flex gap-1 py-1 pl-2 pr-1 items-center">
-            <p className="text-2xs font-bold text-secondary">Pending</p>
-            <div className="rounded-full bg-secondary-300 p-1 text-2xs font-bold text-grey-aw-50 w-[20px] h-[20px] flex items-center justify-center">
-              <p>05</p>
-            </div>
-          </div>
-        </div>
-
-        <CustomTable columns={[]} rows={[]} isCheckbox={false} />
-      </div> */}
-       {dummydata.cargoDimensions.length > 0 &&
+      {dummydata.cargoDimensions.length > 0 &&
         dummydata.cargoDimensions.map((dimension, dimensionIndex) => {
           return (
             <div key={dimensionIndex} className="gap-3 flex flex-col">
+              <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
+                <div className="flex items-center justify-center w-16 h-16">
+                  <img src={ship} alt="ship.png" />
+                </div>
+                <ViewCard
+                  label={"Carrier  Name"}
+                  value={"Maersk Line"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+                <ViewCard
+                  label={"Vessel Name"}
+                  value={"Maersk Emerald"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+
+                <ViewCard
+                  label={"Voyage Number"}
+                  value={"M1234"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+              </div>
               <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
                 <ViewCard
                   label={"Container Type"}
