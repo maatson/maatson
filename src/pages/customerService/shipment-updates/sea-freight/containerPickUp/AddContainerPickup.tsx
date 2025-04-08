@@ -42,7 +42,7 @@ const AddContainerPickup: React.FC<AddContainerPickupProps> = ({ onClose, cargoT
             placeholder={"Enter Package Quantity"}
             name={""}
             value={""}
-            onChange={function (
+            onChange={function (   
               e: React.ChangeEvent<
                 HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
               >
