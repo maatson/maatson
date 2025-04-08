@@ -11,6 +11,7 @@ import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import CustomTable from "../../../../../components/table/CustomTable";
 import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ship from "/images/cargoShip.png";
 
 interface FCLcontainerProps {
   containerNumber: string;
@@ -379,32 +380,37 @@ const ViewEmptyGateIn: React.FC = () => {
         </div>
       </div>
 
-      {/* container type */}
-      {/* <div className="flex flex-col gap-3">
-        <div className="flex px-4 py-2 justify-between bg-grey-aw-50 rounded-sm text-grey-ab-900 items-center">
-          <div className="flex gap-2 text-sm">
-            <p>Container Type</p>
-            <p className="font-bold">20’ft Dry Container</p>
-          </div>
-          <div className="flex gap-2 text-sm">
-            <p>Quantity</p>
-            <p className="font-bold">05</p>
-          </div>
-
-          <div className="rounded-xl bg-secondary-50 flex gap-1 py-1 pl-2 pr-1 items-center">
-            <p className="text-2xs font-bold text-secondary">Pending</p>
-            <div className="rounded-full bg-secondary-300 p-1 text-2xs font-bold text-grey-aw-50 w-[20px] h-[20px] flex items-center justify-center">
-              <p>05</p>
-            </div>
-          </div>
-        </div>
-
-        <CustomTable columns={[]} rows={[]} isCheckbox={false} />
-      </div> */}
       {dummydata.cargoDimensions.length > 0 &&
         dummydata.cargoDimensions.map((dimension, dimensionIndex) => {
           return (
             <div key={dimensionIndex} className="gap-3 flex flex-col">
+              <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
+                <div className="flex items-center justify-center w-16 h-16">
+                  <img src={ship} alt="ship.png" />
+                </div>
+                <ViewCard
+                  label={"Carrier  Name"}
+                  value={"Maersk Line"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+                <ViewCard
+                  label={"Vessel Name"}
+                  value={"Maersk Emerald"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+
+                <ViewCard
+                  label={"Voyage Number"}
+                  value={"M1234"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+              </div>
               <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
                 <ViewCard
                   label={"Container Type"}
