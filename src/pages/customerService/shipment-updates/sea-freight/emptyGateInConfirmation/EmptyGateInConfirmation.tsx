@@ -144,14 +144,14 @@ const EmptyGateInConfirmation: React.FC = () => {
   // Memoize fetchData function with useCallback
   const fetchData = useCallback(() => {
     const arr = data.map((items, index) => {
-      return createData({ ...items, id: index }); // Ensure createData returns the transformed data
+      return createData({ ...items, id: index }); 
     });
-    setRows(arr); // Set the rows with the updated data
-  }, []); // Empty dependency array ensures this function is only created once
+    setRows(arr); 
+  }, []); 
 
   useEffect(() => {
-    fetchData(); // Call fetchData when the component mounts
-  }, [fetchData]); // Only re-run fetchData if fetchData changes
+    fetchData(); 
+  }, [fetchData]); 
 
   return (
     <>
