@@ -41,6 +41,14 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["...", "OnBoard Confirmation", "Edit"]
             : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/view"
+              )
+            ? ["...", "Departure Confirmation", "View"]
+            : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/edit"
+              )
+            ? ["...", "Departure Confirmation", "Edit"]
+            : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/transit-view"
               )
             ? ["Shipment Updates", "Transit Info"]
@@ -49,13 +57,17 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["Shipment Updates", "Delivery Order Collected (DOC)"]
             : location.pathname.startsWith(
+                "/shipment-updates/air-freight/delivery-order-collected/view"
+              )
+            ? ["Shipment Updates", "Delivery Order Collected (DOC)"]
+            : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
               )
             ? ["Shipment Updates", "Empty Gate In Confirmation"]
             : location.pathname.startsWith(
-              "/shipment-updates/air-freight/airport-gatein-date/view"
-            )
-          ? ["Shipment Updates", "Airport Gate-in Date Information"]
+                "/shipment-updates/air-freight/airport-gatein-date/view"
+              )
+            ? ["Shipment Updates", "Airport Gate-in Date Information"]
             : "Shipment Updates",
         ].flat()}
         heading={
@@ -89,7 +101,19 @@ const ShippingUpdates: React.FC = () => {
               )
             ? "OnBoard Confirmation Edit"
             : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/view"
+              )
+            ? "Departure Confirmation View"
+            : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/edit"
+              )
+            ? "Departure Confirmation Edit"
+            : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/transit-view"
+              )
+            ? "Transit Info"
+            : location.pathname.startsWith(
+                "/shipment-updates/air-freight/transit-view"
               )
             ? "Transit Info"
             : location.pathname.startsWith(
@@ -97,13 +121,17 @@ const ShippingUpdates: React.FC = () => {
               )
             ? "Delivery Order Collected (DOC) Details"
             : location.pathname.startsWith(
+                "/shipment-updates/air-freight/delivery-order-collected/view"
+              )
+            ? "Delivery Order Collected (DOC) Details"
+            : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
               )
             ? "Empty Gate In Confirmation"
             : location.pathname.startsWith(
-              "/shipment-updates/air-freight/airport-gatein-date/view"
-            )
-          ? "Airport Gate-in Date Information"
+                "/shipment-updates/air-freight/airport-gatein-date/view"
+              )
+            ? "Airport Gate-in Date Information"
             : "Shipment Updates"
         }
       />
@@ -114,7 +142,16 @@ const ShippingUpdates: React.FC = () => {
           "/shipment-updates/sea-freight/onboard-confirmation/edit"
         ) &&
         !location.pathname.startsWith(
+          "/shipment-updates/air-freight/departure-confirmation/view"
+        ) &&
+        !location.pathname.startsWith(
+          "/shipment-updates/air-freight/departure-confirmation/edit"
+        ) &&
+        !location.pathname.startsWith(
           "/shipment-updates/sea-freight/transit-view"
+        ) &&
+        !location.pathname.startsWith(
+          "/shipment-updates/air-freight/transit-view"
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/updates/update-details"
@@ -126,6 +163,9 @@ const ShippingUpdates: React.FC = () => {
           "/shipment-updates/sea-freight/delivery-order-collected/view"
         ) &&
         !location.pathname.startsWith(
+          "/shipment-updates/air-freight/delivery-order-collected/view"
+        ) &&
+        !location.pathname.startsWith(
           "/shipment-updates/sea-freight/terminal-gateIn/details"
         ) &&
         !location.pathname.startsWith(
@@ -133,10 +173,10 @@ const ShippingUpdates: React.FC = () => {
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
-        ) && 
+        ) &&
         !location.pathname.startsWith(
           "/shipment-updates/air-freight/updates/update-details"
-        ) && 
+        ) &&
         !location.pathname.startsWith(
           "/shipment-updates/air-freight/airport-gatein-date/view"
         ) && (
