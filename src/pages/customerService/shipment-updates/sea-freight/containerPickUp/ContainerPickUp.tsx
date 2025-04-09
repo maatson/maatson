@@ -148,7 +148,7 @@ const ContainerPickUp: React.FC = () => {
             label={""}
             type={""}
             placeholder={"Search"}
-            name={""}
+            name={"search"}
             value={""}
             onChange={function (
               e: React.ChangeEvent<

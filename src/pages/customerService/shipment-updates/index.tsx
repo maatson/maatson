@@ -26,9 +26,9 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["Shipment Updates", "Terminal Gate In Details"]
             : location.pathname.startsWith(
-              "/shipment-updates/sea-freight/create-split-booking"
-            )
-          ? ["Shipment Updates", "Split Booking"]
+                "/shipment-updates/sea-freight/create-split-booking"
+              )
+            ? ["Shipment Updates", "Split Booking"]
             : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/onboard-confirmation/view"
               )
@@ -38,6 +38,14 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["...", "OnBoard Confirmation", "Edit"]
             : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/view"
+              )
+            ? ["...", "Departure Confirmation", "View"]
+            : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/edit"
+              )
+            ? ["...", "Departure Confirmation", "Edit"]
+            : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/transit-view"
               )
             ? ["Shipment Updates", "Transit Info"]
@@ -46,9 +54,9 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["Shipment Updates", "Delivery Order Collected (DOC)"]
             : location.pathname.startsWith(
-              "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
-            )
-          ? ["Shipment Updates", "Empty Gate In Confirmation"]
+                "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
+              )
+            ? ["Shipment Updates", "Empty Gate In Confirmation"]
             : "Shipment Updates",
         ].flat()}
         heading={
@@ -79,7 +87,19 @@ const ShippingUpdates: React.FC = () => {
               )
             ? "OnBoard Confirmation Edit"
             : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/view"
+              )
+            ? "Departure Confirmation View"
+            : location.pathname.startsWith(
+                "/shipment-updates/air-freight/departure-confirmation/edit"
+              )
+            ? "Departure Confirmation Edit"
+            : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/transit-view"
+              )
+            ? "Transit Info"
+            : location.pathname.startsWith(
+                "/shipment-updates/air-freight/transit-view"
               )
             ? "Transit Info"
             : location.pathname.startsWith(
@@ -87,9 +107,9 @@ const ShippingUpdates: React.FC = () => {
               )
             ? "Delivery Order Collected (DOC) Details"
             : location.pathname.startsWith(
-              "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
-            )
-          ? "Empty Gate In Confirmation"
+                "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
+              )
+            ? "Empty Gate In Confirmation"
             : "Shipment Updates"
         }
       />
@@ -100,7 +120,16 @@ const ShippingUpdates: React.FC = () => {
           "/shipment-updates/sea-freight/onboard-confirmation/edit"
         ) &&
         !location.pathname.startsWith(
+          "/shipment-updates/air-freight/departure-confirmation/view"
+        ) &&
+        !location.pathname.startsWith(
+          "/shipment-updates/air-freight/departure-confirmation/edit"
+        ) &&
+        !location.pathname.startsWith(
           "/shipment-updates/sea-freight/transit-view"
+        ) &&
+        !location.pathname.startsWith(
+          "/shipment-updates/air-freight/transit-view"
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/updates/update-details"
@@ -113,10 +142,10 @@ const ShippingUpdates: React.FC = () => {
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/terminal-gateIn/details"
-        ) && 
+        ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/create-split-booking"
-        ) && 
+        ) &&
         !location.pathname.startsWith(
           "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
         ) && (

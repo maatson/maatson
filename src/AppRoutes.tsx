@@ -347,10 +347,28 @@ const DepartureConfirmationAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/departureConfirmation/DepartureConfirmation"
     )
 );
+const ViewDepartureConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/departureConfirmation/ViewDepartureConfirmation"
+    )
+);
+const EditDepartureConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/departureConfirmation/EditDepartureConfirmation"
+    )
+);
 const TransitInfoAir = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/air-freight/transitInfo/TransitInfo"
+    )
+);
+const TransitViewAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/transitInfo/TransitView"
     )
 );
 const DeliveryOrderCollectedAir = lazy(
@@ -569,7 +587,17 @@ const AppRoutes: React.FC = () => {
               path="departure-confirmation"
               element={<DepartureConfirmationAir />}
             />
+            <Route
+              path="departure-confirmation/view/:bookingId"
+              element={<ViewDepartureConfirmation />}
+            />
+            <Route
+              path="departure-confirmation/edit/:bookingId"
+              element={<EditDepartureConfirmation />}
+            />
             <Route path="transit-info" element={<TransitInfoAir />} />
+            <Route path="transit-view/:id" element={<TransitViewAir />} />
+
             <Route
               path="delivery-order-collected"
               element={<DeliveryOrderCollectedAir />}
