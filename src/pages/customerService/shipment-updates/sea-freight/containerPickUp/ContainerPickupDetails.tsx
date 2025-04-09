@@ -39,6 +39,18 @@ interface BulkRowData {
   action: React.ReactNode;
 }
 
+interface FCLItem {
+  containerNumber: string;
+  pickupDate: string;
+}
+
+interface LCLItem {
+  containerNumber: string;
+  quantity: string;
+  pickupDate: string;
+}
+
+
 const FCLColumns: any[] = [
   { id: "No", label: "NO", minWidth: 30, align: "center" },
   {
@@ -76,41 +88,10 @@ const ContainerPickupDetails: React.FC = () => {
   const [lclRows, setLCLRows] = useState<LCLRowData[]>([]);
   const [bulkRows, setBulkRows] = useState<BulkRowData[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const [editingRows, setEditingRows] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-
-  const handleEdit = (id: number) => {
-    setEditingRows((prev) => ({ ...prev, [id]: true }));
-  };
-
-  const handleDeleteFCL = (id: number) => {
-    setFCLData((prev) => prev.filter((_, index) => index !== id));
-  };
-  const handleDeleteLCL = (id: number) => {
-    setLCLData((prev) => prev.filter((_, index) => index !== id));
-  };
-
-  const handleCancel = (id: number) => {
-    setEditingRows((prev) => ({ ...prev, [id]: false }));
-  };
-
-  const handleSave = (id: number) => {
-    setEditingRows((prev) => ({ ...prev, [id]: false }));
-  };
-
-  const handleAddMoreFCL = () => {
-    setIsOpen(true);
-    // setFCLData([...FCLData, { containerNumber: "" }]);
-  };
-  const closePopup = () => setIsOpen(false);
-
-
-  const handleAddMoreLCL = () => {
-    setIsOpen(true);
-    // setLCLData([...LCLData, { containerNumber: "" }]);
-  };
+  const [editingRows, setEditingRows] = useState<{ [key: number]: boolean }>({});
+  const [FCLData, setFCLData] = useState<FCLItem[]>([]);
+  const [LCLData, setLCLData] = useState<LCLItem[]>([]);
+  const bulkData = [{ grossWeight: "10000 kgs" }];
 
   // fcl
   const createFCLData = (items: any, index: number) => {
@@ -195,8 +176,6 @@ const ContainerPickupDetails: React.FC = () => {
     };
     return updatedData;
   };
-
-  const [FCLData, setFCLData] = useState([{ containerNumber: "" }]);
 
   const createLCLData = (items: any, index: number) => {
     const { id } = items;
@@ -292,8 +271,6 @@ const ContainerPickupDetails: React.FC = () => {
     return updatedData;
   };
 
-  const [LCLData, setLCLData] = useState([{ containerNumber: "" }]);
-
   const createBulkData = (items: any, index: number) => {
     const { id } = items;
     const isEditing = editingRows[index] || false;
@@ -346,8 +323,39 @@ const ContainerPickupDetails: React.FC = () => {
     return updatedData;
   };
 
-  const bulkData = [{ grossWeight: "10000 kgs" }];
 
+  const handleEdit = (id: number) => {
+    setEditingRows((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const handleDeleteFCL = (id: number) => {
+    setFCLData((prev) => prev.filter((_, index) => index !== id));
+  };
+  const handleDeleteLCL = (id: number) => {
+    setLCLData((prev) => prev.filter((_, index) => index !== id));
+  };
+
+  const handleCancel = (id: number) => {
+    setEditingRows((prev) => ({ ...prev, [id]: false }));
+  };
+
+  const handleSave = (id: number) => {
+    setEditingRows((prev) => ({ ...prev, [id]: false }));
+  };
+
+  const handleAddMoreFCL = () => {
+    setIsOpen(true);
+  };
+  
+  const handleAddMoreLCL = () => {
+    setIsOpen(true);
+  };
+  const handleAddData = () => {
+    setIsOpen(true);
+  }
+  const closePopup = () => setIsOpen(false);
+
+  // table datas fetch
   const fetchFCLData = useCallback(() => {
     const arr = FCLData.map((items, index) => {
       return createFCLData({ ...items, id: index }, index);
@@ -454,7 +462,8 @@ const ContainerPickupDetails: React.FC = () => {
           </div>
 
           {/* for fcl table */}
-          <div>
+          {FCLData.length >=1 ? (
+            <div>
             <CustomTable
               columns={FCLColumns}
               rows={fclRows}
@@ -471,6 +480,21 @@ const ContainerPickupDetails: React.FC = () => {
               </div>
             </div>
           </div>
+          ): (
+            <div className="flex flex-col gap-1 rounded-xs bg-grey-aw-50">
+              <div className="px-6 py-2 bg-grey-200 text-grey-ab-900 flex justify-between font-semibold text-sm">
+                <p className="p-2 py-1">NO</p>
+                <p className="p-2 py-1">Container Number</p>
+                <p className="p-2 py-1">Pickup Date</p>
+                <p className="p-2 py-1">Action</p>
+              </div>
+              <div className="px-6 py-2 flex flex-col gap-4 items-center justify-center">
+                <p className="text-xs text-grey-ab-300">Please enter the Container Number (e.g., ABCD1234567) and Container Pickup Date (e.g., YYYY-MM-DD) for the new row.</p>
+                 <div onClick={handleAddData}><BlackButton label={"Add Data"} size={"s"} variant={"primary"} leftIcon={<AddIcon size={16} color="#ffffff"/>}/></div>
+              </div>
+            </div>
+          )}
+          
 
           {/* for lcl table */}
           {/* <div>

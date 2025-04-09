@@ -329,10 +329,22 @@ const UpdatesAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/updates/Updates"
     )
 );
+const UpdatesAirDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/updates/UpdateAirDetails"
+    )
+);
 const AirportGateInDateAir = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/air-freight/airportGateInDate/AirportGateInDate"
+    )
+);
+const ViewAirportGateIn = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/airportGateInDate/ViewAirportGateIn"
     )
 );
 const CargoHandoverUpdateAir = lazy(
@@ -582,8 +594,16 @@ const AppRoutes: React.FC = () => {
           <Route path="air-freight" element={<ShipmentAirFreight />}>
             <Route index element={<UpdatesAir />} />
             <Route
+              path="updates/update-details/:id"
+              element={<UpdatesAirDetails />}
+            />
+            <Route
               path="airport-gatein-date"
               element={<AirportGateInDateAir />}
+            />
+            <Route
+              path="airport-gatein-date/view/:id"
+              element={<ViewAirportGateIn />}
             />
             <Route
               path="cargo-handover-update"

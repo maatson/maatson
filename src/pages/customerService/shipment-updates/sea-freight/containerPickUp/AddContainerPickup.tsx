@@ -35,14 +35,14 @@ const AddContainerPickup: React.FC<AddContainerPickupProps> = ({ onClose, cargoT
             error={false}
             errorMessage={""}
             options={[]}
-          />
+          />  
           {/* <GroupField
             label={"Package Quantity"}
             type={""}
             placeholder={"Enter Package Quantity"}
             name={""}
             value={""}
-            onChange={function (
+            onChange={function (   
               e: React.ChangeEvent<
                 HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
               >

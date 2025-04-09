@@ -18,6 +18,12 @@ const ShipmentAirFreight: React.FC = () => {
           ) &&
           !location.pathname.startsWith(
             "/shipment-updates/air-freight/delivery-order-collected/view"
+          ) &&
+          !location.pathname.startsWith(
+            "/shipment-updates/air-freight/updates/update-details"
+          ) &&
+          !location.pathname.startsWith(
+            "/shipment-updates/air-freight/airport-gatein-date/view"
           ) && (
             <div className="border-b border-grey-ab-100 flex p-2 gap-2 text-sm font-semibold items-center">
               <div className="pe-2 border-r border-r-grey-ab-100">
@@ -126,6 +132,7 @@ const ShipmentAirFreight: React.FC = () => {
               </div>
             </div>
           )}
+
         <Outlet />
       </div>
     </>
