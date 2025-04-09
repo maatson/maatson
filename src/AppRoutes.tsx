@@ -377,6 +377,12 @@ const DeliveryOrderCollectedAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollected"
     )
 );
+const DeliveryOrderCollectedViewAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollectedView"
+    )
+);
 
 // PRICING AND PROCUREMENT
 
@@ -601,6 +607,10 @@ const AppRoutes: React.FC = () => {
             <Route
               path="delivery-order-collected"
               element={<DeliveryOrderCollectedAir />}
+            />
+            <Route
+              path="delivery-order-collected/view/:id"
+              element={<DeliveryOrderCollectedViewAir />}
             />
           </Route>
         </Route>
