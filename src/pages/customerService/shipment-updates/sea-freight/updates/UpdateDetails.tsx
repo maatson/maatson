@@ -6,7 +6,7 @@ import {
 } from "../../../../../components/icons/Icons";
 import ShipmentTrackingLayout from "../../components/layouts/ShipmentTrackingLayout";
 import CustomTable from "../../../../../components/table/CustomTable";
-import CoargoShipImage from "/images/cargoShip.png";
+import CargoShipImage from "/images/cargoShip.png";
 
 interface FCLRowData {
   id: string | number;
@@ -537,7 +537,7 @@ const UpdateDetails: React.FC = () => {
         <p className="h6 font-semibold">Transit Leg 1</p>
         <div className="px-4 py-2 rounded-sm bg-grey-aw-50 flex justify-between">
           <div className="w-[60px] h-[60px]">
-            <img src={CoargoShipImage} alt="CoargoShipImage" />
+            <img src={CargoShipImage} alt="CargoShipImage" />
           </div>
           <div className="text-sm flex flex-col gap-2 p-1">
             <p className="text-grey-ab-300">Carrier Name</p>
