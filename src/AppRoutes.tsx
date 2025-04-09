@@ -353,6 +353,12 @@ const CargoHandoverUpdateAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/CargoHandoverUpdate"
     )
 );
+const ViewCargoHandoverUpdate = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/ViewCargoHandover"
+    )
+);
 const DepartureConfirmationAir = lazy(
   () =>
     import(
@@ -584,6 +590,10 @@ const AppRoutes: React.FC = () => {
             <Route
               path="cargo-handover-update"
               element={<CargoHandoverUpdateAir />}
+            />
+            <Route
+              path="cargo-handover-update/view/:id"
+              element={<ViewCargoHandoverUpdate />}
             />
             <Route
               path="departure-confirmation"

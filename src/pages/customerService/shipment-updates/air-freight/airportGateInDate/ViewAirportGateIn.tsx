@@ -17,25 +17,39 @@ import AddAirportGateIn from "./AddAirportGateIn";
 interface RowData {
   id: string | number;
   No: string | number;
-  containerNumber: string | React.ReactNode;
-  pickupDate: React.ReactNode;
+  airlineName: string | React.ReactNode;
+  mawbNumber: string | React.ReactNode;
+  hawbNumber: string | React.ReactNode;
+  flightNumber: string | React.ReactNode;
+  origin: string | React.ReactNode;
+  quantity: string | React.ReactNode;
+  flightDate: string | React.ReactNode;
+  airportGateInDate: string | React.ReactNode;
   action: React.ReactNode;
 }
 
 interface Item {
-  containerNumber: string;
-  pickupDate: string;
+  airlineName: string;
+  mawbNumber: string;
+  hawbNumber: string;
+  flightNumber: string;
+  origin: string;
+  quantity: string;
+  flightDate: string;
+  airportGateInDate: string;
 }
 
 const Columns: any[] = [
-  { id: "No", label: "NO", minWidth: 30, align: "center" },
-  {
-    id: "containerNumber",
-    label: "Container Number",
-    minWidth: 140,
-    align: "center",
-  },
-  { id: "pickupDate", label: "Pickup Date", align: "center" },
+  { id: "No", label: "NO", minWidth: 80, align: "center" },
+
+  { id: "airlineName", label: "Airline Name", align: "center" },
+  { id: "mawbNumber", label: "MAWB Number", align: "center" },
+  { id: "hawbNumber", label: "HAWB Number", align: "center" },
+  { id: "flightNumber", label: "Flight Number", align: "center" },
+  { id: "origin", label: "Origin", align: "center" },
+  { id: "quantity", label: "Quantity", align: "center" },
+  { id: "flightDate", label: "Flight Date", align: "center" },
+  { id: "airportGateInDate", label: "Airport Gate In Date", align: "center" },
   { id: "action", label: "Action", align: "center" },
 ];
 
@@ -50,7 +64,7 @@ const ViewAirportGateIn: React.FC = () => {
   const createData = (items: any, index: number) => {
     const { id } = items;
     const isEditing = editingRows[index] || false;
-    const containerNumbers = (
+    const airlineNameValue = (
       <div>
         {!isEditing ? (
           "-"
@@ -61,7 +75,73 @@ const ViewAirportGateIn: React.FC = () => {
         )}
       </div>
     );
-    const pickupDates = (
+    const mawbNumberValue = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const hawbNumberValue = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const flightNumberValue = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const originValue = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const quantityValue = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="text" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const flightDateValue = (
+      <div>
+        {!isEditing ? (
+          "-"
+        ) : (
+          <div>
+            <input type="date" name="" id="" />
+          </div>
+        )}
+      </div>
+    );
+    const airportGateInDateValue = (
       <div>
         {!isEditing ? (
           "-"
@@ -122,8 +202,14 @@ const ViewAirportGateIn: React.FC = () => {
     const updatedData = {
       id: id,
       No: (id + 1).toString().padStart(2, "0"),
-      containerNumber: containerNumbers,
-      pickupDate: pickupDates,
+      airlineName: airlineNameValue,
+      mawbNumber: mawbNumberValue,
+      hawbNumber: hawbNumberValue,
+      flightNumber: flightNumberValue,
+      origin: originValue,
+      quantity: quantityValue,
+      flightDate: flightDateValue,
+      airportGateInDate: airportGateInDateValue,
       action: actions,
     };
     return updatedData;
@@ -234,11 +320,7 @@ const ViewAirportGateIn: React.FC = () => {
 
           {data.length >= 1 ? (
             <div>
-              <CustomTable
-                columns={Columns}
-                rows={rows}
-                isCheckbox={false}
-              />
+              <CustomTable columns={Columns} rows={rows} isCheckbox={false} />
               <div className="w-full bg-grey-aw-50 px-4 py-2 rounded-b-xs">
                 <div onClick={handleAddMore}>
                   <BlackButton
