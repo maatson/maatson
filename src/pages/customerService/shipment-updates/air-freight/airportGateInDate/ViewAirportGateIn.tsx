@@ -297,7 +297,7 @@ const ViewAirportGateIn: React.FC = () => {
             <p className="text-sm font-bold ">11/10/25</p>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-sm">Pickup Status</p>
+            <p className="text-sm">Airport Gate In Status</p>
             <WarningChip label={"Processing"} size={"m"} variant={"fill"} />
           </div>
         </div>

@@ -68,6 +68,10 @@ const ShippingUpdates: React.FC = () => {
                 "/shipment-updates/air-freight/airport-gatein-date/view"
               )
             ? ["Shipment Updates", "Airport Gate-in Date Information"]
+            : location.pathname.startsWith(
+              "/shipment-updates/air-freight/cargo-handover-update/view"
+            )
+          ? ["Shipment Updates", "Cargo Handover Update"]
             : "Shipment Updates",
         ].flat()}
         heading={
@@ -132,6 +136,10 @@ const ShippingUpdates: React.FC = () => {
                 "/shipment-updates/air-freight/airport-gatein-date/view"
               )
             ? "Airport Gate-in Date Information"
+            : location.pathname.startsWith(
+              "/shipment-updates/air-freight/cargo-handover-update/view"
+            )
+          ? "Cargo Handover Update"
             : "Shipment Updates"
         }
       />
@@ -179,6 +187,9 @@ const ShippingUpdates: React.FC = () => {
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/air-freight/airport-gatein-date/view"
+        ) && 
+        !location.pathname.startsWith(
+          "/shipment-updates/air-freight/cargo-handover-update/view"
         ) && (
           <div className="flex items-center text-sm">
             <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold ">

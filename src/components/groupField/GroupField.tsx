@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { DropDownIcon, WarningIcon } from "../icons/Icons";
+import { CalenderIcon, DropDownIcon, WarningIcon } from "../icons/Icons";
 import Select from "react-select";
 import "./style.css";
 import CreatableSelect from "react-select/creatable";
@@ -320,6 +320,30 @@ const GroupField: React.FC<Groupfield> = ({
               placeholder={placeholder}
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
             ></textarea>
+          ) : type === "date" ? (
+            <div className="relative w-full">
+              <input
+                type="date"
+                name={name}
+                value={value}
+                id={name}
+                disabled={isDisabled}
+                onChange={onChange}
+                placeholder={placeholder}
+                className="absolute w-full top-0 left-0 h-full opacity-0 z-10"
+              />
+
+              <div className=" flex w-full justify-between items-center z-0 ">
+                <span
+                  className={`${
+                    value ? "text-grey-ab-800" : "text-grey-ab-200"
+                  }`}
+                >
+                  {value || placeholder}
+                </span>
+                <CalenderIcon size={24} color="#2C398F" />
+              </div>
+            </div>
           ) : (
             <input
               type={type}
@@ -346,7 +370,6 @@ const GroupField: React.FC<Groupfield> = ({
             <span> {errorMessage}</span>
           </p>
         )}
-        {/* </div> */}
       </div>
     </>
   );
