@@ -145,7 +145,7 @@ const PageNotFound: React.FC = () => {
   return (
     <div className="bg-blue-50 relative overflow-hidden h-screen">
       <p className="h2 text-center py-5 bg-blue-50 text-blue-900 font-semibold">
-        Page Not Found 404 !!
+        Page Not Found 404 !!!!!
       </p>
       {data && (
         <table className="bg-red w-4/5 mx-auto rounded-sm relative z-10">
