@@ -1,7 +1,12 @@
 import React from "react";
 
 const AllRates: React.FC = () => {
-  return <div>AllRates</div>;
+  return (
+    <div>
+      <p>All Rates</p>
+      <input type="date" name="date" id="date" />
+    </div>
+  );
 };
 
 export default AllRates;
