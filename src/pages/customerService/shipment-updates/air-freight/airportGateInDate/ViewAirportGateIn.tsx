@@ -21,7 +21,6 @@ interface RowData {
   mawbNumber: string | React.ReactNode;
   hawbNumber: string | React.ReactNode;
   flightNumber: string | React.ReactNode;
-  origin: string | React.ReactNode;
   quantity: string | React.ReactNode;
   flightDate: string | React.ReactNode;
   airportGateInDate: string | React.ReactNode;
@@ -33,7 +32,6 @@ interface Item {
   mawbNumber: string;
   hawbNumber: string;
   flightNumber: string;
-  origin: string;
   quantity: string;
   flightDate: string;
   airportGateInDate: string;
@@ -46,7 +44,6 @@ const Columns: any[] = [
   { id: "mawbNumber", label: "MAWB Number", align: "center" },
   { id: "hawbNumber", label: "HAWB Number", align: "center" },
   { id: "flightNumber", label: "Flight Number", align: "center" },
-  { id: "origin", label: "Origin", align: "center" },
   { id: "quantity", label: "Quantity", align: "center" },
   { id: "flightDate", label: "Flight Date", align: "center" },
   { id: "airportGateInDate", label: "Airport Gate In Date", align: "center" },
@@ -108,17 +105,7 @@ const ViewAirportGateIn: React.FC = () => {
         )}
       </div>
     );
-    const originValue = (
-      <div>
-        {!isEditing ? (
-          "-"
-        ) : (
-          <div>
-            <input type="text" name="" id="" />
-          </div>
-        )}
-      </div>
-    );
+
     const quantityValue = (
       <div>
         {!isEditing ? (
@@ -206,7 +193,6 @@ const ViewAirportGateIn: React.FC = () => {
       mawbNumber: mawbNumberValue,
       hawbNumber: hawbNumberValue,
       flightNumber: flightNumberValue,
-      origin: originValue,
       quantity: quantityValue,
       flightDate: flightDateValue,
       airportGateInDate: airportGateInDateValue,
@@ -340,7 +326,6 @@ const ViewAirportGateIn: React.FC = () => {
                 <p className="p-2 py-1">MAWB Number</p>
                 <p className="p-2 py-1">HAWB Number</p>
                 <p className="p-2 py-1">Flight Number</p>
-                <p className="p-2 py-1">Origin</p>
                 <p className="p-2 py-1">Quantity</p>
                 <p className="p-2 py-1">Flight Date</p>
                 <p className="p-2 py-1">Airport Gate In Date</p>

@@ -11,17 +11,17 @@ import CargoFlightImage from "/images/cargoFlight.png";
 interface RowData {
   id: string | number;
   slNo: string | number | React.ReactNode;
-  airlineName: string;
-  mawbNumber: string;
-  hawbNumber: string;
-  flightNumber: string;
-  origin: string;
-  quantity: string;
-  flightDate: string;
-  airportGateInDate: string;
-  departureConfirmation: string;
-  ata: string;
+  carrierName: string | React.ReactNode;
+  mawbNumber: string | React.ReactNode;
+  hawbNumber: string | React.ReactNode;
+  flightNumber: string | React.ReactNode;
+  quantity: string | React.ReactNode;
+  flightDate: string | React.ReactNode;
+  airportGateInDate: string | React.ReactNode;
   cargoHandoverDate: string | React.ReactNode;
+  departureConfirmation: string | React.ReactNode;
+  ata: string | React.ReactNode;
+  deliveryOrderCollected: string | React.ReactNode;
 }
 
 interface ULDTransitRowData {
@@ -47,14 +47,19 @@ interface StandardCargoTransitRowData {
 
 const Columns: any[] = [
   { id: "slNo", label: "NO", minWidth: 80, align: "center" },
-  { id: "airlineName", label: "Airline Name" },
+  { id: "carrierName", label: "Carrier Name" },
   { id: "mawbNumber", label: "MAWB Number" },
   { id: "hawbNumber", label: "HAWB Number" },
   { id: "flightNumber", label: "Flight Number" },
-  { id: "origin", label: "Origin" },
   { id: "quantity", label: "Quantity", align: "center", minWidth: 50 },
   { id: "flightDate", label: "Flight Date", align: "center" },
   { id: "airportGateInDate", label: "Airport Gate In Date", align: "center" },
+  {
+    id: "cargoHandoverDate",
+    label: "Cargo Handover Date",
+    minWidth: 160,
+    align: "center",
+  },
   {
     id: "departureConfirmation",
     label: "Departure Confirmation",
@@ -63,9 +68,9 @@ const Columns: any[] = [
   },
   { id: "ata", label: "ATA(Date)", align: "center" },
   {
-    id: "cargoHandoverDate",
-    label: "Cargo Handover Date",
-    minWidth: 160,
+    id: "deliveryOrderCollected",
+    label: "Delivery Order Collected",
+    minWidth: 180,
     align: "center",
   },
 ];
@@ -103,34 +108,34 @@ const UpdateAirDetails: React.FC = () => {
     const updatedData = {
       id: id,
       slNo: slNumber,
-      airlineName: items?.airlineName,
+      carrierName: items?.carrierName,
       mawbNumber: items?.mawbNumber,
       hawbNumber: items?.hawbNumber,
       flightNumber: items?.flightNumber,
-      origin: items?.origin,
       quantity: items?.quantity,
       flightDate: items?.flightDate,
-      airportGateInDate: items?.airportGateInDate,
-      departureConfirmation: items?.departureConfirmation,
-      ata: items?.ata,
-      cargoHandoverDate: items?.cargoHandoverDate,
+      airportGateInDate: items?.airportGateInDate || "-",
+      cargoHandoverDate: items?.cargoHandoverDate || "-",
+      departureConfirmation: items?.departureConfirmation || "-",
+      ata: items?.ata || "-",
+      deliveryOrderCollected: items?.deliveryOrderCollected || "-",
     };
     return updatedData;
   };
 
   const data = [
     {
-      airlineName: "Emirates",
+      carrierName: "Emirates",
       mawbNumber: "ert34551",
       hawbNumber: "ert34551",
       flightNumber: "ert34551",
-      origin: "Colombo, Sri Lanka",
       quantity: "5",
       flightDate: "11-02-2025",
       airportGateInDate: "11-02-2025",
+      cargoHandoverDate: "11-02-2025",
       departureConfirmation: "11-02-2025",
       ata: "11-02-2025",
-      cargoHandoverDate: "11-02-2025",
+      deliveryOrderCollected: "",
     },
   ];
 
@@ -245,7 +250,7 @@ const UpdateAirDetails: React.FC = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-sm">Cargo Type</p>
-            <p className="text-sm font-bold ">Full Container Load</p>
+            <p className="text-sm font-bold ">Standard Cargo</p>
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-sm">Booking validity Date</p>
@@ -253,7 +258,7 @@ const UpdateAirDetails: React.FC = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-sm">Current Update</p>
-            <BlackChip label={"Container Pickup"} size={"m"} variant={"mix"} />
+            <BlackChip label={"Terminal Gate In"} size={"m"} variant={"mix"} />
           </div>
         </div>
 
@@ -363,7 +368,11 @@ const UpdateAirDetails: React.FC = () => {
           </div>
         </div>
 
-        <CustomTable columns={ULDTransitColumns} rows={uldTransitrows} isCheckbox={false} />
+        <CustomTable
+          columns={ULDTransitColumns}
+          rows={uldTransitrows}
+          isCheckbox={false}
+        />
       </div>
     </div>
   );

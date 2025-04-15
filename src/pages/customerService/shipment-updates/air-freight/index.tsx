@@ -24,9 +24,12 @@ const ShipmentAirFreight: React.FC = () => {
           ) &&
           !location.pathname.startsWith(
             "/shipment-updates/air-freight/airport-gatein-date/view"
-          ) && 
+          ) &&
           !location.pathname.startsWith(
             "/shipment-updates/air-freight/cargo-handover-update/view"
+          ) &&
+          !location.pathname.startsWith(
+            "/shipment-updates/air-freight/create-split-booking"
           ) && (
             <div className="border-b border-grey-ab-100 flex p-2 gap-2 text-sm font-semibold items-center">
               <div className="pe-2 border-r border-r-grey-ab-100">

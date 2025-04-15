@@ -24,7 +24,7 @@ import {
 } from "../../../../../components/icons/Icons";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import CustomTable from "../../../../../components/table/CustomTable";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 interface BookingProps {
   assignedPerson: string;
@@ -80,6 +80,7 @@ const FCLColumns: any[] = [
 const CreateSplitBooking: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [fclRows, setFCLRows] = useState<FCLRowData[]>([]);
+  const location = useLocation();
 
   const [data, setData] = useState<BookingProps>({
     assignedPerson: "",
@@ -90,7 +91,9 @@ const CreateSplitBooking: React.FC = () => {
     picEmail: "",
     picMobileNumber: "",
     modeOfShipment: "export",
-    modeOfTransportation: "sea freight",
+    modeOfTransportation: `${
+      location.pathname.includes("sea-freight") ? "sea" : "air"
+    } freight`,
     portOfLoading: "",
     portOfDischarge: "",
     products: [],
@@ -1832,13 +1835,24 @@ const CreateSplitBooking: React.FC = () => {
             />
           </div>
         </div>
-        <div className="flex gap-4 flex-col">
-          <HeadTitle label={"Container Table"} icon={<ContainerIcon />} />
-          {/* tables */}
-          <CustomTable columns={FCLColumns} rows={fclRows} isCheckbox={false} />
-        </div>
+        {data.modeOfTransportation.toLocaleLowerCase() === "sea freight" && (
+          <div className="flex gap-4 flex-col">
+            <HeadTitle label={"Container Table"} icon={<ContainerIcon />} />
+            <CustomTable
+              columns={FCLColumns}
+              rows={fclRows}
+              isCheckbox={false}
+            />
+          </div>
+        )}
         <div className="flex justify-end gap-6">
-          <Link to={`/shipment-updates/sea-freight/terminal-gateIn/details/${id}`}>
+          <Link
+            to={`/shipment-updates/${
+              location.pathname.includes("sea-freight")
+                ? "sea-freight/terminal-gateIn/details"
+                : "air-freight/cargo-handover-update/view"
+            }/${id}`}
+          >
             <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
           </Link>
           <div onClick={handleSubmit}>
