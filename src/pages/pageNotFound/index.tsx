@@ -5,7 +5,6 @@ interface Chip {
   label: string;
 }
 const PageNotFound: React.FC = () => {
-  
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
 
@@ -182,7 +181,7 @@ const PageNotFound: React.FC = () => {
 
       <div
         style={{
-          right: `${top + Math.random() * 73}%`, 
+          right: `${top + Math.random() * 73}%`,
           top: `${left + Math.random() * 33}%`,
         }}
         className={`w-10 h-10 bg-blue rounded-full absolute transition-all duration-1000 animate-ping`}

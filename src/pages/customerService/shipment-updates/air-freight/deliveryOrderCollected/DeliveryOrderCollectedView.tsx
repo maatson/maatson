@@ -11,9 +11,9 @@ import {
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import CustomTable from "../../../../../components/table/CustomTable";
-import ship from "/images/cargoShip.png";
+import flight from "/images/cargoFlight.png";
 
-interface FCLcontainerProps {
+interface ULDcontainerProps {
   containerNumber: string;
   pickupDate: string | Date;
   terminalGateInDate: string;
@@ -23,7 +23,7 @@ interface FCLcontainerProps {
   isEditing?: boolean;
 }
 
-interface FCLcargoDimensions {
+interface ULDcargoDimensions {
   id: string;
   containerSize: string;
   grossWeight: string | number;
@@ -31,7 +31,7 @@ interface FCLcargoDimensions {
   containerCount: string | number;
   agreedRate: string | number;
   currency: string | number;
-  containerDetails: FCLcontainerProps[];
+  containerDetails: ULDcontainerProps[];
 }
 
 interface DataProps {
@@ -44,10 +44,10 @@ interface DataProps {
     cargotype: string;
     cargoDimensions: string[];
   };
-  cargoDimensions: FCLcargoDimensions[];
+  cargoDimensions: ULDcargoDimensions[];
 }
 
-const fclColumns: any[] = [
+const uldColumns: any[] = [
   { id: "sNo", label: "s.no", minWidth: "100px" },
   {
     id: "containerNumber",
@@ -83,7 +83,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
     portOfDischarge: "Rotterdam, Netherlands",
     bookingValidityDate: "11/10/25",
     cargoDetails: {
-      cargotype: "fcl",
+      cargotype: "ULD containers",
       cargoDimensions: ["cargoId1", "cargoId2"],
     },
     cargoDimensions: [
@@ -389,7 +389,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
             <div key={dimensionIndex} className="gap-3 flex flex-col">
               <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
                 <div className="flex items-center justify-center w-16 h-16">
-                  <img src={ship} alt="ship.png" />
+                  <img src={flight} alt="flight.png" />
                 </div>
                 <ViewCard
                   label={"Carrier  Name"}
@@ -399,15 +399,15 @@ const DeliveryOrderCollectedView: React.FC = () => {
                   valueStyle="font-semibold"
                 />
                 <ViewCard
-                  label={"Vessel Name"}
-                  value={"Maersk Emerald"}
+                  label={"Aircraft Type"}
+                  value={"PAX"}
                   labelStyle="font-normal text-grey-ab-300"
                   style="flex-col"
                   valueStyle="font-semibold"
                 />
 
                 <ViewCard
-                  label={"Voyage Number"}
+                  label={"Flight Number"}
                   value={"M1234"}
                   labelStyle="font-normal text-grey-ab-300"
                   style="flex-col"
@@ -436,8 +436,8 @@ const DeliveryOrderCollectedView: React.FC = () => {
               </div>
               <CustomTable
                 columns={
-                  dummydata.cargoDetails.cargotype === "fcl"
-                    ? fclColumns
+                  dummydata.cargoDetails.cargotype === "ULD containers"
+                    ? uldColumns
                     : columns
                 }
                 rows={
