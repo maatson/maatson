@@ -179,7 +179,7 @@ const PageNotFound: React.FC = () => {
       )}
       {/* <RippleButton children={"hello"} /> */}
 
-      <div
+      <div  
         style={{
           right: `${top + Math.random() * 73}%`,
           top: `${left + Math.random() * 33}%`,

@@ -630,6 +630,10 @@ const AppRoutes: React.FC = () => {
               element={<ViewCargoHandoverUpdate />}
             />
             <Route
+              path="create-split-booking/:id"
+              element={<CreateSplitBooking />}
+            />
+            <Route
               path="departure-confirmation"
               element={<DepartureConfirmationAir />}
             />

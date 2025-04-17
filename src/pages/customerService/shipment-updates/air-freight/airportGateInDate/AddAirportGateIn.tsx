@@ -1,7 +1,10 @@
 import React from "react";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import GroupField from "../../../../../components/groupField/GroupField";
-import { AeroplaneIcon, LocationIcon } from "../../../../../components/icons/Icons";
+import {
+  AeroplaneIcon,
+  LocationIcon,
+} from "../../../../../components/icons/Icons";
 
 interface AddAirportGateInProps {
   onClose: () => void;
@@ -23,25 +26,25 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
           Airport Gate-in Date Information
         </h6>
         <div className="flex flex-col gap-4">
+          <GroupField
+            label={"Airline Name*"}
+            type={""}
+            placeholder={"Enter Airline Name"}
+            name={""}
+            value={""}
+            onChange={function (
+              e: React.ChangeEvent<
+                HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+              >
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+            error={false}
+            errorMessage={""}
+            leftIcon={<AeroplaneIcon color="#2C398F" />}
+            parentStyle="w-full"
+          />
           <div className="flex gap-4">
-            <GroupField
-              label={"Airline Name*"}
-              type={""}
-              placeholder={"Enter Airline Name"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-              error={false}
-              errorMessage={""}
-              leftIcon ={<AeroplaneIcon color="#2C398F" />}
-              parentStyle="w-full"
-            />
             <GroupField
               label={"Flight Number*"}
               type={""}
@@ -58,11 +61,8 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
               error={false}
               errorMessage={""}
               parentStyle="w-full"
-              leftIcon ={<AeroplaneIcon color="#2C398F" />}
+              leftIcon={<AeroplaneIcon color="#2C398F" />}
             />
-          </div>
-
-          <div className="flex gap-4">
             <GroupField
               label={"MAWB  Number*"}
               type={""}
@@ -78,9 +78,12 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
               }}
               error={false}
               errorMessage={""}
-              leftIcon ={<AeroplaneIcon color="#2C398F" />}
+              leftIcon={<AeroplaneIcon color="#2C398F" />}
               parentStyle="w-full"
             />
+          </div>
+
+          <div className="flex gap-4">
             <GroupField
               label={"HAWB Number*"}
               type={""}
@@ -96,28 +99,7 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
               }}
               error={false}
               errorMessage={""}
-              leftIcon ={<AeroplaneIcon color="#2C398F" />}
-              parentStyle="w-full"
-            />
-          </div>
-
-          <div className="flex gap-4">
-            <GroupField
-              label={"Origin*"}
-              type={""}
-              placeholder={"Enter Origin"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-              error={false}
-              errorMessage={""}
-              leftIcon ={<LocationIcon color="#2C398F" />}
+              leftIcon={<AeroplaneIcon color="#2C398F" />}
               parentStyle="w-full"
             />
             <GroupField
@@ -135,7 +117,7 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
               }}
               error={false}
               errorMessage={""}
-              leftIcon ={<AeroplaneIcon color="#2C398F" />}
+              leftIcon={<AeroplaneIcon color="#2C398F" />}
               parentStyle="w-full"
             />
           </div>
@@ -144,7 +126,7 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
             <GroupField
               label={"Flight Date*"}
               type={"date"}
-              placeholder={""}
+              placeholder={"Enter Flight Date"}
               name={""}
               value={""}
               onChange={function (
@@ -161,7 +143,7 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
             <GroupField
               label={"Airport Gate-In Date*"}
               type={"date"}
-              placeholder={""}
+              placeholder={"Enter Airport Gate-In Date"}
               name={""}
               value={""}
               onChange={function (
@@ -176,8 +158,6 @@ const AddAirportGateIn: React.FC<AddAirportGateInProps> = ({
               parentStyle="w-full"
             />
           </div>
-          
-         
         </div>
         <div className="flex items-center gap-6 justify-center w-full">
           <div onClick={handleCancel} className="w-full">

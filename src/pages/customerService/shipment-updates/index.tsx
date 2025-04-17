@@ -30,6 +30,9 @@ const ShippingUpdates: React.FC = () => {
             ? ["Shipment Updates", "Terminal Gate In Details"]
             : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/create-split-booking"
+              ) ||
+              location.pathname.startsWith(
+                "/shipment-updates/air-freight/create-split-booking"
               )
             ? ["Shipment Updates", "Split Booking"]
             : location.pathname.startsWith(
@@ -69,9 +72,9 @@ const ShippingUpdates: React.FC = () => {
               )
             ? ["Shipment Updates", "Airport Gate-in Date Information"]
             : location.pathname.startsWith(
-              "/shipment-updates/air-freight/cargo-handover-update/view"
-            )
-          ? ["Shipment Updates", "Cargo Handover Update"]
+                "/shipment-updates/air-freight/cargo-handover-update/view"
+              )
+            ? ["Shipment Updates", "Cargo Handover Update"]
             : "Shipment Updates",
         ].flat()}
         heading={
@@ -94,6 +97,9 @@ const ShippingUpdates: React.FC = () => {
             ? "Terminal Gate In Details"
             : location.pathname.startsWith(
                 "/shipment-updates/sea-freight/create-split-booking"
+              ) ||
+              location.pathname.startsWith(
+                "/shipment-updates/air-freight/create-split-booking"
               )
             ? "Create Split Booking"
             : location.pathname.startsWith(
@@ -137,9 +143,9 @@ const ShippingUpdates: React.FC = () => {
               )
             ? "Airport Gate-in Date Information"
             : location.pathname.startsWith(
-              "/shipment-updates/air-freight/cargo-handover-update/view"
-            )
-          ? "Cargo Handover Update"
+                "/shipment-updates/air-freight/cargo-handover-update/view"
+              )
+            ? "Cargo Handover Update"
             : "Shipment Updates"
         }
       />
@@ -180,6 +186,9 @@ const ShippingUpdates: React.FC = () => {
           "/shipment-updates/sea-freight/create-split-booking"
         ) &&
         !location.pathname.startsWith(
+          "/shipment-updates/air-freight/create-split-booking"
+        ) &&
+        !location.pathname.startsWith(
           "/shipment-updates/sea-freight/empty-gateIn-confirmation/view"
         ) &&
         !location.pathname.startsWith(
@@ -187,7 +196,7 @@ const ShippingUpdates: React.FC = () => {
         ) &&
         !location.pathname.startsWith(
           "/shipment-updates/air-freight/airport-gatein-date/view"
-        ) && 
+        ) &&
         !location.pathname.startsWith(
           "/shipment-updates/air-freight/cargo-handover-update/view"
         ) && (

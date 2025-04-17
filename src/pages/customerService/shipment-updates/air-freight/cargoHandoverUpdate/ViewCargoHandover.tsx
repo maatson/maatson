@@ -14,72 +14,43 @@ import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButt
 import CustomTable from "../../../../../components/table/CustomTable";
 import { Link, useParams } from "react-router-dom";
 
-interface FCLRowData {
+interface RowData {
   id: string | number;
-  No: string | number;
-  containerNumber: string;
-  pickupDate: React.ReactNode;
-  terminalGateIn: React.ReactNode;
-  action: React.ReactNode;
-}
-interface LCLRowData {
-  id: string | number;
-  No: string | number;
-  containerNumber: string;
+  No: string | number | React.ReactNode;
+  airlineName: string;
+  mawbNumber: string;
+  hawbNumber: string;
+  flightNumber: string;
   quantity: string;
-  pickupDate: React.ReactNode;
-  terminalGateIn: React.ReactNode;
-  action: React.ReactNode;
-}
-interface BulkRowData {
-  id: string | number;
-  No: string | number;
-  grossWeight: string;
-  pickupDate: React.ReactNode;
-  terminalGateIn: React.ReactNode;
+  cargoType: string;
+  flightDate: string;
+  airportGateInDate: string;
+  cargoHandoverDate: React.ReactNode;
   action: React.ReactNode;
 }
 
-const FCLColumns: any[] = [
-  { id: "No", label: "NO", minWidth: 30, align: "center" },
-  {
-    id: "containerNumber",
-    label: "Container Number",
-    minWidth: 140,
-    align: "center",
-  },
-  { id: "pickupDate", label: "Pickup Date", align: "center" },
-  { id: "terminalGateIn", label: "Terminal Gate In", align: "center" },
-  { id: "action", label: "Action", align: "center" },
-];
-
-const LCLColumns: any[] = [
-  { id: "No", label: "NO", minWidth: 30, align: "center" },
-  {
-    id: "containerNumber",
-    label: "Container Number",
-    minWidth: 140,
-    align: "center",
-  },
+const Columns: any[] = [
+  { id: "No", label: "NO", minWidth: 80, align: "center" },
+  { id: "airlineName", label: "Airline Name", minWidth: 100 },
+  { id: "mawbNumber", label: "MAWB Number", align: "center" },
+  { id: "hawbNumber", label: "HAWB Number", align: "center" },
+  { id: "flightNumber", label: "Flight Number", align: "center" },
   { id: "quantity", label: "Quantity", align: "center" },
-  { id: "pickupDate", label: "Pickup Date", align: "center" },
-  { id: "terminalGateIn", label: "Terminal Gate In", align: "center" },
-  { id: "action", label: "Action", align: "center" },
-];
-
-const BulkColumns: any[] = [
-  { id: "No", label: "NO", minWidth: 30, align: "center" },
-  { id: "grossWeight", label: "Gross Weight", align: "center" },
-  { id: "pickupDate", label: "Pickup Date", align: "center" },
-  { id: "terminalGateIn", label: "Terminal Gate In", align: "center" },
+  { id: "cargoType", label: "Cargo Type", align: "center" },
+  { id: "flightDate", label: "Flight Date", align: "center" },
+  { id: "airportGateInDate", label: "Airport Gate In Date", align: "center" },
+  {
+    id: "cargoHandoverDate",
+    label: "Cargo Handover Date",
+    minWidth: 160,
+    align: "center",
+  },
   { id: "action", label: "Action", align: "center" },
 ];
 
 const ViewCargoHandover: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [fclRows, setFCLRows] = useState<FCLRowData[]>([]);
-  const [lclRows, setLCLRows] = useState<LCLRowData[]>([]);
-  const [bulkRows, setBulkRows] = useState<BulkRowData[]>([]);
+  const [rows, setRows] = useState<RowData[]>([]);
 
   const [editingRows, setEditingRows] = useState<{ [key: number]: boolean }>(
     {}
@@ -98,10 +69,10 @@ const ViewCargoHandover: React.FC = () => {
     console.log(`Row ${id} saved.`);
   };
 
-  const createFCLData = (items: any, index: number) => {
+  const createData = (items: any, index: number) => {
     const { id } = items;
     const isEditing = editingRows[index] || false;
-    const terminalGateIns = (
+    const cargoHandoverDateValue = (
       <div>
         {!isEditing ? (
           "-"
@@ -142,172 +113,45 @@ const ViewCargoHandover: React.FC = () => {
     );
     const updatedData = {
       id: id,
-      No: (id + 1).toString().padStart(2, "0"),
-      containerNumber: items?.containerNumber,
-      pickupDate: items?.pickupDate,
-      terminalGateIn: terminalGateIns,
-      action: actions,
-    };
-    return updatedData;
-  };
-
-  const FCLData = [
-    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", pickupDate: "12-02-2024" },
-  ];
-
-  const createLCLData = (items: any, index: number) => {
-    const { id } = items;
-    const isEditing = editingRows[index] || false;
-    const terminalGateIns = (
-      <div>
-        {!isEditing ? (
-          "-"
-        ) : (
-          <div>
-            <input type="date" name="" id="" />
-          </div>
-        )}
-      </div>
-    );
-
-    const actions = (
-      <div className="flex gap-3 justify-center" key={index}>
-        {isEditing ? (
-          <>
-            <div
-              className="p-1 rounded-xs bg-error cursor-pointer"
-              onClick={() => handleCancel(index)}
-            >
-              <CrossIcon size={16} color="#FDFDFD" />
-            </div>
-            <div
-              className="p-1 rounded-xs bg-success-600 cursor-pointer"
-              onClick={() => handleSave(index)}
-            >
-              <TickIcon size={16} color="#FDFDFD" />
-            </div>
-          </>
-        ) : (
-          <div
-            className="p-1 rounded-xs bg-blue cursor-pointer"
-            onClick={() => handleEdit(index)}
-          >
-            <EditIcon size={16} color="#FDFDFD" />
-          </div>
-        )}
-      </div>
-    );
-    const updatedData = {
-      id: id,
-      No: (id + 1).toString().padStart(2, "0"),
-      containerNumber: items?.containerNumber,
+      No: <div className="py-2"> {(id + 1).toString().padStart(2, "0")}</div>,
+      airlineName: items?.airlineName,
+      mawbNumber: items?.mawbNumber,
+      hawbNumber: items?.hawbNumber,
+      flightNumber: items?.flightNumber,
       quantity: items?.quantity,
-      pickupDate: items?.pickupDate,
-      terminalGateIn: terminalGateIns,
+      cargoType: items?.cargoType,
+      flightDate: items?.flightDate,
+      airportGateInDate: items?.airportGateInDate,
+      cargoHandoverDate: cargoHandoverDateValue,
       action: actions,
     };
     return updatedData;
   };
 
-  const LCLData = [
-    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
-    { containerNumber: "mmi0301123", quantity: "05", pickupDate: "12-02-2024" },
+  const data = [
+    {
+      airlineName: "Emirates",
+      mawbNumber: "ert34551",
+      hawbNumber: "ert34551",
+      flightNumber: "ert34551",
+      quantity: "10",
+      cargoType: "Standard Cargo",
+      flightDate: "11-02-2025",
+      airportGateInDate: "11-02-2025",
+      cargoHandoverDate: "",
+    },
   ];
 
-  const createBulkData = (items: any, index: number) => {
-    const { id } = items;
-    const isEditing = editingRows[index] || false;
-    const terminalGateIns = (
-      <div>
-        {!isEditing ? (
-          "-"
-        ) : (
-          <div>
-            <input type="date" name="" id="" />
-          </div>
-        )}
-      </div>
-    );
-
-    const actions = (
-      <div className="flex gap-3 justify-center" key={index}>
-        {isEditing ? (
-          <>
-            <div
-              className="p-1 rounded-xs bg-error cursor-pointer"
-              onClick={() => handleCancel(index)}
-            >
-              <CrossIcon size={16} color="#FDFDFD" />
-            </div>
-            <div
-              className="p-1 rounded-xs bg-success-600 cursor-pointer"
-              onClick={() => handleSave(index)}
-            >
-              <TickIcon size={16} color="#FDFDFD" />
-            </div>
-          </>
-        ) : (
-          <div
-            className="p-1 rounded-xs bg-blue cursor-pointer"
-            onClick={() => handleEdit(index)}
-          >
-            <EditIcon size={16} color="#FDFDFD" />
-          </div>
-        )}
-      </div>
-    );
-    const updatedData = {
-      id: id,
-      No: (id + 1).toString().padStart(2, "0"),
-      grossWeight: items?.grossWeight,
-      pickupDate: items?.pickupDate,
-      terminalGateIn: terminalGateIns,
-      action: actions,
-    };
-    return updatedData;
-  };
-
-  const bulkData = [{ grossWeight: "10000kgs", pickupDate: "12-02-2024" }];
-
-  const fetchFCLData = useCallback(() => {
-    const arr = FCLData.map((items, index) => {
-      return createFCLData({ ...items, id: index }, index);
+  const fetchData = useCallback(() => {
+    const arr = data.map((items, index) => {
+      return createData({ ...items, id: index }, index);
     });
-    setFCLRows(arr);
-  }, [editingRows]);
-
-  const fetchLCLData = useCallback(() => {
-    const arr = LCLData.map((items, index) => {
-      return createLCLData({ ...items, id: index }, index);
-    });
-    setLCLRows(arr);
-  }, [editingRows]);
-
-  const fetchBulkData = useCallback(() => {
-    const arr = bulkData.map((items, index) => {
-      return createBulkData({ ...items, id: index }, index);
-    });
-    setBulkRows(arr);
+    setRows(arr);
   }, [editingRows]);
 
   useEffect(() => {
-    fetchFCLData();
-  }, [fetchFCLData]);
-
-  useEffect(() => {
-    fetchLCLData();
-  }, [fetchLCLData]);
-
-  useEffect(() => {
-    fetchBulkData();
-  }, [fetchBulkData]);
+    fetchData();
+  }, [fetchData]);
 
   return (
     <div className="flex flex-col gap-6 bg-primary-50">
@@ -348,7 +192,7 @@ const ViewCargoHandover: React.FC = () => {
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-sm">Cargo Type</p>
-          <p className="text-sm font-bold ">Full Container Load</p>
+          <p className="text-sm font-bold ">Standard Cargo</p>
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-sm">Booking validity Date</p>
@@ -377,7 +221,6 @@ const ViewCargoHandover: React.FC = () => {
         </div>
         {/*  */}
         <div className="flex px-4 py-2 justify-between bg-grey-aw-50 rounded-sm text-grey-ab-900 items-center">
-
           <div className="flex gap-2 text-sm">
             <p>Quantity</p>
             <p className="font-bold">05</p>
@@ -392,8 +235,7 @@ const ViewCargoHandover: React.FC = () => {
         </div>
 
         {/* tables */}
-        <div>maathanum...................................</div>
-        <CustomTable columns={FCLColumns} rows={fclRows} isCheckbox={false} />
+        <CustomTable columns={Columns} rows={rows} isCheckbox={false} />
       </div>
     </div>
   );
