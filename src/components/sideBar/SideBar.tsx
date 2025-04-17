@@ -120,7 +120,11 @@ const SideBar: React.FC = () => {
             link: "/sea-air-schedule/sea-freight",
             active: "/sea-air-schedule",
           },
-          { label: "Shipment Updates", link: "/shipment-updates/sea-freight", active:"/shipment-updates" },
+          {
+            label: "Shipment Updates",
+            link: "/shipment-updates/sea-freight",
+            active: "/shipment-updates",
+          },
           { label: "Cargo Arrival Notice", link: "/customer-service" },
         ],
         onClick: () => handleItemClick(3),
@@ -151,12 +155,16 @@ const SideBar: React.FC = () => {
         label: "Pricing & Procurement",
         isOpen: openItems[7] || false,
         children: [
-          { label: "All Rates", link: "/all-rates" },
+          {
+            label: "All Rates",
+            link: "/all-rates",
+          },
           { label: "Rate Filing(Enquiry)", link: "/rate-filing-enquiry" },
           { label: "Rate Filing (New)", link: "/rate-filing-new" },
           { label: "Rate Mailing", link: "/rate-mailing" },
           { label: "Other Vendors", link: "/other-vendors" },
         ],
+
         onClick: () => handleItemClick(7),
       },
       {
