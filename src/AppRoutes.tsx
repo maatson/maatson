@@ -409,6 +409,15 @@ const AllRates = lazy(() => import("./pages/pricing&procurement/allRates"));
 const EnquiryRateFiling = lazy(
   () => import("./pages/pricing&procurement/enquiryRateFiling")
 );
+const EnquiryRateFilingList = lazy(
+  () =>
+    import(
+      "./pages/pricing&procurement/enquiryRateFiling/RateFillingEnquiryList"
+    )
+);
+const EnquiryRateDetails = lazy(
+  () => import("./pages/pricing&procurement/enquiryRateFiling/RateDetails")
+);
 const NewRateFiling = lazy(
   () => import("./pages/pricing&procurement/newRateFiling")
 );
@@ -666,12 +675,10 @@ const AppRoutes: React.FC = () => {
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* pricing & procurement */}
-        <Route path="all-rates" element={<AllRates />}></Route>
-        <Route
-          path="rate-filing-enquiry"
-          element={<EnquiryRateFiling />}
-        ></Route>
-        <Route path="rate-filing-new" element={<NewRateFiling />}></Route>
+        <Route path="rate-filing-enquiry" element={<EnquiryRateFiling />}>
+          <Route index element={<EnquiryRateFilingList />} />
+          <Route path="rate-details/:id" element={<EnquiryRateDetails />} />
+        </Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
         <Route path="other-vendors" element={<OtherVendors />}>
           <Route path="vendor-for-shipping">
