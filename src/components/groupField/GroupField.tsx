@@ -13,6 +13,9 @@ interface Groupfield {
   inputStyle?: string;
   labelStyle?: string;
   parentStyle?: string;
+  // dateInputStyle?: string;
+  // dateIndicatorStyle?: string;
+  isDateLeft?: boolean;
   name: string;
   value: string | number | string[];
   options?: { label: string; value: string }[]; // Better type for options
@@ -63,7 +66,8 @@ const GroupField: React.FC<Groupfield> = ({
   isMulti,
   isDisabled,
   size, //added by suriya
-  id, //added ny vick
+  id, //added ny
+  isDateLeft,
 }) => {
   // Handle React-Select change event
   const handleReactSelectChange = (selectedOption: any) => {
@@ -321,7 +325,7 @@ const GroupField: React.FC<Groupfield> = ({
               className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
             ></textarea>
           ) : type === "date" ? (
-            <div className="relative w-full">
+            <div className={`relative w-full `}>
               <input
                 type="date"
                 name={name}
@@ -330,10 +334,18 @@ const GroupField: React.FC<Groupfield> = ({
                 disabled={isDisabled}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="absolute w-full top-0 left-0 h-full opacity-0 z-10"
+                className={`absolute w-full top-0 left-0 h-full opacity-0 z-10 ${
+                  isDateLeft && "rotate-180"
+                }`}
               />
 
-              <div className=" flex w-full justify-between items-center z-0 ">
+              <div
+                className={` flex w-full  items-center z-0 ${
+                  isDateLeft
+                    ? "flex-row-reverse justify-end gap-4"
+                    : "justify-between"
+                }`}
+              >
                 <span
                   className={`${
                     value ? "text-grey-ab-800" : "text-grey-ab-200"

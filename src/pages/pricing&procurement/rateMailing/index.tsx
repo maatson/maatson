@@ -53,7 +53,7 @@ const RateMailing: React.FC = () => {
 
   const closePopup = () => setIsOpen(false);
   const handleCompose = (id: string) => {
-    console.log(id)
+    console.log(id);
     setIsOpen(true);
   };
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
@@ -77,32 +77,12 @@ const RateMailing: React.FC = () => {
   // table
   const createData = (items: any) => {
     const { id, countryOfOperation } = items;
-
-    // const countryOfOperationValue = (
-    //   <div className="relative">
-    //     <div
-    //       className={`flex gap-1 justify-center flex-wrap w-[140px] h-[22px] overflow-hidden`}
-    //       onMouseEnter={() => setIsHover(true)}
-    //       onMouseLeave={() => setIsHover(false)}
-    //     >
-    //       {countryOfOperation.map((item: string) => (
-    //         <BlueChip label={item} size={"s"} variant={"fill"} />
-    //       ))}
-    //     </div>
-    //     {isHover && (
-    //       <div className="absolute bg-black rounded-xs w-60 h-60 top-8 left-0 z-10">
-    //         hh
-    //       </div>
-    //     )}
-    //   </div>
-    // );
-
     const countryOfOperationValue = (
       <CountryHoverCell countries={countryOfOperation} />
     );
 
     const actions = (
-      <div onClick={() => handleCompose(id+1)}>
+      <div onClick={() => handleCompose(id + 1)}>
         <GreyButton
           label={"Compose"}
           size={"s"}
@@ -143,7 +123,48 @@ const RateMailing: React.FC = () => {
       carrierName: "Maersk Line",
       companyEmail: "cennar@gmail.com",
       contactPerson: "Rotterdam",
-      countryOfOperation: ["India", "China"],
+      countryOfOperation: [
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+        "India",
+        "China",
+      ],
       email: "tim.jennings@example.com",
     },
     {
@@ -321,7 +342,7 @@ const CountryHoverCell: React.FC<CountryHoverCellProps> = ({ countries }) => {
         ))}
       </div>
       {isHovered && (
-        <div className="absolute bg-blue-100 border rounded-xs w-[180px] shadow-lg top-8 left-0 z-10 p-2 flex gap-1 flex-wrap">
+        <div className="absolute bg-grey-aw-50 border border-grey-ab-50 rounded-xs w-[180px] max-h-[60px] overflow-auto custom-scrollbar-small shadow-lg bottom-8 left-0 z-10 p-2 flex gap-1 flex-wrap">
           {countries.map((item) => (
             <BlueChip label={item} size="s" variant="fill" />
           ))}
