@@ -404,8 +404,6 @@ const DeliveryOrderCollectedViewAir = lazy(
 
 // PRICING AND PROCUREMENT
 
-const AllRates = lazy(() => import("./pages/pricing&procurement/allRates"));
-
 const EnquiryRateFiling = lazy(
   () => import("./pages/pricing&procurement/enquiryRateFiling")
 );
@@ -418,9 +416,7 @@ const EnquiryRateFilingList = lazy(
 const EnquiryRateDetails = lazy(
   () => import("./pages/pricing&procurement/enquiryRateFiling/RateDetails")
 );
-const NewRateFiling = lazy(
-  () => import("./pages/pricing&procurement/newRateFiling")
-);
+
 const RateMailing = lazy(
   () => import("./pages/pricing&procurement/rateMailing")
 );
