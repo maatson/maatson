@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import GroupField from "../../../components/groupField/GroupField";
 import {
+  AddIcon,
   ExcelIcon,
   EyeOpenIcon,
   LocationIcon,
@@ -14,6 +15,7 @@ import CustomTable from "../../../components/table/CustomTable";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import SuccessChip from "../../../components/chips/SuccessChip";
 import { Link } from "react-router-dom";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
 interface RowData {
   id: string | number;
@@ -48,7 +50,7 @@ const columns: any[] = [
   },
 ];
 
-const RateFillingEnquiryList: React.FC = () => {
+const RateFillingList: React.FC = () => {
   const [isSeaFreight, setSeaFreight] = useState<boolean>(true); //use for filtering
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -92,7 +94,7 @@ const RateFillingEnquiryList: React.FC = () => {
     const actions = (
       <Link
         className="rounded bg-grey-ab inline-block "
-        to={`/rate-filing-enquiry/rate-details/${id}`}
+        to={`/rate-filing/available-rates/${id}`}
       >
         <BlackButton
           label={"View"}
@@ -203,7 +205,7 @@ const RateFillingEnquiryList: React.FC = () => {
       <div className="bg-grey-aw-50 rounded  h-full">
         <div className="p-3 flex items-center justify-between border-b border-grey-ab-100">
           <div className="flex items-center gap-4">
-            <p className="text-lg font-semibold">Rate Filing (Enquiry) List</p>
+            <p className="text-lg font-semibold">Rate Filing List</p>
             <GroupField
               label={""}
               type={"text"}
@@ -215,13 +217,38 @@ const RateFillingEnquiryList: React.FC = () => {
               errorMessage={""}
               rightIcon={<SearchIcon color="#6A6A6A" />}
             />
+            <GroupField
+              label={""}
+              type={"select"}
+              placeholder={"select rate type"}
+              name={"search"}
+              value={""}
+              onChange={() => {}}
+              error={false}
+              errorMessage={""}
+              options={[
+                { label: "All Rates", value: "allRates" },
+                { label: "Enquiry", value: "enquiry" },
+                { label: "Pricing", value: "pricing" },
+              ]}
+            />
           </div>
-          <SuccessButton
-            label={"Export"}
-            size={"l"}
-            variant={""}
-            rightIcon={<ExcelIcon color="#ffffff" />}
-          />
+          <div className="flex gap-4 items-center">
+            <Link to={"/rate-filing/create"}>
+              <PrimaryButton
+                label={"Create Rate Filing"}
+                size={"l"}
+                variant={""}
+                leftIcon={<AddIcon color="#ffffff" />}
+              />
+            </Link>
+            <SuccessButton
+              label={"Export"}
+              size={"l"}
+              variant={""}
+              rightIcon={<ExcelIcon color="#ffffff" />}
+            />
+          </div>
         </div>
 
         {/* table section */}
@@ -313,4 +340,4 @@ const RateFillingEnquiryList: React.FC = () => {
   );
 };
 
-export default RateFillingEnquiryList;
+export default RateFillingList;
