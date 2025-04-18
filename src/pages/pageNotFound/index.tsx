@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface Chip {
   id: number;
   label: string;
 }
 const PageNotFound: React.FC = () => {
+  const [emailBody, setEmailBody] = useState("");
+  const modules = {
+    toolbar: [
+      [{ font: [] }],
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline"],
+      [{ color: [] }, { background: [] }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
+      ["link", "image"],
+      ["clean"],
+    ],
+  };
+
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
 
@@ -142,7 +158,7 @@ const PageNotFound: React.FC = () => {
   }, []); // Empty array ensures it runs once when the component mounts
 
   return (
-    <div className="bg-blue-50 relative overflow-hidden h-screen">
+    <div className="bg-blue-50 relative ">
       <p className="h2 text-center py-5 bg-blue-50 text-blue-900 font-semibold">
         Page Not Found 404 !!!
       </p>
@@ -179,7 +195,7 @@ const PageNotFound: React.FC = () => {
       )}
       {/* <RippleButton children={"hello"} /> */}
 
-      <div  
+      <div
         style={{
           right: `${top + Math.random() * 73}%`,
           top: `${left + Math.random() * 33}%`,
@@ -235,7 +251,6 @@ const PageNotFound: React.FC = () => {
           width: 0,
           height: 0,
           borderTop: "50px solid #2c398f  ",
-          // borderBottom: "50px solid transparent",
           borderRight: "25px solid transparent ",
           borderLeft: "25px solid transparent",
         }}
@@ -285,10 +300,23 @@ const PageNotFound: React.FC = () => {
           </div>
         </div>
       </div>
-
+{/* 
       <div className="w-full h-60 bg-white">
         <a href="sms:+917358567362">Header Hi</a>
+      </div> */}
+
+      {/* email tempplate */}
+      <div className=" my-4 mx-auto w-[600px] p-1 bg-black">
+        <ReactQuill
+          theme="snow"
+          value={emailBody}
+          onChange={setEmailBody}
+          placeholder="Write your message..."
+          modules={modules}
+          className="bg-white h-full"
+        />
       </div>
+      <p>{emailBody}</p>
     </div>
   );
 };

@@ -162,7 +162,11 @@ const SideBar: React.FC = () => {
           { label: "Rate Filing(Enquiry)", link: "/rate-filing-enquiry" },
           { label: "Rate Filing (New)", link: "/rate-filing-new" },
           { label: "Rate Mailing", link: "/rate-mailing" },
-          { label: "Other Vendors", link: "/other-vendors" },
+          {
+            label: "Other Vendors",
+            link: "/other-vendors/vendor-for-shipping",
+            active: "/other-vendors",
+          },
         ],
 
         onClick: () => handleItemClick(7),
