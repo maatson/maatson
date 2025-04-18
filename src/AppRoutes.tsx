@@ -429,7 +429,7 @@ const VendorForOfficeList = lazy(
     import("./pages/pricing&procurement/otherVendors/vendorForOfficeEssential")
 );
 const CreateVendorBill = lazy(
-  () => import("./pages/pricing&procurement/otherVendors/CreateVendorBill")
+  () => import("./pages/pricing&procurement/otherVendors/CreateVendorBill") 
 );
 const ViewVendorBill = lazy(
   () => import("./pages/pricing&procurement/otherVendors/ViewVendorBill")
