@@ -157,7 +157,11 @@ const SideBar: React.FC = () => {
         children: [
           { label: "Rate Filing(Enquiry)", link: "/rate-filing-enquiry" },
           { label: "Rate Mailing", link: "/rate-mailing" },
-          { label: "Other Vendors", link: "/other-vendors" },
+          {
+            label: "Other Vendors",
+            link: "/other-vendors/vendor-for-shipping",
+            active: "/other-vendors",
+          },
         ],
 
         onClick: () => handleItemClick(7),

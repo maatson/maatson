@@ -427,6 +427,20 @@ const RateMailing = lazy(
 const OtherVendors = lazy(
   () => import("./pages/pricing&procurement/otherVendors")
 );
+const VendorForShippingList = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/vendorForShipping")
+);
+const VendorForOfficeList = lazy(
+  () =>
+    import("./pages/pricing&procurement/otherVendors/vendorForOfficeEssential")
+);
+const CreateVendorBill = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/CreateVendorBill")
+);
+const ViewVendorBill = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/ViewVendorBill")
+);
+
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
@@ -666,7 +680,18 @@ const AppRoutes: React.FC = () => {
           <Route path="rate-details/:id" element={<EnquiryRateDetails />} />
         </Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
-        <Route path="other-vendors" element={<OtherVendors />}></Route>
+        <Route path="other-vendors" element={<OtherVendors />}>
+          <Route path="vendor-for-shipping">
+            <Route index element={<VendorForShippingList />} />
+            <Route path="create" element={<CreateVendorBill />} />
+            <Route path="view/:id" element={<ViewVendorBill />} />
+          </Route>
+          <Route path="vendor-for-office">
+            <Route index element={<VendorForOfficeList />} />
+            <Route path="create" element={<CreateVendorBill />} />
+            <Route path="view/:id" element={<ViewVendorBill />} />
+          </Route>
+        </Route>
 
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>

@@ -207,7 +207,7 @@ const UpdateAirDetails: React.FC = () => {
       return createULDTransitData({ ...items, id: index });
     });
     setULDTransitRows(arr);
-  }, []);
+  }, []); 
 
   const fetchStandardCargoTransitData = useCallback(() => {
     const arr = standardCargoTransitData.map((items, index) => {
