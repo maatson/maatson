@@ -155,7 +155,7 @@ const SideBar: React.FC = () => {
         label: "Pricing & Procurement",
         isOpen: openItems[7] || false,
         children: [
-          { label: "Rate Filing(Enquiry)", link: "/rate-filing-enquiry" },
+          { label: "Rate Filing", link: "/rate-filing" },
           { label: "Rate Mailing", link: "/rate-mailing" },
           {
             label: "Other Vendors",

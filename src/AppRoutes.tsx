@@ -404,17 +404,15 @@ const DeliveryOrderCollectedViewAir = lazy(
 
 // PRICING AND PROCUREMENT
 
-const EnquiryRateFiling = lazy(
-  () => import("./pages/pricing&procurement/enquiryRateFiling")
+const RateFiling = lazy(() => import("./pages/pricing&procurement/rateFiling"));
+const RateFilingList = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/RateFillingList")
 );
-const EnquiryRateFilingList = lazy(
-  () =>
-    import(
-      "./pages/pricing&procurement/enquiryRateFiling/RateFillingEnquiryList"
-    )
+const AvailableRates = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/AvailableRates")
 );
-const EnquiryRateDetails = lazy(
-  () => import("./pages/pricing&procurement/enquiryRateFiling/RateDetails")
+const CreateRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/CreateRateFiling")
 );
 
 const RateMailing = lazy(
@@ -671,9 +669,13 @@ const AppRoutes: React.FC = () => {
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* pricing & procurement */}
-        <Route path="rate-filing-enquiry" element={<EnquiryRateFiling />}>
-          <Route index element={<EnquiryRateFilingList />} />
-          <Route path="rate-details/:id" element={<EnquiryRateDetails />} />
+        <Route path="rate-filing" element={<RateFiling />}>
+          <Route index element={<RateFilingList />} />
+          <Route
+            path="available-rates/:EnquiryId"
+            element={<AvailableRates />}
+          />
+          <Route path="create" element={<CreateRateFiling />} />
         </Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
         <Route path="other-vendors" element={<OtherVendors />}>

@@ -2,7 +2,7 @@ import React from "react";
 import BlueChip from "../../../components/chips/BlueChip";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 
-const RateDetails: React.FC = () => {
+const AvailableRates: React.FC = () => {
   const isSeaFreight = false;
   return (
     <>
@@ -49,7 +49,7 @@ const RateDetails: React.FC = () => {
   );
 };
 
-export default RateDetails;
+export default AvailableRates;
 
 const DetailCard: React.FC<{
   label: string;
