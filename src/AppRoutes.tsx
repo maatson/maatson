@@ -661,12 +661,10 @@ const AppRoutes: React.FC = () => {
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* pricing & procurement */}
-        <Route path="all-rates" element={<AllRates />}></Route>
         <Route path="rate-filing-enquiry" element={<EnquiryRateFiling />}>
           <Route index element={<EnquiryRateFilingList />} />
           <Route path="rate-details/:id" element={<EnquiryRateDetails />} />
         </Route>
-        <Route path="rate-filing-new" element={<NewRateFiling />}></Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
         <Route path="other-vendors" element={<OtherVendors />}></Route>
 
