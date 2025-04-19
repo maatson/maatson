@@ -151,6 +151,8 @@ const GroupField: React.FC<Groupfield> = ({
                   ),
                   IndicatorSeparator: null,
                 }}
+                menuPortalTarget={document.body} //added by suriya..
+                // menuPosition="absolute" 
                 styles={{
                   control: (provided) => ({
                     ...provided,
@@ -164,7 +166,6 @@ const GroupField: React.FC<Groupfield> = ({
                   }),
                   placeholder: (provided) => ({
                     ...provided,
-                    // fontSize: "16px",
                     color: "#999999  ",
                   }),
                   menu: (provided) => ({
@@ -172,6 +173,7 @@ const GroupField: React.FC<Groupfield> = ({
                     top: "120%",
                     background: "#fcfcfc",
                   }),
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 }),//added by suriya..
                   option: (provided, state) => ({
                     ...provided,
                     backgroundColor: state.isSelected
