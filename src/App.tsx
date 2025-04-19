@@ -1,6 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import AppRoutes from "./AppRoutes";
+import ScrollTop from "./utils/ScrollTop";
 
 const App: React.FC = () => {
   return (
@@ -11,7 +12,9 @@ const App: React.FC = () => {
         icon={false}
         closeButton={false}
       />
-      <AppRoutes />
+      <ScrollTop>
+        <AppRoutes />
+      </ScrollTop>
     </>
   );
 };
