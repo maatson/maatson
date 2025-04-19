@@ -223,7 +223,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
   isActive,
 }) => {
   return (
-    <div className="flex flex-col gap-2 cursor-pointer ">
+    <div className="flex flex-col gap-2 cursor-pointer z-20">
       <div
         className={`flex items-center rounded justify-between px-4 py-2 transition-all duration-300    ${
           isOpen ? "bg-grey-50 text-primary" : ""
