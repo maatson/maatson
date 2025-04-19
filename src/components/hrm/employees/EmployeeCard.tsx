@@ -11,7 +11,6 @@ import BlueChip from "../../chips/BlueChip";
 import TertiaryChip from "../../chips/TertiaryChip";
 import SecondaryChip from "../../chips/SecondaryChip";
 import SuccessChip from "../../chips/SuccessChip";
-import NormalChip from "../../chips/NormalChip";
 
 interface Employee {
   id: number;

@@ -8,21 +8,23 @@ const DashBoard: React.FC = () => {
   return (
     <>
       {/* Fixed Header */}
-
       <div className="fixed top-0 left-0 w-full z-10">
         <Header />
       </div>
-      <div className="h-16 "></div>
-      <div className="flex items-start w-full relative custom-scrollbar ">
-        <div className="w-full max-w-[20%]  min-h-screen h-full"></div>
-        <div className="w-full max-w-[20%] min-h-screen  h-full fixed bg-primary-gradient-4 overflow-y-auto">
+      {/* Spacer for fixed header */}
+      <div className="h-16"></div>
+
+      {/* Layout */}
+      <div className="flex w-full relative">
+        {/* Sidebar */}
+        <div className="w-[20%] min-h-screen h-full fixed top-16 z-10 bg-primary-gradient-4 overflow-y-auto custom-scrollbar">
           <SideBar />
         </div>
-        <div className="w-full max-w-[80%]  h-full bg-primary-50 break-after-all flex mx-auto  ">
-          <div className="flex flex-col justifiy-between min-h-screen h-full w-full ps-4 pe-5 pt-4 gap-4 custom-scrollbar">
-            <Outlet />
-            <Footer />
-          </div>
+
+        {/* Main Content */}
+        <div className="w-[80%] ml-[20%] bg-primary-50 min-h-screen h-full px-5 pt-4 flex flex-col gap-4 custom-scrollbar">
+          <Outlet />
+          <Footer />
         </div>
       </div>
     </>

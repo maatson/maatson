@@ -27,9 +27,24 @@ const columns: any[] = [
   { id: "companyName", label: "Company Name" },
   { id: "portOfLoading", label: "Port of loading", minWidth: 160 },
   { id: "portOfDischarge", label: "Port of Discharge", minWidth: 160 },
-  { id: "bookingValidityDate", label: "Booking Validity Date", minWidth: 160,align: "center" },
-  { id: "cargoHandoverStatus", label: "Cargo Handover Status", align: "center", minWidth:170},
-  { id: "cargoHandoverUpdate", label: "Cargo Handover Update", align: "center", minWidth:170 },
+  {
+    id: "bookingValidityDate",
+    label: "Booking Validity Date",
+    minWidth: 160,
+    align: "center",
+  },
+  {
+    id: "cargoHandoverStatus",
+    label: "Cargo Handover Status",
+    align: "center",
+    minWidth: 170,
+  },
+  {
+    id: "cargoHandoverUpdate",
+    label: "Cargo Handover Update",
+    align: "center",
+    minWidth: 170,
+  },
   { id: "action", label: "Action", minWidth: 120, align: "center" },
 ];
 
@@ -72,7 +87,9 @@ const CargoHandoverUpdate: React.FC = () => {
     );
     const actions = (
       <Link
-        to={`/shipment-updates/air-freight/cargo-handover-update/view/${id + 1}`}
+        to={`/shipment-updates/air-freight/cargo-handover-update/view/${
+          id + 1
+        }`}
         className="flex justify-center"
       >
         <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
@@ -101,7 +118,7 @@ const CargoHandoverUpdate: React.FC = () => {
       portOfDischarge: "Rotterdam, Netherlands",
       bookingValidityDate: "11/10/25",
       cargoHandoverStatus: "Processing",
-      cargoHandoverUpdate:"",
+      cargoHandoverUpdate: "",
     },
     {
       bookingID: "0000002",
@@ -110,7 +127,7 @@ const CargoHandoverUpdate: React.FC = () => {
       portOfDischarge: " Netherlands",
       bookingValidityDate: "11/10/25",
       cargoHandoverStatus: "Collected",
-      cargoHandoverUpdate:"11/10/25",
+      cargoHandoverUpdate: "11/10/25",
     },
     {
       bookingID: "0000003",
@@ -119,7 +136,7 @@ const CargoHandoverUpdate: React.FC = () => {
       portOfDischarge: "Rotterdam",
       bookingValidityDate: "11/10/25",
       cargoHandoverStatus: "Processing",
-      cargoHandoverUpdate:"",
+      cargoHandoverUpdate: "",
     },
     {
       bookingID: "0000004",
@@ -128,7 +145,7 @@ const CargoHandoverUpdate: React.FC = () => {
       portOfDischarge: " Netherlands",
       bookingValidityDate: "11/10/25",
       cargoHandoverStatus: "Collected",
-      cargoHandoverUpdate:"11/10/25",
+      cargoHandoverUpdate: "11/10/25",
     },
   ];
 
@@ -149,7 +166,7 @@ const CargoHandoverUpdate: React.FC = () => {
       <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center">
         <div className="w-[60%] flex gap-4 items-center">
           <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-            Container Pickup List
+            Cargo Handover Update List
           </p>
           <GroupField
             label={""}
