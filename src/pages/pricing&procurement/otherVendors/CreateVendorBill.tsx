@@ -1,16 +1,35 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import GroupField from "../../../components/groupField/GroupField";
 import {
   AddIcon,
+  CrossIcon,
   DeleteIcon,
   InvoiceIcon,
   LocationIcon,
 } from "../../../components/icons/Icons";
 import { Link, useLocation } from "react-router-dom";
-import GreyButton from "../../../components/buttons/GreyButton";
 import CustomTable from "../../../components/table/CustomTable";
 import BlackButton from "../../../components/buttons/BlackButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
+
+interface DummyDataProps {
+  billType: string;
+  // billValue: BillValueProps[];
+  billValue: string[];
+  vendorName: string;
+  productOrService: string;
+  vendorInvoiceNumber: string;
+  invoiceDate: string;
+  orderedLocation: string;
+  pickupLocation: string;
+  deliveryLocation: string;
+  baseCurrency: string;
+  exchangeRate: string;
+  otherDescription: string;
+}
+// interface BillValueProps {
+//   value: string;
+// }
 
 interface RowData {
   id: string | number;
@@ -38,37 +57,103 @@ const columns: any[] = [
 const CreateVendorBill: React.FC = () => {
   const location = useLocation();
   const [rows, setRows] = useState<RowData[]>([]);
+  const [dummyData, setDummyData] = useState<DummyDataProps>({
+    billType: "",
+    // billValue: [{ value: "" }],
+    billValue: [""],
+    vendorName: "",
+    productOrService: "",
+    vendorInvoiceNumber: "",
+    invoiceDate: "",
+    orderedLocation: "",
+    pickupLocation: "",
+    deliveryLocation: "",
+    baseCurrency: "",
+    exchangeRate: "",
+    otherDescription: "",
+  });
 
-  const handleDelete = (id: string | number) => {};
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setDummyData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleBillValueChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    index: number
+  ) => {
+    const { value } = e.target;
+    setDummyData((prev) => {
+      const newBillValue = [...prev.billValue];
+      // newBillValue[index] = { ...newBillValue[index], [name]: value };  //for objects
+      newBillValue[index] = value; //for array string
+      return { ...prev, billValue: newBillValue };
+    });
+  };
+
+  const handleAdd = () => {
+    setDummyData((prev) => ({
+      ...prev,
+      // billValue: [...prev.billValue, { value: "" }], //for object of array
+      billValue: [...prev.billValue, ""],
+    }));
+    console.log(dummyData.billValue);
+  };
+
+  const handleDelete = (index: number) => {
+    setDummyData((prev) => ({
+      ...prev,
+      billValue: prev.billValue.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleTableInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    index: number
+  ) => {
+    const { name, value } = e.target;
+    setData((prev) => {
+      const newValue = [...prev];
+      newValue[index] = { ...newValue[index], [name]: value }; //for objects
+      return newValue;
+    });
+  };
+  const handleAddMore = () => {
+    setData((prev) => [
+      ...prev,
+      {
+        particulars: "",
+        currencyType: "",
+        unitOfMeasure: "",
+        pricePerUnit: "",
+        quantity: "",
+        tax: "",
+        amount: "",
+      },
+    ]);
+  };
+  const handleDeleteTableRow = (index: number) => {
+    setData((prev) => [...prev.filter((_, i) => i !== index)]);
+  };
+
   // table
   const createData = (items: any) => {
-    const {
-      id,
-      particulars,
-      currencyType,
-      unitOfMeasure,
-      pricePerUnit,
-      quantity,
-      tax,
-      amount,
-    } = items;
+    const { id } = items;
     const particularsValue = (
       <GroupField
         label={""}
-        type={""}
+        type={"textarea"}
         placeholder={""}
-        name={particulars}
-        value={particulars}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"particulars"}
+        value={data[id].particulars}
+        maxLength={255}
+        onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
         parentStyle="min-w-[224px] max-w-[244px] mx-auto"
+        // inputStyle="bg-black"
       />
     );
     const currencyTypeValue = (
@@ -76,15 +161,9 @@ const CreateVendorBill: React.FC = () => {
         label={""}
         type={"select"}
         placeholder={"Select"}
-        name={currencyType}
-        value={currencyType}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"currencyType"}
+        value={data[id].currencyType}
+        onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
         parentStyle="min-w-[95px] max-w-[100px] mx-auto"
@@ -95,15 +174,9 @@ const CreateVendorBill: React.FC = () => {
         label={""}
         type={"select"}
         placeholder={"Select"}
-        name={unitOfMeasure}
-        value={unitOfMeasure}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"unitOfMeasure"}
+        value={data[id].unitOfMeasure}
+        onChange={(e) => handleTableInputChange(e, id)}
         options={[
           { label: "box", value: "Box" },
           { label: "kgs", value: "KGS" },
@@ -119,15 +192,9 @@ const CreateVendorBill: React.FC = () => {
         label={""}
         type={""}
         placeholder={""}
-        name={pricePerUnit}
-        value={pricePerUnit}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"pricePerUnit"}
+        value={data[id].pricePerUnit}
+        onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
         parentStyle="min-w-[104px] max-w-[104px] mx-auto"
@@ -138,15 +205,9 @@ const CreateVendorBill: React.FC = () => {
         label={""}
         type={""}
         placeholder={""}
-        name={quantity}
-        value={quantity}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"quantity"}
+        value={data[id].quantity}
+        onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
         parentStyle="min-w-[104px] max-w-[104px] mx-auto"
@@ -157,15 +218,9 @@ const CreateVendorBill: React.FC = () => {
         label={""}
         type={""}
         placeholder={""}
-        name={tax}
-        value={tax}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"tax"}
+        value={data[id].tax}
+        onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
         parentStyle="min-w-[104px] max-w-[104px] mx-auto"
@@ -176,15 +231,9 @@ const CreateVendorBill: React.FC = () => {
         label={""}
         type={""}
         placeholder={""}
-        name={amount}
-        value={amount}
-        onChange={function (
-          e: React.ChangeEvent<
-            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-          >
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
+        name={"amount"}
+        value={data[id].amount}
+        onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
         parentStyle="min-w-[124px] max-w-[124px] mx-auto"
@@ -192,12 +241,18 @@ const CreateVendorBill: React.FC = () => {
     );
 
     const actions = (
-      <div
-        className="p-1 mx-auto rounded-xs bg-error-50 w-fit"
-        onClick={() => handleDelete(id)}
-      >
-        <DeleteIcon size={16} color="#810001" />
-      </div>
+      <>
+        {data.length === 1 ? (
+          <div className="text-xl">-</div>
+        ) : (
+          <div
+            className="p-1 mx-auto rounded-xs bg-error-50 w-fit cursor-pointer"
+            onClick={() => handleDeleteTableRow(id)}
+          >
+            <DeleteIcon size={16} color="#810001" />
+          </div>
+        )}
+      </>
     );
 
     const updatedData = {
@@ -214,72 +269,174 @@ const CreateVendorBill: React.FC = () => {
     return updatedData;
   };
 
-  const data = [
-    {
-      particulars: "particulars",
-      currencyType: "rupees",
+  const createLastRow = (items: any) => {
+    const { id } = items;
+    const updatedData = {
+      id: id,
+      particulars: "",
+      currencyType: "",
       unitOfMeasure: "",
-      pricePerUnit: "20000",
-      quantity: "5",
-      tax: "10",
-      amount: "100000",
+      pricePerUnit: "",
+      quantity: "",
+      tax: "",
+      amount: "",
+      action: "",
+    };
+    return updatedData;
+  };
+
+  const [data, setData] = useState([
+    {
+      particulars: "",
+      currencyType: "",
+      unitOfMeasure: "",
+      pricePerUnit: "",
+      quantity: "",
+      tax: "",
+      amount: "",
     },
-  ];
+  ]);
 
   const fetchData = useCallback(() => {
     const arr = data.map((items, index) => {
       return createData({ ...items, id: index });
     });
-
-    setRows(arr);
-  }, []);
+    const addMoreRow = {
+      id: "",
+      particulars: (
+        <div onClick={handleAddMore} className="py-1">
+          <BlackButton
+            label={"Add More"}
+            size={"s"}
+            variant={"primary"}
+            leftIcon={<AddIcon size={16} color="#ffffff" />}
+          />
+        </div>
+      ),
+      currencyType: null,
+      unitOfMeasure: null,
+      pricePerUnit: null,
+      quantity: null,
+      tax: null,
+      amount: null,
+      action: null,
+    };
+    setRows([...arr, addMoreRow]);
+  }, [data]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
+  useEffect(() => {
+    setDummyData((prev) => ({
+      ...prev,
+      // billValue: [{ value: "" }],
+      billValue: [""],
+    }));
+  }, [dummyData.billType]);
+
   return (
     <>
       <div className="flex flex-col gap-6 px-8 py-6 rounded=xs bg-grey-aw-50 ">
-        <p className="text-grey-ab font-semibold text-h6">Vendor Bill for BL</p>
-        <GroupField
-          label={"Choose Bill Type"}
-          type={"select"}
-          placeholder={"Select Bill Type"}
-          name={""}
-          value={""}
-          options={[
-            { value: "Bill of Lading", label: "Bill of Lading" },
-            { value: "Booking Number", label: "Booking Number" },
-            { value: "Container Number", label: "Container Number" },
-          ]}
-          onChange={function (
-            e: React.ChangeEvent<
-              HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-            >
-          ): void {
-            throw new Error("Function not implemented.");
-          }}
-          error={false}
-          errorMessage={""}
-          parentStyle="w-[30%]"
-        />
+        <p className="text-grey-ab font-semibold text-h6">
+          {location.pathname.startsWith(
+            "/other-vendors/vendor-for-shipping/create"
+          )
+            ? "Vendor Bill for BL"
+            : "Vendor Bill for Office Essentials"}
+        </p>
 
         <div className="flex justify-between">
           <div className="flex flex-col gap-4 w-[40%]">
+            {location.pathname.startsWith(
+              "/other-vendors/vendor-for-shipping/create"
+            ) && (
+              <div className="flex flex-col gap-4">
+                <GroupField
+                  label={"Choose Bill Type"}
+                  type={"select"}
+                  placeholder={"Select Bill Type"}
+                  name={"billType"}
+                  value={dummyData.billType}
+                  options={[
+                    { value: "Bill of Lading", label: "Bill of Lading" },
+                    { value: "Booking Number", label: "Booking Number" },
+                    { value: "Container Number", label: "Container Number" },
+                  ]}
+                  onChange={handleChange}
+                  error={false}
+                  errorMessage={""}
+                />
+                {dummyData.billType.toLowerCase().includes("bill of lading") ||
+                dummyData.billType.toLowerCase().includes("booking number") ||
+                dummyData.billType
+                  .toLowerCase()
+                  .includes("container number") ? (
+                  <>
+                    {dummyData.billValue.map((item, index) => (
+                      <div className="flex gap-2 items-end" key={index}>
+                        <GroupField
+                          label={`${
+                            dummyData.billType
+                              .toLowerCase()
+                              .includes("container number")
+                              ? "Container Number"
+                              : dummyData.billType
+                                  .toLowerCase()
+                                  .includes("booking number")
+                              ? "Booking Number"
+                              : "BL Number"
+                          }`}
+                          type={""}
+                          placeholder={`${
+                            dummyData.billType
+                              .toLowerCase()
+                              .includes("container number")
+                              ? "Enter Container Number"
+                              : dummyData.billType
+                                  .toLowerCase()
+                                  .includes("booking number")
+                              ? "Enter Booking Number"
+                              : "Enter BL Number"
+                          }`}
+                          name={"value"}
+                          value={item}
+                          onChange={(e) => handleBillValueChange(e, index)}
+                          error={false}
+                          errorMessage={""}
+                          parentStyle="w-full"
+                        />
+                        {index === dummyData.billValue.length - 1 ? (
+                          <div
+                            className={`p-1 rounded cursor-pointer bg-grey-ab-50 h-fit `}
+                            onClick={handleAdd}
+                          >
+                            <AddIcon size={16} />
+                          </div>
+                        ) : (
+                          <div
+                            className={`p-1 rounded cursor-pointer bg-error-ab-50 h-fit `}
+                            onClick={() => handleDelete(index)}
+                          >
+                            <CrossIcon size={16} color="#C80008" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  ""
+                )}
+              </div>
+            )}
             <GroupField
               label={"Vendor Name*"}
               type={""}
-              placeholder={"Entern Vendor Name"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              placeholder={"Enter Vendor Name"}
+              name={"vendorName"}
+              value={dummyData.vendorName}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -287,19 +444,13 @@ const CreateVendorBill: React.FC = () => {
               label={"Product or Service"}
               type={"select"}
               placeholder={"Select Product or Service"}
-              name={""}
-              value={""}
+              name={"productOrService"}
+              value={dummyData.productOrService}
               options={[
                 { value: "Product", label: "Product" },
                 { value: "Service", label: "Service" },
               ]}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
             />
@@ -309,15 +460,9 @@ const CreateVendorBill: React.FC = () => {
               label={"Vendor Invoice Number"}
               type={""}
               placeholder={"Enter Invoice Number"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              name={"vendorInvoiceNumber"}
+              value={dummyData.vendorInvoiceNumber}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               leftIcon={<InvoiceIcon color="#2C398F" />}
@@ -326,15 +471,9 @@ const CreateVendorBill: React.FC = () => {
               label={"Invoice Date"}
               type={"date"}
               placeholder={"Enter Invoice Date"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              name={"invoiceDate"}
+              value={dummyData.invoiceDate}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               isDateLeft
@@ -343,15 +482,9 @@ const CreateVendorBill: React.FC = () => {
               label={"Ordered Location"}
               type={""}
               placeholder={"Enter Ordered Location"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              name={"orderedLocation"}
+              value={dummyData.orderedLocation}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               leftIcon={<LocationIcon color="#2C398F" />}
@@ -360,15 +493,9 @@ const CreateVendorBill: React.FC = () => {
               label={"Pickup Location"}
               type={""}
               placeholder={"Enter Pickup Location"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              name={"pickupLocation"}
+              value={dummyData.pickupLocation}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               leftIcon={<InvoiceIcon color="#2C398F" />}
@@ -377,15 +504,9 @@ const CreateVendorBill: React.FC = () => {
               label={"Delivery Location"}
               type={""}
               placeholder={"Enter Delivery Location"}
-              name={""}
-              value={""}
-              onChange={function (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-                >
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
+              name={"deliveryLocation"}
+              value={dummyData.deliveryLocation}
+              onChange={handleChange}
               error={false}
               errorMessage={""}
               leftIcon={<InvoiceIcon color="#2C398F" />}
@@ -395,14 +516,14 @@ const CreateVendorBill: React.FC = () => {
 
         <div className="flex flex-col gap-4 overflow-hidden">
           <CustomTable columns={columns} rows={rows} isCheckbox={false} />
-          <div>
+          {/* <div onClick={handleAddMore}>
             <BlackButton
               label={"Add More"}
               size={"s"}
               variant={"primary"}
               leftIcon={<AddIcon size={16} color="#ffffff" />}
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-4 w-[40%]">
@@ -410,15 +531,9 @@ const CreateVendorBill: React.FC = () => {
             label={"Base Currency"}
             type={"select"}
             placeholder={"Choose Base Currency"}
-            name={""}
-            value={""}
-            onChange={function (
-              e: React.ChangeEvent<
-                HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-              >
-            ): void {
-              throw new Error("Function not implemented.");
-            }}
+            name={"baseCurrency"}
+            value={dummyData.baseCurrency}
+            onChange={handleChange}
             error={false}
             errorMessage={""}
           />
@@ -426,15 +541,9 @@ const CreateVendorBill: React.FC = () => {
             label={"Exchange Rate "}
             type={""}
             placeholder={"Enter Exchange Rate "}
-            name={""}
-            value={""}
-            onChange={function (
-              e: React.ChangeEvent<
-                HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-              >
-            ): void {
-              throw new Error("Function not implemented.");
-            }}
+            name={"exchangeRate"}
+            value={dummyData.exchangeRate}
+            onChange={handleChange}
             error={false}
             errorMessage={""}
           />
@@ -444,15 +553,9 @@ const CreateVendorBill: React.FC = () => {
           label={"Order Description"}
           type={"textarea"}
           placeholder={"Write"}
-          name={""}
-          value={""}
-          onChange={function (
-            e: React.ChangeEvent<
-              HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-            >
-          ): void {
-            throw new Error("Function not implemented.");
-          }}
+          name={"otherDescription"}
+          value={dummyData.otherDescription}
+          onChange={handleChange}
           error={false}
           errorMessage={""}
         />

@@ -12,6 +12,9 @@ const OtherVendors: React.FC = () => {
   const { pathname } = location;
 
   // Check for path conditions
+  const isVendorForOffice = pathname.startsWith(
+    "/other-vendors/vendor-for-office"
+  );
   const isShippingCreate = pathname.startsWith(
     "/other-vendors/vendor-for-shipping/create"
   );
@@ -28,8 +31,22 @@ const OtherVendors: React.FC = () => {
   // Breadcrumbs array
   const breadCrums: BreadCrumsProps[] = [
     { label: "Home", path: "/" },
-    { label: "Pricing & Procurement", path: "/rate-filing" },
-    { label: "Other Vendors", path: "/other-vendors" },
+    {
+      label: "Pricing & Procurement",
+      path: `${
+        isOfficeCreate || isOfficeView || isVendorForOffice
+          ? "/other-vendors/vendor-for-office"
+          : "/other-vendors/vendor-for-shipping"
+      }`,
+    },
+    {
+      label: "Other Vendors",
+      path: `${
+        isOfficeCreate || isOfficeView
+          ? "/other-vendors/vendor-for-office"
+          : "/other-vendors/vendor-for-shipping"
+      }`,
+    },
   ];
 
   // Set heading and push dynamic breadcrumb

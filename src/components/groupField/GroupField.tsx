@@ -29,6 +29,7 @@ interface Groupfield {
   isMulti?: boolean;
   isDisabled?: boolean;
   id?: string;
+  maxLength?:number;
 }
 
 // const CustomDropdownIndicator = () => {
@@ -68,6 +69,7 @@ const GroupField: React.FC<Groupfield> = ({
   size, //added by suriya
   id, //added ny
   isDateLeft,
+  maxLength,
 }) => {
   // Handle React-Select change event
   const handleReactSelectChange = (selectedOption: any) => {
@@ -323,8 +325,9 @@ const GroupField: React.FC<Groupfield> = ({
               id={name}
               disabled={isDisabled}
               onChange={onChange}
+              maxLength={maxLength}
               placeholder={placeholder}
-              className={`outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
+              className={`outline-none custom-scrollbar-small placeholder-grey-ab-200 focus:outline-none bg-grey-50  active:outline-none text-grey-ab-800 w-full `}
             ></textarea>
           ) : type === "date" ? (
             <div className={`relative w-full `}>
