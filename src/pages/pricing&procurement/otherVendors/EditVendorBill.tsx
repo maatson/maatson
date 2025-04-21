@@ -372,7 +372,7 @@ const EditVendorBill: React.FC = () => {
                 />
                 {dummyData.billType.toLowerCase().includes("bill of lading") ||
                 dummyData.billType.toLowerCase().includes("booking number") ||
-                dummyData.billType
+                dummyData.billType 
                   .toLowerCase()
                   .includes("container number") ? (
                   <>
