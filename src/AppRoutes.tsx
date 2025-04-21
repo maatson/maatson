@@ -431,6 +431,9 @@ const VendorForOfficeList = lazy(
 const CreateVendorBill = lazy(
   () => import("./pages/pricing&procurement/otherVendors/CreateVendorBill") 
 );
+const EditVendorBill = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/EditVendorBill") 
+);
 const ViewVendorBill = lazy(
   () => import("./pages/pricing&procurement/otherVendors/ViewVendorBill")
 );
@@ -682,11 +685,13 @@ const AppRoutes: React.FC = () => {
           <Route path="vendor-for-shipping">
             <Route index element={<VendorForShippingList />} />
             <Route path="create" element={<CreateVendorBill />} />
+            <Route path="edit/:id" element={<EditVendorBill />} />
             <Route path="view/:id" element={<ViewVendorBill />} />
           </Route>
           <Route path="vendor-for-office">
             <Route index element={<VendorForOfficeList />} />
             <Route path="create" element={<CreateVendorBill />} />
+            <Route path="edit/:id" element={<EditVendorBill />} />
             <Route path="view/:id" element={<ViewVendorBill />} />
           </Route>
         </Route>

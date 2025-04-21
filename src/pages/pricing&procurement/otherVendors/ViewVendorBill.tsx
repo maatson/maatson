@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ErrorButton from "../../../components/buttons/ErrorButton";
-import { DeleteIcon } from "../../../components/icons/Icons";
+import { DeleteIcon, InvoiceIcon } from "../../../components/icons/Icons";
 import CustomTable from "../../../components/table/CustomTable";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 
 interface LayoutProps {
   label: string;
@@ -42,6 +43,7 @@ const Columns: any[] = [
 
 const ViewVendorBill: React.FC = () => {
   const location = useLocation();
+  const {id} = useParams();
   const [rows, setRows] = useState<RowData[]>([]);
 
   const createData = (items: any) => {
@@ -118,13 +120,29 @@ const ViewVendorBill: React.FC = () => {
       <div className="bg-grey-aw-50 gap-6 flex flex-col px-8 py-6 rounded-xs ">
         <div className="flex justify-between items-center text-lg font-bold text-grey-ab">
           <p>Vendor for Shipping</p>
-          <div>
+          <div className="flex gap-4">
             <ErrorButton
               label={"Delete Invoice"}
               size={"m"}
               variant={"primary"}
               leftIcon={<DeleteIcon size={16} color="#FDFDFD" />}
             />
+            <Link
+              to={`${
+                location.pathname.startsWith(
+                  "/other-vendors/vendor-for-shipping/view"
+                )
+                  ? `/other-vendors/vendor-for-shipping/edit/${id}`
+                  : `/other-vendors/vendor-for-office/edit/${id}`
+              }`}
+            >
+              <NeutralBlueButton
+                label={"Edit Invoice"}
+                size={"m"}
+                variant={"primary"}
+                rightIcon={<InvoiceIcon size={16} color="#FDFDFD" />}
+              />
+            </Link>
           </div>
         </div>
 

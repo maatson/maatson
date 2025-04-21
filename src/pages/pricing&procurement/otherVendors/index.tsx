@@ -18,11 +18,17 @@ const OtherVendors: React.FC = () => {
   const isShippingCreate = pathname.startsWith(
     "/other-vendors/vendor-for-shipping/create"
   );
+  const isShippingEdit = pathname.startsWith(
+    "/other-vendors/vendor-for-shipping/edit"
+  );
   const isShippingView = pathname.startsWith(
     "/other-vendors/vendor-for-shipping/view"
   );
   const isOfficeCreate = pathname.startsWith(
     "/other-vendors/vendor-for-office/create"
+  );
+  const isOfficeEdit = pathname.startsWith(
+    "/other-vendors/vendor-for-office/edit"
   );
   const isOfficeView = pathname.startsWith(
     "/other-vendors/vendor-for-office/view"
@@ -34,7 +40,7 @@ const OtherVendors: React.FC = () => {
     {
       label: "Pricing & Procurement",
       path: `${
-        isOfficeCreate || isOfficeView || isVendorForOffice
+        isOfficeCreate || isOfficeEdit || isOfficeView || isVendorForOffice
           ? "/other-vendors/vendor-for-office"
           : "/other-vendors/vendor-for-shipping"
       }`,
@@ -42,7 +48,7 @@ const OtherVendors: React.FC = () => {
     {
       label: "Other Vendors",
       path: `${
-        isOfficeCreate || isOfficeView
+        isOfficeCreate || isOfficeEdit || isOfficeView
           ? "/other-vendors/vendor-for-office"
           : "/other-vendors/vendor-for-shipping"
       }`,
@@ -55,6 +61,9 @@ const OtherVendors: React.FC = () => {
   if (isShippingCreate || isOfficeCreate) {
     breadCrums.push({ label: "Create Vendor Bill" });
     heading = "Create Vendor Bill";
+  } else if (isShippingEdit || isOfficeEdit) {
+    breadCrums.push({ label: "Edit Vendor Bill" });
+    heading = "Edit Vendor Bill";
   } else if (isShippingView) {
     breadCrums.push({ label: "Vendor for Shipping" });
     heading = "Vendor Bill for Shipping";
@@ -65,7 +74,12 @@ const OtherVendors: React.FC = () => {
 
   // Show tab navigation only on base pages
   const showTabs =
-    !isShippingCreate && !isShippingView && !isOfficeCreate && !isOfficeView;
+    !isShippingCreate &&
+    !isShippingEdit &&
+    !isShippingView &&
+    !isOfficeCreate &&
+    !isOfficeEdit &&
+    !isOfficeView;
 
   return (
     <>
