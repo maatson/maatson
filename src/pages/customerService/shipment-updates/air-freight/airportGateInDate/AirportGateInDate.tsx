@@ -27,8 +27,18 @@ const columns: any[] = [
   { id: "companyName", label: "Company Name" },
   { id: "portOfLoading", label: "Port of loading", minWidth: 160 },
   { id: "portOfDischarge", label: "Port of Discharge", minWidth: 160 },
-  { id: "bookingValidityDate", label: "Booking Validity Date", minWidth: 160,align: "center" },
-  { id: "airportGateInStatus", label: "Airport Gate In Status", align: "center", minWidth:160},
+  {
+    id: "bookingValidityDate",
+    label: "Booking Validity Date",
+    minWidth: 160,
+    align: "center",
+  },
+  {
+    id: "airportGateInStatus",
+    label: "Airport Gate In Status",
+    align: "center",
+    minWidth: 160,
+  },
   { id: "airportGateInDate", label: "Airport Gate In Date", align: "center" },
   { id: "action", label: "Action", minWidth: 120, align: "center" },
 ];
@@ -101,7 +111,7 @@ const AirportGateInDate: React.FC = () => {
       portOfDischarge: "Rotterdam, Netherlands",
       bookingValidityDate: "11/10/25",
       airportGateInStatus: "Processing",
-      airportGateInDate:"",
+      airportGateInDate: "",
     },
     {
       bookingID: "0000002",
@@ -110,7 +120,7 @@ const AirportGateInDate: React.FC = () => {
       portOfDischarge: " Netherlands",
       bookingValidityDate: "11/10/25",
       airportGateInStatus: "Collected",
-      airportGateInDate:"11/10/25",
+      airportGateInDate: "11/10/25",
     },
     {
       bookingID: "0000003",
@@ -119,7 +129,7 @@ const AirportGateInDate: React.FC = () => {
       portOfDischarge: "Rotterdam",
       bookingValidityDate: "11/10/25",
       airportGateInStatus: "Processing",
-      airportGateInDate:"",
+      airportGateInDate: "",
     },
     {
       bookingID: "0000004",
@@ -128,7 +138,7 @@ const AirportGateInDate: React.FC = () => {
       portOfDischarge: " Netherlands",
       bookingValidityDate: "11/10/25",
       airportGateInStatus: "Collected",
-      airportGateInDate:"11/10/25",
+      airportGateInDate: "11/10/25",
     },
   ];
 
@@ -149,7 +159,7 @@ const AirportGateInDate: React.FC = () => {
       <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center">
         <div className="w-[60%] flex gap-4 items-center">
           <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-            Container Pickup List
+            Airport Gate In List
           </p>
           <GroupField
             label={""}

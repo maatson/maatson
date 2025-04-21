@@ -274,7 +274,7 @@ const RateMailing: React.FC = () => {
             }}
             error={false}
             errorMessage={""}
-            parentStyle="w-[20%]"
+            parentStyle="w-1/4"
           />
         </div>
 
