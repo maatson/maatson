@@ -13,7 +13,6 @@ import {
   RangeCalenderIcon,
   RoutingIcon,
   ServiceIcon,
-  ShipIcon,
 } from "../../../../../components/icons/Icons";
 import GroupField from "../../../../../components/groupField/GroupField";
 import GreyButton from "../../../../../components/buttons/GreyButton";
@@ -64,14 +63,18 @@ const AddAirScheduleForm: React.FC = () => {
     setShowServingRoutes((prev) => !prev);
   };
 
-  const handleAdd = () => {
-    setData((prevData) => ({
-      ...prevData,
-      servingRoutes: [
-        ...prevData.servingRoutes,
-        { routePort: "", estimateTimeOfArrival: "" },
-      ],
-    }));
+  const handleAdd = (index: number) => {
+    setData((prevData) => {
+      const newServingRoutes = [...prevData.servingRoutes];
+      newServingRoutes.splice(index + 1, 0, {
+        routePort: "",
+        estimateTimeOfArrival: "",
+      });
+      return {
+        ...prevData,
+        servingRoutes: newServingRoutes,
+      };
+    });
   };
 
   const handleDelete = (index: number) => {
@@ -280,7 +283,7 @@ const AddAirScheduleForm: React.FC = () => {
                         ) : (
                           <div
                             className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab"
-                            onClick={handleAdd}
+                            onClick={() => handleAdd(index)}
                           >
                             <AddIcon color="#FDFDFD" size={16} />
                           </div>

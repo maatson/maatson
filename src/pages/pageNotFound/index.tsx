@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import ComposeEmails from "../../components/composeEmail/ComposeEmails";
 
 interface Chip {
   id: number;
@@ -300,7 +301,7 @@ const PageNotFound: React.FC = () => {
           </div>
         </div>
       </div>
-{/* 
+      {/* 
       <div className="w-full h-60 bg-white">
         <a href="sms:+917358567362">Header Hi</a>
       </div> */}
@@ -317,6 +318,14 @@ const PageNotFound: React.FC = () => {
         />
       </div>
       <p>{emailBody}</p>
+
+      <div className="flex p-10 justify-center">
+        <ComposeEmails
+          onClose={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      </div>
     </div>
   );
 };
