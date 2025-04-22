@@ -6,7 +6,7 @@ import {
   InvoiceIcon,
   LocationIcon,
 } from "../../../components/icons/Icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import CustomTable from "../../../components/table/CustomTable";
 import BlackButton from "../../../components/buttons/BlackButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
@@ -68,23 +68,24 @@ const columns: any[] = [
   { id: "action", label: "Action", align: "center", minWidth: 80 },
 ];
 
-const CreateVendorBill: React.FC = () => {
+const EditVendorBill: React.FC = () => {
   const location = useLocation();
+  const { id } = useParams();
   const [rows, setRows] = useState<RowData[]>([]);
   const [dummyData, setDummyData] = useState<DummyDataProps>({
-    billType: "",
+    billType: "Bill of Lading",
     // billValue: [{ value: "" }],
-    billValue: [""],
-    vendorName: "",
-    productOrService: "",
-    vendorInvoiceNumber: "",
-    invoiceDate: "",
-    orderedLocation: "",
-    pickupLocation: "",
-    deliveryLocation: "",
-    baseCurrency: "",
-    exchangeRate: "",
-    otherDescription: "",
+    billValue: ["123dd4545", "712871h1h"],
+    vendorName: "Sansico pvt ltd.",
+    productOrService: "Service",
+    vendorInvoiceNumber: "123dd4545",
+    invoiceDate: "11/05/2025",
+    orderedLocation: "Chennai, India",
+    pickupLocation: "Mumbai, India",
+    deliveryLocation: "Chennai India",
+    baseCurrency: "INR",
+    exchangeRate: "83",
+    otherDescription: "Mumbai team orderd this product for",
   });
 
   const handleChange = (
@@ -177,6 +178,10 @@ const CreateVendorBill: React.FC = () => {
         placeholder={"Select"}
         name={"currencyType"}
         value={data[id].currencyType}
+        options={[
+          { label: "INR", value: "INR" },
+          { label: "USD", value: "USD" },
+        ]}
         onChange={(e) => handleTableInputChange(e, id)}
         error={false}
         errorMessage={""}
@@ -192,9 +197,9 @@ const CreateVendorBill: React.FC = () => {
         value={data[id].unitOfMeasure}
         onChange={(e) => handleTableInputChange(e, id)}
         options={[
-          { label: "box", value: "Box" },
-          { label: "kgs", value: "KGS" },
-          { label: "drum", value: "Drums" },
+          { label: "Box", value: "Box" },
+          { label: "KGS", value: "KGS" },
+          { label: "Drums", value: "Drums" },
         ]}
         error={false}
         errorMessage={""}
@@ -285,13 +290,13 @@ const CreateVendorBill: React.FC = () => {
 
   const [data, setData] = useState([
     {
-      particulars: "",
-      currencyType: "",
-      unitOfMeasure: "",
-      pricePerUnit: "",
-      quantity: "",
-      tax: "",
-      amount: "",
+      particulars: "50kg Bag of Organic Rice	",
+      currencyType: "USD",
+      unitOfMeasure: "KGS",
+      pricePerUnit: "5000	",
+      quantity: "01",
+      tax: "10",
+      amount: "5000",
     },
   ]);
 
@@ -326,20 +331,19 @@ const CreateVendorBill: React.FC = () => {
     fetchData();
   }, [fetchData]);
 
-  useEffect(() => {
-    setDummyData((prev) => ({
-      ...prev,
-      // billValue: [{ value: "" }],
-      billValue: [""],
-    }));
-  }, [dummyData.billType]);
+  // useEffect(() => {
+  //   setDummyData((prev) => ({
+  //     ...prev,
+  //     billValue: [""],
+  //   }));
+  // }, [dummyData.billType]);
 
   return (
     <>
       <div className="flex flex-col gap-6 px-8 py-6 rounded=xs bg-grey-aw-50 ">
         <p className="text-grey-ab font-semibold text-h6">
           {location.pathname.startsWith(
-            "/other-vendors/vendor-for-shipping/create"
+            "/other-vendors/vendor-for-shipping/edit"
           )
             ? "Vendor Bill for BL"
             : "Vendor Bill for Office Essentials"}
@@ -348,7 +352,7 @@ const CreateVendorBill: React.FC = () => {
         <div className="flex justify-between">
           <div className="flex flex-col gap-4 w-[40%]">
             {location.pathname.startsWith(
-              "/other-vendors/vendor-for-shipping/create"
+              "/other-vendors/vendor-for-shipping/edit"
             ) && (
               <div className="flex flex-col gap-4">
                 <GroupField
@@ -368,7 +372,7 @@ const CreateVendorBill: React.FC = () => {
                 />
                 {dummyData.billType.toLowerCase().includes("bill of lading") ||
                 dummyData.billType.toLowerCase().includes("booking number") ||
-                dummyData.billType
+                dummyData.billType 
                   .toLowerCase()
                   .includes("container number") ? (
                   <>
@@ -531,14 +535,6 @@ const CreateVendorBill: React.FC = () => {
 
         <div className="flex flex-col gap-4 overflow-hidden">
           <CustomTable columns={columns} rows={rows} isCheckbox={false} />
-          {/* <div onClick={handleAddMore}>
-            <BlackButton
-              label={"Add More"}
-              size={"s"}
-              variant={"primary"}
-              leftIcon={<AddIcon size={16} color="#ffffff" />}
-            />
-          </div> */}
         </div>
 
         <div className="flex flex-col gap-4 w-[40%]">
@@ -549,6 +545,10 @@ const CreateVendorBill: React.FC = () => {
             name={"baseCurrency"}
             value={dummyData.baseCurrency}
             onChange={handleChange}
+            options={[
+              { value: "INR", label: "INR" },
+              { value: "USD", label: "USD" },
+            ]}
             error={false}
             errorMessage={""}
           />
@@ -576,14 +576,17 @@ const CreateVendorBill: React.FC = () => {
         />
 
         <div className="flex justify-end gap-6 items-center">
-          {location.pathname ===
-            "/other-vendors/vendor-for-shipping/create" && (
-            <Link to={"/other-vendors/vendor-for-shipping"}>
+          {location.pathname.startsWith(
+            "/other-vendors/vendor-for-shipping/edit"
+          ) && (
+            <Link to={`/other-vendors/vendor-for-shipping/view/${id}`}>
               <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
             </Link>
           )}
-          {location.pathname === "/other-vendors/vendor-for-office/create" && (
-            <Link to={"/other-vendors/vendor-for-office"}>
+          {location.pathname.startsWith(
+            "/other-vendors/vendor-for-office/edit"
+          ) && (
+            <Link to={`/other-vendors/vendor-for-office/view/${id}`}>
               <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
             </Link>
           )}
@@ -596,4 +599,4 @@ const CreateVendorBill: React.FC = () => {
   );
 };
 
-export default CreateVendorBill;
+export default EditVendorBill;

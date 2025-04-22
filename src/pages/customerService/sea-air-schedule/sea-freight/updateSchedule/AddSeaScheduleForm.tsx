@@ -271,12 +271,6 @@ const AddSeaScheduleForm: React.FC = () => {
                             <AddIcon color="#FDFDFD" size={16} />
                           </div>
                         )}
-                        {/* <div
-                          className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab"
-                          onClick={handleAdd}
-                        >
-                          <AddIcon color="#FDFDFD" size={16} />
-                        </div> */}
                       </div>
                     </div>
                   ))}

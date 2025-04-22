@@ -15,6 +15,7 @@ import CustomTable from "../../../components/table/CustomTable";
 import CustomPagination from "../../../components/pagination/CustomPagination";
 import BlueChip from "../../../components/chips/BlueChip";
 import ComposeEmail from "./ComposeEmail";
+import { useLocation } from "react-router-dom";
 
 interface RowData {
   id: string | number;
@@ -28,6 +29,11 @@ interface RowData {
 
 interface CountryHoverCellProps {
   countries: string[];
+}
+
+interface BreadCrumsProps {
+  label: string;
+  path?: string;
 }
 
 const columns: any[] = [
@@ -44,6 +50,16 @@ const columns: any[] = [
 ];
 
 const RateMailing: React.FC = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  // const isRateMailing = pathname.startsWith("/rate-mailing");
+  const breadCrums: BreadCrumsProps[] = [
+    { label: "Home", path: "/" },
+    { label: "Pricing & Procurement", path:"/rate-mailing" },
+    { label: "Rate Mailing",path:"/rate-mailing"  },
+  ];
+  let heading = "Rate Mailing";
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -190,10 +206,7 @@ const RateMailing: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        breadCrums={["Home", "Pricing & Procurement", "Rate Mailing"]}
-        heading={"Rate Mailing"}
-      />
+      <PageHeader breadCrums={breadCrums} heading={heading} />
 
       <div className="rounded-xs shadow-lg bg-grey-aw-50">
         <div className="flex justify-between p-3 items-center border-b border-b-grey-ab-50">

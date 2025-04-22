@@ -27,6 +27,7 @@ interface Groupfield {
   isMulti?: boolean;
   isDisabled?: boolean;
   id?: string;
+  maxLength?:number;
   onBlur?: (e: React.FocusEvent<any>) => void;
 }
 
@@ -121,6 +122,7 @@ const GroupField: React.FC<Groupfield> = ({
   id,
   isDateLeft,
   onBlur,
+  maxLength,
 }) => {
   const getSelectedValue = () => {
     if (Array.isArray(value)) {
@@ -239,8 +241,9 @@ const GroupField: React.FC<Groupfield> = ({
               disabled={isDisabled}
               onChange={onChange}
               onBlur={onBlur}
+              maxLength={maxLength}
               placeholder={placeholder}
-              className="outline-none placeholder-grey-ab-200 focus:outline-none bg-grey-50 text-grey-ab-800 w-full"
+              className="outline-none custom-scrollbar-small placeholder-grey-ab-200 focus:outline-none bg-grey-50 text-grey-ab-800 w-full"
             />
           ) : type === "date" ? (
             <div className="relative w-full">
