@@ -435,7 +435,7 @@ const CreateVendorBill = lazy(
   () => import("./pages/pricing&procurement/otherVendors/CreateVendorBill")
 );
 const EditVendorBill = lazy(
-  () => import("./pages/pricing&procurement/otherVendors/EditVendorBill") 
+  () => import("./pages/pricing&procurement/otherVendors/EditVendorBill")
 );
 const ViewVendorBill = lazy(
   () => import("./pages/pricing&procurement/otherVendors/ViewVendorBill")
@@ -681,7 +681,7 @@ const AppRoutes: React.FC = () => {
             path="available-rates/:enquiryId"
             element={<AvailableRates />}
           />
-          <Route path="add/:EnquiryId" element={<AddRateFiling />} />
+          <Route path="add/:enquiryId" element={<AddRateFiling />} />
           <Route path="create" element={<CreateRateFiling />} />
         </Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
