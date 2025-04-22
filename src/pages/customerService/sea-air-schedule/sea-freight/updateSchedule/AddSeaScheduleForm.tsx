@@ -63,14 +63,18 @@ const AddSeaScheduleForm: React.FC = () => {
     setShowServingRoutes((prev) => !prev);
   };
 
-  const handleAdd = () => {
-    setData((prevData) => ({
-      ...prevData,
-      servingRoutes: [
-        ...prevData.servingRoutes,
-        { routePort: "", estimateTimeOfArrival: "" },
-      ],
-    }));
+  const handleAdd = (index: number) => {
+    setData((prevData) => {
+      const newServingRoutes = [...prevData.servingRoutes];
+      newServingRoutes.splice(index + 1, 0, {
+        routePort: "",
+        estimateTimeOfArrival: "",
+      });
+      return {
+        ...prevData,
+        servingRoutes: newServingRoutes,
+      };
+    });
   };
 
   const handleDelete = (index: number) => {
@@ -252,7 +256,7 @@ const AddSeaScheduleForm: React.FC = () => {
                         rightIcon={<CalenderIcon color="#2C398F" />}
                         parentStyle="w-[30%]"
                       />
-                      <div className="flex gap-1 items-end">
+                      <div className="flex gap-1 items-end" key={index}>
                         {data.servingRoutes.length > 1 && (
                           <div
                             className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-error"
@@ -266,7 +270,7 @@ const AddSeaScheduleForm: React.FC = () => {
                         ) : (
                           <div
                             className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab"
-                            onClick={handleAdd}
+                            onClick={() => handleAdd(index)}
                           >
                             <AddIcon color="#FDFDFD" size={16} />
                           </div>

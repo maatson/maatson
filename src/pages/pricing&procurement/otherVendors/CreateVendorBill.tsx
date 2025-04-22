@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import GroupField from "../../../components/groupField/GroupField";
 import {
   AddIcon,
+  CrossIcon,
   DeleteIcon,
   InvoiceIcon,
   LocationIcon,
@@ -367,7 +368,6 @@ const CreateVendorBill: React.FC = () => {
                   errorMessage={""}
                 />
                 {dummyData.billType.toLowerCase().includes("bill of lading") ||
-                dummyData.billType.toLowerCase().includes("booking number") ||
                 dummyData.billType
                   .toLowerCase()
                   .includes("container number") ? (
@@ -379,24 +379,24 @@ const CreateVendorBill: React.FC = () => {
                             dummyData.billType
                               .toLowerCase()
                               .includes("container number")
-                              ? "Container Number"
+                              ? `Container Number ${index+1}`
                               : dummyData.billType
                                   .toLowerCase()
                                   .includes("booking number")
                               ? "Booking Number"
-                              : "BL Number"
+                              : `BL Number ${index+1}`
                           }`}
                           type={""}
                           placeholder={`${
                             dummyData.billType
                               .toLowerCase()
                               .includes("container number")
-                              ? "Enter Container Number"
+                              ? `Enter Container Number ${index+1}`
                               : dummyData.billType
                                   .toLowerCase()
                                   .includes("booking number")
                               ? "Enter Booking Number"
-                              : "Enter BL Number"
+                              : `Enter BL Number ${index+1}`
                           }`}
                           name={"value"}
                           value={item}
@@ -408,40 +408,76 @@ const CreateVendorBill: React.FC = () => {
                         {index === dummyData.billValue.length - 1 &&
                         dummyData.billValue.length === 1 ? (
                           <div
-                            className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab"
+                            className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab-50"
                             onClick={handleAdd}
                           >
-                            <AddIcon color="#FDFDFD" size={16} />
+                            <AddIcon size={16} />
                           </div>
                         ) : index === dummyData.billValue.length - 1 &&
                           dummyData.billValue.length > 1 ? (
                           <div className="flex  gap-1">
                             <div
-                              className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-error"
+                              className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-error-50"
                               onClick={() => handleDelete(index)}
                             >
-                              <DeleteIcon color="#FDFDFD" size={16} />
+                              <CrossIcon color="#C80008" size={16} />
                             </div>
                             <div
-                              className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab"
+                              className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-grey-ab-50"
                               onClick={handleAdd}
                             >
-                              <AddIcon color="#FDFDFD" size={16} />
+                              <AddIcon size={16} />
                             </div>
                           </div>
                         ) : (
                           <div
-                            className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-error"
+                            className="h-6 w-6 p-1 rounded-xs cursor-pointer bg-error-50"
                             onClick={() => handleDelete(index)}
                           >
-                            <DeleteIcon color="#FDFDFD" size={16} />
+                            <CrossIcon color="#C80008" size={16} />
                           </div>
                         )}
                       </div>
                     ))}
                   </>
                 ) : (
-                  ""
+                  <>
+                    {dummyData.billValue.map((item, index) => (
+                      <div className="flex gap-2 items-end" key={index}>
+                        <GroupField
+                          label={`${
+                            dummyData.billType
+                              .toLowerCase()
+                              .includes("container number")
+                              ? `Container Number ${index+1}`
+                              : dummyData.billType
+                                  .toLowerCase()
+                                  .includes("booking number")
+                              ? "Booking Number"
+                              : `BL Number ${index+1}`
+                          }`}
+                          type={""}
+                          placeholder={`${
+                            dummyData.billType
+                              .toLowerCase()
+                              .includes("container number")
+                              ? `Enter Container Number ${index+1}`
+                              : dummyData.billType
+                                  .toLowerCase()
+                                  .includes("booking number")
+                              ? "Enter Booking Number"
+                              : `Enter BL Number ${index+1}`
+                          }`}
+                          name={"value"}
+                          value={item}
+                          onChange={(e) => handleBillValueChange(e, index)}
+                          error={false}
+                          errorMessage={""}
+                          parentStyle="w-full"
+                        />
+                      </div>
+                    ))}
+                  </>
                 )}
               </div>
             )}
