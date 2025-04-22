@@ -626,7 +626,7 @@ const CreateRateFiling: React.FC = () => {
   };
   return (
     <div className="bg-grey-aw-50 px-8 py-4 rounded flex flex-col gap-8">
-      <p className="text-lg font-semibold"> CreateRateFiling</p>
+      <p className="text-lg font-semibold"> Create Rate Filing</p>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-6">
           {" "}
@@ -1787,7 +1787,7 @@ const CreateRateFiling: React.FC = () => {
           <HeadTitle label={"Transit Route"} icon={<RoutingIcon />} />
           {carrierInfoData.transitRoute.length > 0 &&
             carrierInfoData.transitRoute.map((value, index) => (
-              <div className="flex justify-start gap-4 items-end">
+              <div className="flex justify-start gap-4 items-end" key={index}>
                 <GroupField
                   label={`Transit Leg ${index + 1}`}
                   type={"text"}

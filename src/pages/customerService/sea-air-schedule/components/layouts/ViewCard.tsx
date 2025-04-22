@@ -2,7 +2,7 @@ import React from "react";
 
 const ViewCard: React.FC<{
   label: string;
-  value: string | number | any;
+  value: string | number | React.ReactNode;
   style?: string;
   labelStyle?: string;
   valueStyle?: string;
@@ -10,7 +10,7 @@ const ViewCard: React.FC<{
   return (
     <div className={`flex gap-2 text-sm  ${style} `}>
       <p className={`${labelStyle}`}>{label}</p>
-      <p className={`${valueStyle}`}>{value}</p>
+      <div className={`capitalize ${valueStyle}`}>{value}</div>
     </div>
   );
 });

@@ -30,6 +30,12 @@ const EnquiryRateFiling: React.FC = () => {
       { label: "Create Rate Filing" }
     );
     heading = "Create Rate Filing";
+  } else if (pathname.startsWith("/rate-filing/add")) {
+    breadCrums.push(
+      { label: "Rate Filing", path: "/rate-filing" },
+      { label: "Add Rate Filing" }
+    );
+    heading = "Add Rate Filing";
   } else {
     breadCrums.push({ label: "Rate Filing", path: "/rate-filing" });
   }

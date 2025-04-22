@@ -276,8 +276,11 @@ const AvailableRates: React.FC = () => {
           <>
             <div className="flex px-3 py-2 bg-grey-100 justify-around">
               <input type="checkbox" name="dummy" id="dummy" />
-              {columns.map((column) => (
-                <p className="text-grey-ab-900 font-semibold text-center">
+              {columns.map((column, index) => (
+                <p
+                  className="text-grey-ab-900 font-semibold text-center"
+                  key={index}
+                >
                   {column.label}
                 </p>
               ))}

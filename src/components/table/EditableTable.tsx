@@ -66,7 +66,6 @@ const EditableTable = <T extends Record<string, any>>({
     }
     setTempRow(updatedRow);
   };
-  console.log("hello");
 
   return (
     <div className="overflow-auto custom-scrollbar">
