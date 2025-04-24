@@ -99,17 +99,6 @@ const EditableTable = <T extends Record<string, any>>({
                   >
                     {isEditing && col.editable ? (
                       col.type === "select" ? (
-                        // <select
-                        //   value={tempRow?.[col.key]}
-                        //   onChange={(e) => handleChange(col.key, e.target.value)}
-                        //   className="w-full border px-1 py-0.5"
-                        // >
-                        //   {col.options?.map((opt) => (
-                        //     <option key={opt} value={opt}>
-                        //       {opt}
-                        //     </option>
-                        //   ))}
-                        // </select>
                         <GroupField
                           label={""}
                           type={"select"}
