@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./index.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-// import {useDropZone } from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import {
   AlignCenterIcon,
@@ -39,17 +39,8 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const quillRef = useRef<ReactQuill | null>(null);
   const [subject, setSubject] = useState("");
   const [editorContent, setEditorContent] = useState("");
-
-  //   const applyFormat = (format: string, value?: any) => {
-  //     const editor = quillRef.current?.getEditor();
-  //     if (!editor) return;
-  //     if (value !== undefined) {
-  //       editor.format(format, value);
-  //     } else {
-  //       const current = editor.getFormat()[format];
-  //       editor.format(format, !current);
-  //     }
-  //   };
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
+  const [dragActive, setDragActive] = useState(false);
 
   const applyFormat = (format: string, value?: any) => {
     const editor = quillRef.current?.getEditor();
@@ -58,7 +49,6 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
     const current = editor.getFormat();
 
     if (format === "list") {
-      // Toggle list format
       if (current[format] === value) {
         editor.format(format, false); // Remove list format
       } else {
@@ -84,6 +74,25 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
     }
   };
 
+  const onDrop = (acceptedFiles: File[]) => {
+    setAttachedFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: {
+      "image/*": [".jpg", ".jpeg", ".png", ".gif"],
+      "application/pdf": [".pdf"],
+      "application/msword": [".doc"],
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        [".docx"],
+      "application/vnd.ms-excel": [".xls"],
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+        ".xlsx",
+      ],
+    },
+  });
+
   const handleFontSize = (size: string) => applyFormat("size", size);
   const handleTextColor = (color: string) => applyFormat("color", color);
   const handleBgColor = (color: string) => applyFormat("background", color);
@@ -92,8 +101,48 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
     onClose();
   };
 
+  useEffect(() => {
+    const editor = quillRef.current?.getEditor();
+    if (!editor) return;
+
+    const editorContainer = editor.root;
+
+    const handleDragOver = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(true);
+    };
+
+    const handleDragLeave = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
+    };
+
+    const handleDrop = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
+
+      const files = Array.from(e.dataTransfer?.files || []);
+      if (files.length > 0) {
+        onDrop(files);
+      }
+    };
+
+    editorContainer.addEventListener("dragover", handleDragOver);
+    editorContainer.addEventListener("dragleave", handleDragLeave);
+    editorContainer.addEventListener("drop", handleDrop);
+
+    return () => {
+      editorContainer.removeEventListener("dragover", handleDragOver);
+      editorContainer.removeEventListener("dragleave", handleDragLeave);
+      editorContainer.removeEventListener("drop", handleDrop);
+    };
+  }, []);
+
   return (
-    <div className="max-w-[640px] w-full min-h-[600px] rounded-sm flex bg-grey-aw-50 flex-col shadow-lg gap-3">
+    <div className="max-w-[640px] w-full rounded-sm flex bg-grey-aw-50 flex-col shadow-lg gap-3">
       {/* Header */}
       <div className="flex justify-between items-center px-2 py-3">
         <p className="font-semibold text-grey-ab">New Message</p>
@@ -105,73 +154,101 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
         </div>
       </div>
 
-      {/* To Section */}
-      <div className="px-4 py-2 border-b border-grey-ab-50 flex justify-between items-center">
-        <div className="flex gap-2 items-center">
-          <p className="text-grey-ab-300">To</p>
-          <div className="flex gap-[10px] px-2 py-1 items-center rounded-full bg-grey-200">
-            <div className="h-4 w-4 rounded-full bg-blue"></div>
-            <p className="text-xs text-grey-ab-300">nvt.isst.nute@gmail.com</p>
+      <div>
+        {/* To Section */}
+        <div className="px-4 py-2 border-b border-grey-ab-50 flex justify-between items-center">
+          <div className="flex gap-2 items-center">
+            <p className="text-grey-ab-300">To</p>
+            <div className="flex gap-[10px] px-2 py-1 items-center rounded-full bg-grey-200">
+              <div className="h-4 w-4 rounded-full bg-blue"></div>
+              <p className="text-xs text-grey-ab-300">
+                nvt.isst.nute@gmail.com
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <div className="rounded-xs px-2 py-1 bg-grey-200 text-2xs font-bold text-grey-ab-500 cursor-pointer">
+              CC
+            </div>
+            <div className="rounded-xs px-2 py-1 bg-grey-200 text-2xs font-bold text-grey-ab-500 cursor-pointer">
+              BCC
+            </div>
           </div>
         </div>
-        <div className="flex gap-2">
-          <div className="rounded-xs px-2 py-1 bg-grey-200 text-2xs font-bold text-grey-ab-500 cursor-pointer">
-            CC
-          </div>
-          <div className="rounded-xs px-2 py-1 bg-grey-200 text-2xs font-bold text-grey-ab-500 cursor-pointer">
-            BCC
-          </div>
+
+        {/* Subject */}
+        <div className="flex px-4 py-2 gap-3 border-b border-grey-ab-50 w-full">
+          <p className="text-grey-ab-300">Subject:</p>
+          <input
+            type="text"
+            placeholder="Subject..."
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            className="w-full outline-none text-grey-ab-800"
+          />
+        </div>
+
+        {/* Editor */}
+        <div className={` ${dragActive ? "bg-blue-50" : ""}`}>
+          <ReactQuill
+            ref={quillRef}
+            value={editorContent}
+            onChange={setEditorContent}
+            theme="snow"
+            modules={{
+              toolbar: false,
+              history: {
+                delay: 500,
+                maxStack: 100,
+                userOnly: true,
+              },
+            }}
+            formats={[
+              "header",
+              "font",
+              "size",
+              "bold",
+              "italic",
+              "underline",
+              "color",
+              "background",
+              "list",
+              "bullet",
+              "align",
+              "link",
+              "image",
+            ]}
+            className=" border-none h-60 overflow-auto custom-scrollbar"
+          />
         </div>
       </div>
 
-      {/* Subject */}
-      <div className="flex px-4 py-2 gap-3 border-b border-grey-ab-50 w-full">
-        <p className="text-grey-ab-300">Subject:</p>
-        <input
-          type="text"
-          placeholder="Subject..."
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          className="w-full outline-none text-grey-ab-800"
-        />
-      </div>
-
-      {/* Editor */}
-      <div className=" border-b border-grey-ab-50">
-        <ReactQuill
-          ref={quillRef}
-          value={editorContent}
-          onChange={setEditorContent}
-          theme="snow"
-          modules={{
-            toolbar: false,
-            history: {
-              delay: 500,
-              maxStack: 100,
-              userOnly: true,
-            },
-          }}
-          formats={[
-            "header",
-            "font",
-            "size",
-            "bold",
-            "italic",
-            "underline",
-            "color",
-            "background",
-            "list",
-            "bullet",
-            "align",
-            "link",
-            "image",
-          ]}
-          className="bg-grey-aw-50 border-none h-60 overflow-auto custom-scrollbar"
-        />
-      </div>
+      {/* file attachments */}
+      {attachedFiles.length > 0 && (
+        <div className="flex gap-2 items-center h-[58px] overflow-auto custom-scrollbar-small mx-2">
+          {attachedFiles.map((file, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-2 bg-grey-200 rounded-md px-2 py-1"
+            >
+              <p className="text-xs text-grey-ab-800">{file.name}</p>
+              <button
+                onClick={() =>
+                  setAttachedFiles((prevFiles) =>
+                    prevFiles.filter((_, i) => i !== index)
+                  )
+                }
+                className="text-xs text-red-600"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Custom Toolbar */}
-      <div className="flex flex-col gap-2 px-4 py-3 border-t border-t-grey-ab-50">
+      <div className="flex flex-col px-4 py-3 border-t border-t-grey-ab-50">
         <div className="flex gap-1 flex-wrap justify-end">
           <IconSets icon={<BackwardIcon size={20} />} onClick={() => {}} />
           <IconSets icon={<ForwardIcon size={20} />} onClick={() => {}} />
@@ -189,10 +266,18 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
               <option value="" disabled>
                 Size
               </option>
-              <option value="small" className="cursor-pointer">Small</option>
-              <option value="normal" className="cursor-pointer">Normal</option>
-              <option value="large" className="cursor-pointer">Large</option>
-              <option value="huge" className="cursor-pointer">Huge</option>
+              <option value="small" className="cursor-pointer">
+                Small
+              </option>
+              <option value="normal" className="cursor-pointer">
+                Normal
+              </option>
+              <option value="large" className="cursor-pointer">
+                Large
+              </option>
+              <option value="huge" className="cursor-pointer">
+                Huge
+              </option>
             </select>
           </div>
           <IconSets
@@ -258,7 +343,10 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
         <div className="w-full border-t border-t-grey-ab-50 my-2" />
         <div className="flex justify-between items-center">
           <div className="flex gap-2 items-center">
-            <IconSets icon={<AttachFileIcon size={20} color="#212121" />} />
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              <IconSets icon={<AttachFileIcon size={20} color="#212121" />} />
+            </div>
             <IconSets icon={<EmojiIcon size={20} color="#212121" />} />
             <IconSets icon={<ImageOutlineIcon size={20} color="#212121" />} />
             <IconSets icon={<LinkIcon size={20} color="#212121" />} />
