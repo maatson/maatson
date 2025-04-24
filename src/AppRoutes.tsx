@@ -414,6 +414,12 @@ const AvailableRates = lazy(
 const AddRateFiling = lazy(
   () => import("./pages/pricing&procurement/rateFiling/AddRateFiling")
 );
+const EditRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/EditRateFiling")
+);
+const ViewRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/ViewRateFiling")
+);
 const CreateRateFiling = lazy(
   () => import("./pages/pricing&procurement/rateFiling/CreateRateFiling")
 );
@@ -682,6 +688,14 @@ const AppRoutes: React.FC = () => {
             element={<AvailableRates />}
           />
           <Route path="add/:enquiryId" element={<AddRateFiling />} />
+          <Route
+            path="edit/:enquiryId/:rateFilingId"
+            element={<EditRateFiling />}
+          />
+          <Route
+            path="view/:enquiryId/:rateFilingId"
+            element={<ViewRateFiling />}
+          />
           <Route path="create" element={<CreateRateFiling />} />
         </Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>

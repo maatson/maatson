@@ -93,13 +93,13 @@ const AvailableRates: React.FC = () => {
       <div className="flex gap-3 items-center justify-center">
         <Link
           className="rounded bg-blue inline-block p-1"
-          to={`/rate-filing/available-rates/${id}`}
+          to={`/rate-filing/edit/${enquiryId}/${id}`}
         >
           <EditIcon color="#ffffff" size={16} />
         </Link>{" "}
         <Link
           className="rounded bg-grey-ab inline-block p-1"
-          to={`/rate-filing/available-rates/${id}`}
+          to={`/rate-filing/view/${enquiryId}/${id}`}
         >
           <EyeOpenIcon color="#ffffff" size={16} />
         </Link>
