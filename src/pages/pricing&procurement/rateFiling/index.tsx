@@ -36,6 +36,18 @@ const EnquiryRateFiling: React.FC = () => {
       { label: "Add Rate Filing" }
     );
     heading = "Add Rate Filing";
+  } else if (pathname.startsWith("/rate-filing/edit")) {
+    breadCrums.push(
+      { label: "Rate Filing", path: "/rate-filing" },
+      { label: "Edit Rate Filing" }
+    );
+    heading = "Edit Rate Filing";
+  } else if (pathname.startsWith("/rate-filing/view")) {
+    breadCrums.push(
+      { label: "Rate Filing", path: "/rate-filing" },
+      { label: "Rate Filing Details" }
+    );
+    heading = "Rate Filing Details";
   } else {
     breadCrums.push({ label: "Rate Filing", path: "/rate-filing" });
   }

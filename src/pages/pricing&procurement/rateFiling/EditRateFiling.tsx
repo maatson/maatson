@@ -54,7 +54,7 @@ type LocalCharge = {
   chargeType: string;
   category: string;
   currencyType: string;
-  carrierTariff: number;
+  carrierTariff: string | number;
   profit: number;
   amount: number;
 };
@@ -74,7 +74,7 @@ interface CreateRateFilingProps {
   carrierInfoData: any;
 }
 
-const AddRateFiling: React.FC = () => {
+const EditRateFiling: React.FC = () => {
   const [enquiryData, setEnquiryData] = useState<EnquiryDataProps>({
     modeOfShipment: "export",
     modeOfTransportation: "sea freight",
@@ -99,30 +99,30 @@ const AddRateFiling: React.FC = () => {
     },
   });
   const [carrierInfoData, setCarrierInfoData] = useState<CarrierInfoProps>({
-    carrierName: "",
-    personName: "",
-    email: "",
-    mobileNumber: "",
-    department: "",
+    carrierName: "Maresk Line",
+    personName: "Khonshu",
+    email: "khonsu@gmail.com",
+    mobileNumber: "9862468911",
+    department: "sales",
     rateDetails: [
       {
-        size: "",
-        currencyType: "",
-        rate: 0,
-        profit: 0,
-        priceValidity: "",
-        amount: 0,
+        size: "reefers",
+        currencyType: "USD",
+        rate: 1000,
+        profit: 10,
+        priceValidity: "12-5-2025",
+        amount: 1100,
       },
     ],
-    transitRoute: [""],
+    transitRoute: ["columbo"],
     localChargesTariff: [
       {
-        chargeType: "",
-        category: "",
-        currencyType: "",
-        carrierTariff: 0,
-        profit: 0,
-        amount: 0,
+        chargeType: "bill",
+        category: "POL",
+        currencyType: "USD",
+        carrierTariff: 1000,
+        profit: 10,
+        amount: 1100,
       },
     ],
   });
@@ -679,8 +679,8 @@ const AddRateFiling: React.FC = () => {
     }));
   };
   return (
-    <div className="bg-grey-aw-50 px-8 py-4 rounded flex flex-col gap-8">
-      <p className="text-lg font-semibold"> Add Rate Filing</p>
+    <div className="bg-grey-aw-50 px-6 py-4 rounded flex flex-col gap-8">
+      <p className="text-lg font-semibold"> Edit Rate Filing</p>
       <div className="flex flex-col gap-6">
         {isEditEnquiry ? (
           <div className="flex flex-col gap-6 bg-grey-aw-100 p-4 rounded-sm">
@@ -2170,14 +2170,14 @@ const AddRateFiling: React.FC = () => {
           <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
         </div>
         <div onClick={handleSubmit}>
-          <PrimaryButton label={"Save Pricing"} size={"xl"} variant={""} />
+          <PrimaryButton label={"Save"} size={"xl"} variant={""} />
         </div>
       </div>
     </div>
   );
 };
 
-export default AddRateFiling;
+export default EditRateFiling;
 
 const HeadTitle: React.FC<{ label: string; icon: React.ReactNode }> = ({
   label,

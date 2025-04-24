@@ -18,6 +18,7 @@ type EditableTableProps<T> = {
   onChange: (updated: T[]) => void;
   isDisableDelete: boolean;
   onRowChange?: (row: T) => T;
+  isOnlyView?: boolean;
 };
 
 const EditableTable = <T extends Record<string, any>>({
@@ -26,6 +27,7 @@ const EditableTable = <T extends Record<string, any>>({
   onChange,
   isDisableDelete,
   onRowChange,
+  isOnlyView,
 }: EditableTableProps<T>) => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [tempRow, setTempRow] = useState<T | null>(null);
@@ -79,7 +81,7 @@ const EditableTable = <T extends Record<string, any>>({
                 {col.label}
               </td>
             ))}
-            <td className=" px-2 py-2 text-center">Action</td>
+            {!isOnlyView && <td className=" px-2 py-2 text-center">Action</td>}
           </tr>
         </thead>
         <tbody>
@@ -164,42 +166,44 @@ const EditableTable = <T extends Record<string, any>>({
                     )}
                   </td>
                 ))}
-                <td className="border-b border-grey-ab-50 px-2 py-1 text-center min-w-[30px]">
-                  {isEditing ? (
-                    <div className="flex justify-center gap-2">
-                      <button
-                        onClick={handleCancel}
-                        className="p-1 bg-error rounded"
-                      >
-                        <CrossIcon color="#fff" size={16} />
-                      </button>
-                      <button
-                        onClick={handleSave}
-                        className="p-1 bg-success rounded"
-                      >
-                        <TickIcon color="#fff" size={16} />
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex justify-center gap-2">
-                      <button
-                        onClick={() => handleEdit(index)}
-                        className="p-1 bg-blue rounded"
-                      >
-                        <EditIcon color="#fff" size={16} />
-                      </button>
-                      {!isDisableDelete && (
+                {!isOnlyView && (
+                  <td className="border-b border-grey-ab-50 px-2 py-1 text-center min-w-[30px]">
+                    {isEditing ? (
+                      <div className="flex justify-center gap-2">
                         <button
-                          onClick={() => handleDelete(index)}
-                          className="p-1 bg-error rounded disabled:bg-error-800 disabled:cursor-not-allowed"
-                          disabled={data.length === 1}
+                          onClick={handleCancel}
+                          className="p-1 bg-error rounded"
                         >
-                          <DeleteIcon color="#fff" size={16} />
+                          <CrossIcon color="#fff" size={16} />
                         </button>
-                      )}
-                    </div>
-                  )}
-                </td>
+                        <button
+                          onClick={handleSave}
+                          className="p-1 bg-success rounded"
+                        >
+                          <TickIcon color="#fff" size={16} />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex justify-center gap-2">
+                        <button
+                          onClick={() => handleEdit(index)}
+                          className="p-1 bg-blue rounded"
+                        >
+                          <EditIcon color="#fff" size={16} />
+                        </button>
+                        {!isDisableDelete && (
+                          <button
+                            onClick={() => handleDelete(index)}
+                            className="p-1 bg-error rounded disabled:bg-error-800 disabled:cursor-not-allowed"
+                            disabled={data.length === 1}
+                          >
+                            <DeleteIcon color="#fff" size={16} />
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </td>
+                )}
               </tr>
             );
           })}
