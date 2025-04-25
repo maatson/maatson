@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import GroupField from "../../../components/groupField/GroupField";
 import {
   AddIcon,
@@ -88,6 +94,7 @@ const EditVendorBill: React.FC = () => {
     exchangeRate: "83",
     otherDescription: "Mumbai team orderd this product for",
   });
+  const prevBillType = useRef<string | null>(null);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -169,7 +176,6 @@ const EditVendorBill: React.FC = () => {
         error={false}
         errorMessage={""}
         parentStyle="min-w-[224px] max-w-[244px] mx-auto"
-        // inputStyle="bg-black"
       />
     );
     const currencyTypeValue = (
@@ -332,12 +338,16 @@ const EditVendorBill: React.FC = () => {
     fetchData();
   }, [fetchData]);
 
-  // useEffect(() => {
-  //   setDummyData((prev) => ({
-  //     ...prev,
-  //     billValue: [""],
-  //   }));
-  // }, [dummyData.billType]);
+  useEffect(() => {
+    // Only reset if billType changed
+    if (prevBillType.current !== null &&prevBillType.current !== dummyData.billType) { 
+      setDummyData((prev) => ({
+        ...prev,
+        billValue: [""],
+      }));
+    }
+    prevBillType.current = dummyData.billType; // store current for next comparison
+  }, [dummyData.billType]);
 
   return (
     <>
@@ -371,10 +381,10 @@ const EditVendorBill: React.FC = () => {
                   error={false}
                   errorMessage={""}
                 />
-                {dummyData.billType.toLowerCase().includes("bill of lading") ||
-                dummyData.billType
-                  .toLowerCase()
-                  .includes("container number") ? (
+                {(dummyData.billType.toLowerCase().includes("bill of lading") ||
+                  dummyData.billType
+                    .toLowerCase()
+                    .includes("container number")) && (
                   <>
                     {dummyData.billValue.map((item, index) => (
                       <div className="flex gap-2 items-end" key={index}>
@@ -383,24 +393,16 @@ const EditVendorBill: React.FC = () => {
                             dummyData.billType
                               .toLowerCase()
                               .includes("container number")
-                              ? `Container Number ${index+1}`
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Booking Number"
-                              : `BL Number ${index+1}`
+                              ? `Container Number ${index + 1}`
+                              : `BL Number ${index + 1}`
                           }`}
                           type={""}
                           placeholder={`${
                             dummyData.billType
                               .toLowerCase()
                               .includes("container number")
-                              ? `Enter Container Number ${index+1}`
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Enter Booking Number"
-                              : `Enter BL Number ${index+1}`
+                              ? `Enter Container Number ${index + 1}`
+                              : `Enter BL Number ${index + 1}`
                           }`}
                           name={"value"}
                           value={item}
@@ -444,34 +446,18 @@ const EditVendorBill: React.FC = () => {
                       </div>
                     ))}
                   </>
-                ) : (
+                )}
+
+                {dummyData.billType
+                  .toLowerCase()
+                  .includes("booking number") && (
                   <>
                     {dummyData.billValue.map((item, index) => (
                       <div className="flex gap-2 items-end" key={index}>
                         <GroupField
-                          label={`${
-                            dummyData.billType
-                              .toLowerCase()
-                              .includes("container number")
-                              ? "Container Number"
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Booking Number"
-                              : "BL Number"
-                          }`}
+                          label={"Booking Number"}
                           type={""}
-                          placeholder={`${
-                            dummyData.billType
-                              .toLowerCase()
-                              .includes("container number")
-                              ? "Enter Container Number"
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Enter Booking Number"
-                              : "Enter BL Number"
-                          }`}
+                          placeholder={"Enter Booking Number"}
                           name={"value"}
                           value={item}
                           onChange={(e) => handleBillValueChange(e, index)}

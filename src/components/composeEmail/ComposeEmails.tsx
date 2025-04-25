@@ -3,6 +3,9 @@ import "./index.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useDropzone } from "react-dropzone";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
+
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import {
   AlignCenterIcon,
@@ -25,6 +28,8 @@ import {
   TextColorIcon,
   UnderLineIcon,
 } from "../../components/icons/Icons";
+import BlackButton from "../buttons/BlackButton";
+import GroupField from "../groupField/GroupField";
 
 interface ComposeEmailsProps {
   onClose: () => void;
@@ -37,10 +42,16 @@ interface IconSetsProps {
 
 const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const quillRef = useRef<ReactQuill | null>(null);
+  const cursorPosition = useRef<number | null>(null);
   const [subject, setSubject] = useState("");
   const [editorContent, setEditorContent] = useState("");
   const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [linkText, setLinkText] = useState("");
+  const [linkUrl, setLinkUrl] = useState("");
 
   const applyFormat = (format: string, value?: any) => {
     const editor = quillRef.current?.getEditor();
@@ -96,6 +107,46 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const handleFontSize = (size: string) => applyFormat("size", size);
   const handleTextColor = (color: string) => applyFormat("color", color);
   const handleBgColor = (color: string) => applyFormat("background", color);
+  const handleEmojiSelect = (emoji: any) => {
+    const editor = quillRef.current?.getEditor();
+    const position = cursorPosition.current ?? 0;
+    if (editor) {
+      editor.insertText(position, emoji.native); // Insert the emoji at cursor position
+      editor.setSelection(position + emoji.native.length); // Move the cursor after the emoji
+    }
+    setShowEmojiPicker(false);
+  };
+
+  const insertLink = () => {
+    const quill = quillRef.current?.getEditor();
+    if (!quill) return;
+
+    quill.focus();
+
+    const range = quill.getSelection();
+    // const linkToInsert = linkUrl;
+
+    if (range) {
+      quill.insertText(range.index, linkUrl);
+      quill.formatText(range.index, linkUrl.length, "link", linkUrl);
+      quill.setSelection(range.index + linkUrl.length);
+    } else {
+      const position = cursorPosition.current ?? 0;
+      quill.insertText(position, linkUrl);
+      quill.formatText(position, linkUrl.length, "link", linkUrl);
+      quill.setSelection(position + linkUrl.length);
+    }
+
+    setShowLinkModal(false);
+    setLinkText("");
+    setLinkUrl("");
+  };
+
+  const handleEditorChangeSelection = (range: any) => {
+    if (range) {
+      cursorPosition.current = range.index;
+    }
+  };
 
   const handleCancel = () => {
     onClose();
@@ -194,6 +245,7 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
             ref={quillRef}
             value={editorContent}
             onChange={setEditorContent}
+            onChangeSelection={handleEditorChangeSelection} // To track cursor position
             theme="snow"
             modules={{
               toolbar: false,
@@ -347,9 +399,25 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
               <input {...getInputProps()} />
               <IconSets icon={<AttachFileIcon size={20} color="#212121" />} />
             </div>
-            <IconSets icon={<EmojiIcon size={20} color="#212121" />} />
+            <IconSets
+              icon={<EmojiIcon size={20} color="#212121" />}
+              onClick={() => setShowEmojiPicker((prev) => !prev)}
+            />
+            {showEmojiPicker && (
+              <div className="absolute bottom-[20px] left-4 z-50">
+                <Picker
+                  data={data}
+                  onEmojiSelect={handleEmojiSelect}
+                  theme="dark"
+                />
+              </div>
+            )}
+            {/* below apply image upload functcon similar in emails */}
             <IconSets icon={<ImageOutlineIcon size={20} color="#212121" />} />
-            <IconSets icon={<LinkIcon size={20} color="#212121" />} />
+            <IconSets
+              icon={<LinkIcon size={20} color="#212121" />}
+              onClick={() => setShowLinkModal(true)}
+            />
           </div>
           <div className="flex gap-3">
             <div onClick={handleCancel}>
@@ -364,6 +432,33 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
           </div>
         </div>
       </div>
+
+      {/* Link Modal */}
+      {showLinkModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-grey-aw-50 rounded-md shadow-md p-4 flex flex-col gap-4 w-full max-w-sm">
+            <GroupField
+              label={"Insert Link"}
+              type={"url"}
+              placeholder={"Enter Link"}
+              name={""}
+              value={linkUrl}
+              onChange={(e) => setLinkUrl(e.target.value)}
+              error={false}
+              errorMessage={""}
+              leftIcon={<LinkIcon color="#2C398F" />}
+            />
+            <div className="flex justify-end gap-2 items-center">
+              <div onClick={() => setShowLinkModal(false)}>
+                <BlackButton label={"Cancel"} size={"m"} variant={"link"} />
+              </div>
+              <div onClick={insertLink}>
+                <BlackButton label={"Save"} size={"m"} variant={"primary"} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

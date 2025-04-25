@@ -274,7 +274,7 @@ const GroupField: React.FC<Groupfield> = ({
                 >
                   {value || placeholder}
                 </span>
-                <CalenderIcon size={24} color="#2C398F" />
+                <CalenderIcon size={`${size === "s" ? 16:24}`} color="#2C398F" />
               </div>
             </div>
           ) : (
