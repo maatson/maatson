@@ -452,6 +452,20 @@ const ViewVendorBill = lazy(
 const ContainerReleaseOrder = lazy(
   () => import("./pages/operations/containerReleaseOrder")
 );
+const ContainerReleaseOrderList = lazy(
+  () =>
+    import("./pages/operations/containerReleaseOrder/ContainerReleaseOrderList")
+);
+const CreateContainerReleaseOrder = lazy(
+  () =>
+    import(
+      "./pages/operations/containerReleaseOrder/CreateContainerReleaseOrder"
+    )
+);
+const ViewContainerReleaseOrder = lazy(
+  () =>
+    import("./pages/operations/containerReleaseOrder/ViewContainerReleaseOrder")
+);
 const Vgm = lazy(() => import("./pages/operations/vgm"));
 const CargoManifest = lazy(() => import("./pages/operations/cargoManifest"));
 
@@ -728,7 +742,11 @@ const AppRoutes: React.FC = () => {
         <Route
           path="container-release-order"
           element={<ContainerReleaseOrder />}
-        ></Route>
+        >
+          <Route index element={<ContainerReleaseOrderList />} />
+          <Route path="create" element={<CreateContainerReleaseOrder />} />
+          <Route path="view/:id" element={<ViewContainerReleaseOrder />} />
+        </Route>
 
         <Route path="vgm" element={<Vgm />}></Route>
 
