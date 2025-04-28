@@ -62,17 +62,13 @@ const ContainerPickupDetails: React.FC = () => {
         id: 1,
         containerSize: "40’ft Dry Container",
         quantity: 5,
-        cargoData: [
-          { id: 1, containerNumber: "123243353", pickupDate: "21-2-2024" },
-        ],
+        cargoData: [],
       },
       {
         id: 2,
         containerSize: "20’ft Dry Container",
         quantity: 10,
-        cargoData: [
-          { id: 1, containerNumber: "98878879989", pickupDate: "21-2-2024" },
-        ],
+        cargoData: [],
       },
     ],
     bookingValidatity: "11/10/25",

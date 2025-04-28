@@ -14,9 +14,10 @@ import {
   AttachFileIcon,
   BackwardIcon,
   BulletListsIcon,
+  CloseIcon,
   ColorFillIcon,
   CrossIcon,
-  DropDownIcon,
+  DocumentIcon,
   EmojiIcon,
   ForwardIcon,
   ImageOutlineIcon,
@@ -31,6 +32,12 @@ import {
 import BlackButton from "../buttons/BlackButton";
 import GroupField from "../groupField/GroupField";
 
+import Quill from "quill";
+
+const Font = Quill.import("formats/font") as any;
+Font.whitelist = ["sans-serif", "serif", "slabserif", "script"];
+Quill.register(Font, true);
+
 interface ComposeEmailsProps {
   onClose: () => void;
 }
@@ -40,6 +47,29 @@ interface IconSetsProps {
   onClick?: () => void;
 }
 
+const textColor = [
+  "#000000",
+  "#00CC54",
+  "#232E72",
+  "#255771",
+  "#BE8819",
+  "#E800B1",
+  "#0084E8",
+  "#E8891C",
+  "#C80008",
+];
+const textBackgroundColor = [
+  "#FDFDFD",
+  "#8AF1B4",
+  "#C4C8E4",
+  "#9FBECD",
+  "#F8DDA5",
+  "#FF8AE3",
+  "#8ACCFF",
+  "#FFCF98",
+  "#F58A8A",
+];
+
 const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const quillRef = useRef<ReactQuill | null>(null);
   const cursorPosition = useRef<number | null>(null);
@@ -48,6 +78,8 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [showTextColorPalette, setShowTextColorPalette] = useState(false);
+  const [showBgColorPalette, setShowBgColorPalette] = useState(false);
 
   const [showLinkModal, setShowLinkModal] = useState(false);
   const [linkText, setLinkText] = useState("");
@@ -70,6 +102,12 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
         editor.format("size", false); // Remove align format to reset - for left
       } else {
         editor.format("size", value); // For apply align center and right
+      }
+    } else if (format === "font") {
+      if (value === "sans-serif") {
+        editor.format("font", false);
+      } else {
+        editor.format("font", value);
       }
     } else if (format === "align") {
       if (value === "left") {
@@ -105,6 +143,7 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   });
 
   const handleFontSize = (size: string) => applyFormat("size", size);
+  const handleFontStyle = (font: string) => applyFormat("font", font);
   const handleTextColor = (color: string) => applyFormat("color", color);
   const handleBgColor = (color: string) => applyFormat("background", color);
   const handleEmojiSelect = (emoji: any) => {
@@ -277,22 +316,26 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
 
       {/* file attachments */}
       {attachedFiles.length > 0 && (
-        <div className="flex gap-2 items-center h-[58px] overflow-auto custom-scrollbar-small mx-2">
+        <div className="flex gap-2 items-center h-[48px] overflow-auto custom-scrollbar-small mx-4 ">
           {attachedFiles.map((file, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 bg-grey-200 rounded-md px-2 py-1"
+              className="flex gap-3 p-2 rounded-xs bg-primary-50 border border-grey-ab-100 items-center w-[220px] justify-between"
             >
-              <p className="text-xs text-grey-ab-800">{file.name}</p>
+              <div className="flex gap-3 truncate">
+                <div>
+                  <DocumentIcon color="#2C398F" />
+                </div>
+                <p className=" text-grey-ab-900 truncate">{file.name}</p>
+              </div>
               <button
                 onClick={() =>
                   setAttachedFiles((prevFiles) =>
                     prevFiles.filter((_, i) => i !== index)
                   )
                 }
-                className="text-xs text-red-600"
               >
-                Remove
+                <CloseIcon size={16} />
               </button>
             </div>
           ))}
@@ -304,9 +347,37 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
         <div className="flex gap-1 flex-wrap justify-end">
           <IconSets icon={<BackwardIcon size={20} />} onClick={() => {}} />
           <IconSets icon={<ForwardIcon size={20} />} onClick={() => {}} />
-          <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-2 py-1 cursor-pointer flex gap-2 items-center">
+
+          {/* <select
+            value={fontStyle}
+            onChange={(e) => handleFontStyleChange(e.target.value)}
+            className="custom-toolbar-select"
+          >
+            <option value="sans-serif">Sans Serif</option>
+            <option value="serif">Serif</option>
+            <option value="slabserif">Slab Serif</option>
+            <option value="script">Script</option>
+          </select> */}
+
+          {/* <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-2 py-1 cursor-pointer flex gap-2 items-center">
             <p className="font-bold text-xs text-grey-ab-800">San serif</p>
             <DropDownIcon size={12} />
+          </div> */}
+
+          <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-1">
+            <select
+              className="text-xs bg-transparent outline-none cursor-pointer"
+              onChange={(e) => handleFontStyle(e.target.value)}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Font Style
+              </option>
+              <option value="sans-serif">Sans Serif</option>
+              <option value="serif">Serif</option>
+              <option value="slabserif">Slab Serif</option>
+              <option value="script">Script</option>
+            </select>
           </div>
 
           <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-1">
@@ -318,18 +389,10 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
               <option value="" disabled>
                 Size
               </option>
-              <option value="small" className="cursor-pointer">
-                Small
-              </option>
-              <option value="normal" className="cursor-pointer">
-                Normal
-              </option>
-              <option value="large" className="cursor-pointer">
-                Large
-              </option>
-              <option value="huge" className="cursor-pointer">
-                Huge
-              </option>
+              <option value="small">Small</option>
+              <option value="normal">Normal</option>
+              <option value="large">Large</option>
+              <option value="huge">Huge</option>
             </select>
           </div>
           <IconSets
@@ -344,30 +407,55 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
             icon={<UnderLineIcon size={20} />}
             onClick={() => applyFormat("underline")}
           />
-
-          <label htmlFor="textColor" className="relative">
-            <IconSets icon={<TextColorIcon size={20} />} />
-            <input
-              type="color"
-              id="textColor"
-              aria-label="Text Color"
-              title="Text Color"
-              value={"#C80008"}
-              className="absolute w-1 h-1 top-0 opacity-0"
-              onChange={(e) => handleTextColor(e.target.value)}
+          <div className="relative">
+            <IconSets
+              icon={<TextColorIcon size={20} />}
+              onClick={() => {
+                setShowTextColorPalette((prev) => !prev);
+                setShowBgColorPalette(false);
+              }}
             />
-          </label>
+            {showTextColorPalette && (
+              <div className="absolute flex gap-2 bottom-[44px] z-10 bg-grey-aw-50 border border-grey-ab-50 rounded-xs shadow-md p-2">
+                {textColor.map((color) => (
+                  <button
+                    key={color}
+                    className="w-4 h-4 rounded-full"
+                    style={{ backgroundColor: color }}
+                    onClick={() => {
+                      handleTextColor(color);
+                      setShowTextColorPalette(false);
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
 
-          <label htmlFor="textbgColor" className="relative">
-            <IconSets icon={<ColorFillIcon size={20} />} />
-            <input
-              type="color"
-              id="textbgColor"
-              className="absolute w-1 h-1 top-0 opacity-0"
-              onChange={(e) => handleBgColor(e.target.value)}
+          <div className="relative">
+            <IconSets
+              icon={<ColorFillIcon size={20} />}
+              onClick={() => {
+                setShowTextColorPalette(false);
+                setShowBgColorPalette((prev) => !prev);
+              }}
             />
-          </label>
-
+            {showBgColorPalette && (
+              <div className="absolute flex gap-2 bottom-[44px] z-10 bg-grey-aw-50 border border-grey-ab-50 rounded-xs shadow-md p-2">
+                {textBackgroundColor.map((color) => (
+                  <button
+                    key={color}
+                    className="w-4 h-4 rounded-full border border-grey-ab-100"
+                    style={{ backgroundColor: color }}
+                    onClick={() => {
+                      handleBgColor(color);
+                      setShowBgColorPalette(false);
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
           <IconSets
             icon={<AlignLeftIcon size={20} />}
             onClick={() => applyFormat("align", "left")}
