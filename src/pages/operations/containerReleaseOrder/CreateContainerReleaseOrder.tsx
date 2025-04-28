@@ -304,7 +304,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
           <GroupField
             label={"Gate Cut off*"}
             type={"date"}
-            placeholder={"Enter Gate Cut off Date"}
+            placeholder={"Enter Gate Cut off Date uhsisiuiuaddqddqdqdq"}
             name={"gateCutOff"}
             value={data.gateCutOff}
             onChange={handleChange}
