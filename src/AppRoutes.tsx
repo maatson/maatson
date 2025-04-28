@@ -447,6 +447,14 @@ const ViewVendorBill = lazy(
   () => import("./pages/pricing&procurement/otherVendors/ViewVendorBill")
 );
 
+// OPERATIONS
+
+const ContainerReleaseOrder = lazy(
+  () => import("./pages/operations/containerReleaseOrder")
+);
+const Vgm = lazy(() => import("./pages/operations/vgm"));
+const CargoManifest = lazy(() => import("./pages/operations/cargoManifest"));
+
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
@@ -678,6 +686,8 @@ const AppRoutes: React.FC = () => {
             />
           </Route>
         </Route>
+
+        {/* cargo arrival notice */}
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* pricing & procurement */}
@@ -714,6 +724,15 @@ const AppRoutes: React.FC = () => {
           </Route>
         </Route>
 
+        {/* operations */}
+        <Route
+          path="container-release-order"
+          element={<ContainerReleaseOrder />}
+        ></Route>
+
+        <Route path="vgm" element={<Vgm />}></Route>
+
+        <Route path="cargo-manifest" element={<CargoManifest />}></Route>
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>
           <Route index element={<TestimonialList />} />

@@ -13,7 +13,7 @@ import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 import WarningChip from "../../../../../components/chips/WarningChip";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
-import ship from "../../../../../../public/images/cargoShip.png";
+import ship from "/images/cargoShip.png";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
 import ErrorButton from "../../../../../components/buttons/ErrorButton";
 import AddVesselDetail from "./AddVesselDetail";
