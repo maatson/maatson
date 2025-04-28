@@ -45,6 +45,9 @@ const selectStyles = {
   placeholder: (provided: any) => ({
     ...provided,
     color: "#999999",
+    overflow: "hidden", 
+    whiteSpace: "nowrap", 
+    textOverflow: "ellipsis",
   }),
   menu: (provided: any) => ({
     ...provided,

@@ -324,7 +324,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
             onChange={handleChange}
             error={false}
             errorMessage={""}
-            parentStyle="w-[30%]"
+            parentStyle="w-[28%]"
           />
           <GroupField
             label={"Cargo Type*"}
@@ -335,9 +335,9 @@ const CreateContainerReleaseOrder: React.FC = () => {
             onChange={handleChange}
             error={false}
             errorMessage={""}
-            parentStyle="w-[30%]"
+            parentStyle="w-[28%]"
           />
-          <div className="flex items-end w-[40%]">
+          <div className="flex items-end w-[39%]">
             <GroupField
               label={"Gross Weight*"}
               type={""}
@@ -347,7 +347,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
               onChange={handleChange}
               error={false}
               errorMessage={""}
-              parentStyle="w-full"
+              parentStyle="flex-grow"
             />
             <GroupField
               label={""}
@@ -358,7 +358,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
               onChange={handleChange}
               error={false}
               errorMessage={""}
-              parentStyle="w-[40%]"
+              parentStyle="w-[25%] "
             />
           </div>
         </div>
@@ -382,19 +382,20 @@ const CreateContainerReleaseOrder: React.FC = () => {
                   <td align="center">
                     {(index + 1).toString().padStart(2, "0")}
                   </td>
-                  <td className="py-3 " align="center">
+                  <td className="py-3 " >
                     <GroupField
                       label={""}
                       type={"select"}
                       placeholder={"Choose Container Type"}
                       name={`containerType`}
                       value={item.containerType}
+                      options={[{value:"dd", label:"containertype"}]}
                       onChange={(e) => handleCargoDetailsChange(e, index)}
                       error={false}
                       errorMessage={""}
                     />
                   </td>
-                  <td align="center">
+                  <td >
                     <GroupField
                       label={""}
                       type={""}
@@ -406,7 +407,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
                       errorMessage={""}
                     />
                   </td>
-                  <td align="center">
+                  <td >
                     <GroupField
                       label={""}
                       type={""}
@@ -418,7 +419,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
                       errorMessage={""}
                     />
                   </td>
-                  <td align="center">
+                  <td >
                     <div className="flex justify-center">
                       <button
                         className="p-1 rounded-xs bg-error-50 cursor-pointer  disabled:cursor-not-allowed"
