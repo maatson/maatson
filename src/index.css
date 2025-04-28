@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 body {
   font-family: "Roboto", sans-serif;
 }
@@ -24,7 +25,7 @@ input[type="checkbox"] {
   .primary-btn-xl {
     @apply bg-primary px-4 py-3 rounded-xs text-grey-50 font-semibold hover:bg-primary-600 active:bg-primary-700 disabled:bg-primary-200 shadow-sm outline-none
   } */
-   
+
   .h-3xl {
     @apply text-h-3xl leading-[120%];
   }
@@ -64,7 +65,7 @@ input[type="checkbox"] {
     [&::-webkit-scrollbar-track]:rounded
     [&::-webkit-scrollbar-track]:bg-grey-200
     [&::-webkit-scrollbar-thumb]:rounded 
-    [&::-webkit-scrollbar-thumb]:bg-primary-400 ;
+    [&::-webkit-scrollbar-thumb]:bg-primary-400;
   }
   .custom-scrollbar-small {
     @apply [&::-webkit-scrollbar]:w-[2px]
@@ -72,9 +73,8 @@ input[type="checkbox"] {
     [&::-webkit-scrollbar-track]:rounded
     [&::-webkit-scrollbar-track]:bg-grey-200
     [&::-webkit-scrollbar-thumb]:rounded 
-    [&::-webkit-scrollbar-thumb]:bg-primary-400 ;
+    [&::-webkit-scrollbar-thumb]:bg-primary-400;
   }
- 
 }
 
 /* @layer utilities {
@@ -98,7 +98,6 @@ input[type="checkbox"] {
   }
 } */
 
-
 input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer; 
+  cursor: pointer;
 }

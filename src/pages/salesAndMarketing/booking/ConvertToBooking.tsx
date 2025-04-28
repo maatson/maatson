@@ -1533,7 +1533,7 @@ const ConvertToBooking: React.FC = () => {
                   </div>
                 </div>
                 <GroupField
-                  label={"Container Count*"}
+                  label={"Quantity*"}
                   type={"number"}
                   placeholder={"eg:1"}
                   name={"containerCount"}

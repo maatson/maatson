@@ -238,7 +238,7 @@ const AddSeaScheduleForm: React.FC = () => {
                         placeholder={"Enter Route Port"}
                         name={"routePort"}
                         value={item.routePort}
-                        onChange={(e)=>handleRouteChange(e, index)}
+                        onChange={(e) => handleRouteChange(e, index)}
                         error={false}
                         errorMessage={""}
                         leftIcon={<LocationIcon color="#2C398F" />}
@@ -250,7 +250,7 @@ const AddSeaScheduleForm: React.FC = () => {
                         placeholder={"Enter ETA"}
                         name={"estimateTimeOfArrival"}
                         value={item.estimateTimeOfArrival}
-                        onChange={(e)=>handleRouteChange(e, index)}
+                        onChange={(e) => handleRouteChange(e, index)}
                         error={false}
                         errorMessage={""}
                         rightIcon={<CalenderIcon color="#2C398F" />}

@@ -27,7 +27,7 @@ interface Groupfield {
   isMulti?: boolean;
   isDisabled?: boolean;
   id?: string;
-  maxLength?:number;
+  maxLength?: number;
   onBlur?: (e: React.FocusEvent<any>) => void;
 }
 
@@ -45,6 +45,9 @@ const selectStyles = {
   placeholder: (provided: any) => ({
     ...provided,
     color: "#999999",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
   }),
   menu: (provided: any) => ({
     ...provided,
@@ -268,13 +271,16 @@ const GroupField: React.FC<Groupfield> = ({
                 }`}
               >
                 <span
-                  className={`${
+                  className={` overflow-hidden text-ellipsis max-w-[150px] whitespace-nowrap ${
                     value ? "text-grey-ab-800" : "text-grey-ab-200"
                   }`}
                 >
                   {value || placeholder}
                 </span>
-                <CalenderIcon size={24} color="#2C398F" />
+                <CalenderIcon
+                  size={`${size === "s" ? 16 : 24}`}
+                  color="#2C398F"
+                />
               </div>
             </div>
           ) : (
