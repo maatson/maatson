@@ -170,7 +170,17 @@ const SideBar: React.FC = () => {
         leftIcon: <OperationsIcon />,
         label: "Operations",
         isOpen: openItems[8] || false,
-        children: [],
+        children: [
+          {
+            label: "Container Release Order",
+            link: "/container-release-order",
+          },
+          { label: "VGM Filing Update", link: "/vgm" },
+          {
+            label: "Cargo Manifest",
+            link: "/cargo-manifest",
+          },
+        ],
         onClick: () => handleItemClick(8),
       },
       {
@@ -259,8 +269,8 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
                   : ""
               }`}
             >
-              <span className="w-2 h-2 rounded-full border border-grey-50 "></span>{" "}
-              <span> {child.label}</span>
+              <span className="w-2 h-2 rounded-full border border-grey-50 flex-shrink-0"></span>{" "}
+              <span className="text-nowrap"> {child.label}</span>
             </Link>
           ))}
         </ul>
@@ -270,35 +280,3 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
 };
 
 export default SideBar;
-
-// import React from "react";
-// import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
-// import { MessageIcon } from "../icons/Icons";
-
-// const SideBar: React.FC = () => {
-//   return (
-//     <Sidebar>
-//       <Menu>
-//         {/* Home Menu */}
-//         <MenuItem icon={<MessageIcon />}>Home</MenuItem>
-
-//         {/* Users Submenu */}
-//         <SubMenu
-//           title="Users"
-//           icon={<MessageIcon />}
-
-//           // open={activeSubMenu === 'users'}
-//           // onClick={() => handleSubMenuToggle('users')}
-//         >
-//           <MenuItem> User 1 </MenuItem>
-//           <MenuItem> User 2 </MenuItem>
-//         </SubMenu>
-
-//         {/* Settings Menu */}
-//         <MenuItem icon={<MessageIcon />}>Settings</MenuItem>
-//       </Menu>
-//     </Sidebar>
-//   );
-// };
-
-// export default SideBar;

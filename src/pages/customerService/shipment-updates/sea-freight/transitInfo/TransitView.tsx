@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import {
@@ -13,7 +13,7 @@ import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 import WarningChip from "../../../../../components/chips/WarningChip";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
-import ship from "../../../../../../public/images/cargoShip.png";
+import ship from "/images/cargoShip.png";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
 import ErrorButton from "../../../../../components/buttons/ErrorButton";
 import AddVesselDetail from "./AddVesselDetail";
@@ -214,6 +214,9 @@ const TransitView: React.FC = () => {
   const [isAddVessel, setAddVessel] = useState<boolean>(false);
   const [isUpdateVessel, setUpdateVessel] = useState<boolean>(false);
   const [isUpdateCargo, setUpdateCargo] = useState<boolean>(false);
+  const [currentVesselUpdateIndex, setCurrentVesselUpdateIndex] = useState<
+    number | null
+  >(null);
 
   const handleCurrentTransit = useCallback(() => {
     const activeTransit = dummyData.transitData.filter(
@@ -241,6 +244,17 @@ const TransitView: React.FC = () => {
     setUpdateVessel(false);
   };
 
+  // cargo update
+  const updateVesselCargoData = (vesselIndex: number) => {
+    setUpdateCargo(true);
+    setCurrentVesselUpdateIndex(vesselIndex);
+  };
+
+  const abortUpdateVesselCargoData = () => {
+    setUpdateCargo(false);
+    setCurrentVesselUpdateIndex(null);
+  };
+
   useEffect(() => {
     handleCurrentTransit();
   }, [activeTransitLeg]);
@@ -254,7 +268,12 @@ const TransitView: React.FC = () => {
           data={currentUpdateVesselData}
         />
       )}
-      {isUpdateCargo && <UpdateCargo />}
+      {isUpdateCargo && currentVesselUpdateIndex !== null && (
+        <UpdateCargo
+          data={{ ...currentTransit, vesselIndex: currentVesselUpdateIndex }}
+          oncancel={abortUpdateVesselCargoData}
+        />
+      )}
       <div className="flex flex-col gap-4 bg-primary-50">
         <div className="bg-grey-aw-50 rounded shadow-sm p-3 flex items-center justify-between">
           <p className="text-lg font-semibold">{dummyData.bookingId} Details</p>
@@ -405,8 +424,11 @@ const TransitView: React.FC = () => {
               </div>
 
               {currentTransit?.vesselDetails.length > 0 ? (
-                currentTransit?.vesselDetails.map((vessel) => (
-                  <div className="p-4 gap-4 flex flex-col border border-grey-ab-100 rounded-lg">
+                currentTransit?.vesselDetails.map((vessel, vesselIndex) => (
+                  <div
+                    className="p-4 gap-4 flex flex-col border border-grey-ab-100 rounded-lg"
+                    key={vesselIndex}
+                  >
                     <div className="flex gap-6 w-full">
                       <div className="w-32 flex items-center">
                         <img src={ship} alt="vessel" className="object-fill" />
@@ -428,7 +450,7 @@ const TransitView: React.FC = () => {
                           <div className="flex flex-col gap-2">
                             <div onClick={() => updateVesselData(vessel)}>
                               <PrimaryButton
-                                label={"Update Form"}
+                                label={"Update Vessel"}
                                 size={"m"}
                                 variant={"outline"}
                                 leftIcon={
@@ -500,7 +522,9 @@ const TransitView: React.FC = () => {
                           ))}
                         </div>
                         {activeTransitLeg !== 1 && (
-                          <div>
+                          <div
+                            onClick={() => updateVesselCargoData(vesselIndex)}
+                          >
                             <NeutralBlueButton
                               label={"Update Container"}
                               size={"m"}
