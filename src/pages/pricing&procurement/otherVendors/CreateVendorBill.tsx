@@ -74,7 +74,6 @@ const CreateVendorBill: React.FC = () => {
   const [rows, setRows] = useState<RowData[]>([]);
   const [dummyData, setDummyData] = useState<DummyDataProps>({
     billType: "",
-    // billValue: [{ value: "" }],
     billValue: [""],
     vendorName: "",
     productOrService: "",
@@ -367,10 +366,10 @@ const CreateVendorBill: React.FC = () => {
                   error={false}
                   errorMessage={""}
                 />
-                {dummyData.billType.toLowerCase().includes("bill of lading") ||
-                dummyData.billType
-                  .toLowerCase()
-                  .includes("container number") ? (
+                {(dummyData.billType.toLowerCase().includes("bill of lading") ||
+                  dummyData.billType
+                    .toLowerCase()
+                    .includes("container number")) && (
                   <>
                     {dummyData.billValue.map((item, index) => (
                       <div className="flex gap-2 items-end" key={index}>
@@ -379,24 +378,16 @@ const CreateVendorBill: React.FC = () => {
                             dummyData.billType
                               .toLowerCase()
                               .includes("container number")
-                              ? `Container Number ${index+1}`
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Booking Number"
-                              : `BL Number ${index+1}`
+                              ? `Container Number ${index + 1}`
+                              : `BL Number ${index + 1}`
                           }`}
                           type={""}
                           placeholder={`${
                             dummyData.billType
                               .toLowerCase()
                               .includes("container number")
-                              ? `Enter Container Number ${index+1}`
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Enter Booking Number"
-                              : `Enter BL Number ${index+1}`
+                              ? `Enter Container Number ${index + 1}`
+                              : `Enter BL Number ${index + 1}`
                           }`}
                           name={"value"}
                           value={item}
@@ -440,34 +431,18 @@ const CreateVendorBill: React.FC = () => {
                       </div>
                     ))}
                   </>
-                ) : (
+                )}
+
+                {dummyData.billType
+                  .toLowerCase()
+                  .includes("booking number") && (
                   <>
                     {dummyData.billValue.map((item, index) => (
                       <div className="flex gap-2 items-end" key={index}>
                         <GroupField
-                          label={`${
-                            dummyData.billType
-                              .toLowerCase()
-                              .includes("container number")
-                              ? `Container Number ${index+1}`
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Booking Number"
-                              : `BL Number ${index+1}`
-                          }`}
+                          label={"Booking Number"}
                           type={""}
-                          placeholder={`${
-                            dummyData.billType
-                              .toLowerCase()
-                              .includes("container number")
-                              ? `Enter Container Number ${index+1}`
-                              : dummyData.billType
-                                  .toLowerCase()
-                                  .includes("booking number")
-                              ? "Enter Booking Number"
-                              : `Enter BL Number ${index+1}`
-                          }`}
+                          placeholder={"Enter Booking Number"}
                           name={"value"}
                           value={item}
                           onChange={(e) => handleBillValueChange(e, index)}

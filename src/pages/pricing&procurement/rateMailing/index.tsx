@@ -16,6 +16,7 @@ import CustomPagination from "../../../components/pagination/CustomPagination";
 import BlueChip from "../../../components/chips/BlueChip";
 import ComposeEmail from "./ComposeEmail";
 import { useLocation } from "react-router-dom";
+import ComposeEmails from "../../../components/composeEmail/ComposeEmails";
 
 interface RowData {
   id: string | number;
@@ -331,7 +332,8 @@ const RateMailing: React.FC = () => {
       {/* Popup  */}
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30">
-          <ComposeEmail onClose={closePopup} />
+          {/* <ComposeEmail onClose={closePopup} /> */}
+          <ComposeEmails onClose={closePopup} />
         </div>
       )}
     </>

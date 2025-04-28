@@ -72,16 +72,16 @@ const EditableTable = <T extends Record<string, any>>({
   return (
     <div className="overflow-auto custom-scrollbar">
       <table className="border w-full text-sm ">
-        <thead className="bg-gray-200 font-semibold">
+        <thead className="bg-grey-200 font-semibold">
           <tr>
-            <td className=" px-2 py-2 text-center">S.No</td>
+            <td className=" px-2 py-3 text-center border-b">S.No</td>
 
             {columns.map((col) => (
-              <td key={String(col.key)} className="border px-2 py-2">
+              <td key={String(col.key)} className="border-b px-2 py-3">
                 {col.label}
               </td>
             ))}
-            {!isOnlyView && <td className=" px-2 py-2 text-center">Action</td>}
+            {!isOnlyView && <td className=" px-2 py-3 text-center border-b">Action</td>}
           </tr>
         </thead>
         <tbody>
@@ -95,7 +95,7 @@ const EditableTable = <T extends Record<string, any>>({
                 {columns.map((col) => (
                   <td
                     key={String(col.key)}
-                    className=" border-b border-grey-ab-50 px-2 py-1 min-w-[120px] "
+                    className=" border-b border-grey-ab-50 px-2 py-2 min-w-[120px] "
                   >
                     {isEditing && col.editable ? (
                       col.type === "select" ? (
@@ -118,7 +118,7 @@ const EditableTable = <T extends Record<string, any>>({
                             label: opt,
                             value: opt,
                           }))}
-                          parentStyle="w-[180px]"
+                          parentStyle="w-[180px] min-w-[150px]"
                           size="s"
                         />
                       ) : (
@@ -144,19 +144,21 @@ const EditableTable = <T extends Record<string, any>>({
                           error={false}
                           errorMessage={""}
                           size="s"
+                          parentStyle="w-[180px] "
+
                         />
                       )
                     ) : (
-                      <div className="w-full">
+                      <div className="w-[180px] break-all ">
                         {editIndex === index && tempRow
                           ? tempRow[col.key]
-                          : row[col.key]}
+                          : <p>{row[col.key]}</p>}
                       </div>
                     )}
                   </td>
                 ))}
                 {!isOnlyView && (
-                  <td className="border-b border-grey-ab-50 px-2 py-1 text-center min-w-[30px]">
+                  <td className="border-b border-grey-ab-50 px-2 py-2 text-center min-w-[30px]">
                     {isEditing ? (
                       <div className="flex justify-center gap-2">
                         <button
