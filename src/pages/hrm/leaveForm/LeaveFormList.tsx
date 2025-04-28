@@ -90,7 +90,7 @@ const LeaveFormList: React.FC = () => {
       </div>
       <div className="flex flex-col gap-3 px-4 py-3">
         {rows.length > 0 &&
-          rows.map((item, index) => (
+          rows.map((_, index) => (
             <div key={index}>
               <LeaveCard
                 rejectClick={() => setRejectLeaveForm(true)}

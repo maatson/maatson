@@ -178,7 +178,8 @@ const SideBar: React.FC = () => {
           { label: "VGM Filing Update", link: "/vgm" },
           {
             label: "Cargo Manifest",
-            link: "/cargo-manifest",
+            link: "/cargo-manifest/sea-freight",
+            active: "/cargo-manifest",
           },
         ],
         onClick: () => handleItemClick(8),

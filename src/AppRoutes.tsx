@@ -454,6 +454,20 @@ const ContainerReleaseOrder = lazy(
 );
 const Vgm = lazy(() => import("./pages/operations/vgm"));
 const CargoManifest = lazy(() => import("./pages/operations/cargoManifest"));
+const CargoManifestListSea = lazy(
+  () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestList")
+);
+const CargoManifestCreateSea = lazy(
+  () =>
+    import("./pages/operations/cargoManifest/seaFreight/CargoManifestCreate")
+);
+const CargoManifestListAir = lazy(
+  () => import("./pages/operations/cargoManifest/airFreight/CargoManifestList")
+);
+const CargoManifestCreateAir = lazy(
+  () =>
+    import("./pages/operations/cargoManifest/airFreight/CargoManifestCreate")
+);
 
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
@@ -732,7 +746,22 @@ const AppRoutes: React.FC = () => {
 
         <Route path="vgm" element={<Vgm />}></Route>
 
-        <Route path="cargo-manifest" element={<CargoManifest />}></Route>
+        <Route path="cargo-manifest" element={<CargoManifest />}>
+          <Route path="sea-freight">
+            <Route index element={<CargoManifestListSea />} />
+            <Route
+              path="create/:bookingId"
+              element={<CargoManifestCreateSea />}
+            />
+          </Route>
+          <Route path="air-freight">
+            <Route index element={<CargoManifestListAir />} />
+            <Route
+              path="create/:bookingId"
+              element={<CargoManifestCreateAir />}
+            />
+          </Route>
+        </Route>
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>
           <Route index element={<TestimonialList />} />
