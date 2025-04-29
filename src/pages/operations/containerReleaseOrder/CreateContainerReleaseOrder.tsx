@@ -417,7 +417,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
                       errorMessage={""}
                     />
                   </td>
-                  <td className="w-[28%]">
+                  <td className="w-[28%]"> 
                     <GroupField
                       label={""}
                       type={""}
