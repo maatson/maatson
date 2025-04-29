@@ -267,51 +267,61 @@ const CreateContainerReleaseOrder: React.FC = () => {
         </div>
 
         <div className="flex gap-4 ">
-          <GroupField
-            label={"Port of Loading(ETA)*"}
-            type={"date"}
-            placeholder={"Enter ETA Date"}
-            name={"eta"}
-            value={data.eta}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            parentStyle="w-full"
-          />
-          <GroupField
-            label={"Port of Loading(ETD)*"}
-            type={"date"}
-            placeholder={"Enter ETD Date"}
-            name={"etd"}
-            value={data.etd}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            parentStyle="w-full"
-          />
-          <GroupField
-            label={"Gate Open*"}
-            type={"date"}
-            placeholder={"Enter Gate Open Date"}
-            name={"gateOpenDate"}
-            value={data.gateOpenDate}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            parentStyle="w-full"
-          />
+          <div className="w-full max-w-[25%] min-w-0">
+            <GroupField
+              label={"Port of Loading(ETA)*"}
+              type={"date"}
+              placeholder={"Enter ETA Date"}
+              name={"eta"}
+              value={data.eta}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              parentStyle="w-full"
+            />
+          </div>
 
-          <GroupField
-            label={"Gate Cut off*"}
-            type={"date"}
-            placeholder={"Enter Gate Cut off Date"}
-            name={"gateCutOff"}
-            value={data.gateCutOff}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-            parentStyle="w-full"
-          />
+          <div className="w-full max-w-[25%] min-w-0">
+            <GroupField
+              label={"Port of Loading(ETD)*"}
+              type={"date"}
+              placeholder={"Enter ETD Date"}
+              name={"etd"}
+              value={data.etd}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              parentStyle="w-full"
+            />
+          </div>
+
+          <div className="w-full max-w-[25%] min-w-0">
+            <GroupField
+              label={"Gate Open*"}
+              type={"date"}
+              placeholder={"Enter Gate Open Date"}
+              name={"gateOpenDate"}
+              value={data.gateOpenDate}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              parentStyle="w-full"
+            />
+          </div>
+
+          <div className="w-full max-w-[25%] min-w-0">
+            <GroupField
+              label={"Gate Cut off*"}
+              type={"date"}
+              placeholder={"Enter Gate Cut off Date"}
+              name={"gateCutOff"}
+              value={data.gateCutOff}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              parentStyle="w-full"
+            />
+          </div>
         </div>
 
         <div className="flex gap-6 ">
@@ -337,7 +347,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
             errorMessage={""}
             parentStyle="w-[28%]"
           />
-          <div className="flex items-end w-[39%]">
+          <div className="flex items-end flex-grow">
             <GroupField
               label={"Gross Weight*"}
               type={""}
@@ -358,13 +368,13 @@ const CreateContainerReleaseOrder: React.FC = () => {
               onChange={handleChange}
               error={false}
               errorMessage={""}
-              parentStyle="w-[25%] "
+              parentStyle="w-[100px]"
             />
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
-          <table cellPadding={10} className="shadow-lg rounded-xs">
+        <div className="flex flex-col gap-4 shadow-lg rounded-xs">
+          <table cellPadding={10} className="">
             <thead className="bg-grey-100 rounded-t-xs border-b border-b-grey-ab-50">
               <tr>
                 <td className="py-2" align="center">
@@ -382,20 +392,20 @@ const CreateContainerReleaseOrder: React.FC = () => {
                   <td align="center">
                     {(index + 1).toString().padStart(2, "0")}
                   </td>
-                  <td className="py-3 " >
+                  <td className="py-3 w-[28%]">
                     <GroupField
                       label={""}
                       type={"select"}
                       placeholder={"Choose Container Type"}
                       name={`containerType`}
                       value={item.containerType}
-                      options={[{value:"dd", label:"containertype"}]}
+                      options={[{ value: "dd", label: "containertype" }]}
                       onChange={(e) => handleCargoDetailsChange(e, index)}
                       error={false}
                       errorMessage={""}
                     />
                   </td>
-                  <td >
+                  <td className="w-[28%]">
                     <GroupField
                       label={""}
                       type={""}
@@ -407,7 +417,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
                       errorMessage={""}
                     />
                   </td>
-                  <td >
+                  <td className="w-[28%]">
                     <GroupField
                       label={""}
                       type={""}
@@ -419,7 +429,7 @@ const CreateContainerReleaseOrder: React.FC = () => {
                       errorMessage={""}
                     />
                   </td>
-                  <td >
+                  <td>
                     <div className="flex justify-center">
                       <button
                         className="p-1 rounded-xs bg-error-50 cursor-pointer  disabled:cursor-not-allowed"
@@ -432,26 +442,16 @@ const CreateContainerReleaseOrder: React.FC = () => {
                   </td>
                 </tr>
               ))}
-              <tr className="py-3">
-                <div className="px-4 py-3" onClick={handleAddMore}>
-                  <BlackButton
-                    label={"Add More"}
-                    size={"s"}
-                    variant={"primary"}
-                    leftIcon={<AddIcon size={16} color="#ffffff" />}
-                  />
-                </div>
-              </tr>
             </tbody>
           </table>
-          {/* <div>
+          <div className="px-4 pb-4" onClick={handleAddMore}>
             <BlackButton
               label={"Add More"}
               size={"s"}
               variant={"primary"}
               leftIcon={<AddIcon size={16} color="#ffffff" />}
             />
-          </div> */}
+          </div>
         </div>
 
         <div className="border border-grey-ab-50 "></div>

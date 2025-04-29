@@ -271,16 +271,18 @@ const GroupField: React.FC<Groupfield> = ({
                 }`}
               >
                 <span
-                  className={` overflow-hidden text-ellipsis max-w-[150px] whitespace-nowrap ${
+                  className={`truncate overflow-hidden text-ellipsis w-full  ${
                     value ? "text-grey-ab-800" : "text-grey-ab-200"
                   }`}
                 >
                   {value || placeholder}
                 </span>
-                <CalenderIcon
-                  size={`${size === "s" ? 16 : 24}`}
-                  color="#2C398F"
-                />
+                <div>
+                  <CalenderIcon
+                    size={`${size === "s" ? 16 : 24}`}
+                    color="#2C398F"
+                  />
+                </div>
               </div>
             </div>
           ) : (
