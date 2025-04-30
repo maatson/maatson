@@ -175,7 +175,7 @@ const SideBar: React.FC = () => {
             label: "Container Release Order",
             link: "/container-release-order",
           },
-          { label: "VGM Filing Update", link: "/vgm" },
+          { label: "VGM Filing Update", link: "/vgm-filing" },
           {
             label: "Cargo Manifest",
             link: "/cargo-manifest/sea-freight",
