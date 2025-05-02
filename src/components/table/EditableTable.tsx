@@ -81,7 +81,9 @@ const EditableTable = <T extends Record<string, any>>({
                 {col.label}
               </td>
             ))}
-            {!isOnlyView && <td className=" px-2 py-3 text-center border-b">Action</td>}
+            {!isOnlyView && (
+              <td className=" px-2 py-3 text-center border-b">Action</td>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -145,14 +147,15 @@ const EditableTable = <T extends Record<string, any>>({
                           errorMessage={""}
                           size="s"
                           parentStyle="w-[180px] "
-
                         />
                       )
                     ) : (
                       <div className="w-[180px] break-all ">
-                        {editIndex === index && tempRow
-                          ? tempRow[col.key]
-                          : <p>{row[col.key]}</p>}
+                        {editIndex === index && tempRow ? (
+                          tempRow[col.key]
+                        ) : (
+                          <p>{row[col.key]}</p>
+                        )}
                       </div>
                     )}
                   </td>
