@@ -24,6 +24,12 @@ const ContainerReleaseOrder: React.FC = () => {
       { label: "CRO Create" }
     );
     heading = "CRO Create";
+  } else if (pathname.startsWith("/container-release-order/edit")) {
+    breadCrums.push(
+      { label: "Container Release Order", path: "/container-release-order" },
+      { label: "Edit CRO" }
+    );
+    heading = "Edit CRO";
   } else if (pathname.startsWith("/container-release-order/view")) {
     breadCrums.push(
       { label: "Container Release Order", path: "/container-release-order" },

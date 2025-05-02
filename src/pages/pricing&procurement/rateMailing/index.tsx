@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import PageHeader from "../../../components/header/PageHeader";
 import GroupField from "../../../components/groupField/GroupField";
 import {
@@ -14,7 +14,6 @@ import GreyButton from "../../../components/buttons/GreyButton";
 import CustomTable from "../../../components/table/CustomTable";
 import CustomPagination from "../../../components/pagination/CustomPagination";
 import BlueChip from "../../../components/chips/BlueChip";
-import ComposeEmail from "./ComposeEmail";
 import { useLocation } from "react-router-dom";
 import ComposeEmails from "../../../components/composeEmail/ComposeEmails";
 
@@ -56,8 +55,8 @@ const RateMailing: React.FC = () => {
   // const isRateMailing = pathname.startsWith("/rate-mailing");
   const breadCrums: BreadCrumsProps[] = [
     { label: "Home", path: "/" },
-    { label: "Pricing & Procurement", path:"/rate-mailing" },
-    { label: "Rate Mailing",path:"/rate-mailing"  },
+    { label: "Pricing & Procurement", path: "/rate-mailing" },
+    { label: "Rate Mailing", path: "/rate-mailing" },
   ];
   let heading = "Rate Mailing";
 
@@ -76,7 +75,7 @@ const RateMailing: React.FC = () => {
   const handleCheckedRowsChange = (newCheckedRows: (string | number)[]) => {
     setSelectedRows(newCheckedRows);
   };
-  console.log(selectedRows, "selected Rows");
+  // console.log(selectedRows, "selected Rows");
   const handleItemsPerPageChange = useCallback(
     (event: SelectChangeEvent<number>) => {
       setItemsPerPage(Number(event.target.value));
@@ -99,7 +98,7 @@ const RateMailing: React.FC = () => {
     );
 
     const actions = (
-      <div onClick={() => handleCompose(id + 1)}>
+      <div onClick={() => handleCompose(id + 1)} key={id}>
         <GreyButton
           label={"Compose"}
           size={"s"}
@@ -352,14 +351,18 @@ const CountryHoverCell: React.FC<CountryHoverCellProps> = ({ countries }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex gap-1 justify-center flex-wrap w-[180px] h-[22px] overflow-hidden">
-        {countries.map((item) => (
-          <BlueChip label={item} size="s" variant="fill" />
+        {countries.map((item, index) => (
+          <React.Fragment key={index}>
+            <BlueChip label={item} size="s" variant="fill" />
+          </React.Fragment>
         ))}
       </div>
       {isHovered && (
         <div className="absolute bg-grey-aw-50 border border-grey-ab-50 rounded-xs w-[180px] max-h-[60px] overflow-auto custom-scrollbar-small shadow-lg bottom-8 left-0 z-10 p-2 flex gap-1 flex-wrap">
-          {countries.map((item) => (
-            <BlueChip label={item} size="s" variant="fill" />
+          {countries.map((item, index) => (
+            <React.Fragment key={index}>
+              <BlueChip label={item} size="s" variant="fill" />
+            </React.Fragment>
           ))}
         </div>
       )}

@@ -462,11 +462,27 @@ const CreateContainerReleaseOrder = lazy(
       "./pages/operations/containerReleaseOrder/CreateContainerReleaseOrder"
     )
 );
+const EditContainerReleaseOrder = lazy(
+  () =>
+    import("./pages/operations/containerReleaseOrder/EditContainerReleaseOrder")
+);
 const ViewContainerReleaseOrder = lazy(
   () =>
     import("./pages/operations/containerReleaseOrder/ViewContainerReleaseOrder")
 );
 const Vgm = lazy(() => import("./pages/operations/vgm"));
+const VGMFilingList = lazy(
+  () => import("./pages/operations/vgm/VGMFilingList")
+);
+const CreateVGMFiling = lazy(
+  () => import("./pages/operations/vgm/CreateVGMFiling")
+);
+const EditVGMFiling = lazy(
+  () => import("./pages/operations/vgm/EditVGMFiling")
+);
+const ViewVGMFiling = lazy(
+  () => import("./pages/operations/vgm/ViewVGMFiling")
+);
 const CargoManifest = lazy(() => import("./pages/operations/cargoManifest"));
 const CargoManifestListSea = lazy(
   () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestList")
@@ -765,10 +781,16 @@ const AppRoutes: React.FC = () => {
         >
           <Route index element={<ContainerReleaseOrderList />} />
           <Route path="create" element={<CreateContainerReleaseOrder />} />
+          <Route path="edit/:id" element={<EditContainerReleaseOrder />} />
           <Route path="view/:id" element={<ViewContainerReleaseOrder />} />
         </Route>
 
-        <Route path="vgm" element={<Vgm />}></Route>
+        <Route path="vgm-filing" element={<Vgm />}>
+          <Route index element={<VGMFilingList />} />
+          <Route path="create" element={<CreateVGMFiling />} />
+          <Route path="edit/:id" element={<EditVGMFiling />} />
+          <Route path="view/:id" element={<ViewVGMFiling />} />
+        </Route>
 
         <Route path="cargo-manifest" element={<CargoManifest />}>
           <Route path="sea-freight">

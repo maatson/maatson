@@ -272,7 +272,7 @@ const GroupField: React.FC<Groupfield> = ({
                 }`}
               >
                 <span
-                  className={`truncate overflow-hidden text-ellipsis w-full  ${
+                  className={`truncate w-full  ${
                     value ? "text-grey-ab-800" : "text-grey-ab-200"
                   }`}
                 >

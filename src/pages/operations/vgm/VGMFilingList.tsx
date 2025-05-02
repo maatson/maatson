@@ -21,9 +21,9 @@ interface RowData {
   companyName: string;
   portOfLoading: string;
   portOfDischarge: string;
-  bookingValidityDate: string;
-  releaseOrderStatus: React.ReactNode;
-  releaseOrderDate: string | React.ReactNode;
+  vgmCutOff: string;
+  vgmUpdateStatus: React.ReactNode;
+  vgmUpdateDate: string | React.ReactNode;
   action: React.ReactNode;
 }
 
@@ -33,22 +33,22 @@ const columns: any[] = [
   { id: "portOfLoading", label: "Port of loading", minWidth: 160 },
   { id: "portOfDischarge", label: "Port of Discharge", minWidth: 140 },
   {
-    id: "bookingValidityDate",
-    label: "Booking Validity Date",
+    id: "vgmCutOff",
+    label: "VGM Cut-Off",
     minWidth: 160,
     align: "center",
   },
   {
-    id: "releaseOrderStatus",
-    label: "Release Order Status",
+    id: "vgmUpdateStatus",
+    label: "VGM Update Status",
     align: "center",
     minWidth: 160,
   },
-  { id: "releaseOrderDate", label: "Release Order Date", align: "center" },
+  { id: "vgmUpdateDate", label: "VGM Update Date", align: "center" },
   { id: "action", label: "Action", minWidth: 120, align: "center" },
 ];
 
-const ContainerReleaseOrderList: React.FC = () => {
+const VGMFilingList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rows, setRows] = useState<RowData[]>([]);
   const [itemsPerPage, setItemsPerPage] = React.useState(5);
@@ -74,25 +74,21 @@ const ContainerReleaseOrderList: React.FC = () => {
 
   // table
   const createData = (items: any) => {
-    const { id, releaseOrderStatus } = items;
+    const { id, vgmUpdateStatus } = items;
 
-    const releaseOrderStatusValue = (
+    const vgmUpdateStatusValue = (
       <>
-        {releaseOrderStatus.toLowerCase() === "pending" ? (
-          <SecondaryChip
-            label={releaseOrderStatus}
-            size={"m"}
-            variant={"fill"}
-          />
+        {vgmUpdateStatus.toLowerCase() === "pending" ? (
+          <SecondaryChip label={vgmUpdateStatus} size={"m"} variant={"fill"} />
         ) : (
-          <SuccessChip label={releaseOrderStatus} size={"m"} variant={"fill"} />
+          <SuccessChip label={vgmUpdateStatus} size={"m"} variant={"fill"} />
         )}
       </>
     );
     const actions = (
       <>
-        {releaseOrderStatus.toLowerCase() === "pending" ? (
-          <Link to={`/container-release-order/create`}>
+        {vgmUpdateStatus.toLowerCase() === "pending" ? (
+          <Link to={`/vgm-filing/create`}>
             <div className="flex justify-center">
               <PrimaryButton
                 label={"Create"}
@@ -104,16 +100,12 @@ const ContainerReleaseOrderList: React.FC = () => {
           </Link>
         ) : (
           <div className="flex gap-2 justify-center">
-            <Link
-              to={`/container-release-order/edit/${
-                id + 1
-              }`}
-            >
+            <Link to={`/vgm-filing/edit/${id + 1}`}>
               <div className="p-1 rounded-xs bg-blue cursor-pointer">
                 <EditIcon size={16} color="#FDFDFD" />
               </div>
             </Link>
-            <Link to={`/container-release-order/view/${id + 1}`}>
+            <Link to={`/vgm-filing/view/${id + 1}`}>
               <div className="p-1 rounded-xs bg-grey-ab cursor-pointer">
                 <EyeOpenIcon size={16} color="#FDFDFD" />
               </div>
@@ -129,9 +121,9 @@ const ContainerReleaseOrderList: React.FC = () => {
       companyName: items?.companyName,
       portOfLoading: items?.portOfLoading,
       portOfDischarge: items?.portOfDischarge,
-      bookingValidityDate: items?.bookingValidityDate,
-      releaseOrderStatus: releaseOrderStatusValue,
-      releaseOrderDate: items?.releaseOrderDate || "-",
+      vgmCutOff: items?.vgmCutOff,
+      vgmUpdateStatus: vgmUpdateStatusValue,
+      vgmUpdateDate: items?.vgmUpdateDate || "-",
       action: actions,
     };
     return updatedData;
@@ -143,36 +135,36 @@ const ContainerReleaseOrderList: React.FC = () => {
       companyName: "Farrel Kurniawan",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Rotterdam, Netherlands",
-      bookingValidityDate: "11/10/25",
-      releaseOrderStatus: "Pending",
-      releaseOrderDate: "",
+      vgmCutOff: "11/10/25",
+      vgmUpdateStatus: "Pending",
+      vgmUpdateDate: "",
     },
     {
       bookingID: "0000002",
       companyName: "Dimas Kamal",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: " Netherlands",
-      bookingValidityDate: "11/10/25",
-      releaseOrderStatus: "Created",
-      releaseOrderDate: "11/10/25",
+      vgmCutOff: "11/10/25",
+      vgmUpdateStatus: "Created",
+      vgmUpdateDate: "11/10/25",
     },
     {
       bookingID: "0000003",
       companyName: "Farrel Kurniawan",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: "Rotterdam",
-      bookingValidityDate: "11/10/25",
-      releaseOrderStatus: "Pending",
-      releaseOrderDate: "",
+      vgmCutOff: "11/10/25",
+      vgmUpdateStatus: "Pending",
+      vgmUpdateDate: "",
     },
     {
       bookingID: "0000004",
       companyName: "Farrel Kurniawan",
       portOfLoading: "Los Angeles, USA",
       portOfDischarge: " Netherlands",
-      bookingValidityDate: "11/10/25",
-      releaseOrderStatus: "Created",
-      releaseOrderDate: "11/10/25",
+      vgmCutOff: "11/10/25",
+      vgmUpdateStatus: "Created",
+      vgmUpdateDate: "11/10/25",
     },
   ];
 
@@ -194,7 +186,7 @@ const ContainerReleaseOrderList: React.FC = () => {
         <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center ">
           <div className="w-[60%] flex gap-4 items-center">
             <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-              Container Release Order List
+              VGM Updated List
             </p>
             <GroupField
               label={""}
@@ -278,4 +270,4 @@ const ContainerReleaseOrderList: React.FC = () => {
   );
 };
 
-export default ContainerReleaseOrderList;
+export default VGMFilingList;

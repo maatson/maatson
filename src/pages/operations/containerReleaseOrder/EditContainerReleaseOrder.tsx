@@ -4,41 +4,48 @@ import GroupField from "../../../components/groupField/GroupField";
 import { AddIcon, DeleteIcon } from "../../../components/icons/Icons";
 import BlackButton from "../../../components/buttons/BlackButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeadersLayout from "./layouts/HeadersLayouts";
 
-const CreateContainerReleaseOrder: React.FC = () => {
+const EditContainerReleaseOrder: React.FC = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    referenceNumber: "",
-    containerTerminal: "",
-    containerAddress: "",
-    containerDepotContact: "",
-    containerDepotTelNumber: "",
-    shipperName: "",
-    shipperAddress: "",
-    shipperCustomerContact: "",
-    shipperContactNumber: "",
-    portOfLoading: "",
-    portOfDischarge: "",
-    eta: "",
-    etd: "",
-    gateOpenDate: "",
-    gateCutOff: "",
-    cargoName: "",
-    cargoType: "",
-    grossWeight: "",
+    referenceNumber: "389789232",
+    containerTerminal: "Chennai",
+    containerAddress: "323, abc street, chennai",
+    containerDepotContact: "9898989898",
+    containerDepotTelNumber: "9898989898",
+    shipperName: "Franklin Josheph",
+    shipperAddress: "9898989898",
+    shipperCustomerContact: "9932232989",
+    shipperContactNumber: "9932232989",
+    portOfLoading: "Chennai",
+    portOfDischarge: "Singapore",
+    eta: "04-04-2025",
+    etd: "04-04-2025",
+    gateOpenDate: "04-04-2025",
+    gateCutOff: "04-04-2025",
+    cargoName: "Shipments",
+    cargoType: "FCL",
+    grossWeight: "10000",
     weightUnit: "KGS",
     cargoDetails: [
       {
-        containerType: "",
-        quantity: "",
-        containerNumber: "",
+        containerType: "20'ft",
+        quantity: "1",
+        containerNumber: "782732723",
+      },
+      {
+        containerType: "40'ft",
+        quantity: "5",
+        containerNumber: "Random",
       },
     ],
-    releaseOrderDate: "",
-    freeStorageDays: "",
-    freeStorageExpireDate: "",
-    remarks: "",
+    releaseOrderDate: "04-04-2025",
+    freeStorageDays: "10",
+    freeStorageExpireDate: "04-04-2025",
+    remarks:
+      "onboard confirmation occurs when goods have been loaded onto the vessel and all customs and documentation requirements are met.",
   });
 
   const handleAddMore = () => {
@@ -497,9 +504,13 @@ const CreateContainerReleaseOrder: React.FC = () => {
         />
 
         <div className="flex gap-6 justify-end">
-          <Link to={"/container-release-order"}>
+          <div
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
             <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
-          </Link>
+          </div>
           <div>
             <PrimaryButton label={"Save"} size={"l"} variant={"primary"} />
           </div>
@@ -511,4 +522,4 @@ const CreateContainerReleaseOrder: React.FC = () => {
   );
 };
 
-export default CreateContainerReleaseOrder;
+export default EditContainerReleaseOrder;
