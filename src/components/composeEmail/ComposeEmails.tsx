@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./index.css";
+import "./quillCustomFonts";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useDropzone } from "react-dropzone";
@@ -31,12 +32,6 @@ import {
 } from "../../components/icons/Icons";
 import BlackButton from "../buttons/BlackButton";
 import GroupField from "../groupField/GroupField";
-
-import Quill from "quill";
-
-const Font = Quill.import("formats/font") as any;
-Font.whitelist = ["sans-serif", "serif", "slabserif", "script"];
-Quill.register(Font, true);
 
 interface ComposeEmailsProps {
   onClose: () => void;
@@ -82,8 +77,11 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const [showBgColorPalette, setShowBgColorPalette] = useState(false);
 
   const [showLinkModal, setShowLinkModal] = useState(false);
-  const [linkText, setLinkText] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
+  const [image, setImage] = useState<File | null>();
+
+  const [currentFontSize, setCurrentFontSize] = useState("normal");
+  const [currentFontStyle, setCurrentFontStyle] = useState("sans-serif");
 
   const applyFormat = (format: string, value?: any) => {
     const editor = quillRef.current?.getEditor();
@@ -93,33 +91,33 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
 
     if (format === "list") {
       if (current[format] === value) {
-        editor.format(format, false); // Remove list format
+        editor.format(format, false, "user"); // Remove list format
       } else {
-        editor.format(format, value); // Apply list format
+        editor.format(format, value, "user"); // Apply list format
       }
     } else if (format === "size") {
       if (value === "normal") {
-        editor.format("size", false); // Remove align format to reset - for left
+        editor.format("size", false, "user"); // Remove align format to reset - for left
       } else {
-        editor.format("size", value); // For apply align center and right
+        editor.format("size", value, "user"); // For apply align center and right
       }
     } else if (format === "font") {
       if (value === "sans-serif") {
-        editor.format("font", false);
+        editor.format("font", false, "user");
       } else {
-        editor.format("font", value);
+        editor.format("font", value, "user");
       }
     } else if (format === "align") {
       if (value === "left") {
-        editor.format("align", false); // Remove align format to reset - for left
+        editor.format("align", false, "user"); // Remove align format to reset - for left
       } else {
-        editor.format("align", value); // For apply align center and right
+        editor.format("align", value, "user"); // For apply align center and right
       }
     } else if (value !== undefined) {
-      editor.format(format, value);
+      editor.format(format, value, "user");
     } else {
       const isActive = current[format];
-      editor.format(format, !isActive);
+      editor.format(format, !isActive, "user");
     }
   };
 
@@ -142,15 +140,23 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
     },
   });
 
-  const handleFontSize = (size: string) => applyFormat("size", size);
-  const handleFontStyle = (font: string) => applyFormat("font", font);
+  const handleFontSize = (size: string) => {
+    applyFormat("size", size);
+    setCurrentFontSize(size); // <- Manually update UI
+  };
+  const handleFontStyle = (font: string) => {
+    applyFormat("font", font);
+    setCurrentFontStyle(font); // <- Manually update UI
+  };
   const handleTextColor = (color: string) => applyFormat("color", color);
   const handleBgColor = (color: string) => applyFormat("background", color);
+
   const handleEmojiSelect = (emoji: any) => {
     const editor = quillRef.current?.getEditor();
+
     const position = cursorPosition.current ?? 0;
     if (editor) {
-      editor.insertText(position, emoji.native); // Insert the emoji at cursor position
+      editor.insertText(position, emoji.native, "user"); // Insert the emoji at cursor position
       editor.setSelection(position + emoji.native.length); // Move the cursor after the emoji
     }
     setShowEmojiPicker(false);
@@ -159,37 +165,82 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
   const insertLink = () => {
     const quill = quillRef.current?.getEditor();
     if (!quill) return;
-
     quill.focus();
 
     const range = quill.getSelection();
-    // const linkToInsert = linkUrl;
-
     if (range) {
-      quill.insertText(range.index, linkUrl);
-      quill.formatText(range.index, linkUrl.length, "link", linkUrl);
-      quill.setSelection(range.index + linkUrl.length);
+      quill.insertText(range.index, linkUrl, "user");
+      quill.formatText(range.index, linkUrl.length, "link", linkUrl, "user");
+      quill.setSelection(range.index + linkUrl.length, 0);
     } else {
       const position = cursorPosition.current ?? 0;
-      quill.insertText(position, linkUrl);
-      quill.formatText(position, linkUrl.length, "link", linkUrl);
-      quill.setSelection(position + linkUrl.length);
+      quill.insertText(position, linkUrl, "user");
+      quill.formatText(position, linkUrl.length, "link", linkUrl, "user");
+      quill.setSelection(position + linkUrl.length, 0);
     }
-
     setShowLinkModal(false);
-    setLinkText("");
     setLinkUrl("");
+  };
+
+  const insertImage = () => {
+    const quill = quillRef.current?.getEditor();
+    if (!quill || !image) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64Image = reader.result as string;
+      const range = quill.getSelection(true);
+      quill.insertEmbed(range ? range.index : 0, "image", base64Image, "user");
+      quill.setSelection((range?.index ?? 0) + 1, 0);
+    };
+    reader.readAsDataURL(image);
+    setImage(null);
+  };
+
+  const handleUndo = () => {
+    const editor = quillRef.current?.getEditor();
+    (editor as any).history.undo();
+  };
+
+  const handleRedo = () => {
+    const editor = quillRef.current?.getEditor();
+    (editor as any).history.redo();
   };
 
   const handleEditorChangeSelection = (range: any) => {
     if (range) {
       cursorPosition.current = range.index;
+      const editor = quillRef.current?.getEditor();
+      if (editor) {
+        const formats = editor.getFormat(range);
+
+        setCurrentFontSize(formats.size || "normal");
+        setCurrentFontStyle(formats.font || "sans-serif");
+      }
     }
   };
 
   const handleCancel = () => {
     onClose();
   };
+
+  useEffect(() => {
+    const editor = quillRef.current?.getEditor();
+    if (editor) {
+      const range = editor.getSelection();
+      if (range) {
+        const formats = editor.getFormat(range);
+        setCurrentFontSize(formats.size || "normal");
+        setCurrentFontStyle(formats.font || "sans-serif");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (image) {
+      insertImage();
+    }
+  }, [image]);
 
   useEffect(() => {
     const editor = quillRef.current?.getEditor();
@@ -283,7 +334,17 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
           <ReactQuill
             ref={quillRef}
             value={editorContent}
-            onChange={setEditorContent}
+            onChange={(content, delta, source, editor) => {
+              setEditorContent(content);
+              setTimeout(() => {
+                const range = editor.getSelection();
+                if (range) {
+                  const formats = (editor as any).getFormat(range);
+                  setCurrentFontSize(formats.size || "normal");
+                  setCurrentFontStyle(formats.font || "sans-serif");
+                }
+              }, 0); // Defer to next tick
+            }}
             onChangeSelection={handleEditorChangeSelection} // To track cursor position
             theme="snow"
             modules={{
@@ -345,30 +406,14 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
       {/* Custom Toolbar */}
       <div className="flex flex-col px-4 py-3 border-t border-t-grey-ab-50">
         <div className="flex gap-1 flex-wrap justify-end">
-          <IconSets icon={<BackwardIcon size={20} />} onClick={() => {}} />
-          <IconSets icon={<ForwardIcon size={20} />} onClick={() => {}} />
-
-          {/* <select
-            value={fontStyle}
-            onChange={(e) => handleFontStyleChange(e.target.value)}
-            className="custom-toolbar-select"
-          >
-            <option value="sans-serif">Sans Serif</option>
-            <option value="serif">Serif</option>
-            <option value="slabserif">Slab Serif</option>
-            <option value="script">Script</option>
-          </select> */}
-
-          {/* <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-2 py-1 cursor-pointer flex gap-2 items-center">
-            <p className="font-bold text-xs text-grey-ab-800">San serif</p>
-            <DropDownIcon size={12} />
-          </div> */}
+          <IconSets icon={<BackwardIcon size={20} />} onClick={handleUndo} />
+          <IconSets icon={<ForwardIcon size={20} />} onClick={handleRedo} />
 
           <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-1">
             <select
               className="text-xs bg-transparent outline-none cursor-pointer"
+              value={currentFontStyle}
               onChange={(e) => handleFontStyle(e.target.value)}
-              defaultValue=""
             >
               <option value="" disabled>
                 Font Style
@@ -383,8 +428,8 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
           <div className="bg-grey-aw-50 border border-grey-ab-50 rounded-xs px-1">
             <select
               className="text-xs bg-transparent outline-none cursor-pointer"
+              value={currentFontSize}
               onChange={(e) => handleFontSize(e.target.value)}
-              defaultValue=""
             >
               <option value="" disabled>
                 Size
@@ -500,8 +545,21 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
                 />
               </div>
             )}
-            {/* below apply image upload functcon similar in emails */}
-            <IconSets icon={<ImageOutlineIcon size={20} color="#212121" />} />
+            <label htmlFor="imageinsertion">
+              <IconSets icon={<ImageOutlineIcon size={20} color="#212121" />} />
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              id="imageinsertion"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  setImage(e.target.files[0]);
+                  insertImage(); // Insert immediately
+                }
+              }}
+              className="hidden"
+            />
             <IconSets
               icon={<LinkIcon size={20} color="#212121" />}
               onClick={() => setShowLinkModal(true)}

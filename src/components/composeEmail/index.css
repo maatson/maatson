@@ -12,10 +12,18 @@
 }
 .ql-font-serif {
   font-family: "Georgia", serif;
+
 }
 .ql-font-slabserif {
   font-family: "Roboto Slab", serif;
 }
 .ql-font-script {
   font-family: "Pacifico", cursive;
+}
+
+.script-sample {
+  font-family: "Pacifico", cursive;
+}
+.slab-sample {
+  font-family: "Roboto Slab", serif;
 }
