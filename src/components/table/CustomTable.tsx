@@ -110,8 +110,8 @@ const CustomTable: React.FC<TableProps> = React.memo(
             </TableHead>
             <TableBody>
               {rows.length > 0 ? (
-                rows.map((row) => (
-                  <TableRow role="checkbox" tabIndex={-1} key={row.id}>
+                rows.map((row, index) => (
+                  <TableRow role="checkbox" tabIndex={-1} key={index}>
                     {isCheckbox && (
                       <TableCell
                         sx={{

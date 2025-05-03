@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab&display=swap");
+.ql-container {
+  border: none !important;
+}
+
+.ql-editor {
+  @apply h-60 overflow-y-auto custom-scrollbar;
+}
+
+.ql-font-sans-serif {
+  font-family: "Arial", sans-serif;
+}
+.ql-font-serif {
+  font-family: "Georgia", serif;
+
+}
+.ql-font-slabserif {
+  font-family: "Roboto Slab", serif;
+}
+.ql-font-script {
+  font-family: "Pacifico", cursive;
+}
+
+.script-sample {
+  font-family: "Pacifico", cursive;
+}
+.slab-sample {
+  font-family: "Roboto Slab", serif;
+}

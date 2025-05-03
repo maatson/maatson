@@ -2,42 +2,45 @@ import React from "react";
 import PageHeader from "../../../components/header/PageHeader";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
+interface BreadCrumsProps {
+  label: string;
+  path?: string;
+}
+
 const Attendance: React.FC = () => {
   const location = useLocation();
+  const { pathname } = location;
+
+  let breadCrums: BreadCrumsProps[] = [
+    { label: "Home", path: "/" },
+    { label: "HRM", path: "/hrm/employees" },
+  ];
+  let heading = "Attendance";
+
+  const isAttendanceDetail = pathname.includes("/hrm/attendance/detail");
+  const isholidays = pathname.includes("/hrm/attendance/holidays");
+  const isAttendance = pathname === "/hrm/attendance";
+
+  const showTabs = isAttendance || isholidays;
+
+  if (isAttendanceDetail) {
+    heading = "Attendance Detail";
+    breadCrums.push(
+      { label: "Attendance", path: "/hrm/attendance" },
+      { label: "Attendance Detail" }
+    );
+  } else if (isholidays) {
+    heading = "Holidays";
+    breadCrums.push({ label: "Holidays" });
+  } else {
+    breadCrums.push({ label: "Attendance" });
+    heading = "Attendance";
+  }
+
   return (
     <>
-      <PageHeader
-        breadCrums={[
-          "Home",
-          "HRM",
-          location.pathname === "/hrm/attendance/detail"
-            ? ["Attendance", "Attendance Detail"]
-            : location.pathname === "/hrm/attendance/holidays"
-            ? "Holidays"
-            : "Attendance",
-        ].flat()}
-        // breadCrums={[
-        //   { label: "Home", path: "/" },
-        //   { label: "HRM", path: "/hrm/employees" },
-        //   location.pathname === "/hrm/attendance/detail"
-        //     ? [
-        //         { label: "Attendance", path: "/hrm/attendance" },
-        //         { label: "Attendance Detail", path: "/hrm/attendance/detail" },
-        //       ]
-        //     : location.pathname === "/hrm/attendance/holidays"
-        //     ? { label: "Holidays", path: "/hrm/attendance/holidays" }
-        //     : { label: "Attendance", path: "/hrm/attendance" },
-        // ].flat()}
-        heading={
-          location.pathname === "/hrm/attendance/detail"
-            ? "Attendance Detail"
-            : location.pathname === "/hrm/attendance/holidays"
-            ? "Holidays"
-            : "Attendance"
-        }
-      />
-      {(location.pathname === "/hrm/attendance" ||
-        location.pathname === "/hrm/attendance/holidays") && (
+      <PageHeader breadCrums={breadCrums} heading={heading} />
+      {showTabs && (
         <div className="flex items-center text-sm">
           <div className="flex items-center gap-2 bg-grey-50 px-2 py-3 rounded-sm font-semibold ">
             <button>

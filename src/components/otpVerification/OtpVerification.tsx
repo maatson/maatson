@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const OtpVerification: React.FC = () => {
   const [data, setData] = useState({ email: "" });
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 

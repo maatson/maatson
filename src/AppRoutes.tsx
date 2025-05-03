@@ -251,6 +251,18 @@ const TerminalGateIn = lazy(
       "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateIn"
     )
 );
+const TerminalGateInDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/TerminalGateInDetails"
+    )
+);
+const CreateSplitBooking = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/terminalGateIn/CreateSplitBooking"
+    )
+);
 // vick routes
 const OnboardConfirmation = lazy(
   () =>
@@ -294,10 +306,16 @@ const DeliveryOrderCollectedView = lazy(
       "./pages/customerService/shipment-updates/sea-freight/deliveryOrderCollected/DeliveryOrderCollectedView"
     )
 );
-const EmptyReturnConfirmation = lazy(
+const EmptyGateInConfirmation = lazy(
   () =>
     import(
-      "./pages/customerService/shipment-updates/sea-freight/emptyReturnConfirmation/EmptyReturnConfirmation"
+      "./pages/customerService/shipment-updates/sea-freight/emptyGateInConfirmation/EmptyGateInConfirmation"
+    )
+);
+const ViewEmptyGateIn = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/sea-freight/emptyGateInConfirmation/ViewEmptyGateIn"
     )
 );
 
@@ -311,10 +329,22 @@ const UpdatesAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/updates/Updates"
     )
 );
+const UpdatesAirDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/updates/UpdateAirDetails"
+    )
+);
 const AirportGateInDateAir = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/air-freight/airportGateInDate/AirportGateInDate"
+    )
+);
+const ViewAirportGateIn = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/airportGateInDate/ViewAirportGateIn"
     )
 );
 const CargoHandoverUpdateAir = lazy(
@@ -323,10 +353,28 @@ const CargoHandoverUpdateAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/CargoHandoverUpdate"
     )
 );
+const ViewCargoHandoverUpdate = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/cargoHandoverUpdate/ViewCargoHandover"
+    )
+);
 const DepartureConfirmationAir = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/air-freight/departureConfirmation/DepartureConfirmation"
+    )
+);
+const ViewDepartureConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/departureConfirmation/ViewDepartureConfirmation"
+    )
+);
+const EditDepartureConfirmation = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/departureConfirmation/EditDepartureConfirmation"
     )
 );
 const TransitInfoAir = lazy(
@@ -335,28 +383,128 @@ const TransitInfoAir = lazy(
       "./pages/customerService/shipment-updates/air-freight/transitInfo/TransitInfo"
     )
 );
+const TransitViewAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/transitInfo/TransitView"
+    )
+);
 const DeliveryOrderCollectedAir = lazy(
   () =>
     import(
       "./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollected"
     )
 );
+const DeliveryOrderCollectedViewAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/shipment-updates/air-freight/deliveryOrderCollected/DeliveryOrderCollectedView"
+    )
+);
 
 // PRICING AND PROCUREMENT
 
-const AllRates = lazy(() => import("./pages/pricing&procurement/allRates"));
-const EnquiryRateFiling = lazy(
-  () => import("./pages/pricing&procurement/enquiryRateFiling")
+const RateFiling = lazy(() => import("./pages/pricing&procurement/rateFiling"));
+const RateFilingList = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/RateFillingList")
 );
-const NewRateFiling = lazy(
-  () => import("./pages/pricing&procurement/newRateFiling")
+const AvailableRates = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/AvailableRates")
 );
+const AddRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/AddRateFiling")
+);
+const EditRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/EditRateFiling")
+);
+const ViewRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/ViewRateFiling")
+);
+const CreateRateFiling = lazy(
+  () => import("./pages/pricing&procurement/rateFiling/CreateRateFiling")
+);
+
 const RateMailing = lazy(
   () => import("./pages/pricing&procurement/rateMailing")
 );
 const OtherVendors = lazy(
   () => import("./pages/pricing&procurement/otherVendors")
 );
+const VendorForShippingList = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/vendorForShipping")
+);
+const VendorForOfficeList = lazy(
+  () =>
+    import("./pages/pricing&procurement/otherVendors/vendorForOfficeEssential")
+);
+const CreateVendorBill = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/CreateVendorBill")
+);
+const EditVendorBill = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/EditVendorBill")
+);
+const ViewVendorBill = lazy(
+  () => import("./pages/pricing&procurement/otherVendors/ViewVendorBill")
+);
+
+// OPERATIONS
+
+const ContainerReleaseOrder = lazy(
+  () => import("./pages/operations/containerReleaseOrder")
+);
+const ContainerReleaseOrderList = lazy(
+  () =>
+    import("./pages/operations/containerReleaseOrder/ContainerReleaseOrderList")
+);
+const CreateContainerReleaseOrder = lazy(
+  () =>
+    import(
+      "./pages/operations/containerReleaseOrder/CreateContainerReleaseOrder"
+    )
+);
+const EditContainerReleaseOrder = lazy(
+  () =>
+    import("./pages/operations/containerReleaseOrder/EditContainerReleaseOrder")
+);
+const ViewContainerReleaseOrder = lazy(
+  () =>
+    import("./pages/operations/containerReleaseOrder/ViewContainerReleaseOrder")
+);
+const Vgm = lazy(() => import("./pages/operations/vgm"));
+const VGMFilingList = lazy(
+  () => import("./pages/operations/vgm/VGMFilingList")
+);
+const CreateVGMFiling = lazy(
+  () => import("./pages/operations/vgm/CreateVGMFiling")
+);
+const EditVGMFiling = lazy(
+  () => import("./pages/operations/vgm/EditVGMFiling")
+);
+const ViewVGMFiling = lazy(
+  () => import("./pages/operations/vgm/ViewVGMFiling")
+);
+const CargoManifest = lazy(() => import("./pages/operations/cargoManifest"));
+const CargoManifestListSea = lazy(
+  () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestList")
+);
+const CargoManifestCreateSea = lazy(
+  () =>
+    import("./pages/operations/cargoManifest/seaFreight/CargoManifestCreate")
+);
+const CargoManifestViewSea = lazy(
+  () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestView")
+);
+const CargoManifestListAir = lazy(
+  () => import("./pages/operations/cargoManifest/airFreight/CargoManifestList")
+);
+const CargoManifestCreateAir = lazy(
+  () =>
+    import("./pages/operations/cargoManifest/airFreight/CargoManifestCreate")
+);
+const CargoManifestViewAir = lazy(
+  () => import("./pages/operations/cargoManifest/airFreight/CargoManifestView")
+);
+
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
@@ -481,18 +629,30 @@ const AppRoutes: React.FC = () => {
             element={<FlightDetails />}
           />
         </Route>
+
         {/* shipment-updates */}
 
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
             <Route index element={<Updates />} />
-            <Route path="updates/update-details" element={<UpdateDetails />} />
+            <Route
+              path="updates/update-details/:id"
+              element={<UpdateDetails />}
+            />
             <Route path="container-pickup" element={<ContainerPickUp />} />
             <Route
-              path="container-pickup/details"
+              path="container-pickup/details/:id"
               element={<ContainerPickUpDetails />}
             />
             <Route path="terminal-gateIn" element={<TerminalGateIn />} />
+            <Route
+              path="terminal-gateIn/details/:id"
+              element={<TerminalGateInDetails />}
+            />
+            <Route
+              path="create-split-booking/:id"
+              element={<CreateSplitBooking />}
+            />
             <Route
               path="onboard-confirmation"
               element={<OnboardConfirmation />}
@@ -516,44 +676,140 @@ const AppRoutes: React.FC = () => {
               element={<DeliveryOrderCollectedView />}
             />
             <Route
-              path="empty-return-confirmation"
-              element={<EmptyReturnConfirmation />}
+              path="empty-gateIn-confirmation"
+              element={<EmptyGateInConfirmation />}
+            />
+            <Route
+              path="empty-gateIn-confirmation/view/:id"
+              element={<ViewEmptyGateIn />}
             />
           </Route>
 
           <Route path="air-freight" element={<ShipmentAirFreight />}>
             <Route index element={<UpdatesAir />} />
             <Route
+              path="updates/update-details/:id"
+              element={<UpdatesAirDetails />}
+            />
+            <Route
               path="airport-gatein-date"
               element={<AirportGateInDateAir />}
+            />
+            <Route
+              path="airport-gatein-date/view/:id"
+              element={<ViewAirportGateIn />}
             />
             <Route
               path="cargo-handover-update"
               element={<CargoHandoverUpdateAir />}
             />
             <Route
+              path="cargo-handover-update/view/:id"
+              element={<ViewCargoHandoverUpdate />}
+            />
+            <Route
+              path="create-split-booking/:id"
+              element={<CreateSplitBooking />}
+            />
+            <Route
               path="departure-confirmation"
               element={<DepartureConfirmationAir />}
             />
+            <Route
+              path="departure-confirmation/view/:bookingId"
+              element={<ViewDepartureConfirmation />}
+            />
+            <Route
+              path="departure-confirmation/edit/:bookingId"
+              element={<EditDepartureConfirmation />}
+            />
             <Route path="transit-info" element={<TransitInfoAir />} />
+            <Route path="transit-view/:id" element={<TransitViewAir />} />
+
             <Route
               path="delivery-order-collected"
               element={<DeliveryOrderCollectedAir />}
             />
+            <Route
+              path="delivery-order-collected/view/:id"
+              element={<DeliveryOrderCollectedViewAir />}
+            />
           </Route>
         </Route>
+
+        {/* cargo arrival notice */}
         <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
 
         {/* pricing & procurement */}
-        <Route path="all-rates" element={<AllRates />}></Route>
-        <Route
-          path="rate-filing-enquiry"
-          element={<EnquiryRateFiling />}
-        ></Route>
-        <Route path="rate-filing-new" element={<NewRateFiling />}></Route>
+        <Route path="rate-filing" element={<RateFiling />}>
+          <Route index element={<RateFilingList />} />
+          <Route
+            path="available-rates/:enquiryId"
+            element={<AvailableRates />}
+          />
+          <Route path="add/:enquiryId" element={<AddRateFiling />} />
+          <Route
+            path="edit/:enquiryId/:rateFilingId"
+            element={<EditRateFiling />}
+          />
+          <Route
+            path="view/:enquiryId/:rateFilingId"
+            element={<ViewRateFiling />}
+          />
+          <Route path="create" element={<CreateRateFiling />} />
+        </Route>
         <Route path="rate-mailing" element={<RateMailing />}></Route>
-        <Route path="other-vendors" element={<OtherVendors />}></Route>
+        <Route path="other-vendors" element={<OtherVendors />}>
+          <Route path="vendor-for-shipping">
+            <Route index element={<VendorForShippingList />} />
+            <Route path="create" element={<CreateVendorBill />} />
+            <Route path="edit/:id" element={<EditVendorBill />} />
+            <Route path="view/:id" element={<ViewVendorBill />} />
+          </Route>
+          <Route path="vendor-for-office">
+            <Route index element={<VendorForOfficeList />} />
+            <Route path="create" element={<CreateVendorBill />} />
+            <Route path="edit/:id" element={<EditVendorBill />} />
+            <Route path="view/:id" element={<ViewVendorBill />} />
+          </Route>
+        </Route>
 
+        {/* operations */}
+        <Route
+          path="container-release-order"
+          element={<ContainerReleaseOrder />}
+        >
+          <Route index element={<ContainerReleaseOrderList />} />
+          <Route path="create" element={<CreateContainerReleaseOrder />} />
+          <Route path="edit/:id" element={<EditContainerReleaseOrder />} />
+          <Route path="view/:id" element={<ViewContainerReleaseOrder />} />
+        </Route>
+
+        <Route path="vgm-filing" element={<Vgm />}>
+          <Route index element={<VGMFilingList />} />
+          <Route path="create" element={<CreateVGMFiling />} />
+          <Route path="edit/:id" element={<EditVGMFiling />} />
+          <Route path="view/:id" element={<ViewVGMFiling />} />
+        </Route>
+
+        <Route path="cargo-manifest" element={<CargoManifest />}>
+          <Route path="sea-freight">
+            <Route index element={<CargoManifestListSea />} />
+            <Route
+              path="create/:bookingId"
+              element={<CargoManifestCreateSea />}
+            />
+            <Route path="view/:bookingId" element={<CargoManifestViewSea />} />
+          </Route>
+          <Route path="air-freight">
+            <Route index element={<CargoManifestListAir />} />
+            <Route
+              path="create/:bookingId"
+              element={<CargoManifestCreateAir />}
+            />
+            <Route path="view/:bookingId" element={<CargoManifestViewAir />} />
+          </Route>
+        </Route>
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>
           <Route index element={<TestimonialList />} />

@@ -69,7 +69,10 @@ const ContainerPickUp: React.FC = () => {
       </>
     );
     const actions = (
-      <Link to={"/shipment-updates/sea-freight/container-pickup/details"}>
+      <Link
+        to={`/shipment-updates/sea-freight/container-pickup/details/${id + 1}`}
+        className="flex justify-center"
+      >
         <GreyButton label={"View Updates"} size={"s"} variant={"primary"} />
       </Link>
     );
@@ -139,13 +142,13 @@ const ContainerPickUp: React.FC = () => {
       <div className="flex justify-between p-3 border-b border-b-grey-ab-50 items-center">
         <div className="w-[60%] flex gap-4 items-center">
           <p className="text-lg font-semibold text-grey-ab-900 text-nowrap">
-            Shipment Updates List
+            Container Pickup List
           </p>
           <GroupField
             label={""}
             type={""}
             placeholder={"Search"}
-            name={""}
+            name={"search"}
             value={""}
             onChange={function (
               e: React.ChangeEvent<

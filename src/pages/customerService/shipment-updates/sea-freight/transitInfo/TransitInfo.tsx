@@ -1,13 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import WarningChip from "../../../../../components/chips/WarningChip";
-import {
-  DocumentIcon,
-  EditIcon,
-  ExcelIcon,
-  SearchIcon,
-  SendIcon,
-} from "../../../../../components/icons/Icons";
+import { ExcelIcon, SearchIcon } from "../../../../../components/icons/Icons";
 import { Link } from "react-router-dom";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import CustomPagination from "../../../../../components/pagination/CustomPagination";

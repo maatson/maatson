@@ -11,6 +11,7 @@ import {
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import CustomTable from "../../../../../components/table/CustomTable";
+import ship from "/images/cargoShip.png";
 
 interface FCLcontainerProps {
   containerNumber: string;
@@ -47,7 +48,7 @@ interface DataProps {
 }
 
 const fclColumns: any[] = [
-  { id: "s.no", label: "s.no", minWidth: "100px" },
+  { id: "sNo", label: "s.no", minWidth: "100px" },
   {
     id: "containerNumber",
     label: "Container Number",
@@ -57,7 +58,7 @@ const fclColumns: any[] = [
   { id: "onboardDate", label: "Onboard Date" },
   { id: "ata_pod", label: "ATA (POD)" },
   { id: "doc", label: "Delivery Order Collected (DOC)" },
-  { id: "action", label: "Action", minWidth: "100px" },
+  { id: "action", label: "Action", minWidth: "100px", align: "center" },
 ];
 const columns: any[] = [
   { id: "s.no", label: "s.no", minWidth: "100px" },
@@ -70,7 +71,7 @@ const columns: any[] = [
   { id: "onboardDate", label: "Onboard Date" },
   { id: "ata_pod", label: "ATA (POD)" },
   { id: "doc", label: "Delivery Order Collected (DOC)" },
-  { id: "action", label: "Action", minWidth: "100px" },
+  { id: "action", label: "Action", minWidth: "100px", align: "center" },
 ];
 
 const DeliveryOrderCollectedView: React.FC = () => {
@@ -236,7 +237,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
     } = items;
 
     const actionValue = (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 justify-center">
         {!isEditing ? (
           <div
             className="p-1 rounded bg-blue flex items-center cursor-pointer"
@@ -251,7 +252,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
               onClick={() => handleToggleEdit(dimensionId, id, false)}
             >
               <CrossIcon color="#ffffff" size={16} />
-            </div>{" "}
+            </div>
             <div className="p-1 rounded bg-success flex items-center cursor-pointer">
               <TickIcon color="#ffffff" size={16} />
             </div>
@@ -274,6 +275,7 @@ const DeliveryOrderCollectedView: React.FC = () => {
 
     const updatedRowData = {
       id: id,
+      sNo: id + 1,
       containerNumber,
       pickupDate,
       terminalGateInDate,
@@ -386,17 +388,42 @@ const DeliveryOrderCollectedView: React.FC = () => {
           return (
             <div key={dimensionIndex} className="gap-3 flex flex-col">
               <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
+                <div className="flex items-center justify-center w-16 h-16">
+                  <img src={ship} alt="ship.png" />
+                </div>
+                <ViewCard
+                  label={"Carrier  Name"}
+                  value={"Maersk Line"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+                <ViewCard
+                  label={"Vessel Name"}
+                  value={"Maersk Emerald"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+
+                <ViewCard
+                  label={"Voyage Number"}
+                  value={"M1234"}
+                  labelStyle="font-normal text-grey-ab-300"
+                  style="flex-col"
+                  valueStyle="font-semibold"
+                />
+              </div>
+              <div className="flex px-4 py-2 rounded-sm justify-between items-center bg-grey-aw-50">
                 <ViewCard
                   label={"Container Type"}
                   value={dimension.containerSize}
-                  style="flex-col"
                   labelStyle="font-normal"
                   valueStyle="font-semibold"
                 />
                 <ViewCard
                   label={"Quantity"}
                   value={dimension.containerCount}
-                  style="flex-col"
                   labelStyle="font-normal"
                   valueStyle="font-semibold"
                 />

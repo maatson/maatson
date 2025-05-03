@@ -120,7 +120,11 @@ const SideBar: React.FC = () => {
             link: "/sea-air-schedule/sea-freight",
             active: "/sea-air-schedule",
           },
-          { label: "Shipment Updates", link: "/shipment-updates/sea-freight", active:"/shipment-updates" },
+          {
+            label: "Shipment Updates",
+            link: "/shipment-updates/sea-freight",
+            active: "/shipment-updates",
+          },
           { label: "Cargo Arrival Notice", link: "/customer-service" },
         ],
         onClick: () => handleItemClick(3),
@@ -151,19 +155,33 @@ const SideBar: React.FC = () => {
         label: "Pricing & Procurement",
         isOpen: openItems[7] || false,
         children: [
-          { label: "All Rates", link: "/all-rates" },
-          { label: "Rate Filing(Enquiry)", link: "/rate-filing-enquiry" },
-          { label: "Rate Filing (New)", link: "/rate-filing-new" },
+          { label: "Rate Filing", link: "/rate-filing" },
           { label: "Rate Mailing", link: "/rate-mailing" },
-          { label: "Other Vendors", link: "/other-vendors" },
+          {
+            label: "Other Vendors",
+            link: "/other-vendors/vendor-for-shipping",
+            active: "/other-vendors",
+          },
         ],
+
         onClick: () => handleItemClick(7),
       },
       {
         leftIcon: <OperationsIcon />,
         label: "Operations",
         isOpen: openItems[8] || false,
-        children: [],
+        children: [
+          {
+            label: "Container Release Order",
+            link: "/container-release-order",
+          },
+          { label: "VGM Filing Update", link: "/vgm-filing" },
+          {
+            label: "Cargo Manifest",
+            link: "/cargo-manifest/sea-freight",
+            active: "/cargo-manifest",
+          },
+        ],
         onClick: () => handleItemClick(8),
       },
       {
@@ -216,7 +234,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
   isActive,
 }) => {
   return (
-    <div className="flex flex-col gap-2 cursor-pointer ">
+    <div className="flex flex-col gap-2 cursor-pointer z-20">
       <div
         className={`flex items-center rounded justify-between px-4 py-2 transition-all duration-300    ${
           isOpen ? "bg-grey-50 text-primary" : ""
@@ -252,8 +270,8 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
                   : ""
               }`}
             >
-              <span className="w-2 h-2 rounded-full border border-grey-50 "></span>{" "}
-              <span> {child.label}</span>
+              <span className="w-2 h-2 rounded-full border border-grey-50 flex-shrink-0"></span>{" "}
+              <span className="text-nowrap"> {child.label}</span>
             </Link>
           ))}
         </ul>
@@ -263,35 +281,3 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
 };
 
 export default SideBar;
-
-// import React from "react";
-// import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
-// import { MessageIcon } from "../icons/Icons";
-
-// const SideBar: React.FC = () => {
-//   return (
-//     <Sidebar>
-//       <Menu>
-//         {/* Home Menu */}
-//         <MenuItem icon={<MessageIcon />}>Home</MenuItem>
-
-//         {/* Users Submenu */}
-//         <SubMenu
-//           title="Users"
-//           icon={<MessageIcon />}
-
-//           // open={activeSubMenu === 'users'}
-//           // onClick={() => handleSubMenuToggle('users')}
-//         >
-//           <MenuItem> User 1 </MenuItem>
-//           <MenuItem> User 2 </MenuItem>
-//         </SubMenu>
-
-//         {/* Settings Menu */}
-//         <MenuItem icon={<MessageIcon />}>Settings</MenuItem>
-//       </Menu>
-//     </Sidebar>
-//   );
-// };
-
-// export default SideBar;
