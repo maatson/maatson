@@ -153,7 +153,7 @@ const CargoManifestCreate: React.FC = () => {
     []
   );
 
-  //fetch booking details also cargotype for handling table
+  //fetch booking details also cargotype for handling tables
   useEffect(() => {
     console.log(bookingId, "bookingId");
     setBookingDetail((prev) => ({
