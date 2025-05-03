@@ -235,6 +235,7 @@ const GroupField: React.FC<Groupfield> = ({
                 IndicatorSeparator: null,
               }}
               styles={selectStyles}
+              menuPortalTarget={document.body}
             />
           ) : type === "textarea" ? (
             <textarea

@@ -491,12 +491,18 @@ const CargoManifestCreateSea = lazy(
   () =>
     import("./pages/operations/cargoManifest/seaFreight/CargoManifestCreate")
 );
+const CargoManifestViewSea = lazy(
+  () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestView")
+);
 const CargoManifestListAir = lazy(
   () => import("./pages/operations/cargoManifest/airFreight/CargoManifestList")
 );
 const CargoManifestCreateAir = lazy(
   () =>
     import("./pages/operations/cargoManifest/airFreight/CargoManifestCreate")
+);
+const CargoManifestViewAir = lazy(
+  () => import("./pages/operations/cargoManifest/airFreight/CargoManifestView")
 );
 
 // TESTIMONALS
@@ -793,6 +799,7 @@ const AppRoutes: React.FC = () => {
               path="create/:bookingId"
               element={<CargoManifestCreateSea />}
             />
+            <Route path="view/:bookingId" element={<CargoManifestViewSea />} />
           </Route>
           <Route path="air-freight">
             <Route index element={<CargoManifestListAir />} />
@@ -800,6 +807,7 @@ const AppRoutes: React.FC = () => {
               path="create/:bookingId"
               element={<CargoManifestCreateAir />}
             />
+            <Route path="view/:bookingId" element={<CargoManifestViewAir />} />
           </Route>
         </Route>
         {/* testimonials */}
