@@ -343,7 +343,7 @@ const ComposeEmails: React.FC<ComposeEmailsProps> = ({ onClose }) => {
                   setCurrentFontSize(formats.size || "normal");
                   setCurrentFontStyle(formats.font || "sans-serif");
                 }
-              }, 0); // Defer to next tick
+              }, 0); 
             }}
             onChangeSelection={handleEditorChangeSelection} // To track cursor position
             theme="snow"

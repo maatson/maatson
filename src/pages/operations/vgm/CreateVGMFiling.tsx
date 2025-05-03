@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "/images/logo.svg";
 import HeadersLayout from "../containerReleaseOrder/layouts/HeadersLayouts";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
@@ -36,9 +36,9 @@ const CreateVGMFiling: React.FC = () => {
     ],
     optionalDetails: [
       {
-        // containerNumber: "",
+        containerNumber: "",
         determinationDate: "",
-        solasMethod: "Weighing",
+        solasMethod: "",
         solarCertification: "",
         country: "",
         providerSignature: "",
@@ -59,30 +59,121 @@ const CreateVGMFiling: React.FC = () => {
       shipperCompany: "",
       status: "",
     };
-    const addOptionalData = {
-      // containerNumber: "",
-      determinationDate: "",
-      solasMethod: "Weighing",
-      solarCertification: "",
-      country: "",
-      providerSignature: "",
-    };
-    setData((prev) => ({
-      ...prev,
-      mandatoryDetails: [...prev.mandatoryDetails, addMandatoryData],
-      optionalDetails: [...prev.optionalDetails, addOptionalData],
-    }));
+    if (
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].containerNumber &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].containerType &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].cargoType &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].tare &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].maxGross &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].verifiedWeight &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1]
+        .verifiedWeightUnit &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1]
+        .verificationSignature &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].shipperCompany &&
+      data.mandatoryDetails[data.mandatoryDetails.length - 1].status
+    ) {
+      setData((prev) => ({
+        ...prev,
+        mandatoryDetails: [...prev.mandatoryDetails, addMandatoryData],
+      }));
+    } else {
+      alert("Fill previous data");
+    }
+  };
+
+  const handleAddMoreOptional = () => {
+    if (data.optionalDetails.length < data.mandatoryDetails.length) {
+      const addOptionalData = {
+        containerNumber: "",
+        determinationDate: "",
+        solasMethod: "",
+        solarCertification: "",
+        country: "",
+        providerSignature: "",
+      };
+      if (
+        data.optionalDetails[data.optionalDetails.length - 1]
+          ?.containerNumber &&
+        (data.optionalDetails[data.optionalDetails.length - 1]
+          ?.determinationDate ||
+          data.optionalDetails[data.optionalDetails.length - 1]?.solasMethod ||
+          data.optionalDetails[data.optionalDetails.length - 1]
+            ?.solarCertification ||
+          data.optionalDetails[data.optionalDetails.length - 1]?.country ||
+          data.optionalDetails[data.optionalDetails.length - 1]
+            ?.providerSignature)
+      ) {
+        setData((prev) => ({
+          ...prev,
+          optionalDetails: [...prev.optionalDetails, addOptionalData],
+        }));
+      } else {
+        alert("Fill previous data");
+      }
+    } else {
+      alert("You already reached max");
+    }
+    // const addOptionalData = {
+    //   containerNumber: "",
+    //   determinationDate: "",
+    //   solasMethod: "Weighing",
+    //   solarCertification: "",
+    //   country: "",
+    //   providerSignature: "",
+    // };
+    // setData((prev) => ({
+    //   ...prev,
+    //   optionalDetails: [...prev.optionalDetails, addOptionalData],
+    // }));
   };
 
   const handleDelete = (index: number) => {
     if (data.mandatoryDetails.length > 1) {
+      if (data.mandatoryDetails[index].containerNumber) {
+        // if (data.optionalDetails.length > 1) {
+        setData((prev) => ({
+          ...prev,
+          mandatoryDetails: prev.mandatoryDetails.filter((_, i) => i !== index),
+          optionalDetails: prev.optionalDetails.filter(
+            (item, i) =>
+              item.containerNumber !==
+              data.mandatoryDetails[index].containerNumber
+          ),
+        }));
+        // }
+      } else {
+        setData((prev) => ({
+          ...prev,
+          mandatoryDetails: prev.mandatoryDetails.filter((_, i) => i !== index),
+          // optionalDetails: prev.optionalDetails.filter((_, i) => i !== index),
+        }));
+      }
+    }
+  };
+
+  const handleDeleteOptional = (index: number) => {
+    if (data.optionalDetails.length > 1) {
       setData((prev) => ({
         ...prev,
-        mandatoryDetails: prev.mandatoryDetails.filter((_, i) => i !== index),
         optionalDetails: prev.optionalDetails.filter((_, i) => i !== index),
+      }));
+    } else {
+      const addOptionalData = {
+        containerNumber: "",
+        determinationDate: "",
+        solasMethod: "",
+        solarCertification: "",
+        country: "",
+        providerSignature: "",
+      };
+      setData((prev) => ({
+        ...prev,
+        optionalDetails: [addOptionalData],
       }));
     }
   };
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -119,6 +210,32 @@ const CreateVGMFiling: React.FC = () => {
       return { ...prev, optionalDetails: newcargo };
     });
   };
+
+  useEffect(() => {
+    if (data.optionalDetails.length < 1) {
+      if (data.mandatoryDetails.length < data.optionalDetails.length) {
+        setData((prev) => ({
+          ...prev,
+          optionalDetails: prev.optionalDetails.filter(
+            (_, i) => i !== data.optionalDetails.length - 1
+          ),
+        }));
+      }
+    } else {
+      const addOptionalData = {
+        containerNumber: "",
+        determinationDate: "",
+        solasMethod: "",
+        solarCertification: "",
+        country: "",
+        providerSignature: "",
+      };
+      setData((prev) => ({
+        ...prev,
+        optionalDetails: [addOptionalData],
+      }));
+    }
+  }, [data.mandatoryDetails]);
 
   return (
     <>
@@ -520,134 +637,182 @@ const CreateVGMFiling: React.FC = () => {
             )}
 
             {isOptional && (
-              <table cellPadding={10} className="">
-                <thead className="bg-grey-100 rounded-t-xs border-b border-b-grey-ab-50 font-semibold text-grey-ab-600">
-                  <tr>
-                    <td className="py-2 min-w-[100px]" align="center">
-                      SLNO
-                    </td>
-                    <td align="center" className="min-w-[200px]">
-                      Container Number
-                    </td>
-                    <td align="center" className="min-w-[200px]">
-                      Determ. Date
-                    </td>
-                    <td align="center" className="min-w-[200px]">
-                      Solas Method
-                    </td>
-                    <td align="center" className="min-w-[200px]">
-                      Solas Cert.
-                    </td>
-                    <td align="center" className="min-w-[200px]">
-                      Country
-                    </td>
-                    <td align="center" className="min-w-[200px]">
-                      Provider Signature
-                    </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.optionalDetails.map((item, index) => (
-                    <tr key={index} className="border-b border-b-grey-ab-50">
-                      <td align="center">
-                        {(index + 1).toString().padStart(2, "0")}
+              <React.Fragment>
+                <table cellPadding={10} className="">
+                  <thead className="bg-grey-100 rounded-t-xs border-b border-b-grey-ab-50 font-semibold text-grey-ab-600">
+                    <tr>
+                      <td className="py-2 min-w-[100px]" align="center">
+                        SLNO
                       </td>
-                      <td className="py-3">
-                        <GroupField
-                          label={""}
-                          type={""}
-                          placeholder={""}
-                          name={`containerNumber`}
-                          value={data.mandatoryDetails[index].containerNumber}
-                          onChange={(e) =>
-                            handleMandatoryDetailsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                        />
+                      <td align="center" className="min-w-[200px]">
+                        Container Number
                       </td>
-                      <td>
-                        <GroupField
-                          label={""}
-                          type={"date"}
-                          placeholder={""}
-                          name={`determinationDate`}
-                          value={item.determinationDate}
-                          onChange={(e) =>
-                            handleOptionalDetailsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                        />
+                      <td align="center" className="min-w-[200px]">
+                        Determ. Date
                       </td>
-                      <td>
-                        <GroupField
-                          label={""}
-                          type={"select"}
-                          placeholder={""}
-                          name={`solasMethod`}
-                          value={item.solasMethod}
-                          options={[
-                            { value: "Weighing", label: "Weighing" },
-                            { value: "Calculation", label: "Calculation" },
-                          ]}
-                          onChange={(e) =>
-                            handleOptionalDetailsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                        />
+                      <td align="center" className="min-w-[200px]">
+                        Solas Method
                       </td>
-                      <td>
-                        <GroupField
-                          label={""}
-                          type={""}
-                          placeholder={""}
-                          name={`solarCertification`}
-                          value={item.solarCertification}
-                          onChange={(e) =>
-                            handleOptionalDetailsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                        />
+                      <td align="center" className="min-w-[200px]">
+                        Solas Cert.
                       </td>
-                      <td>
-                        <GroupField
-                          label={""}
-                          type={""}
-                          placeholder={""}
-                          name={`country`}
-                          value={item.country}
-                          onChange={(e) =>
-                            handleOptionalDetailsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                        />
+                      <td align="center" className="min-w-[200px]">
+                        Country
                       </td>
-                      <td>
-                        <GroupField
-                          label={""}
-                          type={""}
-                          placeholder={""}
-                          name={`providerSignature`}
-                          value={item.providerSignature}
-                          onChange={(e) =>
-                            handleOptionalDetailsChange(e, index)
-                          }
-                          error={false}
-                          errorMessage={""}
-                        />
+                      <td align="center" className="min-w-[200px]">
+                        Provider Signature
+                      </td>
+                      <td align="center" className="min-w-[100px]">
+                        Action
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {data.optionalDetails.map((item, index) => (
+                      <tr key={index} className="border-b border-b-grey-ab-50">
+                        <td align="center">
+                          {(index + 1).toString().padStart(2, "0")}
+                        </td>
+                        <td className="py-3">
+                          <GroupField
+                            label={""}
+                            type={"select"}
+                            placeholder={""}
+                            name={`containerNumber`}
+                            value={item.containerNumber}
+                            onChange={(e) =>
+                              handleOptionalDetailsChange(e, index)
+                            }
+                            options={
+                              data.mandatoryDetails.length > 0
+                                ? data.mandatoryDetails.map((details) => ({
+                                    value: details.containerNumber,
+                                    label: details.containerNumber,
+                                  }))
+                                : []
+                            }
+                            error={false}
+                            errorMessage={""}
+                          />
+                        </td>
+                        <td>
+                          <GroupField
+                            label={""}
+                            type={"date"}
+                            placeholder={""}
+                            name={`determinationDate`}
+                            value={item.determinationDate}
+                            onChange={(e) =>
+                              handleOptionalDetailsChange(e, index)
+                            }
+                            error={false}
+                            errorMessage={""}
+                          />
+                        </td>
+                        <td>
+                          <GroupField
+                            label={""}
+                            type={"select"}
+                            placeholder={""}
+                            name={`solasMethod`}
+                            value={item.solasMethod}
+                            options={[
+                              { value: "Weighing", label: "Weighing" },
+                              { value: "Calculation", label: "Calculation" },
+                            ]}
+                            onChange={(e) =>
+                              handleOptionalDetailsChange(e, index)
+                            }
+                            error={false}
+                            errorMessage={""}
+                          />
+                        </td>
+                        <td>
+                          <GroupField
+                            label={""}
+                            type={""}
+                            placeholder={""}
+                            name={`solarCertification`}
+                            value={item.solarCertification}
+                            onChange={(e) =>
+                              handleOptionalDetailsChange(e, index)
+                            }
+                            error={false}
+                            errorMessage={""}
+                          />
+                        </td>
+                        <td>
+                          <GroupField
+                            label={""}
+                            type={""}
+                            placeholder={""}
+                            name={`country`}
+                            value={item.country}
+                            onChange={(e) =>
+                              handleOptionalDetailsChange(e, index)
+                            }
+                            error={false}
+                            errorMessage={""}
+                          />
+                        </td>
+                        <td>
+                          <GroupField
+                            label={""}
+                            type={""}
+                            placeholder={""}
+                            name={`providerSignature`}
+                            value={item.providerSignature}
+                            onChange={(e) =>
+                              handleOptionalDetailsChange(e, index)
+                            }
+                            error={false}
+                            errorMessage={""}
+                          />
+                        </td>
+                        <td>
+                          <div className="flex justify-center">
+                            <button
+                              className="p-1 rounded-xs bg-error-50 cursor-pointer  disabled:cursor-not-allowed"
+                              disabled={
+                                data.optionalDetails.length === 1 &&
+                                !data.optionalDetails[index].containerNumber &&
+                                !data.optionalDetails[index]
+                                  .determinationDate &&
+                                !data.optionalDetails[index].country &&
+                                !data.optionalDetails[index]
+                                  .providerSignature &&
+                                !data.optionalDetails[index]
+                                  .solarCertification &&
+                                !data.optionalDetails[index].solasMethod
+                              }
+                              onClick={() => handleDeleteOptional(index)}
+                            >
+                              <DeleteIcon size={16} color="#810001" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {data.optionalDetails.length < data.mandatoryDetails.length && (
+                  <div
+                    className="mx-4 mb-3 w-fit"
+                    onClick={handleAddMoreOptional}
+                  >
+                    <BlackButton
+                      label={"Add More"}
+                      size={"s"}
+                      variant={"primary"}
+                      leftIcon={<AddIcon size={16} color="#ffffff" />}
+                    />
+                  </div>
+                )}
+              </React.Fragment>
             )}
 
             {isMandatory && (
-              <div className="px-4 pb-3" onClick={handleAddMore}>
+              <div className="mx-4 mb-3 w-fit" onClick={handleAddMore}>
                 <BlackButton
                   label={"Add More"}
                   size={"s"}
