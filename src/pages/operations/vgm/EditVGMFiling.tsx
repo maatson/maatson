@@ -46,7 +46,7 @@ const EditVGMFiling: React.FC = () => {
         providerSignature: "John Doe",
       },
     ],
-  }); 
+  });
 
   const handleAddMore = () => {
     const addMandatoryData = {
@@ -388,7 +388,7 @@ const EditVGMFiling: React.FC = () => {
                           label={""}
                           type={""}
                           placeholder={""}
-                          name={`cargoType`} 
+                          name={`cargoType`}
                           value={item.cargoType}
                           onChange={(e) =>
                             handleMandatoryDetailsChange(e, index)

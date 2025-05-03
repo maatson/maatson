@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import Logo from "/images/logo.svg";
@@ -177,6 +177,22 @@ const CargoManifestCreate: React.FC = () => {
       };
     });
   };
+
+  const delivaryStatusOptions = useMemo(
+    () => [
+      { label: "CFS/CFS", value: "CFS/CFS" },
+      { label: "FI/FO", value: "FI/FO" },
+      { label: "CY/FO", value: "CY/FO" },
+      { label: "FI/CY", value: "FI/CY" },
+      { label: "FI/CFS", value: "FI/CFS" },
+      { label: "CY/CY", value: "CY/CY" },
+      { label: "CFS/FO", value: "CFS/FO" },
+      { label: "FI/HK", value: "FI/HK" },
+      { label: "HK/HK", value: "HK/HK" },
+      { label: "HK/FO", value: "HK/FO" },
+    ],
+    []
+  );
 
   //fetch booking details also cargotype for handling table
   useEffect(() => {
@@ -501,7 +517,7 @@ const CargoManifestCreate: React.FC = () => {
                       value={cargo.delivaryStatus}
                       onChange={(e) => handleCargoChange(e, index)}
                       error={false}
-                      options={[{ label: "CFS/CFS", value: "CFS/CFS" }]}
+                      options={delivaryStatusOptions || []}
                       errorMessage={""}
                       parentStyle=" min-w-[150px] w-[200px]"
                     />
