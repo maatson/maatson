@@ -491,6 +491,9 @@ const CargoManifestCreateSea = lazy(
   () =>
     import("./pages/operations/cargoManifest/seaFreight/CargoManifestCreate")
 );
+const CargoManifestEditSea = lazy(
+  () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestEdit")
+);
 const CargoManifestViewSea = lazy(
   () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestView")
 );
@@ -500,6 +503,9 @@ const CargoManifestListAir = lazy(
 const CargoManifestCreateAir = lazy(
   () =>
     import("./pages/operations/cargoManifest/airFreight/CargoManifestCreate")
+);
+const CargoManifestEditAir = lazy(
+  () => import("./pages/operations/cargoManifest/airFreight/CargoManifestEdit")
 );
 const CargoManifestViewAir = lazy(
   () => import("./pages/operations/cargoManifest/airFreight/CargoManifestView")
@@ -799,6 +805,7 @@ const AppRoutes: React.FC = () => {
               path="create/:bookingId"
               element={<CargoManifestCreateSea />}
             />
+            <Route path="edit/:bookingId" element={<CargoManifestEditSea />} />
             <Route path="view/:bookingId" element={<CargoManifestViewSea />} />
           </Route>
           <Route path="air-freight">
@@ -807,6 +814,7 @@ const AppRoutes: React.FC = () => {
               path="create/:bookingId"
               element={<CargoManifestCreateAir />}
             />
+            <Route path="edit/:bookingId" element={<CargoManifestEditAir />} />
             <Route path="view/:bookingId" element={<CargoManifestViewAir />} />
           </Route>
         </Route>
