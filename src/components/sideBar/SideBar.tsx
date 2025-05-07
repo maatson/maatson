@@ -107,6 +107,7 @@ const SideBar: React.FC = () => {
         children: [
           { label: "Leads and CRM", link: "/enquiry" },
           { label: "Booking", link: "/booking" },
+          { label: "Rate Tariff", link: "/rate-tariff" },
         ],
         onClick: () => handleItemClick(2),
       },

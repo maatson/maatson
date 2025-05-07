@@ -164,7 +164,7 @@ const RequirementList: React.FC = () => {
         <AddRequirement cancel={() => setAddRequirement(false)} />
       )}
 
-      <div className="bg-white min-h-screen rounded">
+      <div className="bg-white h-full rounded">
         <div className="p-3 flex justify-between items-center text-grey-ab-900 ">
           <p className="text-lg font-semibold">Job Requirement List</p>
           <div onClick={() => setAddRequirement(true)}>

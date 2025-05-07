@@ -96,6 +96,14 @@ const ConvertToBookingEnquiry = lazy(
   () => import("./pages/salesAndMarketing/layouts/ConvertToBookingEnquiry")
 );
 
+const RateTariff = lazy(() => import("./pages/salesAndMarketing/rateTariff"));
+const RateTariffList = lazy(
+  () => import("./pages/salesAndMarketing/rateTariff/RateTariffList")
+);
+const RateTariffView = lazy(
+  () => import("./pages/salesAndMarketing/rateTariff/RateTariffView")
+);
+
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
 const AttendanceList = lazy(
@@ -596,6 +604,10 @@ const AppRoutes: React.FC = () => {
               element={<ConvertToBookingEnquiry />}
             />
           </Route>
+        </Route>
+        <Route path="rate-tariff" element={<RateTariff />}>
+          <Route index element={<RateTariffList />} />
+          <Route path="view/:id" element={<RateTariffView />} />
         </Route>
 
         {/* customer services */}
