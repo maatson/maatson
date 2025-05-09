@@ -137,8 +137,11 @@ const RateTariffCard: React.FC<RateTariffData> = ({ ...data }) => {
       </div>
       <div className="px-4 py-2 flex items-center justify-between mt-auto">
         <div className="flex items-center gap-1 basis-2/3">
-          <InfoIcon color="#0091ff" size={16} />
-          <p className="text-3xs text-blue">
+          <div>
+            {" "}
+            <InfoIcon color="#0091ff" size={16} />
+          </div>
+          <p className="text-2xs text-blue">
             for Local charges click view Details or contact pricing Team{" "}
           </p>
         </div>
