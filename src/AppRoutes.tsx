@@ -519,6 +519,18 @@ const CargoManifestViewAir = lazy(
   () => import("./pages/operations/cargoManifest/airFreight/CargoManifestView")
 );
 
+// Documentation
+const BillOfLadingAirFreight = lazy(
+  () => import("./pages/documentation/billOfLadingAirFreight")
+);
+// bill of lading - sea
+const BillOfLadingSeaFreight = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight")
+);
+const BillOfLadingListSea = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight/BillOfLadingList")
+);
+
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
@@ -830,6 +842,19 @@ const AppRoutes: React.FC = () => {
             <Route path="view/:bookingId" element={<CargoManifestViewAir />} />
           </Route>
         </Route>
+
+        {/* documentation */}
+        <Route
+          path="bill-of-lading/air-freight"
+          element={<BillOfLadingAirFreight />}
+        ></Route>
+        <Route
+          path="bill-of-lading/sea-freight"
+          element={<BillOfLadingSeaFreight />}
+        >
+          <Route index element={<BillOfLadingListSea />} />
+        </Route>
+
         {/* testimonials */}
         <Route path="testimonials" element={<Testimonials />}>
           <Route index element={<TestimonialList />} />
