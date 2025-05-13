@@ -50,13 +50,48 @@ interface BLData {
 }
 
 const CreateBl: React.FC = () => {
-  const [data, setData] = useState<BLData>();
+  const [data, setData] = useState<BLData>({
+    bookingId: "123dd4545",
+    vesselName: "",
+    shipperRef: "",
+    vesselNumber: "",
+    portOfLoading: "",
+    portOfDischarge: "",
+    delivaryPlace: "",
+    finalDestination: "",
+    receiptPlace: "",
+    friedPaid: "",
+    shipper: { companyName: "", companyAddress: "" },
+    consignee: { companyName: "", companyAddress: "" },
+    notifyParty: [
+      { companyName: "", companyAddress: "" },
+      { companyName: "", companyAddress: "" },
+    ],
+    cargoDetails: [
+      {
+        containerNumber: "",
+        sealNumber: "",
+        packageType: "",
+        packageQuantity: 0,
+        cargoWeight: 0,
+        cargoWeightUnit: "",
+        measurement: "",
+        description: "",
+      },
+    ],
+    delivaryTerms: "",
+    shippingTerms: "",
+    freightTerms: "",
+    issuedPlace: "",
+    shippedOnboardDate: "",
+    issuedDate: "",
+  });
   return (
     <div className="bg-grey-aw-50 flex flex-col gap-8 p-6 rounded">
       {/* booking */}
       <ViewCard
         label={"Booking ID:"}
-        value={"123dd4545"}
+        value={data.bookingId}
         labelStyle="font-semibold"
       />
       {/* body */}
@@ -69,7 +104,7 @@ const CreateBl: React.FC = () => {
               type={"text"}
               placeholder={"Enter Vessel Name"}
               name={"vesselName"}
-              value={""}
+              value={data.vesselName}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -78,8 +113,8 @@ const CreateBl: React.FC = () => {
               label={"Voyage no*"}
               type={"text"}
               placeholder={"Voyage no"}
-              name={"voyageNumber"}
-              value={""}
+              name={"vesselNumber"}
+              value={data.vesselNumber}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -90,7 +125,7 @@ const CreateBl: React.FC = () => {
             type={"text"}
             placeholder={"Enter Shipper’s Ref"}
             name={"shipperRef"}
-            value={""}
+            value={data.shipperRef}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -102,8 +137,8 @@ const CreateBl: React.FC = () => {
             label={"Port of Loading*"}
             type={"text"}
             placeholder={"Enter POL"}
-            name={"shipperRef"}
-            value={""}
+            name={"portOfLoading"}
+            value={data.portOfLoading}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -112,8 +147,8 @@ const CreateBl: React.FC = () => {
             label={"Port of Discharge*"}
             type={"text"}
             placeholder={"Enter POD"}
-            name={"shipperRef"}
-            value={""}
+            name={"portOfDischarge"}
+            value={data.portOfDischarge}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -122,8 +157,8 @@ const CreateBl: React.FC = () => {
             label={"Place of Delivery*"}
             type={"text"}
             placeholder={"Enter Place of Delivery"}
-            name={"shipperRef"}
-            value={""}
+            name={"delivaryPlace"}
+            value={data.delivaryPlace}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -132,8 +167,8 @@ const CreateBl: React.FC = () => {
             label={"Final Destination*"}
             type={"text"}
             placeholder={"Enter Final Destination"}
-            name={"shipperRef"}
-            value={""}
+            name={"finalDestination"}
+            value={data.finalDestination}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -142,8 +177,8 @@ const CreateBl: React.FC = () => {
             label={"Place of Receipt*"}
             type={"text"}
             placeholder={"Enter receipt"}
-            name={"shipperRef"}
-            value={""}
+            name={"receiptPlace"}
+            value={data.receiptPlace}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -152,8 +187,8 @@ const CreateBl: React.FC = () => {
             label={"Freight Paid at"}
             type={"text"}
             placeholder={"Enter Freight Paid "}
-            name={"shipperRef"}
-            value={""}
+            name={"friedPaid"}
+            value={data.friedPaid}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -165,8 +200,8 @@ const CreateBl: React.FC = () => {
               label={"Shipper*"}
               type={"text"}
               placeholder={"Company Name"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyName"}
+              value={data.shipper.companyName}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -175,8 +210,8 @@ const CreateBl: React.FC = () => {
               label={""}
               type={"textarea"}
               placeholder={"Company Address"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyAddress"}
+              value={data.shipper.companyAddress}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -187,8 +222,8 @@ const CreateBl: React.FC = () => {
               label={"Consignee*"}
               type={"text"}
               placeholder={"Company Name"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyName"}
+              value={data.consignee.companyName}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -197,8 +232,8 @@ const CreateBl: React.FC = () => {
               label={""}
               type={"textarea"}
               placeholder={"Company Address"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyAddress"}
+              value={data.consignee.companyAddress}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -209,8 +244,8 @@ const CreateBl: React.FC = () => {
               label={"Notify Party*"}
               type={"text"}
               placeholder={"Company Name"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyName"}
+              value={data.notifyParty[0].companyName}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -219,8 +254,8 @@ const CreateBl: React.FC = () => {
               label={""}
               type={"textarea"}
               placeholder={"Company Address"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyAddress"}
+              value={data.notifyParty[0].companyAddress}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -231,8 +266,8 @@ const CreateBl: React.FC = () => {
               label={"Notify Party (2)"}
               type={"text"}
               placeholder={"Company Name"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyName"}
+              value={data.notifyParty[1]?.companyName || ""}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -241,8 +276,8 @@ const CreateBl: React.FC = () => {
               label={""}
               type={"textarea"}
               placeholder={"Company Address"}
-              name={"shipperRef"}
-              value={""}
+              name={"companyAddress"}
+              value={data.notifyParty[1]?.companyAddress || ""}
               onChange={() => {}}
               error={false}
               errorMessage={""}
@@ -385,8 +420,8 @@ const CreateBl: React.FC = () => {
             label={"Delivery Terms*"}
             type={"select"}
             placeholder={"Choose Delivery Terms"}
-            name={"shipperRef"}
-            value={""}
+            name={"delivaryTerms"}
+            value={data.delivaryTerms}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -395,8 +430,8 @@ const CreateBl: React.FC = () => {
             label={"Shipping Terms*"}
             type={"select"}
             placeholder={"Choose Shipping Terms"}
-            name={"shipperRef"}
-            value={""}
+            name={"shippingTerms"}
+            value={data.shippingTerms}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -405,8 +440,8 @@ const CreateBl: React.FC = () => {
             label={"Freight Terms*"}
             type={"select"}
             placeholder={"Choose Freight Terms"}
-            name={"shipperRef"}
-            value={""}
+            name={"freightTerms"}
+            value={data.freightTerms}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -415,8 +450,8 @@ const CreateBl: React.FC = () => {
             label={"Place Issued*"}
             type={"text"}
             placeholder={"Enter Place Issued"}
-            name={"shipperRef"}
-            value={""}
+            name={"issuedPlace"}
+            value={data.issuedPlace}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -425,8 +460,8 @@ const CreateBl: React.FC = () => {
             label={"Shipped On Board Date*"}
             type={"date"}
             placeholder={"Enter Date"}
-            name={"shipperRef"}
-            value={""}
+            name={"shippedOnboardDate"}
+            value={data.shippedOnboardDate}
             onChange={() => {}}
             error={false}
             errorMessage={""}
@@ -435,8 +470,8 @@ const CreateBl: React.FC = () => {
             label={"Date Issued*"}
             type={"date"}
             placeholder={"Enter Date Issued"}
-            name={"shipperRef"}
-            value={""}
+            name={"issuedDate"}
+            value={data.issuedDate}
             onChange={() => {}}
             error={false}
             errorMessage={""}
