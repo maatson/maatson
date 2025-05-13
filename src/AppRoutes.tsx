@@ -96,6 +96,14 @@ const ConvertToBookingEnquiry = lazy(
   () => import("./pages/salesAndMarketing/layouts/ConvertToBookingEnquiry")
 );
 
+const RateTariff = lazy(() => import("./pages/salesAndMarketing/rateTariff"));
+const RateTariffList = lazy(
+  () => import("./pages/salesAndMarketing/rateTariff/RateTariffList")
+);
+const RateTariffView = lazy(
+  () => import("./pages/salesAndMarketing/rateTariff/RateTariffView")
+);
+
 // HRM Routes
 const Attendance = lazy(() => import("./pages/hrm/attendance"));
 const AttendanceList = lazy(
@@ -491,6 +499,9 @@ const CargoManifestCreateSea = lazy(
   () =>
     import("./pages/operations/cargoManifest/seaFreight/CargoManifestCreate")
 );
+const CargoManifestEditSea = lazy(
+  () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestEdit")
+);
 const CargoManifestViewSea = lazy(
   () => import("./pages/operations/cargoManifest/seaFreight/CargoManifestView")
 );
@@ -500,6 +511,9 @@ const CargoManifestListAir = lazy(
 const CargoManifestCreateAir = lazy(
   () =>
     import("./pages/operations/cargoManifest/airFreight/CargoManifestCreate")
+);
+const CargoManifestEditAir = lazy(
+  () => import("./pages/operations/cargoManifest/airFreight/CargoManifestEdit")
 );
 const CargoManifestViewAir = lazy(
   () => import("./pages/operations/cargoManifest/airFreight/CargoManifestView")
@@ -512,6 +526,9 @@ const BillOfLadingAirFreight = lazy(
 // bill of lading - sea
 const BillOfLadingSeaFreight = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight")
+);
+const CreateBl = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight/CreateBl")
 );
 const BillOfLadingListSea = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight/BillOfLadingList")
@@ -605,6 +622,10 @@ const AppRoutes: React.FC = () => {
               element={<ConvertToBookingEnquiry />}
             />
           </Route>
+        </Route>
+        <Route path="rate-tariff" element={<RateTariff />}>
+          <Route index element={<RateTariffList />} />
+          <Route path="view/:id" element={<RateTariffView />} />
         </Route>
 
         {/* customer services */}
@@ -814,6 +835,7 @@ const AppRoutes: React.FC = () => {
               path="create/:bookingId"
               element={<CargoManifestCreateSea />}
             />
+            <Route path="edit/:bookingId" element={<CargoManifestEditSea />} />
             <Route path="view/:bookingId" element={<CargoManifestViewSea />} />
           </Route>
           <Route path="air-freight">
@@ -822,6 +844,7 @@ const AppRoutes: React.FC = () => {
               path="create/:bookingId"
               element={<CargoManifestCreateAir />}
             />
+            <Route path="edit/:bookingId" element={<CargoManifestEditAir />} />
             <Route path="view/:bookingId" element={<CargoManifestViewAir />} />
           </Route>
         </Route>
@@ -837,6 +860,8 @@ const AppRoutes: React.FC = () => {
         >
           <Route index element={<BillOfLadingListSea />} />
           <Route path="view/:id" element={<ViewBillOfLading />} />
+        </Route>
+          <Route path="createBl/:bookingId" element={<CreateBl />} />
         </Route>
 
         {/* testimonials */}

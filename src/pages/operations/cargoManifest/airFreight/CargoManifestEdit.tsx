@@ -39,7 +39,7 @@ interface CargoManifestProp {
   cargoType?: string;
 }
 
-const CargoManifestCreate: React.FC = () => {
+const CargoManifestEdit: React.FC = () => {
   const navigate = useNavigate();
   const { bookingId } = useParams();
   const [data, setData] = useState<CargoManifestProp>({
@@ -533,4 +533,4 @@ const CargoManifestCreate: React.FC = () => {
   );
 };
 
-export default CargoManifestCreate;
+export default CargoManifestEdit;

@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from "react";
-import ViewCard from "../../customerService/sea-air-schedule/components/layouts/ViewCard";
+import EditableTable, {
+  ColumnConfig,
+} from "../../../components/table/EditableTable";
 import {
   ContainerSettingsIcon,
-  DeleteIcon,
-  EditIcon,
   LocationIcon,
   PriceTagIcon,
   ProductIcon,
@@ -12,12 +12,8 @@ import {
   StopIcon,
   UserIcon,
 } from "../../../components/icons/Icons";
-import ErrorButton from "../../../components/buttons/ErrorButton";
-import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
-import EditableTable, {
-  ColumnConfig,
-} from "../../../components/table/EditableTable";
-import { Link, useParams } from "react-router-dom";
+import ViewCard from "../../customerService/sea-air-schedule/components/layouts/ViewCard";
+import { useParams } from "react-router-dom";
 
 interface EnquiryDataProps {
   modeOfShipment: string;
@@ -26,6 +22,8 @@ interface EnquiryDataProps {
   portOfDischarge: string;
   products: string[];
   cargoDetails: { cargoType: string; cargoDimensions: any[] };
+  enquiryId?: string;
+  enquiryDate?: string;
 }
 type RateDetails = {
   size: string;
@@ -54,7 +52,7 @@ interface CarrierInfoProps {
   localChargesTariff: LocalCharge[];
 }
 
-const ViewRateFiling: React.FC = () => {
+const RateTariffView: React.FC = () => {
   const [enquiryData, setEnquiryData] = useState<EnquiryDataProps>({
     modeOfShipment: "export",
     modeOfTransportation: "sea freight",
@@ -77,6 +75,8 @@ const ViewRateFiling: React.FC = () => {
         },
       ],
     },
+    enquiryId: "",
+    enquiryDate: "12/3/25",
   });
   const [carrierInfoData, setCarrierInfoData] = useState<CarrierInfoProps>({
     carrierName: "Maresk Line",
@@ -106,7 +106,7 @@ const ViewRateFiling: React.FC = () => {
       },
     ],
   });
-  const { enquiryId, rateFilingId } = useParams();
+  const { id } = useParams();
 
   const rateDetailColumns = useMemo<ColumnConfig<RateDetails>[]>(
     () => [
@@ -118,11 +118,7 @@ const ViewRateFiling: React.FC = () => {
         key: "currencyType",
         label: "Currency Type",
       },
-      { key: "rate", label: "Rate" },
-      {
-        key: "profit",
-        label: "Profit",
-      },
+
       {
         key: "amount",
         label: "Amount",
@@ -148,14 +144,7 @@ const ViewRateFiling: React.FC = () => {
         key: "currencyType",
         label: "Currency Type",
       },
-      {
-        key: "carrierTariff",
-        label: "Carrier Tariff",
-      },
-      {
-        key: "profit",
-        label: "Profit",
-      },
+
       {
         key: "amount",
         label: "Amount",
@@ -167,40 +156,25 @@ const ViewRateFiling: React.FC = () => {
   const onLocalTariffEditableTableChange = useCallback(() => {}, []);
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex gap-4 items-center justify-end">
-        <ErrorButton
-          label={"Delete Pricing"}
-          size={"m"}
-          variant={""}
-          leftIcon={<DeleteIcon color="#ffffff" size={16} />}
-        />
-        <Link to={`/rate-filing/edit/${enquiryId}/${rateFilingId}`}>
-          <NeutralBlueButton
-            label={"Edit Pricing"}
-            size={"m"}
-            variant={""}
-            leftIcon={<EditIcon color="#ffffff" size={16} />}
-          />
-        </Link>{" "}
-      </div>
       <div className="flex flex-col gap-4 bg-grey-aw-100 p-6 rounded-sm ">
-        <p className="text-lg font-semibold">Enquiry Details</p>
-        <div className="flex justify-between items-center gap-6 border-b border-grey-ab-100">
-          <ViewCard
-            label={"Enquiry ID"}
-            value={18139088}
-            style="flex-col"
-            labelStyle="text-grey-ab-300 text-sm"
-            valueStyle="text-grey-ab-800 text-sm font-semibold"
-          />
-          <ViewCard
-            label={"Enquired Date"}
-            value={"11/03/2024"}
-            style="flex-col"
-            labelStyle="text-grey-ab-300 text-sm"
-            valueStyle="text-grey-ab-800 text-sm font-semibold"
-          />
-        </div>
+        {enquiryData.enquiryId && (
+          <div className="flex justify-between items-center gap-6 border-b border-grey-ab-100">
+            <ViewCard
+              label={"Enquiry ID"}
+              value={18139088}
+              style="flex-col"
+              labelStyle="text-grey-ab-300 text-sm"
+              valueStyle="text-grey-ab-800 text-sm font-semibold"
+            />
+            <ViewCard
+              label={"Enquired Date"}
+              value={"11/03/2024"}
+              style="flex-col"
+              labelStyle="text-grey-ab-300 text-sm"
+              valueStyle="text-grey-ab-800 text-sm font-semibold"
+            />
+          </div>
+        )}
         <div className="grid grid-cols-2  gap-4">
           <div className="flex flex-col gap-2 p-4 bg-grey-aw-50 rounded-md w-full">
             <div className="flex flex-col gap-3">
@@ -417,24 +391,10 @@ const ViewRateFiling: React.FC = () => {
         />
         <div className="px-3 py-2 bg-success-50 flex items-center justify-between text-lg font-semibold">
           <p className="w-full">Total Value</p>
-          <div className="flex items-center gap-2 justify-between w-full">
-            <p>INR</p>
-            <p>
-              {carrierInfoData.localChargesTariff.length > 0 &&
-                carrierInfoData.localChargesTariff.reduce(
-                  (acc, curr) => acc + curr.carrierTariff,
-                  0
-                )}
-            </p>
-            <p>
-              {carrierInfoData.localChargesTariff.length > 0 &&
-                carrierInfoData.localChargesTariff.reduce(
-                  (acc, curr) => acc + curr.profit,
-                  0
-                )}
-              %
-            </p>
-            <p>
+          <div className="flex items-center gap-2 justify-end w-full">
+            <p className="max-w-[120px] w-full">INR</p>
+
+            <p className="max-w-[120px] w-full">
               {carrierInfoData.localChargesTariff.length > 0 &&
                 carrierInfoData.localChargesTariff.reduce(
                   (acc, curr) => acc + curr.amount,
@@ -448,7 +408,7 @@ const ViewRateFiling: React.FC = () => {
   );
 };
 
-export default ViewRateFiling;
+export default RateTariffView;
 
 const HeadTitle: React.FC<{ label: string; icon: React.ReactNode }> = ({
   label,

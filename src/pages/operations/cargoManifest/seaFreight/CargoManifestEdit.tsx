@@ -8,6 +8,8 @@ import GroupField from "../../../../components/groupField/GroupField";
 import BlackButton from "../../../../components/buttons/BlackButton";
 
 interface CargoDetailsProp {
+  containerNumber?: string;
+  sealNumber?: string;
   description: string;
   delivaryStatus: string;
   packagesCount: number;
@@ -24,9 +26,8 @@ interface CargoManifestProp {
   bookingNumber: string;
   carrierName: string;
   dateOfDeparture: string;
-  aircraftType: string;
-  hawbNumber: string;
-  mawbNumber: string;
+  vesselName: string[];
+  blNumber: string;
   portOfLoading: string;
   portOfDischarge: string;
   shipperName: string;
@@ -39,7 +40,7 @@ interface CargoManifestProp {
   cargoType?: string;
 }
 
-const CargoManifestCreate: React.FC = () => {
+const CargoManifestEdit: React.FC = () => {
   const navigate = useNavigate();
   const { bookingId } = useParams();
   const [data, setData] = useState<CargoManifestProp>({
@@ -50,9 +51,8 @@ const CargoManifestCreate: React.FC = () => {
     bookingNumber: "",
     carrierName: "",
     dateOfDeparture: "",
-    aircraftType: "",
-    mawbNumber: "",
-    hawbNumber: "",
+    vesselName: [""],
+    blNumber: "",
     portOfLoading: "",
     portOfDischarge: "",
     shipperName: "",
@@ -64,6 +64,8 @@ const CargoManifestCreate: React.FC = () => {
     cargoType: "",
     cargoDetails: [
       {
+        containerNumber: "",
+        sealNumber: "",
         description: "",
         delivaryStatus: "CFS/CFS",
         packagesCount: 0,
@@ -104,6 +106,43 @@ const CargoManifestCreate: React.FC = () => {
       return { ...prev, cargoDetails: updatedCargo };
     });
   };
+  const handleVesselNameChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+    vesselIndex: number
+  ) => {
+    const { value } = e.target;
+
+    setData((prev) => {
+      const updatedVessel = [...prev.vesselName];
+      updatedVessel[vesselIndex] = value;
+
+      return { ...prev, vesselName: updatedVessel };
+    });
+  };
+
+  // add vesselname function
+  const handleAddVesselName = () => {
+    setData((prev) => ({
+      ...prev,
+      vesselName: [...prev.vesselName, ""],
+    }));
+  };
+  // delete vessel name
+  const handleDeleteVesselName = (index: number) => {
+    setData((prev) => {
+      const updatedVesselName = prev.vesselName.filter(
+        (_, vindex) => index !== vindex
+      );
+
+      return {
+        ...prev,
+        vesselName: updatedVesselName,
+      };
+    });
+  };
+
   // add container details function
   const handleAddCargoDetails = () => {
     setData((prev) => ({
@@ -111,6 +150,8 @@ const CargoManifestCreate: React.FC = () => {
       cargoDetails: [
         ...prev.cargoDetails,
         {
+          containerNumber: "",
+          sealNumber: "",
           description: "",
           delivaryStatus: "CFS/CFS",
           packagesCount: 0,
@@ -153,7 +194,7 @@ const CargoManifestCreate: React.FC = () => {
     []
   );
 
-  //fetch booking details also cargotype for handling tables
+  //fetch booking details also cargotype for handling table
   useEffect(() => {
     console.log(bookingId, "bookingId");
     setBookingDetail((prev) => ({
@@ -248,39 +289,47 @@ const CargoManifestCreate: React.FC = () => {
             error={false}
             errorMessage={""}
           />
-
-          <GroupField
-            label={"Aircraft Type"}
-            type={"select"}
-            placeholder={"Choose Aircraft Type"}
-            name={"aircraftType"}
-            value={data.aircraftType}
-            onChange={handleChange}
-            options={[
-              { label: "COA", value: "COA" },
-              { label: "PAX", value: "PAX" },
-            ]}
-            error={false}
-            errorMessage={""}
-          />
+          {data.vesselName.length > 0 &&
+            data.vesselName.map((vesselName, index) => (
+              <div className="flex items-end gap-4 ">
+                <GroupField
+                  label={"Vessel Name"}
+                  type={"text"}
+                  placeholder={"Enter Vessel Name"}
+                  name={"vesselName"}
+                  value={vesselName}
+                  onChange={(e) => {
+                    handleVesselNameChange(e, index);
+                  }}
+                  error={false}
+                  errorMessage={""}
+                  key={index}
+                />
+                {data.vesselName.length - 1 === index ? (
+                  <div
+                    className="p-2 bg-primary-50 rounded"
+                    onClick={handleAddVesselName}
+                  >
+                    <AddIcon size={20} color="#2c398f" />
+                  </div>
+                ) : (
+                  <div
+                    className="p-2 bg-red-50 rounded"
+                    onClick={() => handleDeleteVesselName(index)}
+                  >
+                    <DeleteIcon size={20} color="#d8001a" />
+                  </div>
+                )}
+              </div>
+            ))}
         </div>
         <div className="flex flex-col gap-4 basis-1/3">
           <GroupField
-            label={"MAWB Number"}
+            label={"BL Number"}
             type={"text"}
-            placeholder={"Enter MAWB Number"}
-            name={"mawbNumber"}
-            value={data.mawbNumber}
-            onChange={handleChange}
-            error={false}
-            errorMessage={""}
-          />
-          <GroupField
-            label={"HAWB Number"}
-            type={"text"}
-            placeholder={"Enter HAWB Number"}
-            name={"hawbNumber"}
-            value={data.hawbNumber}
+            placeholder={"Enter BL Number"}
+            name={"blNumber"}
+            value={data.blNumber}
             onChange={handleChange}
             error={false}
             errorMessage={""}
@@ -382,6 +431,16 @@ const CargoManifestCreate: React.FC = () => {
         <table className="w-full">
           <thead className="bg-neutral-100 text-sm font-semibold">
             <tr>
+              {bookingDetail.cargoType !== "bulk" && (
+                <>
+                  <th className="min-w-[140px] px-3 py-4 text-left">
+                    Container Number
+                  </th>
+                  <th className="min-w-[140px] px-3 py-4 text-left">
+                    Seal Number
+                  </th>
+                </>
+              )}
               <th className="min-w-[220px] px-3 py-4 text-left">
                 Description of Goods
               </th>
@@ -403,6 +462,38 @@ const CargoManifestCreate: React.FC = () => {
             {data.cargoDetails.length > 0 &&
               data.cargoDetails.map((cargo, index) => (
                 <tr key={index}>
+                  {bookingDetail.cargoType !== "bulk" && (
+                    <>
+                      <td className="px-3 py-1">
+                        {
+                          <GroupField
+                            label={""}
+                            type={""}
+                            placeholder={""}
+                            name={"containerNumber"}
+                            value={cargo.containerNumber || ""}
+                            onChange={(e) => handleCargoChange(e, index)}
+                            error={false}
+                            errorMessage={""}
+                          />
+                        }
+                      </td>{" "}
+                      <td className="px-3 py-1">
+                        {
+                          <GroupField
+                            label={""}
+                            type={""}
+                            placeholder={""}
+                            name={"sealNumber"}
+                            value={cargo.sealNumber || ""}
+                            onChange={(e) => handleCargoChange(e, index)}
+                            error={false}
+                            errorMessage={""}
+                          />
+                        }
+                      </td>
+                    </>
+                  )}
                   <td className="px-3 py-1">
                     {
                       <GroupField
@@ -418,20 +509,18 @@ const CargoManifestCreate: React.FC = () => {
                     }
                   </td>
                   <td className="px-3 py-1">
-                    {
-                      <GroupField
-                        label={""}
-                        type={"select"}
-                        placeholder={""}
-                        name={"delivaryStatus"}
-                        value={cargo.delivaryStatus}
-                        onChange={(e) => handleCargoChange(e, index)}
-                        error={false}
-                        options={delivaryStatusOptions || []}
-                        errorMessage={""}
-                        parentStyle=" min-w-[150px] w-[200px]"
-                      />
-                    }
+                    <GroupField
+                      label={""}
+                      type={"select"}
+                      placeholder={""}
+                      name={"delivaryStatus"}
+                      value={cargo.delivaryStatus}
+                      onChange={(e) => handleCargoChange(e, index)}
+                      error={false}
+                      options={delivaryStatusOptions || []}
+                      errorMessage={""}
+                      parentStyle=" min-w-[150px] w-[200px]"
+                    />
                   </td>
                   <td className="px-3 py-1 ">
                     <div className="items-center gap-1 flex">
@@ -533,4 +622,4 @@ const CargoManifestCreate: React.FC = () => {
   );
 };
 
-export default CargoManifestCreate;
+export default CargoManifestEdit;
