@@ -1,5 +1,4 @@
 import React from "react";
-import { toast } from "react-toastify";
 import { InfoIcon } from "../icons/Icons";
 import { ToastProps } from "./SuccessToast";
 

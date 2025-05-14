@@ -1,5 +1,4 @@
 import React from "react";
-import { toast } from "react-toastify";
 import { CloseIcon } from "../icons/Icons";
 
 interface ErrorToastProps {
