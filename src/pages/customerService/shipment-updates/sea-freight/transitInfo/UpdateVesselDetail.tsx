@@ -1,7 +1,7 @@
 import React from "react";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import GroupField from "../../../../../components/groupField/GroupField";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 
 interface VesselProp {
   vesselName: string;

@@ -10,7 +10,7 @@ import {
   PrintIcon,
   SendIcon,
 } from "../../../../components/icons/Icons";
-import ViewCard from "../../../customerService/sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../customerService/sea-air-schedule/components/layouts/ViewCard";
 import EditableTable, {
   ColumnConfig,
 } from "../../../../components/table/EditableTable";

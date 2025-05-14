@@ -31,7 +31,7 @@ import EditableTable, {
 import ErrorButton from "../../../components/buttons/ErrorButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import { useNavigate, useParams } from "react-router-dom";
-import ViewCard from "../../customerService/sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../customerService/sea-air-schedule/components/layouts/ViewCard";
 import GreyButton from "../../../components/buttons/GreyButton";
 
 interface EnquiryDataProps {
