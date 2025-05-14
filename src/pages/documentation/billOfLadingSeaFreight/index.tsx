@@ -12,13 +12,16 @@ const BillOfLadingSeaFreight: React.FC = () => {
   const { pathname } = location;
 
   const isViewBillOfLading = pathname.startsWith(
-    "/bill-of-lading/sea-freight/view"
+    "/bill-of-lading/sea-freight/view/"
   );
   const isCreateBillOfLading = pathname.startsWith(
     "/bill-of-lading/sea-freight/createBl"
   );
   const isEditBillOfLading = pathname.startsWith(
     "/bill-of-lading/sea-freight/editBl"
+  );
+  const isViewBillOfLadingDraft = pathname.startsWith(
+    "/bill-of-lading/sea-freight/viewBl"
   );
 
   let breadCrums: BreadCrumsProps[] = [
@@ -55,6 +58,15 @@ const BillOfLadingSeaFreight: React.FC = () => {
       { label: "Edit BL Draft" }
     );
     heading = "Edit BL Draft";
+  } else if (isViewBillOfLadingDraft) {
+    breadCrums.push(
+      {
+        label: "Bill of Lading (Sea Freight)",
+        path: "/sea-air-schedule/sea-freight",
+      },
+      { label: "BL Draft Details" }
+    );
+    heading = "BL Draft Details";
   } else {
     breadCrums.push({ label: "Bill of Lading (Sea Freight)" });
   }
