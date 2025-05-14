@@ -11,7 +11,9 @@ const BillOfLadingSeaFreight: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;
 
-  const isViewBillOfLading = pathname === "/bill-of-lading/sea-freight/view";
+  const isViewBillOfLading = pathname.startsWith(
+    "/bill-of-lading/sea-freight/view"
+  );
   const isCreateBillOfLading = pathname.startsWith(
     "/bill-of-lading/sea-freight/createBl"
   );
