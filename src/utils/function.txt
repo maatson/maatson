@@ -1,1 +1,10 @@
 // For pure utility functions (string manipulation, etc.)
+src/
+  ├── utils/
+  │   ├── stringUtils.js
+  │   ├── dateUtils.js
+  │   ├── apiUtils.js
+  │   ├── validationUtils.js
+  │   └── mathUtils.js
+  └── components/
+      └── YourComponent.js
