@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import GroupField from "../../components/groupField/GroupField";
 import ImageUpload from "../../components/imageUpload/ImageUpload";
-import { useSuccessNotify } from "../../utils/toastutil";
+import { useNotify } from "../../hooks/useNotify";
 
 interface TestimonialsFormProps {
   onClose: () => void; // Function to close the popup
@@ -15,6 +15,8 @@ const TestimonialsForm: React.FC<TestimonialsFormProps> = ({ onClose }) => {
     rating: "",
     feedback: "",
   });
+
+  const { showToast } = useNotify();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -33,7 +35,10 @@ const TestimonialsForm: React.FC<TestimonialsFormProps> = ({ onClose }) => {
     e.preventDefault();
     console.log("data: ", data);
     setData({ companyLogo: null, companyName: "", rating: "", feedback: "" });
-    useSuccessNotify({heading: "Testimonial Added Successfully!", message: "The testimonial has been successfully added to the system."})
+    showToast("success", {
+      heading: "Testimonial Added Successfully!",
+      message: "The testimonial has been successfully added to the system.",
+    });
     onClose();
   };
   const handleCancel = () => {
