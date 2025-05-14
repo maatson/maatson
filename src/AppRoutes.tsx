@@ -530,6 +530,9 @@ const BillOfLadingSeaFreight = lazy(
 const CreateBl = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight/CreateBl")
 );
+const EditBl = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight/EditBl")
+);
 const BillOfLadingListSea = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight/BillOfLadingList")
 );
@@ -861,6 +864,7 @@ const AppRoutes: React.FC = () => {
           <Route index element={<BillOfLadingListSea />} />
           <Route path="view/:id" element={<ViewBillOfLading />} />
           <Route path="createBl/:bookingId" element={<CreateBl />} />
+          <Route path="EditBl/:blId" element={<EditBl />} />
         </Route>
 
         {/* testimonials */}

@@ -1,3 +1,4 @@
+// For pure utility functions (string manipulation, etc.)
 import { toast } from "react-toastify";
 import SuccessToast from "../components/toast/SuccessToast";
 import ErrorToast from "../components/toast/ErrorToast";

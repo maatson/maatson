@@ -10,8 +10,7 @@ import {
 import GreyButton from "../../../components/buttons/GreyButton";
 import BlackButton from "../../../components/buttons/BlackButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { useInfoNotify } from "../../../utils/toastutil";
-
+import { useNotify } from "../../../hooks/useNotify";
 type ShipperDetails = {
   companyName: string;
   companyAddress: string;
@@ -29,6 +28,7 @@ type CargoDetails = {
 
 interface BLData {
   bookingId: string;
+  blNumber: string;
   vesselName: string;
   shipperRef: string;
   vesselNumber: string;
@@ -49,45 +49,62 @@ interface BLData {
   shippedOnboardDate: string;
   issuedDate: string;
 }
-
-const CreateBl: React.FC = () => {
+const EditBl: React.FC = () => {
   const [data, setData] = useState<BLData>({
     bookingId: "123dd4545",
-    vesselName: "",
-    shipperRef: "",
-    vesselNumber: "",
-    portOfLoading: "",
-    portOfDischarge: "",
-    delivaryPlace: "",
-    finalDestination: "",
-    receiptPlace: "",
-    freightPaid: "",
-    shipper: { companyName: "", companyAddress: "" },
-    consignee: { companyName: "", companyAddress: "" },
+    blNumber: "13450092",
+    vesselName: "MaerskTitan",
+    shipperRef: "9768576ffd",
+    vesselNumber: "123dd4545",
+    portOfLoading: "Chennai, India",
+    portOfDischarge: "Karachi, Pakistan",
+    delivaryPlace: "Karachi, Pakistan",
+    finalDestination: "Karachi, Pakistan",
+    receiptPlace: "Karachi, Pakistan",
+    freightPaid: "Karachi, Pakistan",
+    shipper: {
+      companyName: "LIFECO",
+      companyAddress:
+        "LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus Brega-Libya",
+    },
+    consignee: {
+      companyName: "Artis industrial pvt ltd",
+      companyAddress:
+        "3-101/2 Sharath villa, beach Road, Hosabettu, mangalore-575109",
+    },
     notifyParty: [
-      { companyName: "", companyAddress: "" },
-      { companyName: "", companyAddress: "" },
+      {
+        companyName: "ASSIDUOUS INTELECTS PRIVATE LIMITED (FTWZ)",
+        companyAddress:
+          "A/C ARTS INDUSTRIAL PVT LTD C/O.integrated chennai BusinessPart (India)private limited, Survey NO.NO1202,kuruvimedu Road, kondakarai,Tiruvallur, tamilnadu 600120",
+      },
+      {
+        companyName: "ASSIDUOUS INTELECTS PRIVATE LIMITED (FTWZ)",
+        companyAddress:
+          "A/C ARTS INDUSTRIAL PVT LTD C/O.integrated chennai BusinessPart (India)private limited, Survey NO.NO1202,kuruvimedu Road, kondakarai,Tiruvallur, tamilnadu 600120",
+      },
     ],
     cargoDetails: [
       {
-        containerNumber: "",
-        sealNumber: "",
-        packageType: "",
-        packageQuantity: 0,
-        cargoWeight: 0,
+        containerNumber: "TCXU3529277",
+        sealNumber: "HC0225999",
+        packageType: "ART-UFECO",
+        packageQuantity: 5049,
+        cargoWeight: 20978,
         cargoWeightUnit: "KGS",
-        measurement: "",
-        description: "",
+        measurement: "-",
+        description:
+          "1X20FT SHIPPER OWNED CONTAINER, Catalyst Handling Equipment, Tools and Tackles",
       },
     ],
-    delivaryTerms: "",
-    shippingTerms: "",
-    freightTerms: "",
-    issuedPlace: "",
-    shippedOnboardDate: "",
-    issuedDate: "",
+    delivaryTerms: "FCL/FCL",
+    shippingTerms: "FCL/CY",
+    freightTerms: "Collected",
+    issuedPlace: "Chennai",
+    shippedOnboardDate: "16-04-2025",
+    issuedDate: "12-04-2025",
   });
-
+  const { showToast } = useNotify();
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -146,7 +163,7 @@ const CreateBl: React.FC = () => {
     const duplicateCargo = addedCargo[index];
     addedCargo.splice(index + 1, 0, duplicateCargo);
     setData((prev) => ({ ...prev, cargoDetails: addedCargo }));
-    useInfoNotify({
+    showToast("info", {
       heading: "Container and Cargo Duplicated",
       message: "Details copied. You can review or edit",
     });
@@ -173,11 +190,18 @@ const CreateBl: React.FC = () => {
   return (
     <div className="bg-grey-aw-50 flex flex-col gap-8 p-6 rounded">
       {/* booking */}
-      <ViewCard
-        label={"Booking ID:"}
-        value={data.bookingId}
-        labelStyle="font-semibold"
-      />
+      <div className="flex items-center justify-between">
+        <ViewCard
+          label={"Booking ID:"}
+          value={data.bookingId}
+          labelStyle="font-semibold"
+        />
+        <ViewCard
+          label={"Bl Number:"}
+          value={data.blNumber}
+          labelStyle="font-semibold"
+        />
+      </div>
       {/* body */}
       <div className="flex flex-col gap-6">
         <div className="flex justify-between ">
@@ -586,4 +610,4 @@ const CreateBl: React.FC = () => {
   );
 };
 
-export default CreateBl;
+export default EditBl;

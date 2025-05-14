@@ -1,7 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import AppRoutes from "./AppRoutes";
-import ScrollTop from "./utils/ScrollTop";
+import ScrollTop from "./components/scroll/ScrollTop";
 
 const App: React.FC = () => {
   return (
