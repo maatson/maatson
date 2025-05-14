@@ -860,7 +860,6 @@ const AppRoutes: React.FC = () => {
         >
           <Route index element={<BillOfLadingListSea />} />
           <Route path="view/:id" element={<ViewBillOfLading />} />
-        </Route>
           <Route path="createBl/:bookingId" element={<CreateBl />} />
         </Route>
 

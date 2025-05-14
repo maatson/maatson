@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { EditIcon } from "../../../components/icons/Icons";
+import { DuplicateIcon, EditIcon } from "../../../components/icons/Icons";
 import CreateImage from "/images/create.png";
 import BlackButton from "../../../components/buttons/BlackButton";
+import BLCreatedCard from "./components/BLCreatedCard";
+import SplitBLForm from "./components/SplitBLForm";
 
 interface LayoutProps {
   label: string;
@@ -13,9 +15,74 @@ interface LayoutProps {
   valueStyle?: string;
 }
 
+interface BLDetailsProps {
+  billOfLadingNumber: string;
+  shipper: string;
+  consignee: string;
+  blCreatedDate: string;
+  billOfLadingStatus: string;
+}
+
 const ViewBillOfLading: React.FC = () => {
   const [isBLCreated, setIsBLCreated] = useState<boolean>(true);
   const [isBLApproved, setIsBLApproved] = useState<boolean>(false);
+  const [isSplitBL, setIsSplitBL] = useState<boolean>(false);
+
+  const [dummyData, setDummyData] = useState({
+    bookingID: "71955776",
+    companyName: "Yanto Jericho",
+    portOfLoading: "Europe",
+    cargoType: "FCL(Full Container Load)",
+    portOfDischarge: "England",
+    blStatus: "pending",
+    blDetails: [
+      {
+        billOfLadingNumber: "71955776",
+        shipper: "Artis industrial pvt ltd",
+        consignee: "ASSIDUOUS INTELECTS PRIVATE LIMITED (FTWZ)",
+        blCreatedDate: "11-04-2025",
+        billOfLadingStatus: "Draft",
+      },
+    ],
+  });
+
+  const toAlpha = (num: number): string => {
+    let str = "";
+    while (num > 0) {
+      let remainder = (num - 1) % 26;
+      str = String.fromCharCode(65 + remainder) + str;
+      num = Math.floor((num - 1) / 26);
+    }
+    return str;
+  };
+
+  const handleSave = (count: number) => {
+    const newBLDetails: BLDetailsProps[] = Array.from(
+      { length: count },
+      (_, i) => {
+        const alpha = toAlpha(i + 1); // 1 → A, 2 → B...
+        return {
+          billOfLadingNumber: `${dummyData.blDetails[0].billOfLadingNumber}-${alpha}`,
+          shipper: `${dummyData.blDetails[0].shipper}`,
+          consignee: `${dummyData.blDetails[0].consignee}`,
+          blCreatedDate: `${dummyData.blDetails[0].blCreatedDate}`, // here set current date
+          billOfLadingStatus: `${dummyData.blDetails[0].billOfLadingStatus}`,
+        };
+      }
+    );
+    setDummyData((prev) => ({ ...prev, blDetails: newBLDetails }));
+    setIsSplitBL(false);
+  };
+
+  const handleDelete = (blNumber: string) => {
+    setDummyData((prev) => ({
+      ...prev,
+      blDetails: prev.blDetails.filter(
+        (bl) => bl.billOfLadingNumber !== blNumber
+      ),
+    }));
+  };
+
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -33,11 +100,7 @@ const ViewBillOfLading: React.FC = () => {
 
         {/* Changable part */}
         <div className="flex flex-col gap-2 ">
-          <div className="bg-secondary-300 rounded-sm py-2 pl-4 pr-2 w-fit flex gap-8 items-center">
-            <p className="text-grey-ab-800">Do you want to split this BL draft into multiple BLs?</p>
-            <BlackButton label={"Split BL"} size={"m"} variant={"primary"}  />
-          </div>
-
+          {/* main tab */}
           <div className="rounded-xs bg-grey-aw-50 shadow-lg px-3 py-2 flex justify-between items-center">
             <div className="flex gap-6 text-sm">
               <div
@@ -68,30 +131,78 @@ const ViewBillOfLading: React.FC = () => {
                 BL Approved
               </div>
             </div>
-            <PrimaryButton
-              label={"Create BL"}
-              size={"l"}
-              variant={"primary"}
-              leftIcon={<EditIcon color="#ffffff" />}
-            />
+            {dummyData.blDetails.length === 0 && (
+              <div>
+                <PrimaryButton
+                  label={"Create BL"}
+                  size={"l"}
+                  variant={"primary"}
+                  leftIcon={<EditIcon color="#ffffff" />}
+                />
+              </div>
+            )}
           </div>
+          {/* main tab end */}
 
-          <div className="bg-grey-aw-50 flex flex-col gap-2 px-4 py-8 rounded-xs shadow-lg justify-center">
-            <div className="flex justify-center">
-              <img src={CreateImage} alt="CreateImage" />
+          {dummyData.blDetails.length === 0 && (
+            <div className="bg-grey-aw-50 flex flex-col gap-2 px-4 py-8 rounded-xs shadow-lg justify-center">
+              <div className="flex justify-center">
+                <img src={CreateImage} alt="CreateImage" />
+              </div>
+              <p className="text-xs text-grey-ab-300 text-center">
+                Create your Bill of Lading. Click below to get started
+              </p>
+              <PrimaryButton
+                label={"Create BL"}
+                size={"m"}
+                variant={"link"}
+                leftIcon={<EditIcon size={16} color="#2C398F" />}
+              />
             </div>
-            <p className="text-xs text-grey-ab-300 text-center">
-              Create your Bill of Lading. Click below to get started
-            </p>
-            <PrimaryButton
-              label={"Create BL"}
-              size={"m"}
-              variant={"link"}
-              leftIcon={<EditIcon size={16} color="#2C398F" />}
-            />
-          </div>
+          )}
+
+          {/* working in process... */}
+          {dummyData.blDetails.length === 1 && (
+            <div className="bg-secondary-300 rounded-sm py-2 pl-4 pr-2 w-fit my-1 flex gap-8 items-center">
+              <p className="text-grey-ab-800">
+                Do you want to split this BL draft into multiple BLs?
+              </p>
+              <div onClick={() => setIsSplitBL(true)}>
+                <BlackButton
+                  label={"Split BL"}
+                  size={"m"}
+                  variant={"primary"}
+                  leftIcon={<DuplicateIcon size={16} color="#ffffff" />}
+                />
+              </div>
+            </div>
+          )}
+
+          {dummyData.blDetails.map((item) => (
+            <React.Fragment key={item.billOfLadingNumber}>
+              <BLCreatedCard
+                billOfLadingNumber={item.billOfLadingNumber}
+                shipper={item.shipper}
+                consignee={item.consignee}
+                blCreatedDate={item.blCreatedDate}
+                billOfLadingStatus={item.billOfLadingStatus}
+                onDelete={() => handleDelete(item.billOfLadingNumber)}
+                onViewDraft={() => {}}
+                onDownloadDraft={() => {}}
+              />
+            </React.Fragment>
+          ))}
         </div>
       </div>
+
+      {isSplitBL && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <SplitBLForm
+            onClose={() => setIsSplitBL(false)}
+            onSave={handleSave}
+          />
+        </div>
+      )}
     </>
   );
 };

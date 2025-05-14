@@ -11,7 +11,9 @@ const BillOfLadingSeaFreight: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;
 
-  const isViewBillOfLading = pathname.startsWith("/bill-of-lading/sea-freight/view");
+  const isViewBillOfLading = pathname.startsWith(
+    "/bill-of-lading/sea-freight/view"
+  );
   const isCreateBillOfLading = pathname.startsWith(
     "/bill-of-lading/sea-freight/createBl"
   );
@@ -32,8 +34,7 @@ const BillOfLadingSeaFreight: React.FC = () => {
       { label: "Bill of Lading Details" }
     );
     heading = "Bill of Lading Details";
-  }
-  if (isCreateBillOfLading) {
+  } else if (isCreateBillOfLading) {
     breadCrums.push(
       {
         label: "Bill of Lading (Sea Freight)",
