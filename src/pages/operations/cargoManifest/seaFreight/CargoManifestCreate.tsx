@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 import Logo from "/images/logo.svg";
 import { AddIcon, DeleteIcon } from "../../../../components/icons/Icons";
-import ViewCard from "../../../customerService/sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../customerService/sea-air-schedule/components/layouts/ViewCard";
 import GroupField from "../../../../components/groupField/GroupField";
 import BlackButton from "../../../../components/buttons/BlackButton";
 

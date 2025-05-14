@@ -9,7 +9,7 @@ import {
   ExcelIcon,
   SendIcon,
 } from "../../../../../components/icons/Icons";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 import WarningChip from "../../../../../components/chips/WarningChip";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";

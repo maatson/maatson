@@ -10,7 +10,7 @@ import {
 import GreyButton from "../../../components/buttons/GreyButton";
 import BlackButton from "../../../components/buttons/BlackButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { useInfoNotify } from "../../../utils/toastutil";
+import { useNotify } from "../../../hooks/useNotify";
 
 type ShipperDetails = {
   companyName: string;
@@ -87,6 +87,7 @@ const CreateBl: React.FC = () => {
     shippedOnboardDate: "",
     issuedDate: "",
   });
+  const { showToast } = useNotify();
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -146,7 +147,7 @@ const CreateBl: React.FC = () => {
     const duplicateCargo = addedCargo[index];
     addedCargo.splice(index + 1, 0, duplicateCargo);
     setData((prev) => ({ ...prev, cargoDetails: addedCargo }));
-    useInfoNotify({
+    showToast("info", {
       heading: "Container and Cargo Duplicated",
       message: "Details copied. You can review or edit",
     });

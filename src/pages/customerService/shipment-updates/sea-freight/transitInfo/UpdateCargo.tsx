@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 import ship from "../../../../../../public/images/cargoShip.png";
 
 interface CargoProp {
