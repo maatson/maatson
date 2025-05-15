@@ -22,8 +22,10 @@ const DashBoard: React.FC = () => {
         </div>
 
         {/* Main Content */}
-        <div className="w-[80%] ml-[20%] bg-primary-50 min-h-screen h-full px-5 pt-4 flex flex-col gap-4 custom-scrollbar">
-          <Outlet />
+        <div className="w-[80%] ml-[20%]">
+          <div className=" bg-primary-50 min-h-screen h-full px-5 pt-4 flex flex-col gap-4 custom-scrollbar">
+            <Outlet />
+          </div>
           <Footer />
         </div>
       </div>
