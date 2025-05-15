@@ -8,7 +8,7 @@ import {
 } from "../../../../components/icons/Icons";
 import GreyButton from "../../../../components/buttons/GreyButton";
 import BlackButton from "../../../../components/buttons/BlackButton";
-import BLLayout from "./BLLayout";
+import { Link } from "react-router-dom";
 
 interface BLCreatedCardProps {
   billOfLadingNumber: string;
@@ -17,7 +17,7 @@ interface BLCreatedCardProps {
   blCreatedDate: string;
   billOfLadingStatus: string;
   onDelete: () => void;
-  onViewDraft: () => void;
+  onViewDraft: string;
   onDownloadDraft: () => void;
 }
 
@@ -64,14 +64,14 @@ const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
             />
           </div>
           <div className="flex gap-2 items-center">
-            <div onClick={onViewDraft}>
+            <Link to={onViewDraft}>
               <GreyButton
                 label={"View Draft"}
                 size={"m"}
                 variant={"primary"}
                 leftIcon={<DocumentIcon size={16} />}
               />
-            </div>
+            </Link>
             <div onClick={onDownloadDraft}>
               <BlackButton
                 label={"Download Draft"}

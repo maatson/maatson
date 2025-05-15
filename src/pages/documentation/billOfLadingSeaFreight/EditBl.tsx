@@ -11,6 +11,7 @@ import GreyButton from "../../../components/buttons/GreyButton";
 import BlackButton from "../../../components/buttons/BlackButton";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import { useNotify } from "../../../hooks/useNotify";
+import { useNavigate } from "react-router-dom";
 type ShipperDetails = {
   companyName: string;
   companyAddress: string;
@@ -105,6 +106,7 @@ const EditBl: React.FC = () => {
     issuedDate: "12-04-2025",
   });
   const { showToast } = useNotify();
+  const navigate = useNavigate();
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -598,7 +600,7 @@ const EditBl: React.FC = () => {
       </div>
       {/* actions */}
       <div className="flex justify-end gap-4 items-center">
-        <div className="w-fit cursor-pointer">
+        <div className="w-fit cursor-pointer" onClick={() => navigate(-1)}>
           <PrimaryButton label={"Cancel"} size={"xl"} variant={"outline"} />
         </div>
         <div className="w-fit cursor-pointer">

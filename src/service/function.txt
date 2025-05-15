@@ -1,0 +1,6 @@
+for using axios to fetching api services 
+services/
+│   ├── api.js
+│   ├── dropdownService.js
+│   ├── authService.js
+│   └── userService.js

@@ -27,6 +27,7 @@ interface BLDetailsProps {
   consignee: string;
   blCreatedDate: string;
   billOfLadingStatus: string;
+  id: string;
 }
 
 const ViewBillOfLading: React.FC = () => {
@@ -49,6 +50,7 @@ const ViewBillOfLading: React.FC = () => {
         consignee: "ASSIDUOUS INTELECTS PRIVATE LIMITED (FTWZ)",
         blCreatedDate: "11-04-2025",
         billOfLadingStatus: "Draft",
+        id: "0",
       },
     ],
   });
@@ -74,6 +76,7 @@ const ViewBillOfLading: React.FC = () => {
           consignee: `${dummyData.blDetails[0].consignee}`,
           blCreatedDate: `${dummyData.blDetails[0].blCreatedDate}`, // here set current date
           billOfLadingStatus: `${dummyData.blDetails[0].billOfLadingStatus}`,
+          id: alpha,
         };
       }
     );
