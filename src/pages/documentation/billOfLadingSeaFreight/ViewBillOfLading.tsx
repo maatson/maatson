@@ -203,7 +203,7 @@ const ViewBillOfLading: React.FC = () => {
                     blCreatedDate={item.blCreatedDate}
                     billOfLadingStatus={item.billOfLadingStatus}
                     onDelete={() => handleDelete(item.billOfLadingNumber)}
-                    onViewDraft={() => {}}
+                    onViewDraft={`/bill-of-lading/sea-freight/viewBl/${item.id}`}
                     onDownloadDraft={() => {}}
                   />
                 </React.Fragment>

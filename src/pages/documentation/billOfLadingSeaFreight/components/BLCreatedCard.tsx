@@ -9,6 +9,7 @@ import {
 import GreyButton from "../../../../components/buttons/GreyButton";
 import BlackButton from "../../../../components/buttons/BlackButton";
 import { Link } from "react-router-dom";
+import BLLayout from "./BLLayout";
 
 interface BLCreatedCardProps {
   billOfLadingNumber: string;
