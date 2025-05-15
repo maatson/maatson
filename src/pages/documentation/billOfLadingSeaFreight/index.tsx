@@ -32,7 +32,7 @@ const BillOfLadingSeaFreight: React.FC = () => {
     breadCrums.push(
       {
         label: "Bill of Lading (Sea Freight)",
-        path: "/sea-air-schedule/sea-freight",
+        path: "/bill-of-lading/sea-freight",
       },
       { label: "Bill of Lading Details" }
     );
@@ -41,7 +41,7 @@ const BillOfLadingSeaFreight: React.FC = () => {
     breadCrums.push(
       {
         label: "Bill of Lading (Sea Freight)",
-        path: "/sea-air-schedule/sea-freight",
+        path: "/bill-of-lading/sea-freight",
       },
       { label: "Create BL Draft" }
     );
@@ -50,7 +50,7 @@ const BillOfLadingSeaFreight: React.FC = () => {
     breadCrums.push(
       {
         label: "Bill of Lading (Sea Freight)",
-        path: "/sea-air-schedule/sea-freight",
+        path: "/bill-of-lading/sea-freight",
       },
       { label: "Edit BL Draft" }
     );

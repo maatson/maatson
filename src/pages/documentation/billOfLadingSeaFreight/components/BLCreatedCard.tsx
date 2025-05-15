@@ -8,6 +8,7 @@ import {
 } from "../../../../components/icons/Icons";
 import GreyButton from "../../../../components/buttons/GreyButton";
 import BlackButton from "../../../../components/buttons/BlackButton";
+import BLLayout from "./BLLayout";
 
 interface BLCreatedCardProps {
   billOfLadingNumber: string;
@@ -34,24 +35,15 @@ const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
     <>
       <div className="flex flex-col gap-3 p-2 rounded-md bg-grey-aw-50 border border-primary">
         <div className="flex justify-between">
-          <div className="flex flex-col gap-2 p-1 max-w-[240px]">
-            <p className="text-xs text-grey-ab-300">Bill of Lading Number</p>
-            <p className="text-sm font-bold text-grey-ab-900">
-              {billOfLadingNumber}
-            </p>
-          </div>
-          <div className="flex flex-col gap-2 p-1 max-w-[240px]">
-            <p className="text-xs text-grey-ab-300">Shipper</p>
-            <p className="text-sm  text-grey-ab-900">{shipper}</p>
-          </div>
-          <div className="flex flex-col gap-2 p-1 max-w-[240px]">
-            <p className="text-xs text-grey-ab-300">Consignee</p>
-            <p className="text-sm  text-grey-ab-900">{consignee}</p>
-          </div>
-          <div className="flex flex-col gap-2 p-1 max-w-[240px]">
-            <p className="text-xs text-grey-ab-300">BL Created Date</p>
-            <p className="text-sm  text-grey-ab-900">{blCreatedDate}</p>
-          </div>
+          <BLLayout
+            label={"Bill of Lading Number"}
+            value={billOfLadingNumber}
+            valueStyle="font-bold"
+          />
+          <BLLayout label={"Shipper"} value={shipper} />
+          <BLLayout label={"Consignee"} value={consignee} />
+          <BLLayout label={"BL Created Date"} value={blCreatedDate} />
+
           <div className="flex flex-col gap-2 p-1 max-w-[240px] items-center">
             <p className="text-xs text-grey-ab-300">Bill of Lading Status</p>
             <SecondaryChip

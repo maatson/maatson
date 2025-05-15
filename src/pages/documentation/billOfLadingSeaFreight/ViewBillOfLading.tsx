@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { DuplicateIcon, EditIcon } from "../../../components/icons/Icons";
+import {
+  DuplicateIcon,
+  EditIcon,
+  PasswordIcon,
+} from "../../../components/icons/Icons";
 import CreateImage from "/images/create.png";
 import BlackButton from "../../../components/buttons/BlackButton";
 import BLCreatedCard from "./components/BLCreatedCard";
 import SplitBLForm from "./components/SplitBLForm";
+import { Link, useParams } from "react-router-dom";
+import BLApprovedCard from "./components/BLApprovedCard";
 
 interface LayoutProps {
   label: string;
@@ -27,6 +33,7 @@ const ViewBillOfLading: React.FC = () => {
   const [isBLCreated, setIsBLCreated] = useState<boolean>(true);
   const [isBLApproved, setIsBLApproved] = useState<boolean>(false);
   const [isSplitBL, setIsSplitBL] = useState<boolean>(false);
+  const { id } = useParams();
 
   const [dummyData, setDummyData] = useState({
     bookingID: "71955776",
@@ -99,7 +106,7 @@ const ViewBillOfLading: React.FC = () => {
         </div>
 
         {/* Changable part */}
-        <div className="flex flex-col gap-2 ">
+        <div className="flex flex-col gap-2">
           {/* main tab */}
           <div className="rounded-xs bg-grey-aw-50 shadow-lg px-3 py-2 flex justify-between items-center">
             <div className="flex gap-6 text-sm">
@@ -131,67 +138,93 @@ const ViewBillOfLading: React.FC = () => {
                 BL Approved
               </div>
             </div>
-            {dummyData.blDetails.length === 0 && (
-              <div>
+            {dummyData.blDetails.length === 0 && isBLCreated && (
+              <Link to={`/bill-of-lading/sea-freight/createBl/${id}`}>
                 <PrimaryButton
                   label={"Create BL"}
                   size={"l"}
                   variant={"primary"}
                   leftIcon={<EditIcon color="#ffffff" />}
                 />
-              </div>
+              </Link>
             )}
           </div>
           {/* main tab end */}
 
-          {dummyData.blDetails.length === 0 && (
-            <div className="bg-grey-aw-50 flex flex-col gap-2 px-4 py-8 rounded-xs shadow-lg justify-center">
-              <div className="flex justify-center">
-                <img src={CreateImage} alt="CreateImage" />
-              </div>
-              <p className="text-xs text-grey-ab-300 text-center">
-                Create your Bill of Lading. Click below to get started
-              </p>
-              <PrimaryButton
-                label={"Create BL"}
-                size={"m"}
-                variant={"link"}
-                leftIcon={<EditIcon size={16} color="#2C398F" />}
-              />
-            </div>
+          {isBLCreated && (
+            <>
+              {dummyData.blDetails.length === 0 && (
+                <div className="bg-grey-aw-50 flex flex-col gap-2 px-4 py-8 rounded-xs shadow-lg justify-center">
+                  <div className="flex justify-center">
+                    <img src={CreateImage} alt="CreateImage" />
+                  </div>
+                  <p className="text-xs text-grey-ab-300 text-center">
+                    Create your Bill of Lading. Click below to get started
+                  </p>
+                  <Link
+                    to={`/bill-of-lading/sea-freight/createBl/${id}`}
+                    className="flex justify-center"
+                  >
+                    <PrimaryButton
+                      label={"Create BL"}
+                      size={"m"}
+                      variant={"link"}
+                      leftIcon={<EditIcon size={16} color="#2C398F" />}
+                    />
+                  </Link>
+                </div>
+              )}
+
+              {dummyData.blDetails.length === 1 && (
+                <div className="bg-secondary-300 rounded-sm py-2 pl-4 pr-2 w-fit my-1 flex gap-8 items-center">
+                  <p className="text-grey-ab-800">
+                    Do you want to split this BL draft into multiple BLs?
+                  </p>
+                  <div onClick={() => setIsSplitBL(true)}>
+                    <BlackButton
+                      label={"Split BL"}
+                      size={"m"}
+                      variant={"primary"}
+                      leftIcon={<DuplicateIcon size={16} color="#ffffff" />}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {dummyData.blDetails.map((item) => (
+                <React.Fragment key={item.billOfLadingNumber}>
+                  <BLCreatedCard
+                    billOfLadingNumber={item.billOfLadingNumber}
+                    shipper={item.shipper}
+                    consignee={item.consignee}
+                    blCreatedDate={item.blCreatedDate}
+                    billOfLadingStatus={item.billOfLadingStatus}
+                    onDelete={() => handleDelete(item.billOfLadingNumber)}
+                    onViewDraft={() => {}}
+                    onDownloadDraft={() => {}}
+                  />
+                </React.Fragment>
+              ))}
+            </>
           )}
 
-          {/* working in process... */}
-          {dummyData.blDetails.length === 1 && (
-            <div className="bg-secondary-300 rounded-sm py-2 pl-4 pr-2 w-fit my-1 flex gap-8 items-center">
-              <p className="text-grey-ab-800">
-                Do you want to split this BL draft into multiple BLs?
-              </p>
-              <div onClick={() => setIsSplitBL(true)}>
-                <BlackButton
-                  label={"Split BL"}
-                  size={"m"}
-                  variant={"primary"}
-                  leftIcon={<DuplicateIcon size={16} color="#ffffff" />}
-                />
+          {isBLApproved && (
+            <>
+              <div className="flex gap-2 p-2 rounded-xs bg-error-50">
+                <PasswordIcon color="#C80008" />
+                <div className="flex flex-col gap-1 text-error-600 text-xs">
+                  <p className="font-bold">Security Notice</p>
+                  <p>
+                    The BL document contains sensitive and legal
+                    information.Please do not share, forward, or distribute it
+                    without proper authorization.
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
 
-          {dummyData.blDetails.map((item) => (
-            <React.Fragment key={item.billOfLadingNumber}>
-              <BLCreatedCard
-                billOfLadingNumber={item.billOfLadingNumber}
-                shipper={item.shipper}
-                consignee={item.consignee}
-                blCreatedDate={item.blCreatedDate}
-                billOfLadingStatus={item.billOfLadingStatus}
-                onDelete={() => handleDelete(item.billOfLadingNumber)}
-                onViewDraft={() => {}}
-                onDownloadDraft={() => {}}
-              />
-            </React.Fragment>
-          ))}
+              <BLApprovedCard />
+            </>
+          )}
         </div>
       </div>
 

@@ -1,0 +1,26 @@
+create a component for notifications
+backend data =[
+    {
+    type:"user",
+    heading:"container release order"
+    message:" A container release order is required for Booking ID #BK102345."
+    linkLabel:"Issue Release Order"
+},
+    {
+    type:"bl",
+    heading:"Container Release Order Issued"
+    message:" Container release issued for Booking #BK102345."
+},
+    {
+    type:"documents",
+    heading:"New Booking Create"
+    message:" A new booking has been successfully generated."
+    highlightData:"Booking ID: #BK102346"
+},
+    {
+    type:"documents",
+    heading:"BL Approval Request"
+    message:"BL No. 12345 has been submitted for your approval."
+        linkLabel:"View BL" 
+},
+]
