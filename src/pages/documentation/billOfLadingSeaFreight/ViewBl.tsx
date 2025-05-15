@@ -5,7 +5,9 @@ import logo from "/images/logoSymbol.png";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import BlackButton from "../../../components/buttons/BlackButton";
 import { DownloadIcon, EditIcon } from "../../../components/icons/Icons";
+import { Link, useParams } from "react-router-dom";
 const ViewBl: React.FC = () => {
+  const { blId } = useParams();
   return (
     <div className="flex flex-col gap-4">
       {/* top indicators and updates */}
@@ -274,14 +276,17 @@ const ViewBl: React.FC = () => {
 
       {/* actions */}
       <div className="flex items-center gap-4 justify-end">
-        <div className="cursor-pointer">
+        <Link
+          to={`/bill-of-lading/sea-freight/editBl/${blId}`}
+          className="cursor-pointer"
+        >
           <NeutralBlueButton
             label={"Edit Draft"}
             size={"m"}
             variant={""}
             leftIcon={<EditIcon color="#ffffff" size={16} />}
           />
-        </div>
+        </Link>
         <div className="cursor-pointer">
           <BlackButton
             label={"Download Draft"}
