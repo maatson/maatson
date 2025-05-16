@@ -28,6 +28,21 @@ interface BLDetailsProps {
   blCreatedDate: string;
   billOfLadingStatus: string;
   id: string;
+  isOriginal?: boolean;
+  originalBLCopies?: number;
+  nonNegotiableBLCopies?: number;
+  seawayBLCopies?: number;
+  blTypeDetails?: any[];
+}
+
+interface DummyDataProps {
+  bookingID: string;
+  companyName: string;
+  portOfLoading: string;
+  cargoType: string;
+  portOfDischarge: string;
+  blStatus: string;
+  blDetails: BLDetailsProps[];
 }
 
 const ViewBillOfLading: React.FC = () => {
@@ -35,8 +50,9 @@ const ViewBillOfLading: React.FC = () => {
   const [isBLApproved, setIsBLApproved] = useState<boolean>(false);
   const [isSplitBL, setIsSplitBL] = useState<boolean>(false);
   const { id } = useParams();
+  const isAdmin = true;
 
-  const [dummyData, setDummyData] = useState({
+  const [dummyData, setDummyData] = useState<DummyDataProps>({
     bookingID: "71955776",
     companyName: "Yanto Jericho",
     portOfLoading: "Europe",
@@ -45,12 +61,31 @@ const ViewBillOfLading: React.FC = () => {
     blStatus: "pending",
     blDetails: [
       {
+        id: "0",
         billOfLadingNumber: "71955776",
         shipper: "Artis industrial pvt ltd",
         consignee: "ASSIDUOUS INTELECTS PRIVATE LIMITED (FTWZ)",
         blCreatedDate: "11-04-2025",
-        billOfLadingStatus: "Draft",
-        id: "0",
+        billOfLadingStatus: "BL Approved",
+        isOriginal: true,
+        originalBLCopies: 3,
+        nonNegotiableBLCopies: 2,
+        blTypeDetails: [
+          {
+            blTypeName: "Original Bill of Lading",
+            availableCopies: 3,
+            isSealAdded: true,
+            isRequestedToAdmin: false,
+            isRequestRejectByAdmin: false,
+          },
+          {
+            blTypeName: "Non Negotiable Copies Bill  of Lading",
+            availableCopies: 0,
+            isSealAdded: false,
+            isRequestedToAdmin: false,
+            isRequestRejectByAdmin: true,
+          },
+        ],
       },
     ],
   });
@@ -92,6 +127,27 @@ const ViewBillOfLading: React.FC = () => {
       ),
     }));
   };
+
+  const handleRequestToAdmin = (blId: string, blTypeName: string) => {
+    setDummyData((prev) => {
+      const updatedBLDetails = prev.blDetails.map((bl) => {
+        if (bl.id === blId) {
+          const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
+            type.blTypeName === blTypeName
+              ? { ...type, isRequestedToAdmin: true }
+              : type
+          );
+          return { ...bl, blTypeDetails: updatedBLTypeDetails };
+        }
+        return bl;
+      });
+      return { ...prev, blDetails: updatedBLDetails };
+    });
+    console.log(dummyData.blDetails);
+  };
+
+  const handleAddSeal = () => {};
+  const handleRemoveSeal = () => {};
 
   return (
     <>
@@ -195,18 +251,18 @@ const ViewBillOfLading: React.FC = () => {
               )}
 
               {dummyData.blDetails.map((item) => (
-                <React.Fragment key={item.billOfLadingNumber}>
-                  <BLCreatedCard
-                    billOfLadingNumber={item.billOfLadingNumber}
-                    shipper={item.shipper}
-                    consignee={item.consignee}
-                    blCreatedDate={item.blCreatedDate}
-                    billOfLadingStatus={item.billOfLadingStatus}
-                    onDelete={() => handleDelete(item.billOfLadingNumber)}
-                    onViewDraft={`/bill-of-lading/sea-freight/viewBl/${item.id}`}
-                    onDownloadDraft={() => {}}
-                  />
-                </React.Fragment>
+                <BLCreatedCard
+                  id={item.id}
+                  billOfLadingNumber={item.billOfLadingNumber}
+                  shipper={item.shipper}
+                  consignee={item.consignee}
+                  blCreatedDate={item.blCreatedDate}
+                  billOfLadingStatus={item.billOfLadingStatus}
+                  onDelete={() => handleDelete(item.billOfLadingNumber)}
+                  onViewDraft={`/bill-of-lading/sea-freight/viewBl/${item.id}`}
+                  onDownloadDraft={() => {}}
+                  isAdmin={isAdmin}
+                />
               ))}
             </>
           )}
@@ -225,7 +281,26 @@ const ViewBillOfLading: React.FC = () => {
                 </div>
               </div>
 
-              <BLApprovedCard />
+              {dummyData.blDetails.map((item) => (
+                <BLApprovedCard
+                  id={item.id}
+                  billOfLadingNumber={item.billOfLadingNumber}
+                  shipper={item.shipper}
+                  consignee={item.consignee}
+                  blCreatedDate={item.blCreatedDate}
+                  billOfLadingStatus={item.billOfLadingStatus}
+                  isOriginal
+                  originalBLCopies={item?.originalBLCopies}
+                  nonNegotiableBLCopies={item?.nonNegotiableBLCopies}
+                  blTypeDetails={item?.blTypeDetails}
+                  onDownload={() => {}}
+                  onPrint={() => {}}
+                  onAddSeal={handleAddSeal}
+                  onRemoveSeal={handleRemoveSeal}
+                  onRequestAdmin={handleRequestToAdmin}
+                  isAdmin={isAdmin}
+                />
+              ))}
             </>
           )}
         </div>

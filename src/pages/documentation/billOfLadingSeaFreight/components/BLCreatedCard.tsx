@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import BLLayout from "./BLLayout";
 
 interface BLCreatedCardProps {
+  id: string;
   billOfLadingNumber: string;
   shipper: string;
   consignee: string;
@@ -20,9 +21,11 @@ interface BLCreatedCardProps {
   onDelete: () => void;
   onViewDraft: string;
   onDownloadDraft: () => void;
+  isAdmin: boolean;
 }
 
 const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
+  id,
   billOfLadingNumber,
   shipper,
   consignee,
@@ -31,10 +34,16 @@ const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
   onDelete,
   onViewDraft,
   onDownloadDraft,
+  isAdmin,
 }) => {
+  console.log(isAdmin);
+
   return (
     <>
-      <div className="flex flex-col gap-3 p-2 rounded-md bg-grey-aw-50 border border-primary">
+      <div
+        className="flex flex-col gap-3 p-2 rounded-md bg-grey-aw-50 border border-primary"
+        key={id}
+      >
         <div className="flex justify-between">
           <BLLayout
             label={"Bill of Lading Number"}
