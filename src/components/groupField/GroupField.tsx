@@ -28,6 +28,7 @@ interface Groupfield {
   isDisabled?: boolean;
   id?: string;
   maxLength?: number;
+  checked?: boolean;
   onBlur?: (e: React.FocusEvent<any>) => void;
 }
 
@@ -126,6 +127,7 @@ const GroupField: React.FC<Groupfield> = ({
   isDateLeft,
   onBlur,
   maxLength,
+  checked,
 }) => {
   const getSelectedValue = () => {
     if (Array.isArray(value)) {
@@ -293,6 +295,7 @@ const GroupField: React.FC<Groupfield> = ({
               value={value}
               id={type === "radio" ? id || name : name}
               disabled={isDisabled}
+              checked={checked}
               onChange={onChange}
               onBlur={onBlur}
               placeholder={placeholder}
