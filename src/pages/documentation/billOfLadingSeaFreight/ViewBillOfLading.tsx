@@ -14,6 +14,7 @@ import { Link, useParams } from "react-router-dom";
 import BLApprovedCard from "./components/BLApprovedCard";
 import AddSealForm from "./components/AddSealForm";
 import RemoveSealForm from "./components/RemoveSealForm";
+import AddCopiesForm from "./components/AddCopiesForm";
 
 interface LayoutProps {
   label: string;
@@ -53,6 +54,7 @@ const ViewBillOfLading: React.FC = () => {
   const [isSplitBL, setIsSplitBL] = useState<boolean>(false);
   const [isRemoveSeal, setIsRemoveSeal] = useState<boolean>(false);
   const [isAddSeal, setIsAddSeal] = useState<boolean>(false);
+  const [isAddCopies, setIsAddCopies] = useState<boolean>(false);
   const { id } = useParams();
   const isAdmin = true;
 
@@ -116,6 +118,10 @@ const ViewBillOfLading: React.FC = () => {
           blCreatedDate: `${dummyData.blDetails[0].blCreatedDate}`, // here set current date
           billOfLadingStatus: `${dummyData.blDetails[0].billOfLadingStatus}`,
           id: alpha,
+          isOriginal: true,
+          originalBLCopies: 3,
+          nonNegotiableBLCopies: 2,
+          blTypeDetails: dummyData.blDetails[0].blTypeDetails,
         };
       }
     );
@@ -150,11 +156,33 @@ const ViewBillOfLading: React.FC = () => {
     console.log(dummyData.blDetails);
   };
 
+  const handleCancelRequest = (blId: string, blTypeName: string) => {
+     setDummyData((prev) => {
+      const updatedBLDetails = prev.blDetails.map((bl) => {
+        if (bl.id === blId) {
+          const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
+            type.blTypeName === blTypeName
+              ? { ...type, isRequestedToAdmin: false }
+              : type
+          );
+          return { ...bl, blTypeDetails: updatedBLTypeDetails };
+        }
+        return bl;
+      });
+      return { ...prev, blDetails: updatedBLDetails };
+    });
+    // console.log(dummyData.blDetails);
+  }
+
   const handleAddSeal = () => {
     setIsAddSeal(true);
   };
   const handleRemoveSeal = () => {
     setIsRemoveSeal(true);
+  };
+
+  const handleAddCopies = () => {
+    setIsAddCopies(true);
   };
 
   return (
@@ -306,7 +334,8 @@ const ViewBillOfLading: React.FC = () => {
                   onRemoveSeal={handleRemoveSeal}
                   onRequestAdmin={handleRequestToAdmin}
                   onAcceptRequest={() => {}}
-                  onCancelRequest={() => {}}
+                  onCancelRequest={handleCancelRequest}
+                  onAddCopies={handleAddCopies}
                   isAdmin={isAdmin}
                 />
               ))}
@@ -334,6 +363,15 @@ const ViewBillOfLading: React.FC = () => {
         <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
           <RemoveSealForm
             onClose={() => setIsRemoveSeal(false)}
+            onSave={() => {}}
+          />
+        </div>
+      )}
+
+      {isAddCopies && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <AddCopiesForm
+            onClose={() => setIsAddCopies(false)}
             onSave={() => {}}
           />
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AddIcon,
   CloseIcon,
   DocumentIcon,
   DownloadIcon,
@@ -30,6 +31,7 @@ interface BLTypeCardProps {
   onRemoveSeal?: () => void;
   onCancelRequest?: () => void;
   onAcceptRequest?: () => void;
+  onAddCopies?: () => void;
   isAdmin: boolean;
 }
 
@@ -49,6 +51,7 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
   onRemoveSeal,
   onAcceptRequest,
   onCancelRequest,
+  onAddCopies,
   isAdmin,
 }) => {
   //   console.log(isAdmin);
@@ -80,35 +83,7 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
       </div>
       {isAdmin ? (
         <>
-          {isRequestedToAdmin ? (
-            <div className="flex justify-between px-3 pb-3 items-center ">
-              <div className="flex gap-2 items-center p-1 rounded-xs bg-warning-50">
-                <div>
-                  <InfoIcon color="#E8891C" />
-                </div>
-                <p className="text-warning-600 text-sm ">
-                  User has reached the download limit. You can approve or cancel
-                  the request.
-                </p>
-                <div onClick={onCancelRequest}>
-                  <ErrorButton
-                    label={"Cancel"}
-                    size={"m"}
-                    variant={"link"}
-                    style="text-nowrap"
-                  />
-                </div>
-                <div onClick={onAcceptRequest}>
-                  <SuccessButton
-                    label={"Approve"}
-                    size={"m"}
-                    variant={"primary"}
-                    style="text-nowrap"
-                  />
-                </div>
-              </div>
-            </div>
-          ) : (
+          {availableCopies !== 0 ? (
             <>
               {isSealAdded ? (
                 <div className="flex flex-col gap-3 px-3 pb-3 ">
@@ -157,6 +132,62 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
                       variant={"primary"}
                       leftIcon={<SealIcon size={16} color="#ffffff" />}
                     />
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              {isRequestedToAdmin ? (
+                <div className="flex justify-between px-3 pb-3 items-center ">
+                  <div className="flex gap-2 items-center p-1 rounded-xs bg-warning-50">
+                    <div>
+                      <InfoIcon color="#E8891C" />
+                    </div>
+                    <p className="text-warning-600 text-sm ">
+                      User has reached the download limit. You can approve or
+                      cancel the request.
+                    </p>
+                    <div onClick={onCancelRequest}>
+                      <ErrorButton
+                        label={"Cancel"}
+                        size={"m"}
+                        variant={"link"}
+                        style="text-nowrap"
+                      />
+                    </div>
+                    <div onClick={onAcceptRequest}>
+                      <SuccessButton
+                        label={"Approve"}
+                        size={"m"}
+                        variant={"primary"}
+                        style="text-nowrap"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex justify-between px-3 pb-3 items-center ">
+                  <div className="flex justify-between w-full items-center p-1 rounded-xs bg-blue-50">
+                    <div className="flex gap-2">
+                      <div>
+                        <InfoIcon color="#0084E8" />
+                      </div>
+                      <p className="text-blue-600 text-sm ">
+                        Click the button to add Bill of Lading additional
+                        copies.
+                      </p>
+                    </div>
+
+                    <div onClick={onAddCopies}>
+                      <NeutralBlueButton
+                        label={"Add Copies"}
+                        size={"m"}
+                        variant={"primary"}
+                        leftIcon={<AddIcon size={16} color="#ffffff" />}
+                        style="text-nowrap"
+                      />
+                    </div>
                   </div>
                 </div>
               )}

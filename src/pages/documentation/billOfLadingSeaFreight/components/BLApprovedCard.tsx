@@ -20,8 +20,9 @@ interface BLApprovedCardProps {
   onRequestAdmin?: (id: string, blTypeName: string) => void;
   onAddSeal?: () => void;
   onRemoveSeal?: () => void;
-  onAcceptRequest?:()=>void;
-  onCancelRequest?:()=>void;
+  onAcceptRequest?: () => void;
+  onCancelRequest?: (id: string, blTypeName: string) => void;
+  onAddCopies?: () => void;
   isAdmin: boolean;
 }
 
@@ -44,6 +45,7 @@ const BLApprovedCard: React.FC<BLApprovedCardProps> = ({
   onRemoveSeal,
   onAcceptRequest,
   onCancelRequest,
+  onAddCopies,
   isAdmin,
 }) => {
   return (
@@ -101,7 +103,8 @@ const BLApprovedCard: React.FC<BLApprovedCardProps> = ({
             onAddSeal={onAddSeal}
             onRemoveSeal={onRemoveSeal}
             onAcceptRequest={onAcceptRequest}
-            onCancelRequest={onCancelRequest}
+            onCancelRequest={() => onCancelRequest?.(id, item.blTypeName)}
+            onAddCopies={onAddCopies}
             isAdmin={isAdmin}
           />
         ))}
