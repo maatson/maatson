@@ -28,6 +28,8 @@ interface BLTypeCardProps {
   onRequestAdmin?: () => void;
   onAddSeal?: () => void;
   onRemoveSeal?: () => void;
+  onCancelRequest?: () => void;
+  onAcceptRequest?: () => void;
   isAdmin: boolean;
 }
 
@@ -45,6 +47,8 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
   onRequestAdmin,
   onAddSeal,
   onRemoveSeal,
+  onAcceptRequest,
+  onCancelRequest,
   isAdmin,
 }) => {
   //   console.log(isAdmin);
@@ -75,7 +79,90 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
         </div>
       </div>
       {isAdmin ? (
-        "admin"
+        <>
+          {isRequestedToAdmin ? (
+            <div className="flex justify-between px-3 pb-3 items-center ">
+              <div className="flex gap-2 items-center p-1 rounded-xs bg-warning-50">
+                <div>
+                  <InfoIcon color="#E8891C" />
+                </div>
+                <p className="text-warning-600 text-sm ">
+                  User has reached the download limit. You can approve or cancel
+                  the request.
+                </p>
+                <div onClick={onCancelRequest}>
+                  <ErrorButton
+                    label={"Cancel"}
+                    size={"m"}
+                    variant={"link"}
+                    style="text-nowrap"
+                  />
+                </div>
+                <div onClick={onAcceptRequest}>
+                  <SuccessButton
+                    label={"Approve"}
+                    size={"m"}
+                    variant={"primary"}
+                    style="text-nowrap"
+                  />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              {isSealAdded ? (
+                <div className="flex flex-col gap-3 px-3 pb-3 ">
+                  <div onClick={onPrint}>
+                    <NeutralBlueButton
+                      label={"Print"}
+                      size={"m"}
+                      variant={"primary"}
+                      leftIcon={<PrintIcon size={16} color="#ffffff" />}
+                    />
+                  </div>
+                  <div className="flex justify-between gap-2 p-1 rounded-xs bg-success-50">
+                    <div className="flex gap-2 items-center ">
+                      <div>
+                        <SuccessIcon color="#009F41" />
+                      </div>
+                      <p className="text-success-700 text-sm ">
+                        Seal and signature added to the document. Want to remove
+                        them?
+                      </p>
+                    </div>
+                    <div onClick={onRemoveSeal}>
+                      <ErrorButton
+                        label={"Remove"}
+                        size={"m"}
+                        variant={"outline"}
+                        style="text-nowrap"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex justify-between px-3 pb-3 items-center ">
+                  <div onClick={onPrint}>
+                    <NeutralBlueButton
+                      label={"Print"}
+                      size={"m"}
+                      variant={"primary"}
+                      leftIcon={<PrintIcon size={16} color="#ffffff" />}
+                    />
+                  </div>
+                  <div onClick={onAddSeal}>
+                    <TertiaryButton
+                      label={"Add Seal & Signature"}
+                      size={"m"}
+                      variant={"primary"}
+                      leftIcon={<SealIcon size={16} color="#ffffff" />}
+                    />
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </>
       ) : (
         <>
           {availableCopies !== 0 ? (
@@ -176,7 +263,7 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
       )}
 
       {/* for admin portion */}
-      <div className="flex justify-between px-3 pb-3 items-center ">
+      {/* <div className="flex justify-between px-3 pb-3 items-center ">
         <div onClick={onPrint}>
           <NeutralBlueButton
             label={"Print"}
@@ -250,7 +337,7 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
             />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* admin portion ends */}
     </div>
   );

@@ -12,6 +12,8 @@ import BLCreatedCard from "./components/BLCreatedCard";
 import SplitBLForm from "./components/SplitBLForm";
 import { Link, useParams } from "react-router-dom";
 import BLApprovedCard from "./components/BLApprovedCard";
+import AddSealForm from "./components/AddSealForm";
+import RemoveSealForm from "./components/RemoveSealForm";
 
 interface LayoutProps {
   label: string;
@@ -49,6 +51,8 @@ const ViewBillOfLading: React.FC = () => {
   const [isBLCreated, setIsBLCreated] = useState<boolean>(true);
   const [isBLApproved, setIsBLApproved] = useState<boolean>(false);
   const [isSplitBL, setIsSplitBL] = useState<boolean>(false);
+  const [isRemoveSeal, setIsRemoveSeal] = useState<boolean>(false);
+  const [isAddSeal, setIsAddSeal] = useState<boolean>(false);
   const { id } = useParams();
   const isAdmin = true;
 
@@ -82,8 +86,8 @@ const ViewBillOfLading: React.FC = () => {
             blTypeName: "Non Negotiable Copies Bill  of Lading",
             availableCopies: 0,
             isSealAdded: false,
-            isRequestedToAdmin: false,
-            isRequestRejectByAdmin: true,
+            isRequestedToAdmin: true,
+            isRequestRejectByAdmin: false,
           },
         ],
       },
@@ -146,8 +150,12 @@ const ViewBillOfLading: React.FC = () => {
     console.log(dummyData.blDetails);
   };
 
-  const handleAddSeal = () => {};
-  const handleRemoveSeal = () => {};
+  const handleAddSeal = () => {
+    setIsAddSeal(true);
+  };
+  const handleRemoveSeal = () => {
+    setIsRemoveSeal(true);
+  };
 
   return (
     <>
@@ -164,7 +172,6 @@ const ViewBillOfLading: React.FC = () => {
           </div>
         </div>
 
-        {/* Changable part */}
         <div className="flex flex-col gap-2">
           {/* main tab */}
           <div className="rounded-xs bg-grey-aw-50 shadow-lg px-3 py-2 flex justify-between items-center">
@@ -298,6 +305,8 @@ const ViewBillOfLading: React.FC = () => {
                   onAddSeal={handleAddSeal}
                   onRemoveSeal={handleRemoveSeal}
                   onRequestAdmin={handleRequestToAdmin}
+                  onAcceptRequest={() => {}}
+                  onCancelRequest={() => {}}
                   isAdmin={isAdmin}
                 />
               ))}
@@ -311,6 +320,21 @@ const ViewBillOfLading: React.FC = () => {
           <SplitBLForm
             onClose={() => setIsSplitBL(false)}
             onSave={handleSave}
+          />
+        </div>
+      )}
+
+      {isAddSeal && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <AddSealForm onClose={() => setIsAddSeal(false)} onSave={() => {}} />
+        </div>
+      )}
+
+      {isRemoveSeal && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <RemoveSealForm
+            onClose={() => setIsRemoveSeal(false)}
+            onSave={() => {}}
           />
         </div>
       )}
