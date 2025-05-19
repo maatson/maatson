@@ -12,6 +12,9 @@ import BLCreatedCard from "./components/BLCreatedCard";
 import SplitBLForm from "./components/SplitBLForm";
 import { Link, useParams } from "react-router-dom";
 import BLApprovedCard from "./components/BLApprovedCard";
+import AddSealForm from "./components/AddSealForm";
+import RemoveSealForm from "./components/RemoveSealForm";
+import AddCopiesForm from "./components/AddCopiesForm";
 
 interface LayoutProps {
   label: string;
@@ -49,6 +52,9 @@ const ViewBillOfLading: React.FC = () => {
   const [isBLCreated, setIsBLCreated] = useState<boolean>(true);
   const [isBLApproved, setIsBLApproved] = useState<boolean>(false);
   const [isSplitBL, setIsSplitBL] = useState<boolean>(false);
+  const [isRemoveSeal, setIsRemoveSeal] = useState<boolean>(false);
+  const [isAddSeal, setIsAddSeal] = useState<boolean>(false);
+  const [isAddCopies, setIsAddCopies] = useState<boolean>(false);
   const { id } = useParams();
   const isAdmin = true;
 
@@ -82,8 +88,8 @@ const ViewBillOfLading: React.FC = () => {
             blTypeName: "Non Negotiable Copies Bill  of Lading",
             availableCopies: 0,
             isSealAdded: false,
-            isRequestedToAdmin: false,
-            isRequestRejectByAdmin: true,
+            isRequestedToAdmin: true,
+            isRequestRejectByAdmin: false,
           },
         ],
       },
@@ -112,6 +118,10 @@ const ViewBillOfLading: React.FC = () => {
           blCreatedDate: `${dummyData.blDetails[0].blCreatedDate}`, // here set current date
           billOfLadingStatus: `${dummyData.blDetails[0].billOfLadingStatus}`,
           id: alpha,
+          isOriginal: true,
+          originalBLCopies: 3,
+          nonNegotiableBLCopies: 2,
+          blTypeDetails: dummyData.blDetails[0].blTypeDetails,
         };
       }
     );
@@ -146,8 +156,35 @@ const ViewBillOfLading: React.FC = () => {
     console.log(dummyData.blDetails);
   };
 
-  const handleAddSeal = () => {};
-  const handleRemoveSeal = () => {};
+  const handleCancelRequest = (blId: string, blTypeName: string) => {
+    // also set toast
+     setDummyData((prev) => {
+      const updatedBLDetails = prev.blDetails.map((bl) => {
+        if (bl.id === blId) {
+          const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
+            type.blTypeName === blTypeName
+              ? { ...type, isRequestedToAdmin: false }
+              : type
+          );
+          return { ...bl, blTypeDetails: updatedBLTypeDetails };
+        }
+        return bl;
+      });
+      return { ...prev, blDetails: updatedBLDetails };
+    });
+    // console.log(dummyData.blDetails);
+  }
+
+  const handleAddSeal = () => {
+    setIsAddSeal(true);
+  };
+  const handleRemoveSeal = () => {
+    setIsRemoveSeal(true);
+  };
+
+  const handleAddCopies = () => {
+    setIsAddCopies(true);
+  };
 
   return (
     <>
@@ -164,7 +201,6 @@ const ViewBillOfLading: React.FC = () => {
           </div>
         </div>
 
-        {/* Changable part */}
         <div className="flex flex-col gap-2">
           {/* main tab */}
           <div className="rounded-xs bg-grey-aw-50 shadow-lg px-3 py-2 flex justify-between items-center">
@@ -298,6 +334,9 @@ const ViewBillOfLading: React.FC = () => {
                   onAddSeal={handleAddSeal}
                   onRemoveSeal={handleRemoveSeal}
                   onRequestAdmin={handleRequestToAdmin}
+                  onAcceptRequest={() => {}}
+                  onCancelRequest={handleCancelRequest}
+                  onAddCopies={handleAddCopies}
                   isAdmin={isAdmin}
                 />
               ))}
@@ -311,6 +350,30 @@ const ViewBillOfLading: React.FC = () => {
           <SplitBLForm
             onClose={() => setIsSplitBL(false)}
             onSave={handleSave}
+          />
+        </div>
+      )}
+
+      {isAddSeal && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <AddSealForm onClose={() => setIsAddSeal(false)} onSave={() => {}} />
+        </div>
+      )}
+
+      {isRemoveSeal && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <RemoveSealForm
+            onClose={() => setIsRemoveSeal(false)}
+            onSave={() => {}}
+          />
+        </div>
+      )}
+
+      {isAddCopies && (
+        <div className="fixed flex justify-center items-center bg-black bg-opacity-50 z-30 inset-0">
+          <AddCopiesForm
+            onClose={() => setIsAddCopies(false)}
+            onSave={() => {}}
           />
         </div>
       )}

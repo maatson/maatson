@@ -10,6 +10,7 @@ import GreyButton from "../../../../components/buttons/GreyButton";
 import BlackButton from "../../../../components/buttons/BlackButton";
 import { Link } from "react-router-dom";
 import BLLayout from "./BLLayout";
+import SuccessChip from "../../../../components/chips/SuccessChip";
 
 interface BLCreatedCardProps {
   id: string;
@@ -56,7 +57,7 @@ const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
 
           <div className="flex flex-col gap-2 p-1 max-w-[240px] items-center">
             <p className="text-xs text-grey-ab-300">Bill of Lading Status</p>
-            <SecondaryChip
+            <SuccessChip
               label={billOfLadingStatus}
               size={"m"}
               variant={"primary"}
