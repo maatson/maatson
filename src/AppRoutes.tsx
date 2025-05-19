@@ -520,15 +520,15 @@ const CargoManifestViewAir = lazy(
 );
 
 // Documentation
-const BillOfLadingAirFreight = lazy(
-  () => import("./pages/documentation/billOfLadingAirFreight")
-);
 // bill of lading - sea
 const BillOfLadingSeaFreight = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight")
 );
-const ViewBl = lazy(
-  () => import("./pages/documentation/billOfLadingSeaFreight/viewBl")
+const BillOfLadingListSea = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight/BillOfLadingList")
+);
+const ViewBillOfLading = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight/ViewBillOfLading")
 );
 const CreateBl = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight/CreateBl")
@@ -536,11 +536,18 @@ const CreateBl = lazy(
 const EditBl = lazy(
   () => import("./pages/documentation/billOfLadingSeaFreight/EditBl")
 );
-const BillOfLadingListSea = lazy(
-  () => import("./pages/documentation/billOfLadingSeaFreight/BillOfLadingList")
+const ViewBl = lazy(
+  () => import("./pages/documentation/billOfLadingSeaFreight/ViewBl")
 );
-const ViewBillOfLading = lazy(
-  () => import("./pages/documentation/billOfLadingSeaFreight/ViewBillOfLading")
+// bill of lading - air
+const BillOfLadingAirFreight = lazy(
+  () => import("./pages/documentation/billOfLadingAirFreight")
+);
+const BillOfLadingListAir = lazy(
+  () => import("./pages/documentation/billOfLadingAirFreight/BillOfLadingList")
+);
+const ViewBillOfLadingAir = lazy(
+  () => import("./pages/documentation/billOfLadingAirFreight/ViewBillOfLading")
 );
 
 // TESTIMONALS
@@ -857,10 +864,6 @@ const AppRoutes: React.FC = () => {
 
         {/* documentation */}
         <Route
-          path="bill-of-lading/air-freight"
-          element={<BillOfLadingAirFreight />}
-        ></Route>
-        <Route
           path="bill-of-lading/sea-freight"
           element={<BillOfLadingSeaFreight />}
         >
@@ -869,6 +872,13 @@ const AppRoutes: React.FC = () => {
           <Route path="viewBl/:blId" element={<ViewBl />} />
           <Route path="createBl/:bookingId" element={<CreateBl />} />
           <Route path="EditBl/:blId" element={<EditBl />} />
+        </Route>
+        <Route
+          path="bill-of-lading/air-freight"
+          element={<BillOfLadingAirFreight />}
+        >
+          <Route index element={<BillOfLadingListAir />} />
+          <Route path="view/:bookingId" element={<ViewBillOfLadingAir />} />
         </Route>
 
         {/* testimonials */}

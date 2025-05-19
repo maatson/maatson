@@ -157,6 +157,7 @@ const ViewBillOfLading: React.FC = () => {
   };
 
   const handleCancelRequest = (blId: string, blTypeName: string) => {
+    // also set toast
      setDummyData((prev) => {
       const updatedBLDetails = prev.blDetails.map((bl) => {
         if (bl.id === blId) {
