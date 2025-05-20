@@ -372,7 +372,7 @@ const CreateBl: React.FC = () => {
             />
           </div>
         </div>
-        <div className="border boder-grey-ab-50" />
+        <div className="border border-grey-ab-50" />
         <div className="flex flex-col gap-4">
           {data.cargoDetails.length > 0 &&
             data.cargoDetails.map((cargo, index) => (

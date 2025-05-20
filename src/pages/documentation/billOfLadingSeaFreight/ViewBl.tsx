@@ -3,7 +3,14 @@ import React, { ChangeEvent, useState } from "react";
 import logo from "/images/logoSymbol.png";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import BlackButton from "../../../components/buttons/BlackButton";
-import { DownloadIcon, EditIcon } from "../../../components/icons/Icons";
+import {
+  CloseIcon,
+  CrossIcon,
+  DownloadIcon,
+  EditIcon,
+  InfoIcon,
+  TickIcon,
+} from "../../../components/icons/Icons";
 import { Link, useParams } from "react-router-dom";
 import GreyButton from "../../../components/buttons/GreyButton";
 import DraftToReview from "./DraftToReview";
@@ -14,6 +21,7 @@ import ErrorChip from "../../../components/chips/ErrorChip";
 import SuccessChip from "../../../components/chips/SuccessChip";
 import SuccessButton from "../../../components/buttons/SuccessButton";
 import ErrorButton from "../../../components/buttons/ErrorButton";
+import axios from "axios";
 
 type ShipperDetails = {
   companyName: string;
@@ -135,12 +143,31 @@ const ViewBl: React.FC = () => {
   const [isDraftToReview, setDraftToReview] = useState<boolean>(false);
   const [isApprovalRequest, setApprovalRequest] = useState<boolean>(false);
 
+  // axios.post("/ihix,com",data,{onUploadProgress:(e)=>{(e.loaded*100/100)}})
+
   const handleMoveToReview = () => {
+    if (isAdmin) {
+      setData((prev) => ({
+        ...prev,
+        bLStatus: "review",
+        approvalRequestDetails: {
+          ...prev.approvalRequestDetails,
+          status: "pending",
+        },
+      }));
+    }
     setData((prev) => ({ ...prev, bLStatus: "review" }));
     setDraftToReview(false);
   };
   const handleSendApproval = () => {
-    setData((prev) => ({ ...prev, bLStatus: "request" }));
+    setData((prev) => ({
+      ...prev,
+      bLStatus: "request",
+      approvalRequestDetails: {
+        ...prev.approvalRequestDetails,
+        status: "pending",
+      },
+    }));
 
     setApprovalRequest(false);
   };
@@ -156,7 +183,11 @@ const ViewBl: React.FC = () => {
   const handleApproveBl = () => {
     const updatedData = { ...data.approvalRequestDetails };
     updatedData.status = "approved";
-    setData((prev) => ({ ...prev, approvalRequestDetails: updatedData }));
+    setData((prev) => ({
+      ...prev,
+      approvalRequestDetails: updatedData,
+      bLStatus: "approved",
+    }));
   };
   const handleRejectBl = () => {
     const updatedData = { ...data.approvalRequestDetails };
@@ -269,81 +300,151 @@ const ViewBl: React.FC = () => {
         {/* approval request screen */}
 
         {(data.bLStatus === "request" || data.bLStatus === "approved") && (
-          <div className="p-3 gap-3 flex items-start justify-between bg-grey-aw-100 rounded">
-            <div className="flex flex-col gap-3">
-              <p className="text-sm font-semibold">BL Approval Request</p>
-              <p className="text-sm ">
-                Your request to approve the following Bill of Lading has been
-                submitted and is awaiting admin review
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="px-2 flex flex-col py-1 gap-1 bg-grey-200 rounded">
-                  <p className="text-xs">BL Type</p>
-                  <p className="text-xs font-semibold">{data.blType}</p>
+          <div className="flex flex-col gap-3 rounded p-3 bg-grey-aw-100 ">
+            <div className="gap-3  flex items-start justify-between ">
+              <div className="flex flex-col gap-3">
+                <p className="text-sm font-semibold">BL Approval Request</p>
+
+                <div className="flex items-center gap-4">
+                  <div className="px-2 flex flex-col py-1 gap-1 bg-grey-200 rounded">
+                    <p className="text-xs">BL Type</p>
+                    <p className="text-xs font-semibold">{data.blType}</p>
+                  </div>
+                  {data.blType === "original" && (
+                    <>
+                      {" "}
+                      <div className="px-2 flex flex-col py-1 gap-1 bg-grey-200 rounded">
+                        <p className="text-xs">Original BL Copies</p>
+                        <p className="text-xs font-semibold">
+                          {data.numberOfOriginalCopies}
+                        </p>
+                      </div>
+                      <div className="px-2 flex flex-col py-1 gap-1 bg-grey-200 rounded">
+                        <p className="text-xs">Non-Negotiable Copies</p>
+                        <p className="text-xs font-semibold">
+                          {data.numberOfNonNegotiableCopies}
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
-                {data.blType === "original" && (
-                  <>
-                    {" "}
-                    <div className="px-2 flex flex-col py-1 gap-1 bg-grey-200 rounded">
-                      <p className="text-xs">Original BL Copies</p>
-                      <p className="text-xs font-semibold">
-                        {data.numberOfOriginalCopies}
-                      </p>
-                    </div>
-                    <div className="px-2 flex flex-col py-1 gap-1 bg-grey-200 rounded">
-                      <p className="text-xs">Non-Negotiable Copies</p>
-                      <p className="text-xs font-semibold">
-                        {data.numberOfNonNegotiableCopies}
-                      </p>
-                    </div>
-                  </>
-                )}
+              </div>
+              <div className="flex flex-col gap-6 justify-between h-full">
+                <div className="flex flex-col items-center gap-2">
+                  {data.approvalRequestDetails.status === "pending" && (
+                    <WarningChip
+                      label={"Pending"}
+                      size={"s"}
+                      variant={"fill"}
+                    />
+                  )}
+                  {data.approvalRequestDetails.status === "reject" && (
+                    <ErrorChip
+                      label={"Approval Cancelled"}
+                      size={"s"}
+                      variant={"fill"}
+                    />
+                  )}
+                  {data.approvalRequestDetails.status === "approved" && (
+                    <SuccessChip
+                      label={"BL Approved"}
+                      size={"s"}
+                      variant={"fill"}
+                    />
+                  )}
+                  <p className="text-xs text-grey-ab-300">
+                    Requested On May 2, 2025
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-col items-center gap-2">
-                {data.approvalRequestDetails.status === "pending" && (
-                  <WarningChip label={"Pending"} size={"s"} variant={"fill"} />
+            {data.approvalRequestDetails.status === "pending" && (
+              <div className="flex justify-between">
+                <div className="p-1 gap-2 flex items-center bg-warning-50 text-warning-700 rounded w-fit">
+                  <InfoIcon color="#b56b16" size={20} />
+                  <p className="text-sm ">
+                    {isAdmin
+                      ? "A request has been submitted for approval. Please review the details and choose an action below."
+                      : " Your request to approve the following Bill of Lading has been submitted and is awaiting admin review."}
+                  </p>
+                </div>
+
+                {isAdmin &&
+                  data.approvalRequestDetails.status === "pending" && (
+                    <div className="flex items-center gap-4 justify-center">
+                      <div onClick={handleRejectBl}>
+                        <ErrorButton
+                          label={" Reject BL"}
+                          size={"m"}
+                          variant={"outline"}
+                        />
+                      </div>
+
+                      <div onClick={handleApproveBl}>
+                        <SuccessButton
+                          label={"Approve BL "}
+                          size={"m"}
+                          variant={""}
+                        />
+                      </div>
+                    </div>
+                  )}
+              </div>
+            )}
+
+            {data.approvalRequestDetails.status === "reject" && (
+              <>
+                <div className="p-1 gap-2 flex items-center bg-error-50 text-error-700 rounded w-fit">
+                  <CloseIcon color="#a60001" size={20} />
+                  <p className="text-sm ">
+                    {isAdmin
+                      ? `The BL No.${data.blNumber} has been rejected, and the requester has been informed.`
+                      : "The BL approval request has been cancelled by the admin.Please review the BL details again or contact the admin for more information."}
+                  </p>
+                </div>
+
+                {!isAdmin && (
+                  <div className="flex items-center gap-6 text-sm">
+                    <p>
+                      This BL was rejected. If all details have been corrected,
+                      please click the button below to re-request admin
+                      approval.
+                    </p>
+                    <div onClick={() => setApprovalRequest(true)}>
+                      {" "}
+                      <PrimaryButton
+                        label={"Send for Approval"}
+                        size={"m"}
+                        variant={""}
+                      />
+                    </div>
+                  </div>
                 )}
-                {data.approvalRequestDetails.status === "reject" && (
-                  <ErrorChip
-                    label={"Approval Cancelled"}
-                    size={"s"}
-                    variant={"fill"}
-                  />
-                )}
-                {data.approvalRequestDetails.status === "approved" && (
-                  <SuccessChip
-                    label={"BL Approved"}
-                    size={"s"}
-                    variant={"fill"}
-                  />
-                )}
-                <p className="text-xs text-grey-ab-300">
-                  Requested On May 2, 2025
+              </>
+            )}
+
+            {data.approvalRequestDetails.status === "approved" && (
+              <div
+                className={`p-1 gap-2 flex items-center ${
+                  isAdmin
+                    ? "bg-success-50 text-success-700"
+                    : "bg-blue-50 text-blue-700"
+                } rounded w-fit`}
+              >
+                <div>
+                  {isAdmin ? (
+                    <TickIcon color="#009f41  " size={20} />
+                  ) : (
+                    <InfoIcon color="#0067b5 " size={20} />
+                  )}
+                </div>
+                <p className="text-sm ">
+                  {isAdmin
+                    ? `The BL No.${data.blNumber} has been approved, and the requester has been notified.`
+                    : "The Bill of Lading has been approved by the admin. Please go to the 'BL Approved' section below to print the  original copy."}
                 </p>
               </div>
-
-              {isAdmin && data.approvalRequestDetails.status === "pending" && (
-                <div className="flex items-center gap-4 justify-center">
-                  <div onClick={handleRejectBl}>
-                    <ErrorButton
-                      label={" Reject BL"}
-                      size={"m"}
-                      variant={"outline"}
-                    />
-                  </div>
-
-                  <div onClick={handleApproveBl}>
-                    <SuccessButton
-                      label={"Approve BL "}
-                      size={"m"}
-                      variant={""}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
+            )}
           </div>
         )}
         {/* body of bl*/}
