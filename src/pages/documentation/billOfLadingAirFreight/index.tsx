@@ -46,7 +46,7 @@ const BillOfLadingAirFreight: React.FC = () => {
         label: "Bill of Lading (Air Freight)",
         path: "/bill-of-lading/air-freight",
       },
-      { label: "Create BL Draft" }
+      { label: "Create Airway Bill Draft" }
     );
     heading = "Create BL Draft";
   } else if (isEditBillOfLading) {
