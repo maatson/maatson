@@ -62,7 +62,7 @@ const BillOfLadingAirFreight: React.FC = () => {
     breadCrums.push(
       {
         label: "Bill of Lading (Air Freight)",
-        path: "/sea-air-schedule/air-freight",
+        path: "/bill-of-lading/air-freight",
       },
       { label: "BL Draft Details" }
     );
