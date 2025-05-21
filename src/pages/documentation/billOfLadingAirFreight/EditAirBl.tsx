@@ -35,6 +35,7 @@ type CargoDetails = {
 interface BLData {
   bookingId: string;
   mawbNumber: string;
+  hablNumber: string;
   shipper: ShipperDetails;
   consignee: ShipperDetails;
   notifyParty: ShipperDetails;
@@ -88,75 +89,91 @@ interface BLData {
   carrierOtherChargesDueAmount: string;
 }
 
-const CreateAirBl: React.FC = () => {
+const EditAirBl: React.FC = () => {
   const [data, setData] = useState<BLData>({
     bookingId: "123dd4545",
-    mawbNumber: "",
-    shipper: { companyName: "", companyAddress: "", accountNumber: "" },
-    consignee: { companyName: "", companyAddress: "", accountNumber: "" },
-    notifyParty: { companyName: "", companyAddress: "" },
-    carrierAgent: { companyName: "", companyAddress: "" },
+    mawbNumber: "13450092",
+    hablNumber: "123dd4545",
+    shipper: {
+      companyName: "LIFECO",
+      companyAddress:
+        "LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus Brega-Libya LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus Brega-Libya",
+      accountNumber: "56796785675",
+    },
+    consignee: {
+      companyName: "LIFECO",
+      companyAddress:
+        "LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus Brega-Libya LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus Brega-Libya",
+      accountNumber: "56796785675",
+    },
+    notifyParty: { companyName: "RKFI", companyAddress: "RKFI" },
+    carrierAgent: {
+      companyName: "MAATSON MARITIME INTL(OPC) PVT LTD",
+      companyAddress:
+        "A/C ARTS INDUSTRIAL PVT LTD C/O.integrated chennai BusinessPart (India)private limited, Survey NO.NO1202,kuruvimedu Road, kondakarai,Tiruvallur, tamilnadu 600120",
+    },
     cargoDetails: [
       {
-        noOfPiecesRCP: "",
-        grossWeight: 0,
+        noOfPiecesRCP: "1",
+        grossWeight: 15400,
         grossWeightUnit: "KGS",
-        rateClass: "",
-        commodityItemNo: "",
-        chargeableWeight: "",
-        rate: "",
-        charge: "",
-        total: "",
-        natureAndGoodsOfQuantity: "",
-        dimensionOrValue: "",
+        rateClass: "154,00",
+        commodityItemNo: "154,00",
+        chargeableWeight: "154,00",
+        rate: "154,00",
+        charge: "154,00",
+        total: "20978 kgs",
+        natureAndGoodsOfQuantity: "PARTS FOR WIND TURBINES",
+        dimensionOrValue: "Dims (m):2,40*0,80*0,73/1",
       },
     ],
-    agentIATACode: "",
-    accountNo: "",
-    airportDeparture: "",
-    referenceNumber: "",
-    optionalShippingInfo: "",
-    acountingInfo: "",
-    to: "",
-    byCarrier: "",
-    routingAndDestination: "",
-    secondTo: "",
-    secondBy: "",
-    thirdTo: "",
-    thirdBy: "",
-    currency: "",
-    CHGS_Code: "",
-    declaredValueForCarriage: "",
-    declaredValueForCustoms: "",
-    WT_VAT: "",
-    others: "",
-    airportDestination: "",
-    requestedFlightDate: ["", ""],
-    amountOfInsurance: "",
-    handlingInfo: "",
-    x: "",
-    totalGrossWeight: 0,
-    CBM: "",
-    currencyConversionRates: "",
-    CC_ChargesInDestination: "",
-    forCarrierUseOnlyInDestination: "",
-    chargesAtDestination: "",
-    totalCollectCharges: "",
-    otherCharges: "",
-    signatureOfShipper: "",
-    executedDate: "",
-    executedPlace: "",
-    signatureOfIssuingCarrier: "",
+    agentIATACode: "MaerskTitan,123dd4545",
+    accountNo: "Chennai, India",
+    airportDeparture: "Billund (Billund) EK CPH-DXB-MAA",
+    referenceNumber: "R23464efKFI",
+    optionalShippingInfo: "Karachi, Pakistan",
+    acountingInfo: "Terms CPT MAA Airport",
+    to: "CPH",
+    byCarrier: "EK",
+    routingAndDestination: "EK4655/27",
+    secondTo: "BXP",
+    secondBy: "EK",
+    thirdTo: "MAA",
+    thirdBy: "EK",
+    currency: "DKK",
+    CHGS_Code: "DKK",
+    declaredValueForCarriage: "NVD",
+    declaredValueForCustoms: "NCV",
+    WT_VAT: "PPT",
+    others: "PPT",
+    airportDestination: "Chennai (International)",
+    requestedFlightDate: ["EK152/28", "EK542/01"],
+    amountOfInsurance: "XXX",
+    handlingInfo:
+      "DK/RA/00138-01/NSC EAW PLACE OF FINAL DESTINATION [SEZ PORT CODE] : INAIP6",
+    x: "SCI ",
+    totalGrossWeight: 15400,
+    CBM: "1.402",
+    currencyConversionRates: "30",
+    CC_ChargesInDestination: "1234",
+    forCarrierUseOnlyInDestination: "45600",
+    chargesAtDestination: "456700",
+    totalCollectCharges: "500000",
+    otherCharges: "no other charges",
+    signatureOfShipper: "Blue Water Shipping A/S",
+    executedDate: "01 OCT 24",
+    executedPlace: "Billund (Billund)",
+    signatureOfIssuingCarrier: "Patrick Dreier Jørgensen",
     weightChargeStatus: "prepaid",
-    weightChargeAmount: "",
+    weightChargeAmount: "10000",
     valuationChargeStatus: "prepaid",
-    valuationChargeAmount: "",
+    valuationChargeAmount: "10000",
     taxStatus: "prepaid",
-    taxAmount: "",
+    taxAmount: "10000",
     agentOtherChargesDueStatus: "prepaid",
-    agentOtherChargesDueAmount: "",
+    agentOtherChargesDueAmount: "10000",
     carrierOtherChargesDueStatus: "prepaid",
-    carrierOtherChargesDueAmount: "",
+    carrierOtherChargesDueAmount: "10000",
   });
   const { showToast } = useNotify();
 
@@ -269,11 +286,18 @@ const CreateAirBl: React.FC = () => {
     <div className="bg-grey-aw-50 flex flex-col gap-8 p-6 rounded">
       {/* booking */}
       <div className="flex flex-col gap-4">
-        <ViewCard
-          label={"Booking ID:"}
-          value={data.bookingId}
-          labelStyle="font-semibold"
-        />
+        <div className="flex items-center justify-between">
+          <ViewCard
+            label={"Booking ID:"}
+            value={data.bookingId}
+            labelStyle="font-semibold"
+          />{" "}
+          <ViewCard
+            label={"HABL Number:"}
+            value={data.hablNumber}
+            labelStyle="font-semibold"
+          />
+        </div>
         <GroupField
           label={"MAWB Number*"}
           type={"text"}
@@ -304,7 +328,7 @@ const CreateAirBl: React.FC = () => {
             <GroupField
               label={""}
               type={"text"}
-              placeholder={"Shipper's Account Number"}
+              placeholder={"Shipper’s Account Number"}
               name={"accountNumber"}
               value={data.shipper.accountNumber || ""}
               onChange={handleShipperChange}
@@ -338,8 +362,8 @@ const CreateAirBl: React.FC = () => {
               type={"text"}
               placeholder={"Consignee's Account Number"}
               name={"accountNumber"}
-              value={data.consignee.accountNumber || ""}
-              onChange={handleConsigneeChange}
+              value={data.shipper.accountNumber || ""}
+              onChange={handleShipperChange}
               error={false}
               errorMessage={""}
             />
@@ -694,7 +718,7 @@ const CreateAirBl: React.FC = () => {
           </div>
           <GroupField
             label={"Amount of Insurance"}
-            type={"number"}
+            type={"text"}
             placeholder={"Enter Amount"}
             name={"amountOfInsurance"}
             value={data.amountOfInsurance}
@@ -1224,4 +1248,4 @@ const CreateAirBl: React.FC = () => {
   );
 };
 
-export default CreateAirBl;
+export default EditAirBl;
