@@ -163,7 +163,7 @@ const ViewBillOfLading: React.FC = () => {
         if (bl.id === blId) {
           const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
             type.blTypeName === blTypeName
-              ? { ...type, isRequestedToAdmin: false }
+              ? { ...type, isRequestedToAdmin: false } 
               : type
           );
           return { ...bl, blTypeDetails: updatedBLTypeDetails };
