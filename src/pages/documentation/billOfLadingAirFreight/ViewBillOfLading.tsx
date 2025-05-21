@@ -158,7 +158,7 @@ const ViewBillOfLading: React.FC = () => {
 
   const handleCancelRequest = (blId: string, blTypeName: string) => {
     // also set toast
-     setDummyData((prev) => {
+    setDummyData((prev) => {
       const updatedBLDetails = prev.blDetails.map((bl) => {
         if (bl.id === blId) {
           const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
@@ -173,7 +173,7 @@ const ViewBillOfLading: React.FC = () => {
       return { ...prev, blDetails: updatedBLDetails };
     });
     // console.log(dummyData.blDetails);
-  }
+  };
 
   const handleAddSeal = () => {
     setIsAddSeal(true);
@@ -194,10 +194,17 @@ const ViewBillOfLading: React.FC = () => {
           <Layout label={"Company Name"} value={dummyData.companyName} />
           <Layout label={"Port of loading"} value={dummyData.portOfLoading} />
           <Layout label={"Cargo Type"} value={dummyData.cargoType} />
-          <Layout label={"Port of Discharge"} value={dummyData.portOfDischarge} />
+          <Layout
+            label={"Port of Discharge"}
+            value={dummyData.portOfDischarge}
+          />
           <div className={`flex text-sm text-grey-ab-900 py-1 flex-col gap-2 `}>
             <p className={`font-bold `}>BL Status</p>
-            <SecondaryChip label={dummyData.blStatus} size={"m"} variant={"mix"} />
+            <SecondaryChip
+              label={dummyData.blStatus}
+              size={"m"}
+              variant={"mix"}
+            />
           </div>
         </div>
 
@@ -234,7 +241,7 @@ const ViewBillOfLading: React.FC = () => {
               </div>
             </div>
             {dummyData.blDetails.length === 0 && isBLCreated && (
-              <Link to={`/bill-of-lading/sea-freight/createBl/${id}`}>
+              <Link to={`/bill-of-lading/air-freight/createBl/${id}`}>
                 <PrimaryButton
                   label={"Create BL"}
                   size={"l"}
@@ -257,7 +264,7 @@ const ViewBillOfLading: React.FC = () => {
                     Create your Bill of Lading. Click below to get started
                   </p>
                   <Link
-                    to={`/bill-of-lading/sea-freight/createBl/${id}`}
+                    to={`/bill-of-lading/air-freight/createBl/${id}`}
                     className="flex justify-center"
                   >
                     <PrimaryButton
