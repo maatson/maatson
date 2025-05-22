@@ -74,7 +74,8 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
             <span className="text-grey-ab-800 font-normal px-[3px]">/</span>
             {copyType.toLowerCase() === "original bill of lading"
               ? originalBLCopies.toString().padStart(2, "0")
-              : copyType.toLowerCase() === "non negotiable copies bill  of lading"
+              : copyType.toLowerCase() ===
+                "non negotiable copies bill  of lading"
               ? nonNegotiableBLCopies.toString().padStart(2, "0")
               : copyType.toLowerCase() === "seaway bill of lading"
               ? seawayBLCopies.toString().padStart(2, "0")
@@ -169,7 +170,7 @@ const BLTypeCard: React.FC<BLTypeCardProps> = ({
                 </div>
               ) : (
                 <div className="flex justify-between px-3 pb-3 items-center ">
-                  <div className="flex justify-between w-full items-center p-1 rounded-xs bg-blue-50">
+                  <div className="flex justify-between w-full gap-2 items-center p-1 rounded-xs bg-blue-50">
                     <div className="flex gap-2">
                       <div>
                         <InfoIcon color="#0084E8" />

@@ -74,7 +74,7 @@ interface BLData {
 
 const ViewBl: React.FC = () => {
   const { blId } = useParams();
-  const isAdmin = false;
+  const isAdmin = true;
   const [data, setData] = useState<BLData>({
     bookingId: "123dd4545",
     blNumber: "13450092",
@@ -135,8 +135,8 @@ const ViewBl: React.FC = () => {
       approvedPerson: "",
     },
     blType: "seaway",
-    numberOfNonNegotiableCopies: 0,
-    numberOfOriginalCopies: 0,
+    numberOfNonNegotiableCopies: 1,
+    numberOfOriginalCopies: 1,
     numberOfSeawayCopies: 1,
   });
   const [isDraftToReview, setDraftToReview] = useState<boolean>(false);

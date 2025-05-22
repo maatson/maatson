@@ -203,9 +203,9 @@ const ViewAirBl: React.FC = () => {
       approvedPerson: "",
     },
     blType: "airway",
-    numberOfNonNegotiableCopies: 0,
-    numberOfOriginalCopies: 0,
-    numberOfAirwayBlCopies: 0,
+    numberOfNonNegotiableCopies: 1,
+    numberOfOriginalCopies: 1,
+    numberOfAirwayBlCopies: 1,
   });
   const [isDraftToReview, setDraftToReview] = useState<boolean>(false);
   const [isApprovalRequest, setApprovalRequest] = useState<boolean>(false);
