@@ -2,6 +2,8 @@ import React from "react";
 import BLLayout from "./BLLayout";
 import BLTypeCard from "./BLTypeCard";
 import SuccessChip from "../../../../components/chips/SuccessChip";
+import { useLocation } from "react-router-dom";
+import { copyInfoProps } from "../ViewBillOfLading";
 
 interface BLApprovedCardProps {
   id: string;
@@ -11,17 +13,18 @@ interface BLApprovedCardProps {
   blCreatedDate: string;
   billOfLadingStatus: string;
   isOriginal: boolean;
-  originalBLCopies?: number;
-  nonNegotiableBLCopies?: number;
-  seawayBLCopies?: number;
-  blTypeDetails?: any[];
+  originalBLCopies: number;
+  nonNegotiableBLCopies: number;
+  seawayBLCopies: number;
+  airwayBLCopies: number;
+  copyInfo: copyInfoProps[];
   onDownload?: () => void;
   onPrint?: () => void;
-  onRequestAdmin?: (id: string, blTypeName: string) => void;
+  onRequestAdmin?: (id: string, copyType: string) => void;
   onAddSeal?: () => void;
   onRemoveSeal?: () => void;
   onAcceptRequest?: () => void;
-  onCancelRequest?: (id: string, blTypeName: string) => void;
+  onCancelRequest?: (id: string, copyType: string) => void;
   onAddCopies?: () => void;
   isAdmin: boolean;
 }
@@ -37,7 +40,8 @@ const BLApprovedCard: React.FC<BLApprovedCardProps> = ({
   originalBLCopies,
   nonNegotiableBLCopies,
   seawayBLCopies,
-  blTypeDetails,
+  airwayBLCopies,
+  copyInfo,
   onDownload,
   onPrint,
   onRequestAdmin,
@@ -48,11 +52,9 @@ const BLApprovedCard: React.FC<BLApprovedCardProps> = ({
   onAddCopies,
   isAdmin,
 }) => {
+  const location = useLocation();
   return (
-    <div
-      className="flex flex-col gap-3 p-2 rounded-md border border-primary bg-grey-aw-50"
-      key={id}
-    >
+    <div className="flex flex-col gap-3 p-2 rounded-md border border-primary bg-grey-aw-50">
       <div className="flex justify-between">
         <BLLayout
           label={"Bill of Lading Number"}
@@ -65,15 +67,36 @@ const BLApprovedCard: React.FC<BLApprovedCardProps> = ({
           <>
             <BLLayout
               label={"Original BL"}
-              value={`${originalBLCopies} Copies`}
+              value={`${originalBLCopies} ${
+                originalBLCopies > 1 ? "copies" : "copy"
+              }`}
             />
             <BLLayout
               label={"Non Negotiable"}
-              value={`${nonNegotiableBLCopies} Copies`}
+              value={`${nonNegotiableBLCopies} ${
+                nonNegotiableBLCopies > 1 ? "copies" : "copy"
+              }`}
             />
           </>
         ) : (
-          <BLLayout label={"Seaway BL"} value={`${seawayBLCopies} Copy`} />
+          <>
+            {location.pathname.startsWith("/bill-of-lading/sea-freight") && (
+              <BLLayout
+                label={"Seaway BL"}
+                value={`${seawayBLCopies} ${
+                  seawayBLCopies > 1 ? "copies" : "copy"
+                }`}
+              />
+            )}
+            {location.pathname.startsWith("/bill-of-lading/air-freight") && (
+              <BLLayout
+                label={"Airway BL"}
+                value={`${airwayBLCopies} ${
+                  airwayBLCopies > 1 ? "copies" : "copy"
+                }`}
+              />
+            )}
+          </>
         )}
 
         <BLLayout label={"BL Created Date"} value={blCreatedDate} />
@@ -88,25 +111,29 @@ const BLApprovedCard: React.FC<BLApprovedCardProps> = ({
       </div>
 
       <div className="flex gap-6 px-2 pt-4 pb-2 border-t border-t-grey-ab-100">
-        {blTypeDetails?.map((item) => (
-          <BLTypeCard
-            blTypeName={item.blTypeName}
-            availableCopies={item.availableCopies}
-            isSealAdded={item.isSealAdded}
-            isRequestedToAdmin={item.isRequestedToAdmin}
-            isRequestRejectByAdmin={item.isRequestRejectByAdmin}
-            originalBLCopies={originalBLCopies}
-            nonNegotiableBLCopies={nonNegotiableBLCopies}
-            onDownload={onDownload}
-            onPrint={onPrint}
-            onRequestAdmin={() => onRequestAdmin?.(id, item.blTypeName)}
-            onAddSeal={onAddSeal}
-            onRemoveSeal={onRemoveSeal}
-            onAcceptRequest={onAcceptRequest}
-            onCancelRequest={() => onCancelRequest?.(id, item.blTypeName)}
-            onAddCopies={onAddCopies}
-            isAdmin={isAdmin}
-          />
+        {copyInfo.map((item, index) => (
+          <React.Fragment key={index}>
+            <BLTypeCard
+              copyType={item.copyType}
+              available={item.available}
+              isSealAdded={item.isSealAdded}
+              isRequestedToAdmin={item.isRequestedToAdmin}
+              isRequestRejectByAdmin={item.isRequestRejectByAdmin}
+              originalBLCopies={originalBLCopies}
+              nonNegotiableBLCopies={nonNegotiableBLCopies}
+              seawayBLCopies={seawayBLCopies}
+              airwayBLCopies={airwayBLCopies}
+              onDownload={onDownload}
+              onPrint={onPrint}
+              onRequestAdmin={() => onRequestAdmin?.(id, item.copyType)}
+              onAddSeal={onAddSeal}
+              onRemoveSeal={onRemoveSeal}
+              onAcceptRequest={onAcceptRequest}
+              onCancelRequest={() => onCancelRequest?.(id, item.copyType)}
+              onAddCopies={onAddCopies}
+              isAdmin={isAdmin}
+            />
+          </React.Fragment>
         ))}
       </div>
     </div>

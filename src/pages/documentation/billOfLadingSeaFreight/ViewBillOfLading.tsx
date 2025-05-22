@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SecondaryChip from "../../../components/chips/SecondaryChip";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import {
@@ -15,6 +15,8 @@ import BLApprovedCard from "./components/BLApprovedCard";
 import AddSealForm from "./components/AddSealForm";
 import RemoveSealForm from "./components/RemoveSealForm";
 import AddCopiesForm from "./components/AddCopiesForm";
+import BlueChip from "../../../components/chips/BlueChip";
+import SuccessChip from "../../../components/chips/SuccessChip";
 
 interface LayoutProps {
   label: string;
@@ -24,6 +26,22 @@ interface LayoutProps {
   valueStyle?: string;
 }
 
+ export interface copyInfoProps {
+  copyType: string;
+  available: number;
+  isSealAdded: boolean;
+  isRequestedToAdmin: boolean;
+  isRequestRejectByAdmin: boolean;
+  onDownload?: () => void;
+  onPrint?: () => void;
+  onRequestAdmin?: () => void;
+  onAddSeal?: () => void;
+  onRemoveSeal?: () => void;
+  onCancelRequest?: () => void;
+  onAcceptRequest?: () => void;
+  onAddCopies?: () => void;
+}
+
 interface BLDetailsProps {
   billOfLadingNumber: string;
   shipper: string;
@@ -31,11 +49,12 @@ interface BLDetailsProps {
   blCreatedDate: string;
   billOfLadingStatus: string;
   id: string;
-  isOriginal?: boolean;
-  originalBLCopies?: number;
-  nonNegotiableBLCopies?: number;
-  seawayBLCopies?: number;
-  blTypeDetails?: any[];
+  isOriginal: boolean;
+  originalBLCopies: number;
+  nonNegotiableBLCopies: number;
+  seawayBLCopies: number;
+  airwayBLCopies: number;
+  copyInfo: copyInfoProps[];
 }
 
 interface DummyDataProps {
@@ -64,7 +83,7 @@ const ViewBillOfLading: React.FC = () => {
     portOfLoading: "Europe",
     cargoType: "FCL(Full Container Load)",
     portOfDischarge: "England",
-    blStatus: "pending",
+    blStatus: "created",
     blDetails: [
       {
         id: "0",
@@ -76,17 +95,20 @@ const ViewBillOfLading: React.FC = () => {
         isOriginal: true,
         originalBLCopies: 3,
         nonNegotiableBLCopies: 2,
-        blTypeDetails: [
+        seawayBLCopies: 0,
+        airwayBLCopies: 0,
+        copyInfo: [
+          //copyInfo
           {
-            blTypeName: "Original Bill of Lading",
-            availableCopies: 3,
+            copyType: "Original Bill of Lading", //copyType
+            available: 3, //available
             isSealAdded: true,
             isRequestedToAdmin: false,
             isRequestRejectByAdmin: false,
           },
           {
-            blTypeName: "Non Negotiable Copies Bill  of Lading",
-            availableCopies: 0,
+            copyType: "Non Negotiable Copies Bill  of Lading",
+            available: 0,
             isSealAdded: false,
             isRequestedToAdmin: true,
             isRequestRejectByAdmin: false,
@@ -119,9 +141,11 @@ const ViewBillOfLading: React.FC = () => {
           billOfLadingStatus: `${dummyData.blDetails[0].billOfLadingStatus}`,
           id: alpha,
           isOriginal: true,
-          originalBLCopies: 3,
-          nonNegotiableBLCopies: 2,
-          blTypeDetails: dummyData.blDetails[0].blTypeDetails,
+          originalBLCopies: dummyData.blDetails[0].originalBLCopies,
+          nonNegotiableBLCopies: dummyData.blDetails[0].nonNegotiableBLCopies,
+          seawayBLCopies: dummyData.blDetails[0].seawayBLCopies,
+          airwayBLCopies: dummyData.blDetails[0].originalBLCopies,
+          copyInfo: dummyData.blDetails[0].copyInfo,
         };
       }
     );
@@ -138,16 +162,16 @@ const ViewBillOfLading: React.FC = () => {
     }));
   };
 
-  const handleRequestToAdmin = (blId: string, blTypeName: string) => {
+  const handleRequestToAdmin = (blId: string, copyType: string) => {
     setDummyData((prev) => {
       const updatedBLDetails = prev.blDetails.map((bl) => {
         if (bl.id === blId) {
-          const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
-            type.blTypeName === blTypeName
+          const updatedcopyInfo = bl.copyInfo?.map((type) =>
+            type.copyType === copyType
               ? { ...type, isRequestedToAdmin: true }
               : type
           );
-          return { ...bl, blTypeDetails: updatedBLTypeDetails };
+          return { ...bl, copyInfo: updatedcopyInfo };
         }
         return bl;
       });
@@ -156,24 +180,24 @@ const ViewBillOfLading: React.FC = () => {
     console.log(dummyData.blDetails);
   };
 
-  const handleCancelRequest = (blId: string, blTypeName: string) => {
+  const handleCancelRequest = (blId: string, copyType: string) => {
     // also set toast
-     setDummyData((prev) => {
+    setDummyData((prev) => {
       const updatedBLDetails = prev.blDetails.map((bl) => {
         if (bl.id === blId) {
-          const updatedBLTypeDetails = bl.blTypeDetails?.map((type) =>
-            type.blTypeName === blTypeName
-              ? { ...type, isRequestedToAdmin: false } 
+          const updatedcopyInfo = bl.copyInfo?.map((type) =>
+            type.copyType === copyType
+              ? { ...type, isRequestedToAdmin: false }
               : type
           );
-          return { ...bl, blTypeDetails: updatedBLTypeDetails };
+          return { ...bl, copyInfo: updatedcopyInfo };
         }
         return bl;
       });
       return { ...prev, blDetails: updatedBLDetails };
     });
     // console.log(dummyData.blDetails);
-  }
+  };
 
   const handleAddSeal = () => {
     setIsAddSeal(true);
@@ -186,6 +210,15 @@ const ViewBillOfLading: React.FC = () => {
     setIsAddCopies(true);
   };
 
+  useEffect(() => {
+    if (dummyData.blDetails.length === 0) {
+      setDummyData((prev) => ({
+        ...prev,
+        blStatus: "pending",
+      }));
+    }
+  }, [dummyData.blDetails]);
+
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -197,7 +230,21 @@ const ViewBillOfLading: React.FC = () => {
           <Layout label={"Port of Discharge"} value={"Europe"} />
           <div className={`flex text-sm text-grey-ab-900 py-1 flex-col gap-2 `}>
             <p className={`font-bold `}>BL Status</p>
-            <SecondaryChip label={"Pending"} size={"m"} variant={"mix"} />
+            {dummyData.blStatus.toLowerCase() === "pending" ? (
+              <SecondaryChip
+                label={dummyData.blStatus}
+                size={"m"}
+                variant={"mix"}
+              />
+            ) : dummyData.blStatus.toLowerCase() === "created" ? (
+              <BlueChip label={dummyData.blStatus} size={"m"} variant={"mix"} />
+            ) : (
+              <SuccessChip
+                label={dummyData.blStatus}
+                size={"m"}
+                variant={"mix"}
+              />
+            )}
           </div>
         </div>
 
@@ -287,18 +334,20 @@ const ViewBillOfLading: React.FC = () => {
               )}
 
               {dummyData.blDetails.map((item) => (
-                <BLCreatedCard
-                  id={item.id}
-                  billOfLadingNumber={item.billOfLadingNumber}
-                  shipper={item.shipper}
-                  consignee={item.consignee}
-                  blCreatedDate={item.blCreatedDate}
-                  billOfLadingStatus={item.billOfLadingStatus}
-                  onDelete={() => handleDelete(item.billOfLadingNumber)}
-                  onViewDraft={`/bill-of-lading/sea-freight/viewBl/${item.id}`}
-                  onDownloadDraft={() => {}}
-                  isAdmin={isAdmin}
-                />
+                <React.Fragment key={item.id}>
+                  <BLCreatedCard
+                    id={item.id}
+                    billOfLadingNumber={item.billOfLadingNumber}
+                    shipper={item.shipper}
+                    consignee={item.consignee}
+                    blCreatedDate={item.blCreatedDate}
+                    billOfLadingStatus={item.billOfLadingStatus}
+                    onDelete={() => handleDelete(item.billOfLadingNumber)}
+                    onViewDraft={`/bill-of-lading/sea-freight/viewBl/${item.id}`}
+                    onDownloadDraft={() => {}}
+                    isAdmin={isAdmin}
+                  />
+                </React.Fragment>
               ))}
             </>
           )}
@@ -318,27 +367,31 @@ const ViewBillOfLading: React.FC = () => {
               </div>
 
               {dummyData.blDetails.map((item) => (
-                <BLApprovedCard
-                  id={item.id}
-                  billOfLadingNumber={item.billOfLadingNumber}
-                  shipper={item.shipper}
-                  consignee={item.consignee}
-                  blCreatedDate={item.blCreatedDate}
-                  billOfLadingStatus={item.billOfLadingStatus}
-                  isOriginal
-                  originalBLCopies={item?.originalBLCopies}
-                  nonNegotiableBLCopies={item?.nonNegotiableBLCopies}
-                  blTypeDetails={item?.blTypeDetails}
-                  onDownload={() => {}}
-                  onPrint={() => {}}
-                  onAddSeal={handleAddSeal}
-                  onRemoveSeal={handleRemoveSeal}
-                  onRequestAdmin={handleRequestToAdmin}
-                  onAcceptRequest={() => {}}
-                  onCancelRequest={handleCancelRequest}
-                  onAddCopies={handleAddCopies}
-                  isAdmin={isAdmin}
-                />
+                <React.Fragment key={item.id}>
+                  <BLApprovedCard
+                    id={item.id}
+                    billOfLadingNumber={item.billOfLadingNumber}
+                    shipper={item.shipper}
+                    consignee={item.consignee}
+                    blCreatedDate={item.blCreatedDate}
+                    billOfLadingStatus={item.billOfLadingStatus}
+                    isOriginal={item.isOriginal}
+                    originalBLCopies={item.originalBLCopies}
+                    nonNegotiableBLCopies={item.nonNegotiableBLCopies}
+                    seawayBLCopies={item.seawayBLCopies}
+                    airwayBLCopies={item.airwayBLCopies}
+                    copyInfo={item.copyInfo}
+                    onDownload={() => {}}
+                    onPrint={() => {}}
+                    onAddSeal={handleAddSeal}
+                    onRemoveSeal={handleRemoveSeal}
+                    onRequestAdmin={handleRequestToAdmin}
+                    onAcceptRequest={() => {}}
+                    onCancelRequest={handleCancelRequest}
+                    onAddCopies={handleAddCopies}
+                    isAdmin={isAdmin}
+                  />
+                </React.Fragment>
               ))}
             </>
           )}

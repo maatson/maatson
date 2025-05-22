@@ -11,6 +11,8 @@ import BlackButton from "../../../../components/buttons/BlackButton";
 import { Link } from "react-router-dom";
 import BLLayout from "./BLLayout";
 import SuccessChip from "../../../../components/chips/SuccessChip";
+import BlueChip from "../../../../components/chips/BlueChip";
+import ErrorChip from "../../../../components/chips/ErrorChip";
 
 interface BLCreatedCardProps {
   id: string;
@@ -37,13 +39,11 @@ const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
   onDownloadDraft,
   isAdmin,
 }) => {
-  console.log(isAdmin);
 
   return (
     <>
       <div
         className="flex flex-col gap-3 p-2 rounded-md bg-grey-aw-50 border border-primary"
-        key={id}
       >
         <div className="flex justify-between">
           <BLLayout
@@ -57,11 +57,31 @@ const BLCreatedCard: React.FC<BLCreatedCardProps> = ({
 
           <div className="flex flex-col gap-2 p-1 max-w-[240px] items-center">
             <p className="text-xs text-grey-ab-300">Bill of Lading Status</p>
-            <SuccessChip
-              label={billOfLadingStatus}
-              size={"m"}
-              variant={"primary"}
-            />
+            {billOfLadingStatus.toLowerCase() === "draft" ? (
+              <SecondaryChip
+                label={billOfLadingStatus}
+                size={"m"}
+                variant={"primary"}
+              />
+            ) : billOfLadingStatus.toLowerCase() === "bl review" ? (
+              <BlueChip
+                label={billOfLadingStatus}
+                size={"m"}
+                variant={"primary"}
+              />
+            ) : billOfLadingStatus.toLowerCase() === "bl approval request" ? (
+              <ErrorChip
+                label={billOfLadingStatus}
+                size={"m"}
+                variant={"primary"}
+              />
+            ) : (
+              <SuccessChip
+                label={billOfLadingStatus}
+                size={"m"}
+                variant={"primary"}
+              />
+            )}
           </div>
         </div>
 
