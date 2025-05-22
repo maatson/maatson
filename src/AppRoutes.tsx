@@ -555,6 +555,9 @@ const CreateAirBl = lazy(
 const EditAirBl = lazy(
   () => import("./pages/documentation/billOfLadingAirFreight/EditAirBl")
 );
+const ViewAirBl = lazy(
+  () => import("./pages/documentation/billOfLadingAirFreight/viewAirBl")
+);
 
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
@@ -886,7 +889,8 @@ const AppRoutes: React.FC = () => {
           <Route index element={<BillOfLadingListAir />} />
           <Route path="view/:bookingId" element={<ViewBillOfLadingAir />} />
           <Route path="createBl/:bookingId" element={<CreateAirBl />} />
-          <Route path="editBl/:blID" element={<EditAirBl />} />
+          <Route path="editBl/:blId" element={<EditAirBl />} />
+          <Route path="viewBl/:blId" element={<ViewAirBl />} />
         </Route>
 
         {/* testimonials */}

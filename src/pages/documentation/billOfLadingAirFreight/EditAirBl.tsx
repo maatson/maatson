@@ -35,7 +35,7 @@ type CargoDetails = {
 interface BLData {
   bookingId: string;
   mawbNumber: string;
-  hablNumber: string;
+  hawbNumber: string;
   shipper: ShipperDetails;
   consignee: ShipperDetails;
   notifyParty: ShipperDetails;
@@ -93,7 +93,7 @@ const EditAirBl: React.FC = () => {
   const [data, setData] = useState<BLData>({
     bookingId: "123dd4545",
     mawbNumber: "13450092",
-    hablNumber: "123dd4545",
+    hawbNumber: "123dd4545",
     shipper: {
       companyName: "LIFECO",
       companyAddress:
@@ -293,8 +293,8 @@ const EditAirBl: React.FC = () => {
             labelStyle="font-semibold"
           />{" "}
           <ViewCard
-            label={"HABL Number:"}
-            value={data.hablNumber}
+            label={"HAWB Number:"}
+            value={data.hawbNumber}
             labelStyle="font-semibold"
           />
         </div>
