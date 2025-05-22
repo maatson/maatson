@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import { SealIcon, SignatureIcon } from "../../../../components/icons/Icons";
+import GroupField from "../../../components/groupField/GroupField";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import { SealIcon, SignatureIcon } from "../../../components/icons/Icons";
 
 interface AddSealFormProps {
   onClose: () => void;
@@ -38,8 +38,8 @@ const AddSealForm: React.FC<AddSealFormProps> = ({ onClose, onSave }) => {
             <div className="h-4 bg-grey-600 w-[100%] rounded-[2px]"></div>
           </div>
           <div className="flex justify-between">
-            {/* <div>sign</div> */}
-            {/* <div>seal</div> */}
+            {/* <div>sign Image here</div> */}
+            {/* <div>seal Image here</div> */}
           </div>
         </div>
         <div className="bg-grey-200 flex flex-col gap-6 p-3  rounded-xs ">

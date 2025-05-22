@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import GroupField from "../../../components/groupField/GroupField";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
 
-interface SplitBLFormProps {
+interface AddCopiesFormProps {
   onClose: () => void;
   onSave: (count: number) => void;
 }
-const SplitBLForm: React.FC<SplitBLFormProps> = ({ onClose, onSave }) => {
-  const [data, setData] = useState({ numberOfBL: "" });
+const AddCopiesForm: React.FC<AddCopiesFormProps> = ({ onClose, onSave }) => {
+  const [data, setData] = useState({ numberOfCopies: "" });
   const [error, setError] = useState("");
 
   const handleChange = (
@@ -16,21 +16,16 @@ const SplitBLForm: React.FC<SplitBLFormProps> = ({ onClose, onSave }) => {
     const { name, value } = e.target;
     if (/^\d*$/.test(value)) {
       setData((prev) => ({ ...prev, [name]: value }));
-      //   if (Number(value) >= 2 || value === "") {
-      //     setError("");
-      //   } else {
-      //     setError("Minimum 2 BL splits required.");
-      //   }
     }
   };
 
   const handleSave = () => {
-    const count = Number(data.numberOfBL);
-    if (!data.numberOfBL || count < 2) {
-      setError("Please enter a valid number (minimum 2)");
-      return;
-    }
-    setError("");
+    const count = Number(data.numberOfCopies);
+    // if (!data.numberOfCopies || count < 2) {
+    //   setError("Please enter a valid number (minimum 2)");
+    //   return;
+    // }
+    // setError("");
     onSave(count);
   };
 
@@ -38,18 +33,15 @@ const SplitBLForm: React.FC<SplitBLFormProps> = ({ onClose, onSave }) => {
     <div className="bg-grey-aw-50 rounded-sm flex flex-col gap-6 p-4 shadow-lg max-w-[400px]">
       <div className="flex flex-col gap-4 ">
         <p className="text-h5 font-bold text-grey-ab-800 text-center">
-          Split Bill of Lading
+          Add Additional Bill of Lading Copies
         </p>
-        <p className="text-xs text-grey-ab-300 text-center">
-          You can split this BL into multiple BLs based on your shipment
-          needs.Enter the number of splits you want to create.
-        </p>
+
         <GroupField
-          label={"Number of BL Split"}
+          label={"Number of Additional Copies"}
           type={"number"}
-          placeholder={"Enter Number of BL Split"}
-          name={"numberOfBL"}
-          value={data.numberOfBL}
+          placeholder={"Enter Additional Copies"}
+          name={"numberOfCopies"}
+          value={data.numberOfCopies}
           onChange={handleChange}
           error={!!error}
           errorMessage={error}
@@ -66,7 +58,7 @@ const SplitBLForm: React.FC<SplitBLFormProps> = ({ onClose, onSave }) => {
         </div>
         <div className="w-full" onClick={handleSave}>
           <PrimaryButton
-            label={"Split Now"}
+            label={"Add Copies"}
             size={"l"}
             variant={"primary"}
             style="w-full"
@@ -77,4 +69,4 @@ const SplitBLForm: React.FC<SplitBLFormProps> = ({ onClose, onSave }) => {
   );
 };
 
-export default SplitBLForm;
+export default AddCopiesForm;

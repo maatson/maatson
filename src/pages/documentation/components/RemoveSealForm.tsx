@@ -1,6 +1,6 @@
 import React from "react";
-import ErrorButton from "../../../../components/buttons/ErrorButton";
-import GreyButton from "../../../../components/buttons/GreyButton";
+import ErrorButton from "../../../components/buttons/ErrorButton";
+import GreyButton from "../../../components/buttons/GreyButton";
 import RemoveSealImage from "/images/removeSeal.png";
 
 interface RemoveSealFormProps {

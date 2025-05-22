@@ -20,7 +20,7 @@ const ApprovalRequestModal: React.FC<{
   console.log("appbl", data);
   return (
     <div className="inset-0 fixed z-40 bg-black/20 flex justify-center items-center h-screen">
-      <div className="bg-grey-aw-100 max-w-[500px] w-full rounded-sm  max-h-[500px] flex flex-col  gap-4 p-4 relative inset-5">
+      <div className="bg-grey-aw-100 max-w-[400px] w-full rounded-sm  max-h-[500px] flex flex-col  gap-4 p-4 relative inset-5">
         <div className="flex flex-col gap-2 ">
           <p className="text-lg font-semibold text-center">
             BL Submission Details
