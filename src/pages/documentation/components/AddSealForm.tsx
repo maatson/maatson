@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../../components/groupField/GroupField";
-import PrimaryButton from "../../../../components/buttons/PrimaryButton";
-import { SealIcon, SignatureIcon } from "../../../../components/icons/Icons";
+import GroupField from "../../../components/groupField/GroupField";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import { SealIcon, SignatureIcon } from "../../../components/icons/Icons";
 
 interface AddSealFormProps {
   onClose: () => void;

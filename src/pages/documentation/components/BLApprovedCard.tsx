@@ -1,9 +1,9 @@
 import React from "react";
 import BLLayout from "./BLLayout";
 import BLTypeCard from "./BLTypeCard";
-import SuccessChip from "../../../../components/chips/SuccessChip";
+import SuccessChip from "../../../components/chips/SuccessChip";
 import { useLocation } from "react-router-dom";
-import { copyInfoProps } from "../ViewBillOfLading";
+import { copyInfoProps } from "../billOfLadingSeaFreight/ViewBillOfLading";
 
 interface BLApprovedCardProps {
   id: string;

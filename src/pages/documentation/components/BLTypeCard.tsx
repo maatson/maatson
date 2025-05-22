@@ -8,12 +8,12 @@ import {
   PrintIcon,
   SealIcon,
   SuccessIcon,
-} from "../../../../components/icons/Icons";
-import BlackButton from "../../../../components/buttons/BlackButton";
-import NeutralBlueButton from "../../../../components/buttons/NeutralBlueButton";
-import ErrorButton from "../../../../components/buttons/ErrorButton";
-import TertiaryButton from "../../../../components/buttons/TertiaryButton";
-import SuccessButton from "../../../../components/buttons/SuccessButton";
+} from "../../../components/icons/Icons";
+import BlackButton from "../../../components/buttons/BlackButton";
+import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
+import ErrorButton from "../../../components/buttons/ErrorButton";
+import TertiaryButton from "../../../components/buttons/TertiaryButton";
+import SuccessButton from "../../../components/buttons/SuccessButton";
 
 interface BLTypeCardProps {
   copyType: string;

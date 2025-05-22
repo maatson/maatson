@@ -1,18 +1,18 @@
 import React from "react";
-import SecondaryChip from "../../../../components/chips/SecondaryChip";
-import ErrorButton from "../../../../components/buttons/ErrorButton";
+import SecondaryChip from "../../../components/chips/SecondaryChip";
+import ErrorButton from "../../../components/buttons/ErrorButton";
 import {
   DeleteIcon,
   DocumentIcon,
   DownloadIcon,
-} from "../../../../components/icons/Icons";
-import GreyButton from "../../../../components/buttons/GreyButton";
-import BlackButton from "../../../../components/buttons/BlackButton";
+} from "../../../components/icons/Icons";
+import GreyButton from "../../../components/buttons/GreyButton";
+import BlackButton from "../../../components/buttons/BlackButton";
 import { Link } from "react-router-dom";
 import BLLayout from "./BLLayout";
-import SuccessChip from "../../../../components/chips/SuccessChip";
-import BlueChip from "../../../../components/chips/BlueChip";
-import ErrorChip from "../../../../components/chips/ErrorChip";
+import SuccessChip from "../../../components/chips/SuccessChip";
+import BlueChip from "../../../components/chips/BlueChip";
+import ErrorChip from "../../../components/chips/ErrorChip";
 
 interface BLCreatedCardProps {
   id: string;
