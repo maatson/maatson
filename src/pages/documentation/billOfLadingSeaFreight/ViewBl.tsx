@@ -5,7 +5,6 @@ import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import BlackButton from "../../../components/buttons/BlackButton";
 import {
   CloseIcon,
-  CrossIcon,
   DownloadIcon,
   EditIcon,
   InfoIcon,
