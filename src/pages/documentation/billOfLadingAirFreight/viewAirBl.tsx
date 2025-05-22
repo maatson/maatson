@@ -533,17 +533,13 @@ const ViewAirBl: React.FC = () => {
                   </p>
                   <DraftCard
                     heading={"Shipper Account Number"}
-                    value={"3445756457566"}
+                    value={data.shipper.accountNumber || ""}
                     isFlex={false}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p>LIFECO</p>
-                  <p>
-                    LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus
-                    Brega-Libya LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay
-                    Andakus Brega-Libya
-                  </p>
+                  <p>{data.shipper.companyName}</p>
+                  <p>{data.shipper.companyAddress}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-1 border rounded border-grey-ab-100 pb-2 pl-2">
@@ -553,45 +549,37 @@ const ViewAirBl: React.FC = () => {
                   </p>
                   <DraftCard
                     heading={"Consignee Account Number"}
-                    value={"56796785675"}
+                    value={data.consignee.accountNumber || ""}
                     isFlex={false}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p>LIFECO</p>
-                  <p>
-                    LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay Andakus
-                    Brega-Libya LIBTAN FERTILIZER COMPANY P.O.Box 6796 hay
-                    Andakus Brega-Libya
-                  </p>
+                  <p>{data.consignee.companyName}</p>
+                  <p>{data.consignee.companyAddress}</p>
                 </div>
               </div>
               <DraftCard
                 heading={"Issuing Carrier's Agent Name and Address"}
-                value={"MAATSON MARITIME INTL(OPC) PVT LTD"}
-                subValue={
-                  "Kosmo one,tower c.8th floor, sai nagar 3rd main road, Mogapair West, Ambattur Chennai-600 058 tel No: +91 9003052529"
-                }
+                value={data.carrierAgent.companyName}
+                subValue={data.carrierAgent.companyAddress}
                 isFlex={false}
               />
               <DraftCard
                 heading={"Notify Party"}
-                value={"ASSIDUOUS INTELECTS PRIVATE LIMITED (FTWZ)"}
-                subValue={
-                  "A/C ARTS INDUSTRIAL PVT LTD C/O.integrated chennai BusinessPart (India)private limited, Survey NO.NO1202,kuruvimedu Road, kondakarai,Tiruvallur, tamilnadu 600120"
-                }
+                value={data.notifyParty.companyName}
+                subValue={data.notifyParty.companyAddress}
                 isFlex={false}
               />
               <div className="flex gap-2">
                 <DraftCard
                   heading={"Agent's IATA Code"}
-                  value={"MaerskTitan,123dd4545"}
+                  value={data.agentIATACode}
                   isFlex={false}
                   className="w-full"
                 />{" "}
                 <DraftCard
                   heading={"Account No."}
-                  value={"Chennai, India"}
+                  value={data.accountNo}
                   className="w-full"
                   isFlex={false}
                 />
@@ -617,13 +605,13 @@ const ViewAirBl: React.FC = () => {
               <div className="flex gap-2">
                 <DraftCard
                   heading={"MAWB Number"}
-                  value={"123dd4545"}
+                  value={data.mawbNumber}
                   className="w-full"
                   isFlex={false}
                 />{" "}
                 <DraftCard
                   heading={"HAWB Number"}
-                  value={"MM1234001"}
+                  value={data.hawbNumber}
                   className="w-full"
                   isFlex={false}
                 />
@@ -652,7 +640,7 @@ const ViewAirBl: React.FC = () => {
               </div>
               <DraftCard
                 heading={"Accounting Information"}
-                value={"Terms CPT MAA Airport"}
+                value={data.acountingInfo}
                 className="w-full"
                 isFlex={false}
               />{" "}
@@ -665,19 +653,19 @@ const ViewAirBl: React.FC = () => {
                 heading={
                   "Airport of Departure (Addr. of First Carrier) and Requested Routing"
                 }
-                value={"123dd4545"}
+                value={data.airportDeparture}
                 isFlex={false}
               />{" "}
               <div className="flex gap-4">
                 <DraftCard
                   heading={"Reference Number"}
-                  value={"123dd4545"}
+                  value={data.referenceNumber}
                   isFlex={false}
                   className="w-full"
                 />{" "}
                 <DraftCard
                   heading={"Optional Shipping Information"}
-                  value={"123dd4545"}
+                  value={data.optionalShippingInfo}
                   isFlex={false}
                   className="w-full"
                 />{" "}
@@ -687,49 +675,49 @@ const ViewAirBl: React.FC = () => {
               <div className="flex gap-1">
                 <DraftCard
                   heading={"TO"}
-                  value={"CPH"}
+                  value={data.to}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"By First Carrier"}
-                  value={"EK"}
+                  value={data.byCarrier}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"Routing & Destination"}
-                  value={"EK4655/27"}
+                  value={data.routingAndDestination}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"TO"}
-                  value={"BXP"}
+                  value={data.secondTo}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"BY"}
-                  value={"EK"}
+                  value={data.secondBy}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"TO"}
-                  value={"MAA"}
+                  value={data.thirdTo}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"BY"}
-                  value={"EK"}
+                  value={data.thirdBy}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
@@ -739,14 +727,14 @@ const ViewAirBl: React.FC = () => {
               <div className="flex gap-1 ">
                 <DraftCard
                   heading={"Currency"}
-                  value={"DKK"}
+                  value={data.currency}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"CHGS CODE"}
-                  value={"DKK"}
+                  value={data.CHGS_Code}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
@@ -756,14 +744,14 @@ const ViewAirBl: React.FC = () => {
                   <div className="flex gap-1">
                     <DraftCard
                       heading={"PPT"}
-                      value={"YS"}
+                      value={data.WT_VAT === "PPT" ? "YS" : ""}
                       isFlex={false}
                       className="p-[4px] text-3xs  gap-[4px]"
                       headingStyle="text-2xs"
                     />
                     <DraftCard
                       heading={"COL"}
-                      value={""}
+                      value={data.WT_VAT === "COL" ? "YS" : ""}
                       isFlex={false}
                       className="p-[4px] text-3xs  gap-[4px]"
                       headingStyle="text-2xs"
@@ -775,30 +763,30 @@ const ViewAirBl: React.FC = () => {
                   <div className="flex gap-1">
                     <DraftCard
                       heading={"PPT"}
-                      value={"YS"}
+                      value={data.others === "PPT" ? "YS" : ""}
                       isFlex={false}
                       className="p-[4px] text-3xs gap-[4px]"
                       headingStyle="text-2xs "
                     />
                     <DraftCard
                       heading={"COL"}
-                      value={""}
+                      value={data.others === "COL" ? "YS" : ""}
                       isFlex={false}
-                      className="p-[4px] text-3xs  gap-[4px]"
+                      className="p-[4px] text-3xs gap-[4px]"
                       headingStyle="text-2xs"
                     />
                   </div>
                 </div>
                 <DraftCard
                   heading={"Declared Value for Carriage"}
-                  value={"NVD"}
+                  value={data.declaredValueForCarriage}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
                 />{" "}
                 <DraftCard
                   heading={"Declared Value for Customs"}
-                  value={"NCV"}
+                  value={data.declaredValueForCustoms}
                   isFlex={false}
                   className="w-full text-2xs"
                   headingStyle="text-2xs"
@@ -809,22 +797,22 @@ const ViewAirBl: React.FC = () => {
               <div className="flex gap-2">
                 <DraftCard
                   heading={"Airport of Destination"}
-                  value={"Chennai (International)"}
+                  value={data.airportDeparture}
                   isFlex={false}
                   className="w-full"
                 />{" "}
                 <div className="flex flex-col border border-grey-ab-100 rounded gap-2 p-2 w-full">
                   <p className="text-sm font-semibold">Requested Flight/Date</p>
                   <div className="flex justify-between gap-2">
-                    <p>EK152/28</p>
-                    <p>EK542/01</p>
+                    <p>{data.requestedFlightDate[0]}</p>
+                    <p>{data.requestedFlightDate[1]}</p>
                   </div>
                 </div>
               </div>
               <div className="flex gap-2">
                 <DraftCard
                   heading={"Amount of Insurance"}
-                  value={"XXX"}
+                  value={data.amountOfInsurance}
                   isFlex={false}
                   className="w-full"
                 />
@@ -843,17 +831,13 @@ const ViewAirBl: React.FC = () => {
           <div className="border border-grey-ab-100 rounded p-2 flex gap-3 justify-between">
             <div className="flex flex-col gap-3 w-full basis-1/3 ">
               <p className="text-sm font-semibold">Handling Information</p>
-              <p>
-                DK/RA/00138-01/NSC EAW PLACE OF FINAL DESTINATION [SEZ PORT
-                CODE] : INAIP6
-              </p>
+              <p>{data.handlingInfo}</p>
             </div>
             <div className="flex items-center gap-3 w-full basis-1/4 border border-grey-ab-100 rounded h-fit p-2 self-end">
               <p className="text-sm font-semibold">X</p>
-              <p>SCI</p>
+              <p>{data.x}</p>
             </div>
           </div>
-          {/**/}
 
           {/* table */}
           <table>
@@ -897,6 +881,123 @@ const ViewAirBl: React.FC = () => {
               </tbody>
             )}
           </table>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col gap-2">
+              <table className="border border-grey-ab-100  text-sm">
+                <thead>
+                  <tr className=" border-b">
+                    <th className="p-2  text-start">Heading</th>
+                    <th className="p-2  text-start">Prepaid</th>
+                    <th className="p-2  text-start">Collect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="p-2 font-semibold">Weight Charge</td>
+                    <td className="p-2 ">100</td>
+                    <td className="p-2 ">20</td>
+                  </tr>{" "}
+                  <tr className="border-b">
+                    <td className="p-2 font-semibold">Valuation Charge</td>
+                    <td className="p-2 ">100</td>
+                    <td className="p-2 ">20</td>
+                  </tr>{" "}
+                  <tr className="border-b">
+                    <td className="p-2 font-semibold">Tax</td>
+                    <td className="p-2 ">100</td>
+                    <td className="p-2 ">20</td>
+                  </tr>{" "}
+                  <tr className="border-b">
+                    <td className="p-2 font-semibold">
+                      Total Other Charges Due Agent
+                    </td>
+                    <td className="p-2 ">100</td>
+                    <td className="p-2 ">20</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="p-2 font-semibold">
+                      Total Other Charges Due Carrier
+                    </td>
+                    <td className="p-2 ">100</td>
+                    <td className="p-2 ">20</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="p-2 font-semibold">TOTAL</td>
+                    <td className="p-2 font-semibold">100</td>
+                    <td className="p-2 font-semibold">200</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="grid grid-cols-2 gap-2">
+                <DraftCard
+                  heading={"Currency Conversion Rates"}
+                  value={"30"}
+                  isFlex={false}
+                />{" "}
+                <DraftCard
+                  heading={"CC Charges in Dest. Currency"}
+                  value={"1234"}
+                  isFlex={false}
+                />{" "}
+                <DraftCard
+                  heading={"For Carrier's use only at Destination"}
+                  value={"45600"}
+                  isFlex={false}
+                />{" "}
+                <DraftCard
+                  heading={"Charges at Destination"}
+                  value={"456700"}
+                  isFlex={false}
+                />
+              </div>
+              <DraftCard
+                heading={"Total Collect Charges"}
+                value={"500000"}
+                isFlex={false}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <DraftCard
+                heading={"Other Charges"}
+                value={data.otherCharges}
+                isFlex={false}
+              />
+              <div className="border border-grey-ab-100 p-2 flex flex-col rounded gap-4">
+                <p className="text-2xs  min-h-[105px]">
+                  Shipper certifies that the particulars on the face hereof are
+                  correct and that insofar as any part of the consignment
+                  contains dangerous goods, such part is properly described by
+                  name and is in proper condition for carriage by air according
+                  to the applicable Dangerous Goods Regulations
+                </p>
+                <div className="flex flex-col gap-1 text-sm">
+                  <p className="text-center">{data.signatureOfShipper}</p>
+                  <div className="border border-dashed" />
+                  <p className="text-center">
+                    Signature of Shipper or his Agent
+                  </p>
+                </div>
+              </div>
+              <div className="border border-grey-ab-100 p-2 flex flex-col justify-end rounded gap-4 min-h-[150px]">
+                <div className="flex flex-col gap-1 ">
+                  <div className="flex items-center justify-between gap-1 text-xs">
+                    <p className="">{data.executedDate}</p>
+                    <p className="">{data.executedPlace}</p>
+                    <p className="">{data.signatureOfIssuingCarrier}</p>
+                  </div>
+                  <div className="border border-dashed" />
+                  <div className="flex items-center justify-between gap-1 text-xs">
+                    <p className="">Executed on (Date)</p>
+                    <p className="">at (Place)</p>
+                    <p className="">
+                      Signature of Issuing Carrier or its Agent
+                    </p>
+                  </div>{" "}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
