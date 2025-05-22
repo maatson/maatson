@@ -302,7 +302,7 @@ const ViewBillOfLading: React.FC = () => {
                   blCreatedDate={item.blCreatedDate}
                   billOfLadingStatus={item.billOfLadingStatus}
                   onDelete={() => handleDelete(item.billOfLadingNumber)}
-                  onViewDraft={`/bill-of-lading/sea-freight/viewBl/${item.id}`}
+                  onViewDraft={`/bill-of-lading/air-freight/viewBl/${item.id}`}
                   onDownloadDraft={() => {}}
                   isAdmin={isAdmin}
                 />
