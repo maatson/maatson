@@ -1,5 +1,4 @@
 import React from "react";
-import { toast } from "react-toastify";
 import { SuccessIcon } from "../icons/Icons";
 
 export interface ToastProps {

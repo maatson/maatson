@@ -10,7 +10,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import maatsonLogo from "/images/logo.svg";
 import CustomTable from "../../../../../components/table/CustomTable";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 
 const ViewDepartureConfirmation: React.FC = () => {
   const { bookingId } = useParams();

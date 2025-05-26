@@ -4,7 +4,7 @@ import GroupField from "../../../../../components/groupField/GroupField";
 import { AddIcon, DeleteIcon } from "../../../../../components/icons/Icons";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import { useNavigate } from "react-router-dom";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 
 const EditDepartureConfirmation: React.FC = () => {
   const [data, setData] = useState({

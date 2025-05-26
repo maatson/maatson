@@ -1,0 +1,5 @@
+Custom hooks for reusable logic for simpler functions
+ hooks/
+│   ├── useDropdowns.js
+│   ├── useAuth.js ==>these are we also do it in redux due to global
+│   └── useUser.js ==>these are we also do it in redux due to global

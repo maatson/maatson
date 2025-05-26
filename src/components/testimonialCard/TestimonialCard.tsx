@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DeleteIcon, EditIcon, StarFillIcon } from "../icons/Icons";
 import BlueSwitch from "../switches/BlueSwitch";
 import FrameLogo from "/images/frameLogo.svg";
-import { useErrorNotify, useSuccessNotify } from "../../utils/toastutil";
+import { useNotify } from "../../hooks/useNotify";
 
 interface TestimonialCardProps {
   onDelete: () => void;
@@ -29,17 +29,18 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   };
 
   const [isActiveSwitch, setIsActiveSwitch] = useState<boolean>(true);
-  
+  const { showToast } = useNotify();
+
   const handleSwitchChange = () => {
     setIsActiveSwitch(!isActiveSwitch);
     if (isActiveSwitch) {
-      useSuccessNotify({
+      showToast("success", {
         heading: "Testimonial Activated Successfully!",
         message: "Testimonials is now active and visible on the website",
       });
     }
     if (!isActiveSwitch) {
-      useErrorNotify({
+      showToast("error", {
         heading: "Testimonial Disabled!",
         message:
           "Testimonials is now inactive and will not be displayed on the website.",

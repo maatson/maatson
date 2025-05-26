@@ -10,7 +10,7 @@ import {
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import BlackButton from "../../../../../components/buttons/BlackButton";
 import CustomTable from "../../../../../components/table/CustomTable";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 import ship from "/images/cargoShip.png";
 
 interface FCLcontainerProps {

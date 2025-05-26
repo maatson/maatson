@@ -74,10 +74,10 @@ const EditableTable = <T extends Record<string, any>>({
       <table className="border w-full text-sm ">
         <thead className="bg-grey-200 font-semibold">
           <tr>
-            <td className=" px-2 py-3 text-center border-b">S.No</td>
+            <td className=" px-2 py-3  border-b w-full">S.No</td>
 
             {columns.map((col) => (
-              <td key={String(col.key)} className="border-b px-2 py-3">
+              <td key={String(col.key)} className="border-b px-2 py-3 w-full">
                 {col.label}
               </td>
             ))}
@@ -91,7 +91,7 @@ const EditableTable = <T extends Record<string, any>>({
             const isEditing = editIndex === index;
             return (
               <tr key={index}>
-                <td className=" px-2 py-2 text-center">
+                <td className=" px-2 py-2 ">
                   {(index + 1).toFixed().padStart(2, "0")}
                 </td>
                 {columns.map((col) => (

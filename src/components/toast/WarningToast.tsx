@@ -1,5 +1,4 @@
 import React from "react";
-import { toast } from "react-toastify";
 import { WarningIcon } from "../icons/Icons";
 import { ToastProps } from "./SuccessToast";
 

@@ -107,6 +107,7 @@ const SideBar: React.FC = () => {
         children: [
           { label: "Leads and CRM", link: "/enquiry" },
           { label: "Booking", link: "/booking" },
+          { label: "Rate Tariff", link: "/rate-tariff" },
         ],
         onClick: () => handleItemClick(2),
       },
@@ -133,7 +134,18 @@ const SideBar: React.FC = () => {
         leftIcon: <DocumentIcon />,
         label: "Documentation",
         isOpen: openItems[4] || false,
-        children: [],
+        children: [
+          {
+            label: "Bill of Lading (Sea Freight)",
+            link: "/bill-of-lading/sea-freight",
+            active: "/bill-of-lading/sea-freight",
+          },
+          {
+            label: "Bill of Lading (Air Freight)",
+            link: "/bill-of-lading/air-freight",
+            active: "/bill-of-lading/air-freight",
+          },
+        ],
         onClick: () => handleItemClick(4),
       },
       {

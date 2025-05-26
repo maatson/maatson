@@ -265,21 +265,6 @@ const BookingList: React.FC = () => {
       bookingStatus: "Processing",
       bookingValidityDate: "11/10/25",
     },
-    {
-      bookingID: "3233856",
-      companyName: "Farrel Kurniawan",
-      shipmentMode: "Import",
-      attender: "Pantleev A",
-      salesPersonName: "Rina Karina",
-      salesPersonImage: SalesPersonImage,
-      branchLocation: "Chennai, India",
-      transportationMode: "Land Freight",
-      portOfLoading: "Los Angeles, USA",
-      portOfDischarge: "Antwerp, Belgium",
-      nextFollowUps: "11/10/25",
-      bookingStatus: "Confirm",
-      bookingValidityDate: "11/10/25",
-    },
   ];
 
   // Memoize fetchData function with useCallback

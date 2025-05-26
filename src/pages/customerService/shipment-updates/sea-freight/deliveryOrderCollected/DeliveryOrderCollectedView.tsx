@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import WarningChip from "../../../../../components/chips/WarningChip";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 import {
   CrossIcon,
   EditIcon,

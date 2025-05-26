@@ -9,13 +9,13 @@ import {
   ExcelIcon,
   SendIcon,
 } from "../../../../../components/icons/Icons";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 import WarningChip from "../../../../../components/chips/WarningChip";
 import SuccessChip from "../../../../../components/chips/SuccessChip";
 import PrimaryButton from "../../../../../components/buttons/PrimaryButton";
 import flightImage from "/images/cargoFlight.png";
 import NeutralBlueButton from "../../../../../components/buttons/NeutralBlueButton";
 import ErrorButton from "../../../../../components/buttons/ErrorButton";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 // import AddVesselDetail from "./AddVesselDetail";
 // import UpdateVesselDetail from "./UpdateVesselDetail";
 // import UpdateCargo from "./UpdateCargo";

@@ -109,29 +109,15 @@ const CreateVGMFiling: React.FC = () => {
           optionalDetails: [...prev.optionalDetails, addOptionalData],
         }));
       } else {
-        alert("Fill previous data");
+        alert("Choose container number and fill atleast one optional data");
       }
-    } else {
-      alert("You already reached max");
-    }
-    // const addOptionalData = {
-    //   containerNumber: "",
-    //   determinationDate: "",
-    //   solasMethod: "Weighing",
-    //   solarCertification: "",
-    //   country: "",
-    //   providerSignature: "",
-    // };
-    // setData((prev) => ({
-    //   ...prev,
-    //   optionalDetails: [...prev.optionalDetails, addOptionalData],
-    // }));
+    } 
+
   };
 
   const handleDelete = (index: number) => {
     if (data.mandatoryDetails.length > 1) {
       if (data.mandatoryDetails[index].containerNumber) {
-        // if (data.optionalDetails.length > 1) {
         setData((prev) => ({
           ...prev,
           mandatoryDetails: prev.mandatoryDetails.filter((_, i) => i !== index),
@@ -141,12 +127,10 @@ const CreateVGMFiling: React.FC = () => {
               data.mandatoryDetails[index].containerNumber
           ),
         }));
-        // }
       } else {
         setData((prev) => ({
           ...prev,
           mandatoryDetails: prev.mandatoryDetails.filter((_, i) => i !== index),
-          // optionalDetails: prev.optionalDetails.filter((_, i) => i !== index),
         }));
       }
     }
@@ -685,10 +669,18 @@ const CreateVGMFiling: React.FC = () => {
                             }
                             options={
                               data.mandatoryDetails.length > 0
-                                ? data.mandatoryDetails.map((details) => ({
-                                    value: details.containerNumber,
-                                    label: details.containerNumber,
-                                  }))
+                                ? data.mandatoryDetails
+                                    .filter(
+                                      (details) =>
+                                        !data.optionalDetails.some(
+                                          (optionalItem) =>
+                                            optionalItem.containerNumber === details.containerNumber
+                                        )
+                                    )
+                                    .map((details) => ({
+                                      value: details.containerNumber,
+                                      label: details.containerNumber,
+                                    }))
                                 : []
                             }
                             error={false}

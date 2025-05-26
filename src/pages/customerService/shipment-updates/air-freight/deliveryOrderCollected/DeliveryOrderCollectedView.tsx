@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import WarningChip from "../../../../../components/chips/WarningChip";
-import ViewCard from "../../../sea-air-schedule/components/layouts/viewCard";
 import {
   CrossIcon,
   EditIcon,
@@ -12,6 +11,7 @@ import BlackButton from "../../../../../components/buttons/BlackButton";
 import SuccessButton from "../../../../../components/buttons/SuccessButton";
 import CustomTable from "../../../../../components/table/CustomTable";
 import flight from "/images/cargoFlight.png";
+import ViewCard from "../../../sea-air-schedule/components/layouts/ViewCard";
 
 interface ULDcontainerProps {
   containerNumber: string;
@@ -39,7 +39,7 @@ interface DataProps {
   companyName: string;
   portOfLoading: string;
   portOfDischarge: string;
-  bookingValidityDate: string | Date;
+  bookingValidityDate: string;
   cargoDetails: {
     cargotype: string;
     cargoDimensions: string[];

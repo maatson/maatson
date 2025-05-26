@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import ViewCard from "../../customerService/sea-air-schedule/components/layouts/viewCard";
+import ViewCard from "../../customerService/sea-air-schedule/components/layouts/ViewCard";
 import {
   ContainerSettingsIcon,
   DeleteIcon,
@@ -18,6 +18,7 @@ import EditableTable, {
   ColumnConfig,
 } from "../../../components/table/EditableTable";
 import { Link, useParams } from "react-router-dom";
+
 interface EnquiryDataProps {
   modeOfShipment: string;
   modeOfTransportation: string;
@@ -182,7 +183,7 @@ const ViewRateFiling: React.FC = () => {
           />
         </Link>{" "}
       </div>
-      <div className="flex flex-col gap-4 bg-grey-aw-50 p-6 rounded-sm ">
+      <div className="flex flex-col gap-4 bg-grey-aw-100 p-6 rounded-sm ">
         <p className="text-lg font-semibold">Enquiry Details</p>
         <div className="flex justify-between items-center gap-6 border-b border-grey-ab-100">
           <ViewCard
