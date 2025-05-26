@@ -421,7 +421,7 @@ const EditRateFiling: React.FC = () => {
       const profit = Number(row.profit);
 
       if (!isNaN(rate) && !isNaN(profit)) {
-        const amount = rate + (rate * profit) / 100;
+        const amount = rate + profit;
         return { ...row, amount };
       }
       return row;
@@ -434,7 +434,7 @@ const EditRateFiling: React.FC = () => {
       const profit = Number(row.profit);
 
       if (!isNaN(rate) && !isNaN(profit)) {
-        const amount = rate + (rate * profit) / 100;
+        const amount = rate + profit;
         return { ...row, amount };
       }
       return row;
