@@ -257,7 +257,7 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
           <div>{leftIcon}</div>
           <p>{label}</p>
         </div>
-        <div>
+        <div className={`${isOpen ? "-rotate-180":""} transition-all duration-700`}>
           {children.length > 0 && (
             <DropDownIcon color={isOpen ? "#2c398f" : "#fcfcfc "} />
           )}

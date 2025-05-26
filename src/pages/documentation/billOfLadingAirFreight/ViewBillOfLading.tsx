@@ -327,7 +327,7 @@ const ViewBillOfLading: React.FC = () => {
               {dummyData.blDetails.length === 1 && (
                 <div className="bg-secondary-300 rounded-sm py-2 pl-4 pr-2 w-fit my-1 flex gap-8 items-center">
                   <p className="text-grey-ab-800">
-                    Do you want to split this BL draft into multiple BLs?
+                    Do you want to split this MAWB draft into multiple MAWBs?
                   </p>
                   <div onClick={() => setIsSplitBL(true)}>
                     <BlackButton

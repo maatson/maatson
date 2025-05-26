@@ -35,6 +35,7 @@ interface RowData {
   transportationMode: React.ReactNode;
   cargoReadinessDate: string;
   enquiryStatus: React.ReactNode;
+  priceAvailability: React.ReactNode | string;
   action: React.ReactNode;
 }
 
@@ -69,6 +70,12 @@ const columns: any[] = [
   {
     id: "enquiryStatus",
     label: "Enquiry Status",
+    minWidth: 160,
+    align: "center",
+  },
+  {
+    id: "priceAvailability",
+    label: "Price Availability",
     minWidth: 160,
     align: "center",
   },
@@ -182,6 +189,7 @@ const EnquiryList: React.FC = () => {
       transportationMode: transportationModes,
       cargoReadinessDate: items?.cargoReadinessDate,
       enquiryStatus: enquiryStatuses,
+      priceAvailability: items?.priceAvailability,
       action: actions,
     };
     return updatedData;
@@ -203,6 +211,7 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Air Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Converted to booking",
+      priceAvailability: "05",
     },
     {
       enquiryID: "3233856",
@@ -219,6 +228,7 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Land Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Negotiating",
+      priceAvailability: "04",
     },
     {
       enquiryID: "3233856",
@@ -235,6 +245,7 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Sea Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Cancelled",
+      priceAvailability: "05",
     },
     {
       enquiryID: "3233856",
@@ -251,6 +262,7 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Air Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Converted to booking",
+      priceAvailability: "06",
     },
     {
       enquiryID: "3233856",
@@ -267,6 +279,7 @@ const EnquiryList: React.FC = () => {
       transportationMode: "Land Freight",
       cargoReadinessDate: "11/10/25",
       enquiryStatus: "Negotiating",
+      priceAvailability: "03",
     },
   ];
 
