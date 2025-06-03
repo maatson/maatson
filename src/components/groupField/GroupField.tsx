@@ -269,12 +269,12 @@ const GroupField: React.FC<Groupfield> = ({
               <div
                 className={`flex w-full items-center z-0 ${
                   isDateLeft
-                    ? "flex-row-reverse justify-end gap-4"
+                    ? "flex-row-reverse justify-end gap-4 "
                     : "justify-between"
                 }`}
               >
                 <span
-                  className={`truncate w-full  ${
+                  className={`truncate w-full pr-2  ${
                     value ? "text-grey-ab-800" : "text-grey-ab-200"
                   }`}
                 >

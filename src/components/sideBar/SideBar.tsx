@@ -150,9 +150,15 @@ const SideBar: React.FC = () => {
       },
       {
         leftIcon: <TaxIcon />,
-        label: "Finance",
+        label: "Accounts",
         isOpen: openItems[5] || false,
-        children: [],
+        children: [
+          { label: "Accounts Dashboard", link: "/accounts/dashboard" },
+          { label: "Bank", link: "/accounts/bank" },
+          { label: "Invoice", link: "/accounts/invoice" },
+          { label: "Carrier Invoice", link: "/accounts/carrier-invoice" },
+          { label: "Tax Invoice", link: "/accounts/tax-invoice" },
+        ],
         onClick: () => handleItemClick(5),
       },
       {
@@ -257,7 +263,11 @@ const SideBarItem: React.FC<SideBarItemProps & { isActive: boolean }> = ({
           <div>{leftIcon}</div>
           <p>{label}</p>
         </div>
-        <div className={`${isOpen ? "-rotate-180":""} transition-all duration-700`}>
+        <div
+          className={`${
+            isOpen ? "-rotate-180" : ""
+          } transition-all duration-700`}
+        >
           {children.length > 0 && (
             <DropDownIcon color={isOpen ? "#2c398f" : "#fcfcfc "} />
           )}

@@ -559,6 +559,17 @@ const ViewAirBl = lazy(
   () => import("./pages/documentation/billOfLadingAirFreight/viewAirBl")
 );
 
+// Accounts
+const AccountsDashboard = lazy(
+  () => import("./pages/accounts/accountsDashboard")
+);
+const Bank = lazy(() => import("./pages/accounts/bank"));
+const BankList = lazy(() => import("./pages/accounts/bank/BankList"));
+const BankDetails = lazy(() => import("./pages/accounts/bank/BankDetails"));
+const CarrierInvoice = lazy(() => import("./pages/accounts/carrierInvoice"));
+const Invoice = lazy(() => import("./pages/accounts/invoice"));
+const TaxInvoice = lazy(() => import("./pages/accounts/taxInvoice"));
+
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
 const TestimonialList = lazy(
@@ -891,6 +902,18 @@ const AppRoutes: React.FC = () => {
           <Route path="createBl/:bookingId" element={<CreateAirBl />} />
           <Route path="editBl/:blId" element={<EditAirBl />} />
           <Route path="viewBl/:blId" element={<ViewAirBl />} />
+        </Route>
+
+        {/* accounts */}
+        <Route path="accounts">
+          <Route path="dashboard" element={<AccountsDashboard />}></Route>
+          <Route path="bank" element={<Bank />}>
+            <Route index element={<BankList />} />
+            <Route path="details/:id" element={<BankDetails />} />
+          </Route>
+          <Route path="carrier-invoice" element={<CarrierInvoice />}></Route>
+          <Route path="invoice" element={<Invoice />}></Route>
+          <Route path="tax-invoice" element={<TaxInvoice />}></Route>
         </Route>
 
         {/* testimonials */}
