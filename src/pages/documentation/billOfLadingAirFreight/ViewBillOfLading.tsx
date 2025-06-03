@@ -76,7 +76,7 @@ const ViewBillOfLading: React.FC = () => {
   const [isAddSeal, setIsAddSeal] = useState<boolean>(false);
   const [isAddCopies, setIsAddCopies] = useState<boolean>(false);
   const { bookingId } = useParams();
-  const isAdmin = false;
+  const isAdmin = true;
 
   const [dummyData, setDummyData] = useState<DummyDataProps>({
     bookingID: "71955776",
@@ -116,7 +116,7 @@ const ViewBillOfLading: React.FC = () => {
           {
             copyType: "Airway Bill  of Lading",
             available: 0,
-            isSealAdded: false,
+            isSealAdded: true,
             isRequestedToAdmin: false,
             isRequestRejectByAdmin: false,
           },
