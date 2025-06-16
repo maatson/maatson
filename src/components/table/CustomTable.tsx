@@ -91,6 +91,14 @@ const CustomTable: React.FC<TableProps> = React.memo(
                     />
                   </TableCell>
                 )}
+                {!isCheckbox && (
+                  <TableCell
+                    sx={{
+                      padding: "8px",
+                    }}
+                    className="bg-grey-100  "
+                  ></TableCell>
+                )}
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
@@ -99,7 +107,7 @@ const CustomTable: React.FC<TableProps> = React.memo(
                       minWidth: column.minWidth || "150px",
                       padding: "12px 8px",
                     }}
-                    className="bg-grey-100 bre"
+                    className="bg-grey-100 "
                   >
                     <span className="font-semibold capitalize">
                       {column.label}
@@ -133,6 +141,13 @@ const CustomTable: React.FC<TableProps> = React.memo(
                           className="outline-none active:outline-none focus-within:border-none"
                         />
                       </TableCell>
+                    )}
+                    {!isCheckbox && (
+                      <TableCell
+                        sx={{
+                          padding: "1px",
+                        }}
+                      ></TableCell>
                     )}
                     {columns.map((column) => {
                       const value = row ? row[column.id] : undefined; // Check if row exists

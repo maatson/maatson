@@ -69,7 +69,7 @@ const BankDetails: React.FC = () => {
     ifscCode: "ICIC0001902",
     swiftCode: "BOFAUS3N",
     iban: "GB12NWBK60161331926819",
-    isPrimary: false,
+    isPrimary: true,
     balanceAmount: 40000,
   });
 

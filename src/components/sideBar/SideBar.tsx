@@ -155,9 +155,16 @@ const SideBar: React.FC = () => {
         children: [
           { label: "Accounts Dashboard", link: "/accounts/dashboard" },
           { label: "Bank", link: "/accounts/bank" },
-          { label: "Invoice", link: "/accounts/invoice" },
-          { label: "Carrier Invoice", link: "/accounts/carrier-invoice" },
-          { label: "Tax Invoice", link: "/accounts/tax-invoice" },
+          { label: "Invoice (Import)", link: "/accounts/invoice-import" },
+          {
+            label: "Carrier Invoice (Import)",
+            link: "/accounts/carrier-invoice-import",
+          },
+          { label: "Invoice (Export)", link: "/accounts/invoice-export" },
+          {
+            label: "Carrier Invoice (Export)",
+            link: "/accounts/carrier-invoice-export",
+          },
         ],
         onClick: () => handleItemClick(5),
       },

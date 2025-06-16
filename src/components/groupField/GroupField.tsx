@@ -30,9 +30,10 @@ interface Groupfield {
   maxLength?: number;
   checked?: boolean;
   onBlur?: (e: React.FocusEvent<any>) => void;
+  optionFontSize?: string;
 }
 
-const selectStyles = {
+const getSelectStyles = (optionFontSize = "16px") => ({
   control: (provided: any) => ({
     ...provided,
     padding: 0,
@@ -65,6 +66,7 @@ const selectStyles = {
       : "#fff",
     color: state.isSelected || state.isFocused ? "#fff" : "#111827",
     padding: "0.2rem 0.5rem",
+    fontSize: optionFontSize,
   }),
   multiValue: (provided: any) => ({
     ...provided,
@@ -94,7 +96,7 @@ const selectStyles = {
       padding: "0px",
     },
   }),
-};
+});
 
 const CustomDropdownIndicator: React.FC<{ size?: string }> = ({ size }) => {
   return (
@@ -128,6 +130,7 @@ const GroupField: React.FC<Groupfield> = ({
   onBlur,
   maxLength,
   checked,
+  optionFontSize,
 }) => {
   const getSelectedValue = () => {
     if (Array.isArray(value)) {
@@ -212,7 +215,8 @@ const GroupField: React.FC<Groupfield> = ({
                 ),
                 IndicatorSeparator: null,
               }}
-              styles={selectStyles}
+              // styles={selectStyles}
+              styles={getSelectStyles(optionFontSize)}
               menuPortalTarget={document.body}
             />
           ) : type === "creatable" ? (
@@ -236,7 +240,8 @@ const GroupField: React.FC<Groupfield> = ({
                 ),
                 IndicatorSeparator: null,
               }}
-              styles={selectStyles}
+              // styles={selectStyles}
+              styles={getSelectStyles(optionFontSize)}
               menuPortalTarget={document.body}
             />
           ) : type === "textarea" ? (

@@ -566,9 +566,70 @@ const AccountsDashboard = lazy(
 const Bank = lazy(() => import("./pages/accounts/bank"));
 const BankList = lazy(() => import("./pages/accounts/bank/BankList"));
 const BankDetails = lazy(() => import("./pages/accounts/bank/BankDetails"));
-const CarrierInvoice = lazy(() => import("./pages/accounts/carrierInvoice"));
-const Invoice = lazy(() => import("./pages/accounts/invoice"));
-const TaxInvoice = lazy(() => import("./pages/accounts/taxInvoice"));
+const CarrierInvoiceImport = lazy(
+  () => import("./pages/accounts/carrierInvoiceImport")
+);
+const InvoiceImport = lazy(() => import("./pages/accounts/invoiceImport"));
+
+// invoice - export
+const InvoiceExport = lazy(() => import("./pages/accounts/invoiceExport"));
+const InvoiceListExport = lazy(
+  () => import("./pages/accounts/invoiceExport/InvoiceList")
+);
+const ViewInvoiceExport = lazy(
+  () => import("./pages/accounts/invoiceExport/ViewInvoice")
+);
+const Proforma = lazy(() => import("./pages/accounts/invoiceExport/proforma"));
+const CreateProformaExport = lazy(
+  () => import("./pages/accounts/invoiceExport/proforma/CreateProforma")
+);
+const UpdateProformaExport = lazy(
+  () => import("./pages/accounts/invoiceExport/proforma/UpdateProforma")
+);
+const ViewProformaExport = lazy(
+  () => import("./pages/accounts/invoiceExport/proforma/ViewProforma")
+);
+const Colletion = lazy(
+  () => import("./pages/accounts/invoiceExport/collection")
+);
+const CreateCollectionExport = lazy(
+  () => import("./pages/accounts/invoiceExport/collection/CreateCollection")
+);
+const EditCollectionExport = lazy(
+  () => import("./pages/accounts/invoiceExport/collection/EditCollection")
+);
+const ViewColletionExport = lazy(
+  () => import("./pages/accounts/invoiceExport/collection/ViewCollection")
+);
+const TaxInvoice = lazy(
+  () => import("./pages/accounts/invoiceExport/taxInvoice")
+);
+const UpdateTaxInvoiceExport = lazy(
+  () => import("./pages/accounts/invoiceExport/taxInvoice/UpdataTaxInvoice")
+);
+const ViewTaxInvoiceExport = lazy(
+  () => import("./pages/accounts/invoiceExport/taxInvoice/ViewTaxInvoice")
+);
+
+// carrier-invoice-export
+const CarrierInvoiceExport = lazy(
+  () => import("./pages/accounts/carrierInvoiceExport")
+);
+const CarrierInvoiceListExport = lazy(
+  () => import("./pages/accounts/carrierInvoiceExport/CarrierInvoiceList")
+);
+const ViewCarrierInvoiceExport = lazy(
+  () => import("./pages/accounts/carrierInvoiceExport/ViewCarrierInvoice")
+);
+const CreateCarrierInvoiceExport = lazy(
+  () => import("./pages/accounts/carrierInvoiceExport/CreateCarrierInvoice")
+);
+const EditCarrierInvoiceExport = lazy(
+  () => import("./pages/accounts/carrierInvoiceExport/EditCarrierInvoice")
+);
+const CarrierInvoiceDetailsExport = lazy(
+  () => import("./pages/accounts/carrierInvoiceExport/CarrierInvoiceDetails")
+);
 
 // TESTIMONALS
 const Testimonials = lazy(() => import("./pages/testimonials"));
@@ -911,9 +972,70 @@ const AppRoutes: React.FC = () => {
             <Route index element={<BankList />} />
             <Route path="details/:id" element={<BankDetails />} />
           </Route>
-          <Route path="carrier-invoice" element={<CarrierInvoice />}></Route>
-          <Route path="invoice" element={<Invoice />}></Route>
-          <Route path="tax-invoice" element={<TaxInvoice />}></Route>
+          <Route
+            path="carrier-invoice-import"
+            element={<CarrierInvoiceImport />}
+          ></Route>
+          <Route path="invoice-import" element={<InvoiceImport />}></Route>
+          <Route
+            path="carrier-invoice-export"
+            element={<CarrierInvoiceExport />}
+          >
+            <Route index element={<CarrierInvoiceListExport />} />
+            <Route
+              path="view/:id"
+              element={<ViewCarrierInvoiceExport />}
+            ></Route>
+            <Route
+              path="create/:id"
+              element={<CreateCarrierInvoiceExport />}
+            ></Route>
+            <Route
+              path="edit/:id"
+              element={<EditCarrierInvoiceExport />}
+            ></Route>
+            <Route
+              path="details/:id"
+              element={<CarrierInvoiceDetailsExport />}
+            ></Route>
+          </Route>
+          <Route path="invoice-export" element={<InvoiceExport />}>
+            <Route index element={<InvoiceListExport />} />
+            <Route path="view-invoice/:id" element={<ViewInvoiceExport />}>
+              <Route path="proforma" element={<Proforma />} />
+              <Route path="collection" element={<Colletion />} />
+              <Route path="taxInvoice" element={<TaxInvoice />} />
+            </Route>
+            <Route
+              path="create-proforma/:id"
+              element={<CreateProformaExport />}
+            />
+            <Route
+              path="update-proforma/:id"
+              element={<UpdateProformaExport />}
+            />
+            <Route path="view-proforma/:id" element={<ViewProformaExport />} />
+            <Route
+              path="create-collection/:id"
+              element={<CreateCollectionExport />}
+            />
+            <Route
+              path="edit-collection/:id"
+              element={<EditCollectionExport />}
+            />
+            <Route
+              path="view-collection/:id"
+              element={<ViewColletionExport />}
+            />
+            <Route
+              path="update-taxInvoice/:id/:taxNumber"
+              element={<UpdateTaxInvoiceExport />}
+            />
+            <Route
+              path="view-taxInvoice/:id/:taxNumber"
+              element={<ViewTaxInvoiceExport />}
+            />
+          </Route>
         </Route>
 
         {/* testimonials */}
