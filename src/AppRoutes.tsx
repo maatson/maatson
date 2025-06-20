@@ -566,10 +566,68 @@ const AccountsDashboard = lazy(
 const Bank = lazy(() => import("./pages/accounts/bank"));
 const BankList = lazy(() => import("./pages/accounts/bank/BankList"));
 const BankDetails = lazy(() => import("./pages/accounts/bank/BankDetails"));
+
+// carrier-invoice- import
 const CarrierInvoiceImport = lazy(
   () => import("./pages/accounts/carrierInvoiceImport")
 );
+const CarrierInvoiceListImport = lazy(
+  () => import("./pages/accounts/carrierInvoiceImport/CarrierInvoiceList")
+);
+const ViewCarrierInvoiceImport = lazy(
+  () => import("./pages/accounts/carrierInvoiceImport/ViewCarrierInvoice")
+);
+const CreateCarrierInvoiceImport = lazy(
+  () => import("./pages/accounts/carrierInvoiceImport/CreateCarrierInvoice")
+);
+const EditCarrierInvoiceImport = lazy(
+  () => import("./pages/accounts/carrierInvoiceImport/EditCarrierInvoice")
+);
+const CarrierInvoiceDetailsImport = lazy(
+  () => import("./pages/accounts/carrierInvoiceImport/CarrierInvoiceDetails")
+);
+
+// invoice - import
 const InvoiceImport = lazy(() => import("./pages/accounts/invoiceImport"));
+const InvoiceListImport = lazy(
+  () => import("./pages/accounts/invoiceImport/InvoiceList")
+);
+const ViewInvoiceImport = lazy(
+  () => import("./pages/accounts/invoiceImport/ViewInvoice")
+);
+const ProformaImport = lazy(
+  () => import("./pages/accounts/invoiceImport/proforma")
+);
+const CreateProformaImport = lazy(
+  () => import("./pages/accounts/invoiceImport/proforma/CreateProforma")
+);
+const UpdateProformaImport = lazy(
+  () => import("./pages/accounts/invoiceImport/proforma/UpdateProforma")
+);
+const ViewProformaImport = lazy(
+  () => import("./pages/accounts/invoiceImport/proforma/ViewProforma")
+);
+const ColletionImport = lazy(
+  () => import("./pages/accounts/invoiceImport/collection")
+);
+const CreateCollectionImport = lazy(
+  () => import("./pages/accounts/invoiceImport/collection/CreateCollection")
+);
+const EditCollectionImport = lazy(
+  () => import("./pages/accounts/invoiceImport/collection/EditCollection")
+);
+const ViewColletionImport = lazy(
+  () => import("./pages/accounts/invoiceImport/collection/ViewCollection")
+);
+const TaxInvoiceImport = lazy(
+  () => import("./pages/accounts/invoiceImport/taxInvoice")
+);
+const UpdateTaxInvoiceImport = lazy(
+  () => import("./pages/accounts/invoiceImport/taxInvoice/UpdataTaxInvoice")
+);
+const ViewTaxInvoiceImport = lazy(
+  () => import("./pages/accounts/invoiceImport/taxInvoice/ViewTaxInvoice")
+);
 
 // invoice - export
 const InvoiceExport = lazy(() => import("./pages/accounts/invoiceExport"));
@@ -579,7 +637,9 @@ const InvoiceListExport = lazy(
 const ViewInvoiceExport = lazy(
   () => import("./pages/accounts/invoiceExport/ViewInvoice")
 );
-const Proforma = lazy(() => import("./pages/accounts/invoiceExport/proforma"));
+const ProformaExport = lazy(
+  () => import("./pages/accounts/invoiceExport/proforma")
+);
 const CreateProformaExport = lazy(
   () => import("./pages/accounts/invoiceExport/proforma/CreateProforma")
 );
@@ -589,7 +649,7 @@ const UpdateProformaExport = lazy(
 const ViewProformaExport = lazy(
   () => import("./pages/accounts/invoiceExport/proforma/ViewProforma")
 );
-const Colletion = lazy(
+const ColletionExport = lazy(
   () => import("./pages/accounts/invoiceExport/collection")
 );
 const CreateCollectionExport = lazy(
@@ -601,7 +661,7 @@ const EditCollectionExport = lazy(
 const ViewColletionExport = lazy(
   () => import("./pages/accounts/invoiceExport/collection/ViewCollection")
 );
-const TaxInvoice = lazy(
+const TaxInvoiceExport = lazy(
   () => import("./pages/accounts/invoiceExport/taxInvoice")
 );
 const UpdateTaxInvoiceExport = lazy(
@@ -629,6 +689,65 @@ const EditCarrierInvoiceExport = lazy(
 );
 const CarrierInvoiceDetailsExport = lazy(
   () => import("./pages/accounts/carrierInvoiceExport/CarrierInvoiceDetails")
+);
+
+// agent soa dashboard
+const AgentSOADashboard = lazy(
+  () => import("./pages/accounts/agentSOADashboard")
+);
+
+// agent soa import
+const AgentSOAImport = lazy(() => import("./pages/accounts/agentSOAImport"));
+const AgentSOAListImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/AgentSOAList")
+);
+const ViewAgentSOAInvoiceImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/ViewAgentSOA")
+);
+const CreateCreditNoteInvoiceImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/CreateCreditNoteInvoice")
+);
+const CreateDebitNoteInvoiceImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/CreateDebitNoteInvoice")
+);
+const EditCreditNoteInvoiceImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/EditCreditNoteInvoice")
+);
+const EditDebitNoteInvoiceImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/EditDebitNoteInvoice")
+);
+const CreditNoteInvoiceDetailsImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/CreditNoteInvoiceDetails")
+);
+const DebitNoteInvoiceDetailsImport = lazy(
+  () => import("./pages/accounts/agentSOAImport/DebitNoteInvoiceDetails")
+);
+
+// agent soa export
+const AgentSOAExport = lazy(() => import("./pages/accounts/agentSOAExport"));
+const AgentSOAListExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/AgentSOAList")
+);
+const ViewAgentSOAInvoiceExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/ViewAgentSOA")
+);
+const CreateCreditNoteInvoiceExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/CreateCreditNoteInvoice")
+);
+const CreateDebitNoteInvoiceExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/CreateDebitNoteInvoice")
+);
+const EditCreditNoteInvoiceExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/EditCreditNoteInvoice")
+);
+const EditDebitNoteInvoiceExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/EditDebitNoteInvoice")
+);
+const CreditNoteInvoiceDetailsExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/CreditNoteInvoiceDetails")
+);
+const DebitNoteInvoiceDetailsExport = lazy(
+  () => import("./pages/accounts/agentSOAExport/DebitNoteInvoiceDetails")
 );
 
 // TESTIMONALS
@@ -972,11 +1091,68 @@ const AppRoutes: React.FC = () => {
             <Route index element={<BankList />} />
             <Route path="details/:id" element={<BankDetails />} />
           </Route>
+
           <Route
             path="carrier-invoice-import"
             element={<CarrierInvoiceImport />}
-          ></Route>
-          <Route path="invoice-import" element={<InvoiceImport />}></Route>
+          >
+            <Route index element={<CarrierInvoiceListImport />} />
+            <Route
+              path="view/:id"
+              element={<ViewCarrierInvoiceImport />}
+            ></Route>
+            <Route
+              path="create/:id"
+              element={<CreateCarrierInvoiceImport />}
+            ></Route>
+            <Route
+              path="edit/:id"
+              element={<EditCarrierInvoiceImport />}
+            ></Route>
+            <Route
+              path="details/:id"
+              element={<CarrierInvoiceDetailsImport />}
+            ></Route>
+          </Route>
+
+          <Route path="invoice-import" element={<InvoiceImport />}>
+            <Route index element={<InvoiceListImport />} />
+            <Route path="view-invoice/:id" element={<ViewInvoiceImport />}>
+              <Route path="proforma" element={<ProformaImport />} />
+              <Route path="collection" element={<ColletionImport />} />
+              <Route path="taxInvoice" element={<TaxInvoiceImport />} />
+            </Route>
+            <Route
+              path="create-proforma/:id"
+              element={<CreateProformaImport />}
+            />
+            <Route
+              path="update-proforma/:id"
+              element={<UpdateProformaImport />}
+            />
+            <Route path="view-proforma/:id" element={<ViewProformaImport />} />
+            <Route
+              path="create-collection/:id"
+              element={<CreateCollectionImport />}
+            />
+            <Route
+              path="edit-collection/:id"
+              element={<EditCollectionImport />}
+            />
+            <Route
+              path="view-collection/:id"
+              element={<ViewColletionImport />}
+            />
+            <Route
+              path="update-taxInvoice/:id/:taxNumber"
+              element={<UpdateTaxInvoiceImport />}
+            />
+            <Route
+              path="view-taxInvoice/:id/:taxNumber"
+              element={<ViewTaxInvoiceImport />}
+            />
+          </Route>
+
           <Route
             path="carrier-invoice-export"
             element={<CarrierInvoiceExport />}
@@ -999,12 +1175,13 @@ const AppRoutes: React.FC = () => {
               element={<CarrierInvoiceDetailsExport />}
             ></Route>
           </Route>
+
           <Route path="invoice-export" element={<InvoiceExport />}>
             <Route index element={<InvoiceListExport />} />
             <Route path="view-invoice/:id" element={<ViewInvoiceExport />}>
-              <Route path="proforma" element={<Proforma />} />
-              <Route path="collection" element={<Colletion />} />
-              <Route path="taxInvoice" element={<TaxInvoice />} />
+              <Route path="proforma" element={<ProformaExport />} />
+              <Route path="collection" element={<ColletionExport />} />
+              <Route path="taxInvoice" element={<TaxInvoiceExport />} />
             </Route>
             <Route
               path="create-proforma/:id"
@@ -1035,6 +1212,75 @@ const AppRoutes: React.FC = () => {
               path="view-taxInvoice/:id/:taxNumber"
               element={<ViewTaxInvoiceExport />}
             />
+          </Route>
+
+          <Route
+            path="agent-soa-dashboard"
+            element={<AgentSOADashboard />}
+          ></Route>
+
+          <Route path="agent-soa-import" element={<AgentSOAImport />}>
+            <Route index element={<AgentSOAListImport />} />
+            <Route
+              path="view/:id"
+              element={<ViewAgentSOAInvoiceImport />}
+            ></Route>
+            <Route
+              path="credit-create/:id"
+              element={<CreateCreditNoteInvoiceImport />}
+            ></Route>
+            <Route
+              path="debit-create/:id"
+              element={<CreateDebitNoteInvoiceImport />}
+            ></Route>
+            <Route
+              path="credit-edit/:id/:creditId"
+              element={<EditCreditNoteInvoiceImport />}
+            ></Route>
+            <Route
+              path="debit-edit/:id/:creditId"
+              element={<EditDebitNoteInvoiceImport />}
+            ></Route>
+            <Route
+              path="credit-details/:id/:creditId"
+              element={<CreditNoteInvoiceDetailsImport />}
+            ></Route>
+            <Route
+              path="debit-details/:id/:creditId"
+              element={<DebitNoteInvoiceDetailsImport />}
+            ></Route>
+          </Route>
+
+          <Route path="agent-soa-export" element={<AgentSOAExport />}>
+            <Route index element={<AgentSOAListExport />} />
+            <Route
+              path="view/:id"
+              element={<ViewAgentSOAInvoiceExport />}
+            ></Route>
+            <Route
+              path="credit-create/:id"
+              element={<CreateCreditNoteInvoiceExport />}
+            ></Route>
+            <Route
+              path="debit-create/:id"
+              element={<CreateDebitNoteInvoiceExport />}
+            ></Route>
+            <Route
+              path="credit-edit/:id/:creditId"
+              element={<EditCreditNoteInvoiceExport />}
+            ></Route>
+            <Route
+              path="debit-edit/:id/:creditId"
+              element={<EditDebitNoteInvoiceExport />}
+            ></Route>
+            <Route
+              path="credit-details/:id/:creditId"
+              element={<CreditNoteInvoiceDetailsExport />}
+            ></Route>
+            <Route
+              path="debit-details/:id/:creditId"
+              element={<DebitNoteInvoiceDetailsExport />}
+            ></Route>
           </Route>
         </Route>
 

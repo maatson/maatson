@@ -2,46 +2,82 @@ import React, { useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 import BlackButton from "../../../components/buttons/BlackButton";
-import { AddIcon, ContainerIcon, DeleteIcon, EditIcon } from "../../../components/icons/Icons";
-import { NavLink, useParams } from "react-router-dom";
+import {
+  AddIcon,
+  ContainerIcon,
+  DeleteIcon,
+  EditIcon,
+} from "../../../components/icons/Icons";
+import { useNavigate } from "react-router-dom";
 import AccountsModel from "../components/AccountsModel";
 import { useNotify } from "../../../hooks/useNotify";
 
-const CreateCarrierInvoice: React.FC = () => {
-  const { id } = useParams();
+const EditCarrierInvoice: React.FC = () => {
+  const navigate = useNavigate();
   const [isPaymentDetails, setIsPaymentDetails] = useState<boolean>(true);
   const { showToast } = useNotify();
   const [data, setData] = useState({
-    carrierBillOfLading: "",
-    carrierInvoiceNumber: "",
-    carrierInvoiceDate: "",
-    carrierName: "",
-    carrierGSTIN: "",
-    containerType: "",
-    quantityOfContainer: "",
-    grossWeight: "",
-    portOfLoading: "",
-    portOfDischarge: "",
-    finalDestination: "",
-    vesselName: "",
-    voyageNumber: "",
-    sailedDate: "",
-    etd_atd: "",
-    shippingBillNumber: "",
-    exchangeRate: "",
+    carrierBillOfLading: "mmi1234501-A",
+    carrierInvoiceNumber: "ivn0010012301",
+    carrierInvoiceDate: "11-06-2025",
+    carrierName: "Legend Shipping Agency Private Limited",
+    carrierGSTIN: "29ABCDE1234F1Z5",
+    containerType: "20 feet Dry Container",
+    quantityOfContainer: "10",
+    grossWeight: "10000",
+    portOfLoading: " PORTKELANG, INDIA",
+    portOfDischarge: " CHENNAI, INDIA",
+    finalDestination: " CHENNAI, INDIA",
+    vesselName: "ULSAN VOYAGER",
+    voyageNumber: " VT2505W",
+    arrivalDate: "23-04-2025",
+    etd_atd: "ATD",
+    lineNumber: "984958445",
+    igmNumber: "984958445",
+    exchangeRate: "88.45",
     tableDetails: [
       {
-        description: "",
-        sacCode: "",
-        taxableOrNot: "",
-        currency: "",
-        quantity: "",
-        unit: "",
-        unitPrice: "",
-        amount: "",
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
+      },
+      {
+        description: "Warehouse Storage Charges (200 sq.ft)",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
       },
     ],
-    bankName: "",
+    bankName: "ICICI BANK LIMITED",
     paymentInstruction:
       "All payments must be made via NEFT or RTGS only. No other modes of payment will be accepted.",
     notes:
@@ -57,39 +93,71 @@ const CreateCarrierInvoice: React.FC = () => {
       "OOLU7654321",
       "APZU3344552",
     ],
-    remarks: "",
+    remarks:
+      "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervison",
   });
   const [tempData, setTempData] = useState({
-    carrierBillOfLading: "",
-    carrierInvoiceNumber: "",
-    carrierInvoiceDate: "",
-    carrierName: "",
-    carrierGSTIN: "",
-    containerType: "",
-    quantityOfContainer: "",
-    grossWeight: "",
-    portOfLoading: "",
-    portOfDischarge: "",
-    finalDestination: "",
-    vesselName: "",
-    voyageNumber: "",
-    sailedDate: "",
-    etd_atd: "",
-    shippingBillNumber: "",
-    exchangeRate: "",
+    carrierBillOfLading: "mmi1234501-A",
+    carrierInvoiceNumber: "ivn0010012301",
+    carrierInvoiceDate: "11-06-2025",
+    carrierName: "Legend Shipping Agency Private Limited",
+    carrierGSTIN: "29ABCDE1234F1Z5",
+    containerType: "20 feet Dry Container",
+    quantityOfContainer: "10",
+    grossWeight: "10000",
+    portOfLoading: " PORTKELANG, INDIA",
+    portOfDischarge: " CHENNAI, INDIA",
+    finalDestination: " CHENNAI, INDIA",
+    vesselName: "ULSAN VOYAGER",
+    voyageNumber: " VT2505W",
+    arrivalDate: "23-04-2025",
+    etd_atd: "ATD",
+    lineNumber: "984958445",
+    igmNumber: "984958445",
+    exchangeRate: "88.45",
     tableDetails: [
       {
-        description: "",
-        sacCode: "",
-        taxableOrNot: "",
-        currency: "",
-        quantity: "",
-        unit: "",
-        unitPrice: "",
-        amount: "",
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
+      },
+      {
+        description: "Warehouse Storage Charges (200 sq.ft)",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: " 18900.00",
       },
     ],
-    bankName: "",
+    bankName: "ICICI BANK LIMITED",
     paymentInstruction:
       "All payments must be made via NEFT or RTGS only. No other modes of payment will be accepted.",
     notes:
@@ -105,7 +173,8 @@ const CreateCarrierInvoice: React.FC = () => {
       "OOLU7654321",
       "APZU3344552",
     ],
-    remarks: "",
+    remarks:
+      "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervison",
   });
 
   const handleAddMore = () => {
@@ -345,11 +414,11 @@ const CreateCarrierInvoice: React.FC = () => {
             />
             <div className="w-full flex gap-4">
               <GroupField
-                label={"Sailed Date * "}
+                label={"Arrival Date * "}
                 type={"date"}
-                placeholder={"Enter Sailed Date"}
-                name={"sailedDate"}
-                value={data.sailedDate}
+                placeholder={"Enter Arrival Date"}
+                name={"arrivalDate"}
+                value={data.arrivalDate}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -373,13 +442,24 @@ const CreateCarrierInvoice: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 max-w-[816px]">
+          <div className="flex gap-4 ">
             <GroupField
-              label={"Shipping Bill No *"}
+              label={"LINE NO *"}
               type={""}
-              placeholder={"Enter  Shipping Bill No "}
-              name={"shippingBillNumber"}
-              value={data.shippingBillNumber}
+              placeholder={"Enter LINE NO "}
+              name={"lineNumber"}
+              value={data.lineNumber}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              parentStyle="w-full"
+            />
+            <GroupField
+              label={"IGM NO *"}
+              type={""}
+              placeholder={"Enter IGM NO "}
+              name={"igmNumber"}
+              value={data.igmNumber}
               onChange={handleChange}
               error={false}
               errorMessage={""}
@@ -642,7 +722,7 @@ const CreateCarrierInvoice: React.FC = () => {
         onChange={handleChange}
         isMulti
         error={false}
-        leftIcon={<ContainerIcon color="#2C398F"/>}
+        leftIcon={<ContainerIcon color="#2C398F" />}
         errorMessage={""}
         labelStyle="font-bold"
       />
@@ -778,9 +858,9 @@ const CreateCarrierInvoice: React.FC = () => {
 
       {/* buttons */}
       <div className="flex justify-end gap-6">
-        <NavLink to={`/accounts/carrier-invoice-export/view/${id}`}>
+        <div onClick={() => navigate(-1)}>
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
-        </NavLink>
+        </div>
         <PrimaryButton
           label={"Save Carrier Invoice"}
           size={"l"}
@@ -791,4 +871,4 @@ const CreateCarrierInvoice: React.FC = () => {
   );
 };
 
-export default CreateCarrierInvoice;
+export default EditCarrierInvoice;

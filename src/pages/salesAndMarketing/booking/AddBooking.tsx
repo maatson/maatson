@@ -583,9 +583,9 @@ const AddBooking: React.FC = () => {
               error={false}
               errorMessage={""}
               options={[
-                { label: "weed", value: "weed" },
-                { label: "brandi", value: "brandi" },
-                { label: "votka", value: "votka" },
+                { label: "product 1", value: "product 1" },
+                { label: "product 2", value: "product 2" },
+                { label: "product 3", value: "product 3" },
               ]}
               isMulti
               leftIcon={<MenuIcon color="#2c398f" />}

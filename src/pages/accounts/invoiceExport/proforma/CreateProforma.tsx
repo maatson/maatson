@@ -717,7 +717,7 @@ const CreateProforma: React.FC = () => {
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />{" "}
         </NavLink>
         <PrimaryButton
-          label={"Save Proforma Invoioce"}
+          label={"Save Proforma Invoice"}
           size={"l"}
           variant={"primary"}
         />

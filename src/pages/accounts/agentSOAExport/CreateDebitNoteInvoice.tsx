@@ -2,21 +2,24 @@ import React, { useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 import BlackButton from "../../../components/buttons/BlackButton";
-import { AddIcon, ContainerIcon, DeleteIcon, EditIcon } from "../../../components/icons/Icons";
+import {
+  AddIcon,
+  ContainerIcon,
+  DeleteIcon,
+  EditIcon,
+} from "../../../components/icons/Icons";
 import { NavLink, useParams } from "react-router-dom";
 import AccountsModel from "../components/AccountsModel";
 import { useNotify } from "../../../hooks/useNotify";
 
-const CreateCarrierInvoice: React.FC = () => {
+const CreateDebitNoteInvoice: React.FC = () => {
   const { id } = useParams();
   const [isPaymentDetails, setIsPaymentDetails] = useState<boolean>(true);
   const { showToast } = useNotify();
   const [data, setData] = useState({
-    carrierBillOfLading: "",
-    carrierInvoiceNumber: "",
-    carrierInvoiceDate: "",
-    carrierName: "",
-    carrierGSTIN: "",
+    agentName: "",
+    agentDebitReferenceNumber: "",
+    agentGSTIN: "",
     containerType: "",
     quantityOfContainer: "",
     grossWeight: "",
@@ -25,7 +28,7 @@ const CreateCarrierInvoice: React.FC = () => {
     finalDestination: "",
     vesselName: "",
     voyageNumber: "",
-    sailedDate: "",
+    arrivalDate: "",
     etd_atd: "",
     shippingBillNumber: "",
     exchangeRate: "",
@@ -48,23 +51,12 @@ const CreateCarrierInvoice: React.FC = () => {
       "Payment not settled as per agreed terms will attract interest @ 18% p.a This is a computer generated document, signature not required.",
     panNo: "AARCM5896Q",
     gstin: "33AARCM5896Q1Z9",
-    containerNumbers: [
-      "MSCU1234567",
-      "TGHU8765432",
-      "CAIU1122334",
-      "SEGU9988776",
-      "ECMU4455661",
-      "OOLU7654321",
-      "APZU3344552",
-    ],
     remarks: "",
   });
   const [tempData, setTempData] = useState({
-    carrierBillOfLading: "",
-    carrierInvoiceNumber: "",
-    carrierInvoiceDate: "",
-    carrierName: "",
-    carrierGSTIN: "",
+    agentName: "",
+    agentDebitReferenceNumber: "",
+    agentGSTIN: "",
     containerType: "",
     quantityOfContainer: "",
     grossWeight: "",
@@ -73,7 +65,7 @@ const CreateCarrierInvoice: React.FC = () => {
     finalDestination: "",
     vesselName: "",
     voyageNumber: "",
-    sailedDate: "",
+    arrivalDate: "",
     etd_atd: "",
     shippingBillNumber: "",
     exchangeRate: "",
@@ -96,15 +88,6 @@ const CreateCarrierInvoice: React.FC = () => {
       "Payment not settled as per agreed terms will attract interest @ 18% p.a This is a computer generated document, signature not required.",
     panNo: "AARCM5896Q",
     gstin: "33AARCM5896Q1Z9",
-    containerNumbers: [
-      "MSCU1234567",
-      "TGHU8765432",
-      "CAIU1122334",
-      "SEGU9988776",
-      "ECMU4455661",
-      "OOLU7654321",
-      "APZU3344552",
-    ],
     remarks: "",
   });
 
@@ -175,51 +158,27 @@ const CreateCarrierInvoice: React.FC = () => {
         />
       </div>
 
-      <div className="flex gap-4 ">
-        <GroupField
-          label={"Carrier Bill of Lading"}
-          type={""}
-          placeholder={"Enter Carrier Bill of Lading"}
-          name={"carrierBillOfLading"}
-          value={data.carrierBillOfLading}
-          onChange={handleChange}
-          error={false}
-          errorMessage={""}
-          parentStyle="w-full"
-        />
-        <GroupField
-          label={"Carrier Invoice Number"}
-          type={""}
-          placeholder={"Enter Carrier Invoice Number"}
-          name={"carrierInvoiceNumber"}
-          value={data.carrierInvoiceNumber}
-          onChange={handleChange}
-          error={false}
-          errorMessage={""}
-          parentStyle="w-full"
-        />
-        <GroupField
-          label={"Carrier Invoice Date"}
-          type={"date"}
-          placeholder={"Enter Carrier Invoice Date"}
-          name={"carrierInvoiceDate"}
-          value={data.carrierInvoiceDate}
-          onChange={handleChange}
-          error={false}
-          errorMessage={""}
-          parentStyle="w-full"
-        />
-      </div>
+      <GroupField
+        label={"Agent Name"}
+        type={""}
+        placeholder={"Enter Agent Name"}
+        name={"agentName"}
+        value={data.agentName}
+        onChange={handleChange}
+        error={false}
+        errorMessage={""}
+        parentStyle="w-[40%]"
+      />
 
       {/* main details */}
       <div className="flex flex-col gap-6">
-        <div className="flex gap-4 max-w-[816px]">
+        <div className="flex gap-4 max-w-[81%]">
           <GroupField
-            label={"Carrier Name *"}
+            label={"Agent Debit Reference Number"}
             type={""}
-            placeholder={"Enter Carrier Name"}
-            name={"carrierName"}
-            value={data.carrierName}
+            placeholder={"Enter Agent Debit Reference Number"}
+            name={"agentDebitReferenceNumber"}
+            value={data.agentDebitReferenceNumber}
             onChange={handleChange}
             error={false}
             errorMessage={""}
@@ -229,8 +188,8 @@ const CreateCarrierInvoice: React.FC = () => {
             label={"GSTIN"}
             type={""}
             placeholder={"Enter GSTIN"}
-            name={"carrierGSTIN"}
-            value={data.carrierGSTIN}
+            name={"agentGSTIN"}
+            value={data.agentGSTIN}
             onChange={handleChange}
             error={false}
             errorMessage={""}
@@ -238,7 +197,7 @@ const CreateCarrierInvoice: React.FC = () => {
           />
         </div>
 
-        <div className="flex gap-4 max-w-[816px]">
+        <div className="flex gap-4 max-w-[81%]">
           <div className="flex w-full gap-4">
             <GroupField
               label={"No of Containers *"}
@@ -345,11 +304,11 @@ const CreateCarrierInvoice: React.FC = () => {
             />
             <div className="w-full flex gap-4">
               <GroupField
-                label={"Sailed Date * "}
+                label={"Arrival Date * "}
                 type={"date"}
-                placeholder={"Enter Sailed Date"}
-                name={"sailedDate"}
-                value={data.sailedDate}
+                placeholder={"Enter Arrival Date"}
+                name={"arrivalDate"}
+                value={data.arrivalDate}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -373,11 +332,11 @@ const CreateCarrierInvoice: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 max-w-[816px]">
+          <div className="flex gap-4 max-w-[81%]">
             <GroupField
               label={"Shipping Bill No *"}
               type={""}
-              placeholder={"Enter  Shipping Bill No "}
+              placeholder={"Enter Shipping Bill No "}
               name={"shippingBillNumber"}
               value={data.shippingBillNumber}
               onChange={handleChange}
@@ -618,35 +577,6 @@ const CreateCarrierInvoice: React.FC = () => {
         </div>
       </div>
 
-      {/* container number */}
-      {/* <div className="flex flex-col gap-3">
-        <p className="text-sm font-bold text-grey-ab-800">Container Number</p>
-        <div className="flex gap-4 flex-wrap">
-          {data.containerNumbers.map((item, index) => (
-            <div
-              key={index}
-              className="p-2 rounded-xs font-bold text-xs text-grey-ab-800 bg-grey-100 border border-primary shadow-xs"
-            >
-              <p>{item}</p>
-            </div>
-          ))}
-        </div>
-      </div> */}
-
-      <GroupField
-        label={"Container Number"}
-        type={"creatable"}
-        placeholder={""}
-        name={"containerNumbers"}
-        value={data.containerNumbers}
-        onChange={handleChange}
-        isMulti
-        error={false}
-        leftIcon={<ContainerIcon color="#2C398F"/>}
-        errorMessage={""}
-        labelStyle="font-bold"
-      />
-
       {/* payment details and instructions */}
       {isPaymentDetails ? (
         <div className=" rounded-sm bg-grey-200 p-4 flex flex-col gap-4 ">
@@ -778,11 +708,11 @@ const CreateCarrierInvoice: React.FC = () => {
 
       {/* buttons */}
       <div className="flex justify-end gap-6">
-        <NavLink to={`/accounts/carrier-invoice-export/view/${id}`}>
+        <NavLink to={`/accounts/agent-soa-export/view/${id}`}>
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
         </NavLink>
         <PrimaryButton
-          label={"Save Carrier Invoice"}
+          label={"Save Debit Note"}
           size={"l"}
           variant={"primary"}
         />
@@ -791,4 +721,4 @@ const CreateCarrierInvoice: React.FC = () => {
   );
 };
 
-export default CreateCarrierInvoice;
+export default CreateDebitNoteInvoice;

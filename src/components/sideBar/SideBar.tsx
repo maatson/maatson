@@ -165,6 +165,12 @@ const SideBar: React.FC = () => {
             label: "Carrier Invoice (Export)",
             link: "/accounts/carrier-invoice-export",
           },
+          {
+            label: "Agent SOA Dashboard ",
+            link: "/accounts/agent-soa-dashboard",
+          },
+          { label: "Agent SOA (Import) ", link: "/accounts/agent-soa-import" },
+          { label: "Agent SOA (Export) ", link: "/accounts/agent-soa-export" },
         ],
         onClick: () => handleItemClick(5),
       },

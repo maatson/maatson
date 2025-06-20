@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 import BlackButton from "../../../components/buttons/BlackButton";
-import { AddIcon, ContainerIcon, DeleteIcon, EditIcon } from "../../../components/icons/Icons";
+import {
+  AddIcon,
+  ContainerIcon,
+  DeleteIcon,
+  EditIcon,
+} from "../../../components/icons/Icons";
 import { NavLink, useParams } from "react-router-dom";
 import AccountsModel from "../components/AccountsModel";
 import { useNotify } from "../../../hooks/useNotify";
@@ -25,9 +30,10 @@ const CreateCarrierInvoice: React.FC = () => {
     finalDestination: "",
     vesselName: "",
     voyageNumber: "",
-    sailedDate: "",
+    arrivalDate: "",
     etd_atd: "",
-    shippingBillNumber: "",
+    lineNumber: "",
+    igmNumber: "",
     exchangeRate: "",
     tableDetails: [
       {
@@ -73,9 +79,10 @@ const CreateCarrierInvoice: React.FC = () => {
     finalDestination: "",
     vesselName: "",
     voyageNumber: "",
-    sailedDate: "",
+    arrivalDate: "",
     etd_atd: "",
-    shippingBillNumber: "",
+    lineNumber: "",
+    igmNumber: "",
     exchangeRate: "",
     tableDetails: [
       {
@@ -345,11 +352,11 @@ const CreateCarrierInvoice: React.FC = () => {
             />
             <div className="w-full flex gap-4">
               <GroupField
-                label={"Sailed Date * "}
+                label={"Arrival Date * "}
                 type={"date"}
-                placeholder={"Enter Sailed Date"}
-                name={"sailedDate"}
-                value={data.sailedDate}
+                placeholder={"Enter Arrival Date"}
+                name={"arrivalDate"}
+                value={data.arrivalDate}
                 onChange={handleChange}
                 error={false}
                 errorMessage={""}
@@ -373,13 +380,24 @@ const CreateCarrierInvoice: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 max-w-[816px]">
+          <div className="flex gap-4 ">
             <GroupField
-              label={"Shipping Bill No *"}
+              label={"LINE NO *"}
               type={""}
-              placeholder={"Enter  Shipping Bill No "}
-              name={"shippingBillNumber"}
-              value={data.shippingBillNumber}
+              placeholder={"Enter LINE NO "}
+              name={"lineNumber"}
+              value={data.lineNumber}
+              onChange={handleChange}
+              error={false}
+              errorMessage={""}
+              parentStyle="w-full"
+            />
+            <GroupField
+              label={"IGM NO *"}
+              type={""}
+              placeholder={"Enter IGM NO "}
+              name={"igmNumber"}
+              value={data.igmNumber}
               onChange={handleChange}
               error={false}
               errorMessage={""}
@@ -642,7 +660,7 @@ const CreateCarrierInvoice: React.FC = () => {
         onChange={handleChange}
         isMulti
         error={false}
-        leftIcon={<ContainerIcon color="#2C398F"/>}
+        leftIcon={<ContainerIcon color="#2C398F" />}
         errorMessage={""}
         labelStyle="font-bold"
       />
@@ -778,7 +796,7 @@ const CreateCarrierInvoice: React.FC = () => {
 
       {/* buttons */}
       <div className="flex justify-end gap-6">
-        <NavLink to={`/accounts/carrier-invoice-export/view/${id}`}>
+        <NavLink to={`/accounts/carrier-invoice-import/view/${id}`}>
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
         </NavLink>
         <PrimaryButton

@@ -783,7 +783,7 @@ const UpdataTaxInvoice: React.FC = () => {
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />{" "}
         </NavLink>
         <PrimaryButton
-          label={"Save Proforma Invoioce"}
+          label={"Save Tax Invoice"}
           size={"l"}
           variant={"primary"}
         />

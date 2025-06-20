@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
 import GroupField from "../../../components/groupField/GroupField";
 import BlackButton from "../../../components/buttons/BlackButton";
-import { AddIcon, DeleteIcon, EditIcon } from "../../../components/icons/Icons";
+import { AddIcon, ContainerIcon, DeleteIcon, EditIcon } from "../../../components/icons/Icons";
 import { useNavigate } from "react-router-dom";
 import AccountsModel from "../components/AccountsModel";
 import { useNotify } from "../../../hooks/useNotify";
@@ -681,7 +681,7 @@ const EditCarrierInvoice: React.FC = () => {
       </div>
 
       {/* container number */}
-      <div className="flex flex-col gap-3">
+      {/* <div className="flex flex-col gap-3">
         <p className="text-sm font-bold text-grey-ab-800">Container Number</p>
         <div className="flex gap-4 flex-wrap">
           {data.containerNumbers.map((item, index) => (
@@ -693,7 +693,21 @@ const EditCarrierInvoice: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
+
+      <GroupField
+        label={"Container Number"}
+        type={"creatable"}
+        placeholder={""}
+        name={"containerNumbers"}
+        value={data.containerNumbers}
+        onChange={handleChange}
+        isMulti
+        error={false}
+        leftIcon={<ContainerIcon color="#2C398F" />}
+        errorMessage={""}
+        labelStyle="font-bold"
+      />
 
       {/* payment details and instructions */}
       {isPaymentDetails ? (
@@ -830,7 +844,7 @@ const EditCarrierInvoice: React.FC = () => {
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
         </div>
         <PrimaryButton
-          label={"Save Proforma Invoioce"}
+          label={"Save Carrier Invoice"}
           size={"l"}
           variant={"primary"}
         />
