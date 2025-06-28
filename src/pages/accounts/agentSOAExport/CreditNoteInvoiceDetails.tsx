@@ -38,148 +38,148 @@ const Columns: any[] = [
 ];
 
 const CreditNoteInvoiceDetails: React.FC = () => {
-  const { id,creditId } = useParams();
+  const { id, creditId } = useParams();
   const [isPaymentDetails, setIsPaymentDetails] = useState<boolean>(true);
   const { showToast } = useNotify();
   const [Rows, setRows] = useState<RowData[]>([]);
-    const [data, setData] = useState({
-      agentName: "Legend Shipping Agency Private Limited",
-      agentCreditReferenceNumber: "29AARCM5896Q1Z9",
-      agentGSTIN: "29AARCM5896Q1Z9",
-      containerType: "20 feet Dry Container",
-      quantityOfContainer: "10",
-      grossWeight: "10000",
-      portOfLoading: " PORTKELANG, INDIA",
-      portOfDischarge: " CHENNAI, INDIA",
-      finalDestination: " CHENNAI, INDIA",
-      vesselName: "ULSAN VOYAGER",
-      voyageNumber: " VT2505W",
-      arrivalDate: "23-04-2025",
-      shippingBillNumber: "3",
-      etd_atd: "ATD",
-      billOfLading: "984958445",
-      exchangeRate: "88.45",
-      tableDetails: [
-        {
-          description: "Weighment Charges - Inbound",
-          sacCode: "996729",
-          taxableOrNot: "TXB",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 10000.0,
-        },
-        {
-          description: "Warehouse Storage Charges (200 sq.ft)",
-          sacCode: "996729",
-          taxableOrNot: "TXB",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 40000.0,
-        },
-        {
-          description: "Weighment Charges - Inbound",
-          sacCode: "996729",
-          taxableOrNot: "NTX",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 10000.0,
-        },
-        {
-          description: "Weighment Charges - Inbound",
-          sacCode: "996729",
-          taxableOrNot: "NTX",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 20000.0,
-        },
-      ],
-      bankName: "ICICI BANK LIMITED",
-      paymentInstruction:
-        "All payments must be made via NEFT or RTGS only. No other modes of payment will be accepted.",
-      notes:
-        "Payment not settled as per agreed terms will attract interest @ 18% p.a This is a computer generated document, signature not required.",
-      panNo: "AARCM5896Q",
-      gstin: "29AARCM5896Q1Z9",
-      remarks:
-        "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
-    });
-    const [tempData, setTempData] = useState({
-      agentName: "Legend Shipping Agency Private Limited",
-      agentCreditReferenceNumber: "29AARCM5896Q1Z9",
-      agentGSTIN: "29AARCM5896Q1Z9",
-      containerType: "20 feet Dry Container",
-      quantityOfContainer: "10",
-      grossWeight: "10000",
-      portOfLoading: " PORTKELANG, INDIA",
-      portOfDischarge: " CHENNAI, INDIA",
-      finalDestination: " CHENNAI, INDIA",
-      vesselName: "ULSAN VOYAGER",
-      voyageNumber: " VT2505W",
-      arrivalDate: "23-04-2025",
-      shippingBillNumber: "3",
-      etd_atd: "ATD",
-      billOfLading: "984958445",
-      exchangeRate: "88.45",
-      tableDetails: [
-        {
-          description: "Weighment Charges - Inbound",
-          sacCode: "996729",
-          taxableOrNot: "TXB",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 10000.0,
-        },
-        {
-          description: "Warehouse Storage Charges (200 sq.ft)",
-          sacCode: "996729",
-          taxableOrNot: "TXB",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 40000.0,
-        },
-        {
-          description: "Weighment Charges - Inbound",
-          sacCode: "996729",
-          taxableOrNot: "NTX",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 10000.0,
-        },
-        {
-          description: "Weighment Charges - Inbound",
-          sacCode: "996729",
-          taxableOrNot: "NTX",
-          currency: "INR",
-          quantity: "3",
-          unit: "20’STD",
-          unitPrice: " 35000.00",
-          amount: 20000.0,
-        },
-      ],
-      bankName: "ICICI BANK LIMITED",
-      paymentInstruction:
-        "All payments must be made via NEFT or RTGS only. No other modes of payment will be accepted.",
-      notes:
-        "Payment not settled as per agreed terms will attract interest @ 18% p.a This is a computer generated document, signature not required.",
-      panNo: "AARCM5896Q",
-      gstin: "29AARCM5896Q1Z9",
-      remarks:
-        "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
-    });
+  const [data, setData] = useState({
+    billOfLadingNumber: "mmi1234501-A",
+    agentName: "Legend Shipping Agency Private Limited",
+    agentCreditReferenceNumber: "29AARCM5896Q1Z9",
+    agentGSTIN: "29AARCM5896Q1Z9",
+    containerType: "20 feet Dry Container",
+    quantityOfContainer: "10",
+    grossWeight: "10000",
+    portOfLoading: " PORTKELANG, INDIA",
+    portOfDischarge: " CHENNAI, INDIA",
+    finalDestination: " CHENNAI, INDIA",
+    vesselName: "ULSAN VOYAGER",
+    voyageNumber: " VT2505W",
+    arrivalDate: "23-04-2025",
+    shippingBillNumber: "335446565",
+    etd_atd: "ATD",
+    exchangeRate: "88.45",
+    tableDetails: [
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 10000.0,
+      },
+      {
+        description: "Warehouse Storage Charges (200 sq.ft)",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 40000.0,
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "NTX",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 10000.0,
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "NTX",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 20000.0,
+      },
+    ],
+    bankName: "ICICI BANK LIMITED",
+    paymentInstruction:
+      "All payments must be made via NEFT or RTGS only. No other modes of payment will be accepted.",
+    notes:
+      "Payment not settled as per agreed terms will attract interest @ 18% p.a This is a computer generated document, signature not required.",
+    panNo: "AARCM5896Q",
+    gstin: "29AARCM5896Q1Z9",
+    remarks:
+      "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
+  });
+  const [tempData, setTempData] = useState({
+    billOfLadingNumber: "mmi1234501-A",
+    agentName: "Legend Shipping Agency Private Limited",
+    agentCreditReferenceNumber: "29AARCM5896Q1Z9",
+    agentGSTIN: "29AARCM5896Q1Z9",
+    containerType: "20 feet Dry Container",
+    quantityOfContainer: "10",
+    grossWeight: "10000",
+    portOfLoading: " PORTKELANG, INDIA",
+    portOfDischarge: " CHENNAI, INDIA",
+    finalDestination: " CHENNAI, INDIA",
+    vesselName: "ULSAN VOYAGER",
+    voyageNumber: " VT2505W",
+    arrivalDate: "23-04-2025",
+    shippingBillNumber: "3",
+    etd_atd: "ATD",
+    exchangeRate: "88.45",
+    tableDetails: [
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 10000.0,
+      },
+      {
+        description: "Warehouse Storage Charges (200 sq.ft)",
+        sacCode: "996729",
+        taxableOrNot: "TXB",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 40000.0,
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "NTX",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 10000.0,
+      },
+      {
+        description: "Weighment Charges - Inbound",
+        sacCode: "996729",
+        taxableOrNot: "NTX",
+        currency: "INR",
+        quantity: "3",
+        unit: "20’STD",
+        unitPrice: " 35000.00",
+        amount: 20000.0,
+      },
+    ],
+    bankName: "ICICI BANK LIMITED",
+    paymentInstruction:
+      "All payments must be made via NEFT or RTGS only. No other modes of payment will be accepted.",
+    notes:
+      "Payment not settled as per agreed terms will attract interest @ 18% p.a This is a computer generated document, signature not required.",
+    panNo: "AARCM5896Q",
+    gstin: "29AARCM5896Q1Z9",
+    remarks:
+      "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
+  });
 
   const taxable = () => {
     return data.tableDetails.reduce((acc, item) => {
@@ -238,7 +238,9 @@ const CreditNoteInvoiceDetails: React.FC = () => {
   return (
     <div className="bg-grey-aw-50 flex flex-col gap-6 px-8 py-6 rounde-xs shadow-lg">
       <div className="flex justify-end gap-4">
-        <NavLink to={`/accounts/agent-soa-export/credit-edit/${id}/${creditId}`}>
+        <NavLink
+          to={`/accounts/agent-soa-export/credit-edit/${id}/${creditId}`}
+        >
           <NeutralBlueButton
             label={"Edit"}
             size={"m"}
@@ -329,8 +331,11 @@ const CreditNoteInvoiceDetails: React.FC = () => {
             value={data.finalDestination}
             parentStyle="flex-col"
           />
-          <AccountsModel label={"Shipping Bill Number"} value={data.shippingBillNumber} parentStyle="flex-col" />
-         
+          <AccountsModel
+            label={"Shipping Bill Number"}
+            value={data.shippingBillNumber}
+            parentStyle="flex-col"
+          />
         </div>
         <div className="grid gap-4 grid-cols-5">
           <AccountsModel
@@ -345,7 +350,7 @@ const CreditNoteInvoiceDetails: React.FC = () => {
           />
           <AccountsModel
             label={"BILL OF LADING"}
-            value={data.billOfLading}
+            value={data.billOfLadingNumber}
             parentStyle="flex-col"
           />
           <AccountsModel
@@ -594,9 +599,7 @@ const CreditNoteInvoiceDetails: React.FC = () => {
 
       <div className="flex flex-col gap-2">
         <p className="text-grey-ab font-semibold">Remarks</p>
-        <p className="text-sm text-grey-ab">
-          {data.remarks}
-        </p>
+        <p className="text-sm text-grey-ab">{data.remarks}</p>
       </div>
 
       {/* end */}

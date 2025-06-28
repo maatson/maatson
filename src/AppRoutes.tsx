@@ -695,6 +695,36 @@ const CarrierInvoiceDetailsExport = lazy(
 const AgentSOADashboard = lazy(
   () => import("./pages/accounts/agentSOADashboard")
 );
+const AgentSOAList = lazy(
+  () => import("./pages/accounts/agentSOADashboard/AgentSOAList")
+);
+const ViewCreditAgents = lazy(
+  () => import("./pages/accounts/agentSOADashboard/view/ViewCredit")
+);
+const ViewDebitAgents = lazy(
+  () => import("./pages/accounts/agentSOADashboard/view/ViewDebit")
+);
+const ViewAllSlips = lazy(
+  () => import("./pages/accounts/agentSOADashboard/view/ViewAllSlips")
+);
+const ViewCreditSlips = lazy(
+  () => import("./pages/accounts/agentSOADashboard/view/ViewCreditSlips")
+);
+const ViewDebitSlips = lazy(
+  () => import("./pages/accounts/agentSOADashboard/view/ViewDebitSlips")
+);
+const CreditAgentsDetails = lazy(
+  () => import("./pages/accounts/agentSOADashboard/details/CreditDetails")
+);
+const EditCreditAgentsDetails = lazy(
+  () => import("./pages/accounts/agentSOADashboard/edit/EditCredit")
+);
+const DebitAgentsDetails = lazy(
+  () => import("./pages/accounts/agentSOADashboard/details/DebitDetails")
+);
+const EditDebitAgentsDetails = lazy(
+  () => import("./pages/accounts/agentSOADashboard/edit/EditDebit")
+);
 
 // agent soa import
 const AgentSOAImport = lazy(() => import("./pages/accounts/agentSOAImport"));
@@ -1214,73 +1244,88 @@ const AppRoutes: React.FC = () => {
             />
           </Route>
 
-          <Route
-            path="agent-soa-dashboard"
-            element={<AgentSOADashboard />}
-          ></Route>
+          <Route path="agent-soa-dashboard" element={<AgentSOADashboard />}>
+            <Route index element={<AgentSOAList />} />
+            <Route path="view-credit/:id" element={<ViewCreditAgents />} />
+            <Route path="view-debit/:id" element={<ViewDebitAgents />} />
+            <Route path="view-slips" element={<ViewAllSlips />}>
+              <Route path="credit/:id" element={<ViewCreditSlips />} />
+              <Route path="debit/:id" element={<ViewDebitSlips />} />
+            </Route>
+            <Route
+              path="credit-details/:id/:creditInvoiceId"
+              element={<CreditAgentsDetails />}
+            />
+            <Route
+              path="credit-detail-edit/:id/:creditInvoiceId"
+              element={<EditCreditAgentsDetails />}
+            />
+            <Route
+              path="debit-details/:id/:debitInvoiceId"
+              element={<DebitAgentsDetails />}
+            />
+            <Route
+              path="debit-detail-edit/:id/:creditInvoiceId"
+              element={<EditDebitAgentsDetails />}
+            />
+          </Route>
 
           <Route path="agent-soa-import" element={<AgentSOAImport />}>
             <Route index element={<AgentSOAListImport />} />
-            <Route
-              path="view/:id"
-              element={<ViewAgentSOAInvoiceImport />}
-            ></Route>
+            <Route path="view/:id" element={<ViewAgentSOAInvoiceImport />} />
             <Route
               path="credit-create/:id"
               element={<CreateCreditNoteInvoiceImport />}
-            ></Route>
+            />
             <Route
               path="debit-create/:id"
               element={<CreateDebitNoteInvoiceImport />}
-            ></Route>
+            />
             <Route
               path="credit-edit/:id/:creditId"
               element={<EditCreditNoteInvoiceImport />}
-            ></Route>
+            />
             <Route
               path="debit-edit/:id/:creditId"
               element={<EditDebitNoteInvoiceImport />}
-            ></Route>
+            />
             <Route
               path="credit-details/:id/:creditId"
               element={<CreditNoteInvoiceDetailsImport />}
-            ></Route>
+            />
             <Route
               path="debit-details/:id/:creditId"
               element={<DebitNoteInvoiceDetailsImport />}
-            ></Route>
+            />
           </Route>
 
           <Route path="agent-soa-export" element={<AgentSOAExport />}>
             <Route index element={<AgentSOAListExport />} />
-            <Route
-              path="view/:id"
-              element={<ViewAgentSOAInvoiceExport />}
-            ></Route>
+            <Route path="view/:id" element={<ViewAgentSOAInvoiceExport />} />
             <Route
               path="credit-create/:id"
               element={<CreateCreditNoteInvoiceExport />}
-            ></Route>
+            />
             <Route
               path="debit-create/:id"
               element={<CreateDebitNoteInvoiceExport />}
-            ></Route>
+            />
             <Route
               path="credit-edit/:id/:creditId"
               element={<EditCreditNoteInvoiceExport />}
-            ></Route>
+            />
             <Route
               path="debit-edit/:id/:creditId"
               element={<EditDebitNoteInvoiceExport />}
-            ></Route>
+            />
             <Route
               path="credit-details/:id/:creditId"
               element={<CreditNoteInvoiceDetailsExport />}
-            ></Route>
+            />
             <Route
               path="debit-details/:id/:creditId"
               element={<DebitNoteInvoiceDetailsExport />}
-            ></Route>
+            />
           </Route>
         </Route>
 

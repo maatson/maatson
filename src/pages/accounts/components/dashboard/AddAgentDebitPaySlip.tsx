@@ -1,44 +1,40 @@
 import React, { ChangeEvent, useState } from "react";
-import AccountsModel from "../components/AccountsModel";
-import GroupField from "../../../components/groupField/GroupField";
-import { AccountIcon, DocumentIcon } from "../../../components/icons/Icons";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GroupField from "../../../../components/groupField/GroupField";
+import {
+  AccountIcon,
+  CrossIcon,
+  InvoiceIcon,
+} from "../../../../components/icons/Icons";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 
 interface DataProps {
   id: string | number;
   invoiceCollectStatus: string;
   carrierInvoiceDocument: File | null;
 }
-interface EditCollectionPaymentProps {
+interface AddAgentDebitPaySlipProps {
   onClose: () => void;
   onSave: (data: DataProps) => void;
+  defaultDebitNoteInvoiceNumbers: string[];
 }
 
-const EditCollectionPayment: React.FC<EditCollectionPaymentProps> = ({
+const AddAgentDebitPaySlip: React.FC<AddAgentDebitPaySlipProps> = ({
   onClose,
   onSave,
+  defaultDebitNoteInvoiceNumbers,
 }) => {
   const [data, setData] = useState({
-    paymentID: "CD10132001",
-    bookingID: "123dd4545",
-    billOfLadingNumber: "mmi1234501-A",
-    carrierInvoiceNumber: "inv-123404001",
-    carrierName: "Legend Shipping Agency Private Limited",
-    address: "No. 10, Cenotaph Road, Teynampet, Chennai – 600018",
-    companyGSTIN: "123dd4545",
-    bankName: "ICICI BANK LIMITED",
-    benificiaryName: "MAATSON MARITIME INTL OPC PVT LTD",
-    accountNumber: "190205001960",
-    branchName: "MADHAVARAM",
-    IFSCcode: "ICIC0001902",
-    carrierInvoiceAmount: 50000,
-    totalAmount: 49000,
-    tdsAmount: 1000,
-    tdsPercentage: 2,
-    paymentMethod: "NEFT/RTGS/IMPS/SWIFT/ACH",
-    totalAmountPaid: 50000,
-    remarks:
-      "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
+    debitNoteInvoiceNumbers: defaultDebitNoteInvoiceNumbers || [],
+    agentName: "",
+    remittanceRef: "",
+    bankName: "",
+    paymentMethod: "",
+    totalAmount: "",
+    bankCharges: "",
+    otherCharges: "",
+    agentSOADebitAmount: 50000,
+    totalAmountReceived: "",
+    remarks: "",
   });
 
   // const [data, setData] = useState<DataProps>({
@@ -63,22 +59,52 @@ const EditCollectionPayment: React.FC<EditCollectionPaymentProps> = ({
   };
   return (
     <div className="flex flex-col gap-6 px-8 py-6 bg-grey-aw-50 rounded-xs shadow-lg max-w-[800px] max-h-[600px] overflow-auto custom-scrollbar">
-      <p className="text-h5 font-bold text-grey-ab-900">Edit Payment</p>
       <div className="flex justify-between">
-        <AccountsModel label={"Booking ID:"} value={"123dd4545"} />
-        <AccountsModel
-          label={"Bill of Lading Number:"}
-          value={"mmi1234501-A"}
-        />
+        <p className="text-h5 font-bold text-grey-ab-900">
+          Agent SOA Debit Slip Create
+        </p>
+        <div
+          className="p-[6px] rounded-xs bg-grey-ab-50 cursor-pointer h-fit"
+          onClick={onClose}
+        >
+          <CrossIcon size={16}/>
+        </div>
       </div>
-      <AccountsModel label={"Carrier Invoice :"} value={"CR002202001"} />
+      <GroupField
+        label={"Debit Note Invoice Number"}
+        type={"select"}
+        placeholder={"Enter Debit Note Invoice Number"}
+        name={"debitNoteInvoiceNumbers"}
+        value={data.debitNoteInvoiceNumbers}
+        onChange={handleChange}
+        error={false}
+        options={defaultDebitNoteInvoiceNumbers.map((item) => ({
+          label: item,
+          value: item,
+        }))}
+        isMulti
+        errorMessage={""}
+        leftIcon={<InvoiceIcon color="#2C398F" />}
+        parentStyle="w-full"
+      />
       <div className="flex gap-4">
         <GroupField
-          label={"Carrier Name *"}
+          label={"Agent Name*"}
           type={""}
-          placeholder={"Enter Carrier Name"}
-          name={"carrierName"}
-          value={data.carrierName}
+          placeholder={"Enter Agent Name"}
+          name={"agentName"}
+          value={data.agentName}
+          onChange={handleChange}
+          error={false}
+          errorMessage={""}
+          parentStyle="w-full"
+        />
+        <GroupField
+          label={"Remittance Ref "}
+          type={""}
+          placeholder={"Enter Remittance Ref"}
+          name={"remittanceRef"}
+          value={data.remittanceRef}
           onChange={handleChange}
           error={false}
           errorMessage={""}
@@ -119,7 +145,7 @@ const EditCollectionPayment: React.FC<EditCollectionPaymentProps> = ({
       <div className="flex flex-col gap-4 p-3 bg-grey-100">
         <div className="flex gap-4">
           <GroupField
-            label={"Total Amount"}
+            label={"Total Amount*"}
             type={""}
             placeholder={"Enter Total Amount"}
             name={"totalAmount"}
@@ -129,42 +155,45 @@ const EditCollectionPayment: React.FC<EditCollectionPaymentProps> = ({
             errorMessage={""}
             parentStyle="w-full"
           />
-          <div className="flex items-end w-full">
-            <GroupField
-              label={"TDS Amount*"}
-              type={""}
-              placeholder={"TDS Percentage"}
-              name={"tdsPercentage"}
-              value={data.tdsPercentage}
-              onChange={handleChange}
-              rightIcon={<div className="font-bold text-grey-ab-700">%</div>}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-[40%]"
-            />
-            <GroupField
-              label={""}
-              type={""}
-              placeholder={"Enter TDS Amount"}
-              name={"tdsAmount"}
-              value={data.tdsAmount}
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-[60%]"
-            />
-          </div>
+          <GroupField
+            label={"Bank Charges*"}
+            type={""}
+            placeholder={"Enter Bank Charges"}
+            name={"otherCharges"}
+            value={data.otherCharges}
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            parentStyle="w-full"
+          />
+          <GroupField
+            label={"Other Charges"}
+            type={""}
+            placeholder={"Enter Other Charges"}
+            name={"bankCharges"}
+            value={data.bankCharges}
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            parentStyle="w-full"
+          />
         </div>
 
         <div className="flex justify-between">
           <div className="flex flex-col gap-2 py-1">
-            <p className="text-sm text-grey-ab-400">Carrier Invoice Amount</p>
-            <p className="text-lg text-grey-ab-800 font-bold">50,000</p>
+            <p className="text-sm text-grey-ab-400">Agent SOA Debit Amount</p>
+            <p className="text-lg text-grey-ab-800 font-bold">
+              {data.agentSOADebitAmount.toLocaleString("en-IN")}
+            </p>
           </div>
           <div className="flex flex-col gap-2 py-1">
-            <p className="text-sm text-grey-ab-400">Total Amount Paid</p>
+            <p className="text-sm text-grey-ab-400">Total Amount Received</p>
             <p className="text-lg text-success-700 font-bold">
-              {Number(data.totalAmount) + Number(data.tdsAmount)}
+              {(
+                Number(data.totalAmount) +
+                Number(data.bankCharges) +
+                Number(data.otherCharges)
+              ).toLocaleString("en-IN")}
             </p>
           </div>
         </div>
@@ -187,7 +216,7 @@ const EditCollectionPayment: React.FC<EditCollectionPaymentProps> = ({
         </div>
         <div onClick={handleSave}>
           <PrimaryButton
-            label={"Save Payment Slip"}
+            label={"Save Debit Slip"}
             size={"l"}
             variant={"primary"}
           />
@@ -197,4 +226,4 @@ const EditCollectionPayment: React.FC<EditCollectionPaymentProps> = ({
   );
 };
 
-export default EditCollectionPayment;
+export default AddAgentDebitPaySlip;

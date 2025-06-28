@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../components/groupField/GroupField";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GroupField from "../../../../components/groupField/GroupField";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 
 interface bankAccountsDataProps {
   id: string | number;

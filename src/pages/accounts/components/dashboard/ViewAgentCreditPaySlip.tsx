@@ -1,49 +1,56 @@
 import React, { useState } from "react";
-import BlackButton from "../../../components/buttons/BlackButton";
+import BlackButton from "../../../../components/buttons/BlackButton";
 import {
   CrossIcon,
   DeleteIcon,
   DownloadIcon,
   EditIcon,
-} from "../../../components/icons/Icons";
-import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
-import ErrorButton from "../../../components/buttons/ErrorButton";
-import AccountsModel from "../components/AccountsModel";
-import { NavLink, useParams } from "react-router-dom";
+} from "../../../../components/icons/Icons";
+import NeutralBlueButton from "../../../../components/buttons/NeutralBlueButton";
+import ErrorButton from "../../../../components/buttons/ErrorButton";
+import AccountsModel from "../../components/AccountsModel";
+import BlueChip from "../../../../components/chips/BlueChip";
 
-interface CollectionViewProps {
-  onClose: () => void;
-  onEdit: () => void;
+interface InitialDataProps {
+  creditSlipNumber: string;
+  remittanceRef: string;
+  paidDate: string;
+  creditNoteInvoiceNumbers: string[];
+  agentName: string;
+  agentAdress: string;
+  phoneNumber: string;
+  bankName: string;
+  beneficiaryName: string;
+  accountNumber: string;
+  branchName: string;
+  ifscCode: string;
+  agentSOACreditAmount: number;
+  totalAmount: number;
+  bankCharges: number;
+  otherCharges: number;
+  paymentMethod: string;
+  totalAmountReceived: number;
+  remarks: string;
 }
 
-const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
-  const { id } = useParams();
-  const [data, setData] = useState({
-    paymentID: "CD10132001",
-    bookingID: "123dd4545",
-    billOfLadingNumber: "mmi1234501-A",
-    carrierInvoiceNumber: "inv-123404001",
-    carrierName: "Legend Shipping Agency Private Limited",
-    address: "No. 10, Cenotaph Road, Teynampet, Chennai – 600018",
-    companyGSTIN: "123dd4545",
-    bankName: "ICICI BANK LIMITED",
-    benificiaryName: "MAATSON MARITIME INTL OPC PVT LTD",
-    accountNumber: "190205001960",
-    branchName: "MADHAVARAM",
-    IFSCcode: "ICIC0001902",
-    carrierInvoiceAmount: 50000,
-    totalAmount: 49000,
-    tdsAmount: 1000,
-    tdsPercentage: 2,
-    paymentMethod: "NEFT/RTGS/IMPS/SWIFT/ACH",
-    totalAmountPaid: 50000,
-    remarks:
-      "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
-  });
+interface ViewAgentCreditPaySlipProps {
+  onClose: () => void;
+  onEdit: () => void;
+  initialData: InitialDataProps;
+}
+
+const ViewAgentCreditPaySlip: React.FC<ViewAgentCreditPaySlipProps> = ({
+  onClose,
+  onEdit,
+  initialData,
+}) => {
+  const [data, setData] = useState<InitialDataProps>(initialData);
   return (
     <div className="flex flex-col gap-6 px-8 py-6 bg-grey-aw-50 rounded-xs shadow-lg max-w-[800px] max-h-[600px] overflow-auto custom-scrollbar">
       <div className="flex justify-between items-center">
-        <p className="text-h5 font-bold text-grey-ab-900">Collection</p>
+        <p className="text-h5 font-bold text-grey-ab-900">
+          Agent SOA Credit Slip
+        </p>
         <div
           className="p-[6px]  rounded-xs  bg-grey-ab-50 cursor-pointer"
           onClick={onClose}
@@ -63,7 +70,7 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
           </div>
           <div onClick={onEdit}>
             <NeutralBlueButton
-              label={"Edit Collection"}
+              label={"Edit Agent Slip"}
               size={"m"}
               variant={"outline"}
               leftIcon={<EditIcon size={16} color="#0091FF" />}
@@ -83,50 +90,56 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
       <div className="flex justify-between">
         <div className="flex flex-col gap-2">
           <AccountsModel
-            label={"Booking ID:"}
-            value={data.bookingID}
-            parentStyle="py-1"
-          />
-          <AccountsModel
-            label={"Carrier Invoice Number:"}
-            value={data.carrierInvoiceNumber}
-            parentStyle="py-1"
+            label={"Remittance Ref:"}
+            value={data.remittanceRef}
+            parentStyle="py-1 gap-2"
           />
         </div>
         <div className="flex flex-col gap-2">
           <AccountsModel
-            label={"Payment ID:"}
-            value={data.paymentID}
-            parentStyle="py-1"
+            label={"Credit Slip Number:"}
+            value={data.creditSlipNumber}
+            parentStyle="py-1 gap-2"
           />
           <AccountsModel
-            label={"Bill of Lading Number:"}
-            value={data.billOfLadingNumber}
-            parentStyle="py-1"
+            label={"Credit Slip Date:"}
+            value={data.paidDate}
+            parentStyle="py-1 gap-2"
           />
         </div>
       </div>
 
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-semibold tex-grey-ab">
+          Credit Note Invoice Number
+        </p>
+        <div className="flex gap-3 flex-wrap py-1">
+          {data.creditNoteInvoiceNumbers.map((item) => (
+            <BlueChip label={item} size={"m"} variant={"outline"} />
+          ))}
+        </div>
+      </div>
+
       <div className="flex flex-col gap-4">
-        <p className="text-lg font-bold text-grey-ab ">Carrier Information</p>
+        <p className="text-lg font-bold text-grey-ab ">Agent Information</p>
         <div className="flex flex-col">
           <AccountsModel
-            label={"Carrier Name"}
-            value={data.carrierName}
+            label={"Agent Name"}
+            value={data.agentName}
             parentStyle="text-xs py-2 border-t border-t-grey-ab-50"
             labelStyle="font-normal text-grey-ab-300 w-[200px]"
             valueStyle="text-grey-ab-800"
           />
           <AccountsModel
             label={"Address"}
-            value={data.address}
+            value={data.agentAdress}
             parentStyle="text-xs py-2 border-t border-t-grey-ab-50"
             labelStyle="font-normal text-grey-ab-300 w-[200px]"
             valueStyle="text-grey-ab-800"
           />
           <AccountsModel
-            label={"GSTIN"}
-            value={data.companyGSTIN}
+            label={"Phone Number"}
+            value={data.phoneNumber}
             parentStyle="text-xs py-2 border-y border-y-grey-ab-50"
             labelStyle="font-normal text-grey-ab-300 w-[200px]"
             valueStyle="text-grey-ab-800"
@@ -135,7 +148,7 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
       </div>
 
       <div className="flex flex-col gap-4">
-        <p className="text-lg font-bold text-grey-ab ">Customer Information</p>
+        <p className="text-lg font-bold text-grey-ab ">Bank Details</p>
         <div className="flex flex-col">
           <AccountsModel
             label={"Bank Name"}
@@ -146,7 +159,7 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
           />
           <AccountsModel
             label={"Beneficiary Name"}
-            value={data.benificiaryName.toUpperCase()}
+            value={data.beneficiaryName.toUpperCase()}
             parentStyle="text-xs py-2 border-t border-t-grey-ab-50"
             labelStyle="font-normal text-grey-ab-300 w-[200px]"
             valueStyle="text-grey-ab-800"
@@ -167,7 +180,7 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
           />
           <AccountsModel
             label={"IFSC Code No"}
-            value={data.IFSCcode}
+            value={data.ifscCode}
             parentStyle="text-xs py-2 border-b border-b-grey-ab-50"
             labelStyle="font-normal text-grey-ab-300 w-[200px]"
             valueStyle="text-grey-ab-800"
@@ -181,36 +194,36 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
           label={"Description"}
           value={"Amount"}
           parentStyle="py-2 px-8 gap-8 bg-grey-100 border-b border-b-grey-ab-100"
-          labelStyle=" text-grey-ab-600 w-[70%] px-4"
-          valueStyle="text-grey-ab-600 font-bold px-2"
+          labelStyle=" text-grey-ab-600 w-[65%] px-4"
+          valueStyle="text-grey-ab-600 font-bold "
         />
         <AccountsModel
-          label={"Carrier Invoice Amount"}
-          value={data.carrierInvoiceAmount}
+          label={"Agent SOA Credit Amount"}
+          value={data.agentSOACreditAmount.toLocaleString("en-IN")}
           parentStyle="py-3 px-8 gap-8  border-b border-b-grey-ab-100"
-          labelStyle="font-normal text-grey-ab-600 w-[70%] px-4"
-          valueStyle="text-grey-ab-600 px-2"
+          labelStyle="font-normal text-grey-ab-600 w-[65%] px-4"
+          valueStyle="text-grey-ab-600 "
         />
         <AccountsModel
           label={"Total Amount "}
-          value={data.totalAmount}
+          value={data.totalAmount.toLocaleString("en-IN")}
           parentStyle="py-3 px-8 gap-8  border-b border-b-grey-ab-100"
-          labelStyle="font-normal text-grey-ab-600 w-[70%] px-4"
-          valueStyle="text-grey-ab-600 px-2"
+          labelStyle="font-normal text-grey-ab-600 w-[65%] px-4"
+          valueStyle="text-grey-ab-600 "
         />
         <AccountsModel
-          label={"TDS Amount "}
-          value={data.tdsAmount}
+          label={"Bank Charges "}
+          value={data.bankCharges.toLocaleString("en-IN")}
           parentStyle="py-3 px-8 gap-8  border-b border-b-grey-ab-100"
-          labelStyle="font-normal text-grey-ab-600 w-[70%] px-4"
-          valueStyle="text-grey-ab-600 px-2"
+          labelStyle="font-normal text-grey-ab-600 w-[65%] px-4"
+          valueStyle="text-grey-ab-600 "
         />
         <AccountsModel
-          label={"TDS Percentage "}
-          value={data.tdsPercentage.toString().padStart(2, "0") + "%"}
+          label={"Other Charges"}
+          value={data.otherCharges.toLocaleString("en-IN")}
           parentStyle="py-3 px-8 gap-8  border-b border-b-grey-ab-100"
-          labelStyle="font-normal text-grey-ab-600 w-[70%] px-4"
-          valueStyle="text-grey-ab-600 px-2"
+          labelStyle="font-normal text-grey-ab-600 w-[65%] px-4"
+          valueStyle="text-grey-ab-600 "
         />
         <AccountsModel
           label={"Payment Method"}
@@ -220,15 +233,14 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
             </span>
           }
           parentStyle="py-3 px-8 gap-8  border-b border-b-grey-ab-100"
-          labelStyle="font-normal text-grey-ab-600 w-[70%] px-4"
-          valueStyle="px-2"
+          labelStyle="font-normal text-grey-ab-600 w-[65%] px-4"
         />
         <AccountsModel
-          label={" Total Amount Paid"}
-          value={data.totalAmountPaid}
+          label={" Total Amount Received"}
+          value={data.totalAmountReceived.toLocaleString("en-IN")}
           parentStyle="py-3 px-8 gap-8  border-b border-b-grey-ab-100"
-          labelStyle="font-normal text-grey-ab-600 w-[70%] px-4"
-          valueStyle="text-grey-ab-600 px-2"
+          labelStyle="font-normal text-grey-ab-600 w-[65%] px-4"
+          valueStyle="text-grey-ab-600 "
         />
       </div>
       {/* table end  */}
@@ -241,4 +253,4 @@ const CollectionView: React.FC<CollectionViewProps> = ({ onClose, onEdit }) => {
   );
 };
 
-export default CollectionView;
+export default ViewAgentCreditPaySlip;

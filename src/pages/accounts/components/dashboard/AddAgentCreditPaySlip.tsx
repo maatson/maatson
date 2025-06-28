@@ -1,42 +1,39 @@
 import React, { ChangeEvent, useState } from "react";
-import AccountsModel from "../components/AccountsModel";
-import GroupField from "../../../components/groupField/GroupField";
-import { AccountIcon, DocumentIcon } from "../../../components/icons/Icons";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import GroupField from "../../../../components/groupField/GroupField";
+import {
+  AccountIcon,
+  CrossIcon,
+  InvoiceIcon,
+} from "../../../../components/icons/Icons";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
 
 interface DataProps {
   id: string | number;
   invoiceCollectStatus: string;
   carrierInvoiceDocument: File | null;
 }
-interface AddCollectionPaymentProps {
+interface AddAgentCreditPaySlipProps {
   onClose: () => void;
   onSave: (data: DataProps) => void;
+  defaultCreditNoteInvoiceNumbers: string[];
 }
 
-const AddCollectionPayment: React.FC<AddCollectionPaymentProps> = ({
+const AddAgentCreditPaySlip: React.FC<AddAgentCreditPaySlipProps> = ({
   onClose,
   onSave,
+  defaultCreditNoteInvoiceNumbers,
 }) => {
   const [data, setData] = useState({
-    collectionID: "",
-    bookingID: "",
-    billOfLadingNumber: "",
-    proformaNumber: "",
-    carrierName: "",
-    address: "",
-    companyGSTIN: "",
+    creditNoteInvoiceNumbers: defaultCreditNoteInvoiceNumbers || [],
+    agentName: "",
+    remittanceRef: "",
     bankName: "",
-    benificiaryName: "",
-    accountNumber: "",
-    branchName: "",
-    IFSCcode: "",
-    proformaAmount: "",
-    totalAmount: "",
-    tdsAmount: "",
-    tdsPercentage: "",
     paymentMethod: "",
-    totalAmountPaid: "",
+    totalAmount: "",
+    bankCharges: "",
+    otherCharges: "",
+    agentSOACreditAmount: 50000,
+    totalAmountReceived: "",
     remarks: "",
   });
 
@@ -62,26 +59,52 @@ const AddCollectionPayment: React.FC<AddCollectionPaymentProps> = ({
   };
   return (
     <div className="flex flex-col gap-6 px-8 py-6 bg-grey-aw-50 rounded-xs shadow-lg max-w-[800px] max-h-[600px] overflow-auto custom-scrollbar">
-      <p className="text-h5 font-bold text-grey-ab-900">Create Payment</p>
       <div className="flex justify-between">
-        <AccountsModel label={"Booking ID:"} value={"123dd4545"} />
-        <AccountsModel
-          label={"Bill of Lading Number:"}
-          value={"mmi1234501-A"}
-        />
+        <p className="text-h5 font-bold text-grey-ab-900">
+          Agent SOA Credit Slip Create
+        </p>
+        <div
+          className="p-[6px] rounded-xs bg-grey-ab-50 cursor-pointer h-fit"
+          onClick={onClose}
+        >
+          <CrossIcon size={16}/>
+        </div>
       </div>
-      <AccountsModel
-          label={"Carrier Invoice :"}
-          value={"CR002202001"}
-        />
+      <GroupField
+        label={"Credit Note Invoice Number"}
+        type={"select"}
+        placeholder={"Enter Credit Note Invoice Number"}
+        name={"creditNoteInvoiceNumbers"}
+        value={data.creditNoteInvoiceNumbers}
+        onChange={handleChange}
+        error={false}
+        options={defaultCreditNoteInvoiceNumbers.map((item) => ({
+          label: item,
+          value: item,
+        }))}
+        isMulti
+        errorMessage={""}
+        leftIcon={<InvoiceIcon color="#2C398F" />}
+        parentStyle="w-full"
+      />
       <div className="flex gap-4">
-       
         <GroupField
-          label={"Carrier Name *"}
+          label={"Agent Name*"}
           type={""}
-          placeholder={"Enter Carrier Name"}
-          name={"carrierName"}
-          value={data.carrierName}
+          placeholder={"Enter Agent Name"}
+          name={"agentName"}
+          value={data.agentName}
+          onChange={handleChange}
+          error={false}
+          errorMessage={""}
+          parentStyle="w-full"
+        />
+        <GroupField
+          label={"Remittance Ref "}
+          type={""}
+          placeholder={"Enter Remittance Ref"}
+          name={"remittanceRef"}
+          value={data.remittanceRef}
           onChange={handleChange}
           error={false}
           errorMessage={""}
@@ -122,7 +145,7 @@ const AddCollectionPayment: React.FC<AddCollectionPaymentProps> = ({
       <div className="flex flex-col gap-4 p-3 bg-grey-100">
         <div className="flex gap-4">
           <GroupField
-            label={"Total Amount"}
+            label={"Total Amount*"}
             type={""}
             placeholder={"Enter Total Amount"}
             name={"totalAmount"}
@@ -132,42 +155,45 @@ const AddCollectionPayment: React.FC<AddCollectionPaymentProps> = ({
             errorMessage={""}
             parentStyle="w-full"
           />
-          <div className="flex items-end w-full">
-            <GroupField
-              label={"TDS Amount*"}
-              type={""}
-              placeholder={"TDS Percentage"}
-              name={"tdsPercentage"}
-              value={data.tdsPercentage}
-              onChange={handleChange}
-              rightIcon={<div className="font-bold text-grey-ab-700">%</div>}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-[40%]"
-            />
-            <GroupField
-              label={""}
-              type={""}
-              placeholder={"Enter TDS Amount"}
-              name={"tdsAmount"}
-              value={data.tdsAmount}
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-[60%]"
-            />
-          </div>
+          <GroupField
+            label={"Bank Charges*"}
+            type={""}
+            placeholder={"Enter Bank Charges"}
+            name={"otherCharges"}
+            value={data.otherCharges}
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            parentStyle="w-full"
+          />
+          <GroupField
+            label={"Other Charges"}
+            type={""}
+            placeholder={"Enter Other Charges"}
+            name={"bankCharges"}
+            value={data.bankCharges}
+            onChange={handleChange}
+            error={false}
+            errorMessage={""}
+            parentStyle="w-full"
+          />
         </div>
 
         <div className="flex justify-between">
           <div className="flex flex-col gap-2 py-1">
-            <p className="text-sm text-grey-ab-400">Carrier Invoice Amount</p>
-            <p className="text-lg text-grey-ab-800 font-bold">50,000</p>
+            <p className="text-sm text-grey-ab-400">Agent SOA Credit Amount</p>
+            <p className="text-lg text-grey-ab-800 font-bold">
+              {data.agentSOACreditAmount.toLocaleString("en-IN")}
+            </p>
           </div>
           <div className="flex flex-col gap-2 py-1">
-            <p className="text-sm text-grey-ab-400">Total Amount Paid</p>
+            <p className="text-sm text-grey-ab-400">Total Amount Received</p>
             <p className="text-lg text-success-700 font-bold">
-              {Number(data.totalAmount) + Number(data.tdsAmount)}
+              {(
+                Number(data.totalAmount) +
+                Number(data.bankCharges) +
+                Number(data.otherCharges)
+              ).toLocaleString("en-IN")}
             </p>
           </div>
         </div>
@@ -189,11 +215,15 @@ const AddCollectionPayment: React.FC<AddCollectionPaymentProps> = ({
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
         </div>
         <div onClick={handleSave}>
-          <PrimaryButton label={"Save Payment Slip"} size={"l"} variant={"primary"} />
+          <PrimaryButton
+            label={"Save Credit Slip"}
+            size={"l"}
+            variant={"primary"}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default AddCollectionPayment;
+export default AddAgentCreditPaySlip;

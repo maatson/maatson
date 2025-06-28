@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ComposeEmails from "../../components/composeEmail/ComposeEmails";
+import RippleButton from "../../components/rippleButton/RippleButton";
 
 interface Chip {
   id: number;
@@ -163,6 +164,11 @@ const PageNotFound: React.FC = () => {
       <p className="h2 text-center py-5 bg-blue-50 text-blue-900 font-semibold">
         Page Not Found 404 !!!
       </p>
+      <div className="flex py-60 justify-center items-center">
+        <div onClick={() => console.log("clicked")}>
+        <RippleButton children={"Sample Ripple button"} />
+        </div>
+      </div>
       {data && (
         <table className="bg-red w-4/5 mx-auto rounded-sm relative z-10">
           <thead className="">

@@ -43,6 +43,7 @@ const DebitNoteInvoiceDetails: React.FC = () => {
   const { showToast } = useNotify();
   const [Rows, setRows] = useState<RowData[]>([]);
   const [data, setData] = useState({
+    billOfLadingNumber: "mmi1234501-A",
     agentName: "Legend Shipping Agency Private Limited",
     agentDebitReferenceNumber: "29AARCM5896Q1Z9",
     agentGSTIN: "29AARCM5896Q1Z9",
@@ -57,7 +58,6 @@ const DebitNoteInvoiceDetails: React.FC = () => {
     arrivalDate: "23-04-2025",
     shippingBillNumber: "3",
     etd_atd: "ATD",
-    billOfLading: "984958445",
     exchangeRate: "88.45",
     tableDetails: [
       {
@@ -112,6 +112,7 @@ const DebitNoteInvoiceDetails: React.FC = () => {
       "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
   });
   const [tempData, setTempData] = useState({
+    billOfLadingNumber: "mmi1234501-A",
     agentName: "Legend Shipping Agency Private Limited",
     agentDebitReferenceNumber: "29AARCM5896Q1Z9",
     agentGSTIN: "29AARCM5896Q1Z9",
@@ -126,7 +127,6 @@ const DebitNoteInvoiceDetails: React.FC = () => {
     arrivalDate: "23-04-2025",
     shippingBillNumber: "3",
     etd_atd: "ATD",
-    billOfLading: "984958445",
     exchangeRate: "88.45",
     tableDetails: [
       {
@@ -348,7 +348,7 @@ const DebitNoteInvoiceDetails: React.FC = () => {
           />
           <AccountsModel
             label={"BILL OF LADING"}
-            value={data.billOfLading}
+            value={data.billOfLadingNumber}
             parentStyle="flex-col"
           />
           <AccountsModel

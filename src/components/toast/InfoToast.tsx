@@ -4,12 +4,12 @@ import { ToastProps } from "./SuccessToast";
 
 const InfoToast: React.FC<ToastProps> = ({ toastId, heading, message }) => {
   return (
-    <div className="bg-blue-50 border border-blue p-2 rounded flex items-start w-full gap-3">
+    <div className="bg-blue-50 border border-blue p-2 rounded flex items-start w-full gap-3 font-roboto">
       <div className="p-1 bg-blue rounded ">
-        <InfoIcon size={16} color="white" />
+        <InfoIcon size={16} color="#ffffff" />
       </div>
       <div className="flex flex-col gap-1 text-sm w-full">
-        <p className="text-blue-700 font-semibold capitalize">{heading}</p>
+        <p className="text-blue-600 font-semibold capitalize">{heading}</p>
         <p className="text-grey-ab-400 text-xs">{message}</p>
       </div>
     </div>

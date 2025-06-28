@@ -19,7 +19,7 @@ import BankImage from "/images/bank.png";
 import ErrorButton from "../../../components/buttons/ErrorButton";
 import PrimaryChip from "../../../components/chips/PrimaryChip";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
-import UpdateBankForm from "../components/UpdateBank";
+import UpdateBankForm from "../components/bank/UpdateBank";
 import DeleteImage from "/images/delete2.png";
 import GreyButton from "../../../components/buttons/GreyButton";
 

@@ -17,10 +17,10 @@ import BlackButton from "../../../components/buttons/BlackButton";
 import NeutralBlueButton from "../../../components/buttons/NeutralBlueButton";
 import GreyButton from "../../../components/buttons/GreyButton";
 import CustomTable from "../../../components/table/CustomTable";
-import InvoiceCollectStatus from "../components/InvoiceCollectStatus";
-import AddCollectionPayment from "../components/AddCollectionPayment";
-import CollectionView from "../components/CollectionView";
-import EditCollectionPayment from "../components/EditCollectionPayment";
+import InvoiceCollectStatus from "../components/invoice/InvoiceCollectStatus";
+import AddCollectionPayment from "../components/invoice/AddCollectionPayment";
+import CollectionView from "../components/invoice/CollectionView";
+import EditCollectionPayment from "../components/invoice/EditCollectionPayment";
 
 interface RowData {
   id: string | number;

@@ -1,19 +1,24 @@
 import React, { useState } from "react";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import GroupField from "../../../components/groupField/GroupField";
-import BlackButton from "../../../components/buttons/BlackButton";
-import { AddIcon, DeleteIcon, EditIcon } from "../../../components/icons/Icons";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import GroupField from "../../../../components/groupField/GroupField";
+import BlackButton from "../../../../components/buttons/BlackButton";
+import {
+  AddIcon,
+  DeleteIcon,
+  EditIcon,
+} from "../../../../components/icons/Icons";
 import { useNavigate } from "react-router-dom";
-import AccountsModel from "../components/AccountsModel";
-import { useNotify } from "../../../hooks/useNotify";
+import AccountsModel from "../../components/AccountsModel";
+import { useNotify } from "../../../../hooks/useNotify";
 
-const EditDebitNoteInvoice: React.FC = () => {
+const EditCredit: React.FC = () => {
   const navigate = useNavigate();
   const [isPaymentDetails, setIsPaymentDetails] = useState<boolean>(true);
   const { showToast } = useNotify();
   const [data, setData] = useState({
+    billOfLadingNumber: "mmi1234501-A",
     agentName: "Legend Shipping Agency Private Limited",
-    agentDebitReferenceNumber: "29AARCM5896Q1Z9",
+    agentCreditReferenceNumber: "29AARCM5896Q1Z9",
     agentGSTIN: "29AARCM5896Q1Z9",
     containerType: "20 feet Dry Container",
     quantityOfContainer: "10",
@@ -27,7 +32,7 @@ const EditDebitNoteInvoice: React.FC = () => {
     lineNumber: "3",
     igmNumber: "1132794",
     etd_atd: "ATD",
-    shippingBillNumber: "984958445",
+    shippingBillNumber: "",
     exchangeRate: "88.45",
     tableDetails: [
       {
@@ -82,8 +87,9 @@ const EditDebitNoteInvoice: React.FC = () => {
       "Confirmation of successful collection Pending or delayed collections with reasons Issues encountered during collection (e.g., damaged goods, incomplete payment) Follow-up actions required Special instructions or notes from the collector or supervisor",
   });
   const [tempData, setTempData] = useState({
+    billOfLadingNumber: "mmi1234501-A",
     agentName: "Legend Shipping Agency Private Limited",
-    agentDebitReferenceNumber: "29AARCM5896Q1Z9",
+    agentCreditReferenceNumber: "29AARCM5896Q1Z9",
     agentGSTIN: "29AARCM5896Q1Z9",
     containerType: "20 feet Dry Container",
     quantityOfContainer: "10",
@@ -97,7 +103,7 @@ const EditDebitNoteInvoice: React.FC = () => {
     lineNumber: "3",
     igmNumber: "1132794",
     etd_atd: "ATD",
-    shippingBillNumber: "984958445",
+    shippingBillNumber: "",
     exchangeRate: "88.45",
     tableDetails: [
       {
@@ -234,11 +240,11 @@ const EditDebitNoteInvoice: React.FC = () => {
       <div className="flex flex-col gap-6">
         <div className="flex gap-4 max-w-[816px]">
           <GroupField
-            label={"Agent Debit Reference Number"}
+            label={"Agent Credit Reference Number"}
             type={""}
-            placeholder={"Enter Agent Debit Reference Number"}
-            name={"agentDebitReferenceNumber"}
-            value={data.agentDebitReferenceNumber}
+            placeholder={"Enter Agent Credit Reference Number"}
+            name={"agentCreditReferenceNumber"}
+            value={data.agentCreditReferenceNumber}
             onChange={handleChange}
             error={false}
             errorMessage={""}
@@ -392,41 +398,68 @@ const EditDebitNoteInvoice: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-4 ">
-            <GroupField
-              label={"LINE NO *"}
-              type={""}
-              placeholder={"Enter LINE NO "}
-              name={"lineNumber"}
-              value={data.lineNumber}
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-full"
-            />
-            <GroupField
-              label={"IGM NO *"}
-              type={""}
-              placeholder={"Enter IGM NO "}
-              name={"igmNumber"}
-              value={data.igmNumber}
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-full"
-            />
-            <GroupField
-              label={"Exchange Rate"}
-              type={""}
-              placeholder={"Enter Exchange Rate"}
-              name={"exchangeRate"}
-              value={data.exchangeRate}
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              parentStyle="w-full"
-            />
-          </div>
+          {data.shippingBillNumber === "" ? (
+            <div className="flex gap-4 ">
+              <GroupField
+                label={"LINE NO *"}
+                type={""}
+                placeholder={"Enter LINE NO "}
+                name={"lineNumber"}
+                value={data.lineNumber}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                parentStyle="w-full"
+              />
+              <GroupField
+                label={"IGM NO *"}
+                type={""}
+                placeholder={"Enter IGM NO "}
+                name={"igmNumber"}
+                value={data.igmNumber}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                parentStyle="w-full"
+              />
+              <GroupField
+                label={"Exchange Rate"}
+                type={""}
+                placeholder={"Enter Exchange Rate"}
+                name={"exchangeRate"}
+                value={data.exchangeRate}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                parentStyle="w-full"
+              />
+            </div>
+          ) : (
+            <div className="flex gap-4 max-w-[816px]">
+              <GroupField
+                label={"SHipping Bill No*"}
+                type={""}
+                placeholder={"Enter SHipping Bill No"}
+                name={"shippingBillNumber"}
+                value={data.shippingBillNumber}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                parentStyle="w-full"
+              />
+              <GroupField
+                label={"Exchange Rate"}
+                type={""}
+                placeholder={"Enter Exchange Rate"}
+                name={"exchangeRate"}
+                value={data.exchangeRate}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                parentStyle="w-full"
+              />
+            </div>
+          )}
         </div>
 
         {/*  table */}
@@ -783,7 +816,7 @@ const EditDebitNoteInvoice: React.FC = () => {
           <PrimaryButton label={"Cancel"} size={"l"} variant={"link"} />
         </div>
         <PrimaryButton
-          label={"Save Debit Note"}
+          label={"Save Credit Note"}
           size={"l"}
           variant={"primary"}
         />
@@ -792,4 +825,4 @@ const EditDebitNoteInvoice: React.FC = () => {
   );
 };
 
-export default EditDebitNoteInvoice;
+export default EditCredit;

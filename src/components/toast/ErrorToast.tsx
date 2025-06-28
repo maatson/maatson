@@ -13,9 +13,9 @@ const ErrorToast: React.FC<ErrorToastProps> = ({
   message,
 }) => {
   return (
-    <div className="bg-error-50 border border-red p-2 rounded flex items-start w-full gap-3">
+    <div className="bg-error-50 border border-red p-2 rounded flex items-start w-full gap-3 font-roboto">
       <div className="p-1 bg-error rounded ">
-        <CloseIcon size={16} color="white" />
+        <CloseIcon size={16} color="#ffffff" />
       </div>
       <div className="flex flex-col gap-1 text-sm w-full">
         <p className="text-error-700 font-semibold capitalize">{heading}</p>

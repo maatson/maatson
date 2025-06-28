@@ -43,6 +43,7 @@ const CarrierInvoiceDetails: React.FC = () => {
   const { showToast } = useNotify();
   const [Rows, setRows] = useState<RowData[]>([]);
   const [data, setData] = useState({
+    billOfLadingNumber: "984958445",
     customerName: "Legend Shipping Agency Private Limited",
     customerGSTIN: "29AARCM5896Q1Z9",
     containerType: "20 feet Dry Container",
@@ -55,7 +56,6 @@ const CarrierInvoiceDetails: React.FC = () => {
     voyageNumber: " VT2505W",
     sailedDate: "23-04-2025",
     etd_atd: "ATD",
-    shippingBillNumber: "984958445",
     exchangeRate: "88.45",
     tableDetails: [
       {
@@ -117,6 +117,7 @@ const CarrierInvoiceDetails: React.FC = () => {
     ],
   });
   const [tempData, setTempData] = useState({
+    billOfLadingNumber: "984958445",
     customerName: "Legend Shipping Agency Private Limited",
     customerGSTIN: "",
     containerType: "20 feet Dry Container",
@@ -129,7 +130,6 @@ const CarrierInvoiceDetails: React.FC = () => {
     voyageNumber: " VT2505W",
     sailedDate: "23-04-2025",
     etd_atd: "ATD",
-    shippingBillNumber: "984958445",
     exchangeRate: "88.45",
     tableDetails: [
       {
@@ -350,7 +350,7 @@ const CarrierInvoiceDetails: React.FC = () => {
           />
           <AccountsModel
             label={"BILL OF LADING"}
-            value={data.shippingBillNumber}
+            value={data.billOfLadingNumber}
             parentStyle="flex-col"
           />
           <AccountsModel

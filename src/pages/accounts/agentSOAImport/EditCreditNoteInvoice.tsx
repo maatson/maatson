@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import AccountsModel from "../components/AccountsModel";
 import { useNotify } from "../../../hooks/useNotify";
 
-const CreateCreditNoteInvoice: React.FC = () => {
+const EditCreditNoteInvoice: React.FC = () => {
   const navigate = useNavigate();
   const [isPaymentDetails, setIsPaymentDetails] = useState<boolean>(true);
   const { showToast } = useNotify();
@@ -792,4 +792,4 @@ const CreateCreditNoteInvoice: React.FC = () => {
   );
 };
 
-export default CreateCreditNoteInvoice;
+export default EditCreditNoteInvoice;

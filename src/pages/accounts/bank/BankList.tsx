@@ -18,8 +18,8 @@ import SuccessButton from "../../../components/buttons/SuccessButton";
 import CustomTable from "../../../components/table/CustomTable";
 import CustomPagination from "../../../components/pagination/CustomPagination";
 import ErrorChip from "../../../components/chips/ErrorChip";
-import AddBankForm from "../components/AddBank";
-import UpdateBankForm from "../components/UpdateBank";
+import AddBankForm from "../components/bank/AddBank";
+import UpdateBankForm from "../components/bank/UpdateBank";
 import { useNotify } from "../../../hooks/useNotify";
 import { useNavigate } from "react-router-dom";
 

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
-import GroupField from "../../../components/groupField/GroupField";
-import PrimaryButton from "../../../components/buttons/PrimaryButton";
-import { DocumentIcon } from "../../../components/icons/Icons";
-import GreyButton from "../../../components/buttons/GreyButton";
+import GroupField from "../../../../components/groupField/GroupField";
+import PrimaryButton from "../../../../components/buttons/PrimaryButton";
+import { DocumentIcon } from "../../../../components/icons/Icons";
+import GreyButton from "../../../../components/buttons/GreyButton";
 
 interface DataProps {
   id: string | number;
