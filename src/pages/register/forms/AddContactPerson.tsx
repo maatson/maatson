@@ -8,12 +8,14 @@ import {
   PhoneIcon,
 } from "../../../components/icons/Icons";
 import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import { useLocation } from "react-router-dom";
 
 interface AddContactPersonProps {
   onClose: () => void; // Function to close the popup
 }
 
 const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
+  const location = useLocation();
   const [data, setData] = useState({
     contactName: "",
     department: "",
@@ -56,7 +58,6 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
       city: "",
       countryOfOperation: "",
     });
-    onClose();
   };
   return (
     <>
@@ -122,33 +123,35 @@ const AddContactPerson: React.FC<AddContactPersonProps> = ({ onClose }) => {
             errorMessage={""}
             leftIcon={<PhoneIcon color="#2C398F" />}
           />
-          <div className="flex gap-4 w-full">
-            <GroupField
-              label={"City"}
-              type={""}
-              placeholder={"Enter City"}
-              name={"city"}
-              value={data.city}
-              onChange={handleChange}
-              error={false}
-              errorMessage={""}
-              leftIcon={<LocationIcon color="#2C398F" />}
-              parentStyle="w-[50%]"
-            />
-            <GroupField
-              label={"Country of Operation"}
-              type={"select"}
-              placeholder={"Enter Country of .."}
-              name={"countryOfOperation"}
-              value={data.countryOfOperation}
-              onChange={handleChange}
-              isMulti
-              error={false}
-              errorMessage={""}
-              leftIcon={<CategoryIcon color="#2C398F" />}
-              parentStyle="w-[50%]"
-            />
-          </div>
+          {!location.pathname.startsWith("/registration-empty-depot") && (
+            <div className="flex gap-4 w-full">
+              <GroupField
+                label={"City"}
+                type={""}
+                placeholder={"Enter City"}
+                name={"city"}
+                value={data.city}
+                onChange={handleChange}
+                error={false}
+                errorMessage={""}
+                leftIcon={<LocationIcon color="#2C398F" />}
+                parentStyle="w-[50%]"
+              />
+              <GroupField
+                label={"Country of Operation"}
+                type={"select"}
+                placeholder={"Enter Country of .."}
+                name={"countryOfOperation"}
+                value={data.countryOfOperation}
+                onChange={handleChange}
+                isMulti
+                error={false}
+                errorMessage={""}
+                leftIcon={<CategoryIcon color="#2C398F" />}
+                parentStyle="w-[50%]"
+              />
+            </div>
+          )}
         </div>
         {/* button */}
         <div className="px-6 pb-6 flex gap-4">

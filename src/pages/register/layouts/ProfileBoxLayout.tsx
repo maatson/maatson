@@ -2,7 +2,7 @@ import React from "react";
 
 const ProfileBoxLayout: React.FC<{
   title: string;
-  value: string;
+  value: string | React.ReactNode;
   style?: string;
   titleStyle?: string;
   valueStyle?: string;

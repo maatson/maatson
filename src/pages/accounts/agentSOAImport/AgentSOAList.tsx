@@ -124,7 +124,6 @@ const AgentSOAList: React.FC = () => {
     },
   ];
 
-  // Memoize fetchData function with useCallback
   const fetchData = useCallback(() => {
     const arr = data.map((items, index) => {
       return createData({ ...items, id: index }); // Ensure createData returns the transformed data

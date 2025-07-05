@@ -61,6 +61,37 @@ const VendorContact = lazy(
   () => import("./pages/register/vendor/vendorDetails/VendorContact")
 );
 
+// empty depopt register
+const EmptyDepotRegister = lazy(() => import("./pages/register/emptyDepot"));
+const EmptyDepotRegisterList = lazy(
+  () => import("./pages/register/emptyDepot/EmptyDepotList")
+);
+const AddEmptyDepotRegister = lazy(
+  () => import("./pages/register/emptyDepot/AddEmptyDepot")
+);
+const EditEmptyDepotRegister = lazy(
+  () => import("./pages/register/emptyDepot/EditEmptyDepot")
+);
+const EmptyDepotDetails = lazy(
+  () => import("./pages/register/emptyDepot/emptyDepotDetails")
+);
+const EmptyDepotProfile = lazy(
+  () =>
+    import("./pages/register/emptyDepot/emptyDepotDetails/EmptyDepotProfile")
+);
+const EmptyDepotContainerMovement = lazy(
+  () =>
+    import(
+      "./pages/register/emptyDepot/emptyDepotDetails/EmptyDepotContainerMovement"
+    )
+);
+const EmptyDepotLiveActivity = lazy(
+  () =>
+    import(
+      "./pages/register/emptyDepot/emptyDepotDetails/EmptyDepotLiveActivity"
+    )
+);
+
 //SALES AND CRM (SALES AND MARKING & ENQUIRY & BOOKING)
 const Booking = lazy(() => import("./pages/salesAndMarketing/booking"));
 const BookingDetails = lazy(
@@ -827,6 +858,21 @@ const AppRoutes: React.FC = () => {
             <Route path="contact" element={<VendorContact />} />
           </Route>
         </Route>
+
+        <Route path="registration-empty-depot" element={<EmptyDepotRegister />}>
+          <Route index element={<EmptyDepotRegisterList />} />
+          <Route path="add" element={<AddEmptyDepotRegister />} />
+          <Route path="edit/:id" element={<EditEmptyDepotRegister />} />
+          <Route path="details/:id" element={<EmptyDepotDetails />}>
+            <Route index element={<EmptyDepotProfile />} />
+            <Route
+              path="container-movement"
+              element={<EmptyDepotContainerMovement />}
+            />
+            <Route path="line-activity" element={<EmptyDepotLiveActivity />} />
+          </Route>
+        </Route>
+
         {/* hrm */}
         <Route path="hrm/employees" element={<Employees />}>
           <Route index element={<EmployeeList />} />

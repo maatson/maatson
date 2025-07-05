@@ -176,7 +176,7 @@ const VendorProfile: React.FC = () => {
                   <div className="rounded-xs border p-2 flex gap-3 items-center w-[250px] bg-primary-50 border-grey-ab-100">
                     <DocumentIcon color="#2C398F" />
                     <div className="text-grey-ab-800 truncate w-[140px] ">
-                      reg-cert.pdf{" "}
+                      reg-cert.pdf
                     </div>
                     <div className="flex gap-1">
                       <div className="rounded-xs p-1 bg-grey-ab">
