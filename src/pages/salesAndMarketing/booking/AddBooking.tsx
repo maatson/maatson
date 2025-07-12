@@ -390,6 +390,9 @@ const AddBooking: React.FC = () => {
   const handleSubmit = () => {
     console.log(data);
   };
+
+  console.log("page rendered");
+  
   return (
     <>
       <div className="bg-grey-aw-50 px-8 py-4 rounded flex flex-col gap-8">

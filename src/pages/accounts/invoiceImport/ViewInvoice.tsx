@@ -3,7 +3,7 @@ import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 
 interface LayoutProps {
   label: string;
-  value: string;
+  value: string | React.ReactNode;
   parentStyle?: string;
   labelStyle?: string;
   valueStyle?: string;

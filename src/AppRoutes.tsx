@@ -441,6 +441,69 @@ const DeliveryOrderCollectedViewAir = lazy(
     )
 );
 
+// Customer Service : Cargo Arrival Notice
+const CargoArrivalNotice = lazy(
+  () => import("./pages/customerService/cargo-arrival-notice")
+);
+// sea
+const CargoArrivalNoticeList = lazy(
+  () => import("./pages/customerService/cargo-arrival-notice/sea-freight/CargoArrivalList")
+);
+const ViewCargoArrivalNotice = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/sea-freight/ViewCargoArrival"
+    )
+);
+const CargoArrivalNoticeCreate = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/sea-freight/CargoArrivalCreate"
+    )
+);
+const CargoArrivalNoticeEdit = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/sea-freight/CargoArrivalEdit"
+    )
+);
+const CargoArrivalNoticeDetails = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/sea-freight/CargoArrivalDetails"
+    )
+);
+
+// air
+
+const CargoArrivalNoticeListAir = lazy(
+  () => import("./pages/customerService/cargo-arrival-notice/air-freight/CargoArrivalList")
+);
+const ViewCargoArrivalNoticeAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/air-freight/ViewCargoArrival"
+    )
+);
+const CargoArrivalNoticeCreateAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/air-freight/CargoArrivalCreate"
+    )
+);
+const CargoArrivalNoticeEditAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/air-freight/CargoArrivalEdit"
+    )
+);
+const CargoArrivalNoticeDetailsAir = lazy(
+  () =>
+    import(
+      "./pages/customerService/cargo-arrival-notice/air-freight/CargoArrivalDetails"
+    )
+);
+
 // PRICING AND PROCUREMENT
 
 const RateFiling = lazy(() => import("./pages/pricing&procurement/rateFiling"));
@@ -487,7 +550,6 @@ const ViewVendorBill = lazy(
 );
 
 // OPERATIONS
-
 const ContainerReleaseOrder = lazy(
   () => import("./pages/operations/containerReleaseOrder")
 );
@@ -591,9 +653,6 @@ const ViewAirBl = lazy(
 );
 
 // Accounts
-const AccountsDashboard = lazy(
-  () => import("./pages/accounts/accountsDashboard")
-);
 const Bank = lazy(() => import("./pages/accounts/bank"));
 const BankList = lazy(() => import("./pages/accounts/bank/BankList"));
 const BankDetails = lazy(() => import("./pages/accounts/bank/BankDetails"));
@@ -890,7 +949,6 @@ const AppRoutes: React.FC = () => {
         <Route path="hrm/requirement" element={<Requirement />}>
           <Route index element={<RequirementList />} />
           <Route path="details" element={<RequirementDetails />} />
-          {/* <Route path="employee-profile" element={<EmployeeProfile />} /> */}
         </Route>
 
         {/* sales and marketting */}
@@ -919,7 +977,6 @@ const AppRoutes: React.FC = () => {
 
         {/* customer services */}
         {/* sea-air-schedule */}
-
         <Route path="sea-air-schedule" element={<SeaAirSchedule />}>
           <Route path="sea-freight" element={<SeaFreight />}>
             <Route index element={<UpdateSchedule />} />
@@ -956,7 +1013,6 @@ const AppRoutes: React.FC = () => {
         </Route>
 
         {/* shipment-updates */}
-
         <Route path="shipment-updates" element={<ShipmentUpdates />}>
           <Route path="sea-freight" element={<ShipmentSeaFreight />}>
             <Route index element={<Updates />} />
@@ -1061,9 +1117,39 @@ const AppRoutes: React.FC = () => {
             />
           </Route>
         </Route>
-
         {/* cargo arrival notice */}
-        <Route path="cargo-arrival-notice" element={<Requirement />}></Route>
+        <Route path="cargo-arrival-notice" element={<CargoArrivalNotice />}>
+          <Route path="sea-freight">
+            <Route index element={<CargoArrivalNoticeList />} />
+            <Route path="view/:id" element={<ViewCargoArrivalNotice />} />
+            <Route path="create/:id" element={<CargoArrivalNoticeCreate />} />
+            <Route
+              path="edit/:id/:canNo"
+              element={<CargoArrivalNoticeEdit />}
+            />
+            <Route
+              path="details/:id/:canNo"
+              element={<CargoArrivalNoticeDetails />}
+            />
+          </Route>
+
+          <Route path="air-freight">
+            <Route index element={<CargoArrivalNoticeListAir />} />
+            <Route path="view/:id" element={<ViewCargoArrivalNoticeAir />} />
+            <Route
+              path="create/:id"
+              element={<CargoArrivalNoticeCreateAir />}
+            />
+            <Route
+              path="edit/:id/:canNo"
+              element={<CargoArrivalNoticeEditAir />}
+            />
+            <Route
+              path="details/:id/:canNo"
+              element={<CargoArrivalNoticeDetailsAir />}
+            />
+          </Route>
+        </Route>
 
         {/* pricing & procurement */}
         <Route path="rate-filing" element={<RateFiling />}>
@@ -1162,7 +1248,6 @@ const AppRoutes: React.FC = () => {
 
         {/* accounts */}
         <Route path="accounts">
-          <Route path="dashboard" element={<AccountsDashboard />}></Route>
           <Route path="bank" element={<Bank />}>
             <Route index element={<BankList />} />
             <Route path="details/:id" element={<BankDetails />} />

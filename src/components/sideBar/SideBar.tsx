@@ -97,7 +97,10 @@ const SideBar: React.FC = () => {
           { link: "/registration-user", label: "User Registration" },
           { link: "/registration-carrier", label: "Carrier Registration" },
           { link: "/registration-vendor", label: "Vendor Registration" },
-          { link: "/registration-empty-depot", label: "Empty Depot Registration" },
+          {
+            link: "/registration-empty-depot",
+            label: "Empty Depot Registration",
+          },
         ],
         onClick: () => handleItemClick(1),
       },
@@ -127,7 +130,11 @@ const SideBar: React.FC = () => {
             link: "/shipment-updates/sea-freight",
             active: "/shipment-updates",
           },
-          { label: "Cargo Arrival Notice", link: "/customer-service" },
+          {
+            label: "Cargo Arrival Notice",
+            link: "/cargo-arrival-notice/sea-freight",
+            active: "/cargo-arrival-notice",
+          },
         ],
         onClick: () => handleItemClick(3),
       },
@@ -154,7 +161,6 @@ const SideBar: React.FC = () => {
         label: "Accounts",
         isOpen: openItems[5] || false,
         children: [
-          { label: "Accounts Dashboard", link: "/accounts/dashboard" },
           { label: "Bank", link: "/accounts/bank" },
           { label: "Invoice (Import)", link: "/accounts/invoice-import" },
           {
